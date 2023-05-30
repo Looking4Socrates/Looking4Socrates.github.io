@@ -104,8 +104,8 @@
 <tr>
 <th align="left">Memory Consistency Models</th>
 <th align="left">特点</th>
-<th align="left"><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency1.png"></th>
-<th align="left"><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency2.png"></th>
+<th align="left"><img src="/memoryConsistency1.png"></th>
+<th align="left"><img src="/memoryConsistency2.png"></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -147,7 +147,7 @@
 </ul>
 <h2 id="微架构实现"><a href="#微架构实现" class="headerlink" title="微架构实现"></a>微架构实现</h2><h3 id="问题：既然x86和-arm-的架构在-memory-order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？"><a href="#问题：既然x86和-arm-的架构在-memory-order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？" class="headerlink" title="问题：既然x86和 arm 的架构在 memory order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？"></a>问题：既然x86和 arm 的架构在 memory order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？</h3><p>答案：其实 x86微架构内部还是乱序执行的，只不过通过顺序提交、乱序读取的检查机制、发现错误后的回滚策略保证其 memory order。</p>
 <h3 id="问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？"><a href="#问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？" class="headerlink" title="问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？"></a>问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？</h3><p>答案：例子: Thread1先进行write address1再执行 write address2；thread2 先进性read address2 在进行read address1。</p>
-<p><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency3.png"></p>
+<p><img src="/memoryConsistency3.png"></p>
 <p>错误情况如何检测呢？<br>处理器会 在 STB（store buffer）记录未提交的 write（即 store），STB 记录了w1先于 w2的顺序：</p>
 <ol>
 <li>先执行W2：W2先到HCA2（home coherence agent），获得独占权限（老数据写入 core1的cache）。<ul>
