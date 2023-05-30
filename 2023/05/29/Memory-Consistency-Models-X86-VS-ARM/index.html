@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Memory Consistency Models介绍https:&#x2F;&#x2F;www.cs.utexas.edu&#x2F;~bornholt&#x2F;post&#x2F;memory-models.html    Memory Consistency Models 特点      SCSequential consistency 不同地址一个序 不允许出现00 程序如直观顺序，正确执行   TSOTotal store or">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/memoryConsistency1.png">
-<meta property="og:image" content="http://example.com/memoryConsistency2.png">
-<meta property="og:image" content="http://example.com/memoryConsistency3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency3.png">
 <meta property="article:published_time" content="2023-05-29T14:10:57.000Z">
-<meta property="article:modified_time" content="2023-05-30T10:15:17.253Z">
+<meta property="article:modified_time" content="2023-05-30T10:18:45.237Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/memoryConsistency1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency1.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -110,8 +110,8 @@
 <tr>
 <th align="left">Memory Consistency Models</th>
 <th align="left">特点</th>
-<th align="left"><img src="/memoryConsistency1.png"></th>
-<th align="left"><img src="/memoryConsistency2.png"></th>
+<th align="left"><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency1.png"></th>
+<th align="left"><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency2.png"></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -153,7 +153,7 @@
 </ul>
 <h2 id="微架构实现"><a href="#微架构实现" class="headerlink" title="微架构实现"></a>微架构实现</h2><h3 id="问题：既然x86和-arm-的架构在-memory-order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？"><a href="#问题：既然x86和-arm-的架构在-memory-order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？" class="headerlink" title="问题：既然x86和 arm 的架构在 memory order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？"></a>问题：既然x86和 arm 的架构在 memory order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？</h3><p>答案：其实 x86微架构内部还是乱序执行的，只不过通过顺序提交、乱序读取的检查机制、发现错误后的回滚策略保证其 memory order。</p>
 <h3 id="问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？"><a href="#问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？" class="headerlink" title="问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？"></a>问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？</h3><p>答案：例子: Thread1先进行write address1再执行 write address2；thread2 先进性read address2 在进行read address1。</p>
-<p><img src="/memoryConsistency3.png"></p>
+<p><img src="https://raw.githubusercontent.com/AyueAji/pic/main/work/memoryConsistency3.png"></p>
 <p>错误情况如何检测呢？<br>处理器会 在 STB（store buffer）记录未提交的 write（即 store），STB 记录了w1先于 w2的顺序：</p>
 <ol>
 <li>先执行W2：W2先到HCA2（home coherence agent），获得独占权限（老数据写入 core1的cache）。<ul>
