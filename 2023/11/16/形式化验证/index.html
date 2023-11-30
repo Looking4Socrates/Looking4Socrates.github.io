@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="形式化验证"><meta name="keywords" content=""><meta name="author" content="Looking4Socrates"><meta name="copyright" content="Looking4Socrates"><title>形式化验证 | Looking For Socrates</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%AA%8C%E8%AF%81"><span class="toc-number">1.</span> <span class="toc-text">形式化验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">验证流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">3.</span> <span class="toc-text">例子</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">16</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title">形式化验证</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="形式化验证"><a href="#形式化验证" class="headerlink" title="形式化验证"></a>形式化验证</h2><p>形式化验证工具是一类用于验证硬件或软件系统设计是否满足特定规范或性质的工具。这些工具基于数学模型和逻辑推理，能够自动化地验证系统的正确性。以下是几种常见的形式化验证工具：</p>
+<ol>
+<li>模型检查器（Model Checkers）：<ul>
+<li>SPIN：用于验证并发系统的模型检查器，使用 Promela 语言描述系统模型。</li>
+<li>NuSMV 和 SPIN：用于验证硬件和软件系统的模型检查器，使用类似于时序逻辑（temporal logic）的规范语言。</li>
+<li>UPPAAL：用于验证实时系统的模型检查器，可以验证具有时间约束的系统行为。</li>
+</ul>
+</li>
+<li>定理证明器（Theorem Provers）：<ul>
+<li>Isabelle/HOL：支持高阶逻辑（Higher Order Logic），能够进行复杂的数学定理证明。</li>
+<li>Coq：基于计算的定理证明器，支持依赖类型（dependent types），用于证明程序正确性和数学定理。</li>
+</ul>
+</li>
+<li>符号执行工具（Symbolic Execution Tools）：<ul>
+<li>KLEE：用于自动化生成测试用例和验证程序的符号执行工具，主要用于 C 和 C++ 代码的验证。</li>
+<li>SAGE：用于自动化分析和发现软件漏洞的符号执行工具。</li>
+</ul>
+</li>
+<li>形式化语言和工具：<ul>
+<li>ACL2：一个包含逻辑和编程环境的工具，用于验证计算机系统和算法的正确性。</li>
+<li>TLA+：一种用于设计和验证分布式系统的形式化语言和工具。<br>这些工具在验证对象、验证领域和使用方式上有所不同。有些工具更适合硬件系统（如处理器、芯片等）的验证，而有些则更适合软件系统（如程序、算法等）的验证。它们的共同目标是提供自动化的、精确的、可靠的验证手段，帮助设计者发现并修复系统设计中的潜在问题，确保系统符合规范和性能要求。<br>选择合适的形式化验证工具通常取决于你的验证需求、所验证对象的类型以及你的经验和熟悉程度。深入了解每个工具的优势和适用范围能够更好地选择合适的工具来完成你的验证任务。</li>
+</ul>
+</li>
+</ol>
+<h2 id="验证流程"><a href="#验证流程" class="headerlink" title="验证流程"></a>验证流程</h2><p>当涉及形式化验证时，一个经典的例子是验证缓存一致性协议。在多核处理器系统中，为了保证数据的一致性，通常会使用缓存一致性协议，比如 MESI 协议。</p>
+<p>考虑一个简化的缓存一致性协议，我们可以使用模型检查器来验证它是否满足一致性和正确性属性。以下是一个可能的验证流程：</p>
+<ol>
+<li>建立模型：</li>
+</ol>
+<ul>
+<li>使用模型检查器的输入语言描述缓存一致性协议，定义缓存的状态、操作和状态转换规则。</li>
+</ul>
+<ol>
+<li>定义性质：</li>
+</ol>
+<ul>
+<li>定义需要验证的性质。例如，我们可能希望验证所有核心对于共享数据的访问是否都能够遵守一致性协议的规定。</li>
+</ul>
+<ol>
+<li>模型检查：</li>
+</ol>
+<p>运行模型检查器对定义的性质进行验证。模型检查器将会尝试在状态空间中寻找违反性质的情况。</p>
+<ol>
+<li>分析结果：</li>
+</ol>
+<ul>
+<li><p>如果模型检查器找到违反性质的情况，它将会给出一个反例（counterexample），展示了违反性质的状态序列，帮助识别问题所在。</p>
+</li>
+<li><p>如果验证通过，那么协议就在给定性质下被证明是正确的。</p>
+</li>
+</ul>
+<p>这种验证过程允许工程师在设计阶段发现潜在的问题，例如在并发操作中可能出现的竞争条件或不一致性情况。通过形式化验证，可以确保缓存一致性协议在不同场景下都能正确地维护数据的一致性。</p>
+<p>这只是形式化验证的一个示例。实际上，在硬件、软件、协议和系统设计中，形式化验证都可以应用于不同的场景，以确保设计的正确性和一致性。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>对于缓存一致性协议的形式化验证，可以使用类似于模型检查器（如 SPIN）的工具来实现。</p>
+<p>举例来说，可以使用 Promela 语言描述缓存一致性协议的状态转换和规则，然后使用 SPIN 工具进行模型检查。以下是一个简化的例子：</p>
+<p>假设有一个简单的缓存一致性协议，包含了两个核心（Core 0 和 Core 1）以及一个共享的内存（Memory）。协议使用 MESI 协议进行缓存管理。</p>
+<p>下面是一个可能的 Promela 代码片段示例：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">mtype = {INVALID, SHARED, MODIFIED, EXCLUSIVE};</span><br><span class="line"></span><br><span class="line">chan core_to_mem = [2] of {mtype, mtype};  // 两个核心和内存之间的通道</span><br><span class="line"></span><br><span class="line">proctype Core(int id; chan c_to_m; chan m_to_c) {</span><br><span class="line">    mtype cache_state = INVALID;</span><br><span class="line">    mtype memory_state = INVALID;</span><br><span class="line"></span><br><span class="line">    do</span><br><span class="line">    :: </span><br><span class="line">        // 读取或写入操作的模拟</span><br><span class="line">        if</span><br><span class="line">            :: (cache_state == INVALID) -&gt; </span><br><span class="line">                // 从内存读取数据</span><br><span class="line">                c_to_m ! (id, READ);</span><br><span class="line">                m_to_c ? memory_state;</span><br><span class="line">                cache_state = memory_state;</span><br><span class="line">            :: (cache_state == SHARED) -&gt; </span><br><span class="line">                // 从共享缓存读取数据</span><br><span class="line">                // ...</span><br><span class="line">            :: (cache_state == MODIFIED) -&gt; </span><br><span class="line">                // 在本地缓存中执行写操作</span><br><span class="line">                // ...</span><br><span class="line">        fi;</span><br><span class="line">        // 省略其他操作...</span><br><span class="line">    od;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 内存处理进程</span><br><span class="line">proctype Memory(chan m_to_c; chan c_to_m) {</span><br><span class="line">    mtype memory_state = INVALID;</span><br><span class="line"></span><br><span class="line">    do</span><br><span class="line">    :: </span><br><span class="line">        // 处理来自核心的读写请求</span><br><span class="line">        c_to_m ? memory_state;</span><br><span class="line">        m_to_c ! memory_state;</span><br><span class="line">        // 处理缓存和内存之间的通信</span><br><span class="line">        // ...</span><br><span class="line">    od;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 主进程，启动核心和内存</span><br><span class="line">active [2] proctype Cores() {</span><br><span class="line">    chan core_to_mem = [2] of {mtype, mtype};</span><br><span class="line">    chan mem_to_core = [2] of {mtype, mtype};</span><br><span class="line"></span><br><span class="line">    run Core(0, core_to_mem[0], mem_to_core[0]);</span><br><span class="line">    run Core(1, core_to_mem[1], mem_to_core[1]);</span><br><span class="line">    run Memory(mem_to_core[0], core_to_mem[0]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这个示例中使用了 Promela 语言来描述了两个核心和内存之间的通信以及状态转换规则。你可以使用 SPIN 工具对这个模型进行模型检查，验证在不同的操作序列下，是否会出现不一致性或违反协议规则的情况。</p>
+<p>这个示例是一个简化的模型，实际的协议会更加复杂，但基本思路是使用类似的形式化语言描述系统的状态和行为，然后使用相应的模型检查器或形式化验证工具进行验证。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Looking4Socrates</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://looking4socrates.github.io/2023/11/16/形式化验证/">https://looking4socrates.github.io/2023/11/16/形式化验证/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://looking4socrates.github.io">Looking For Socrates</a>！</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2023/11/16/gem5/"><span>gem5</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2023 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>

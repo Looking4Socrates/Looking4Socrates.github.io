@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="coz"><meta name="keywords" content="profiling"><meta name="author" content="Looking4Socrates"><meta name="copyright" content="Looking4Socrates"><title>coz | Looking For Socrates</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#COZ-Finding-Code-that-Counts-with-Causal-Profiling"><span class="toc-number">1.</span> <span class="toc-text">COZ: Finding Code that Counts with Causal Profiling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.2.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%A1%E7%8C%AE"><span class="toc-number">1.2.1.</span> <span class="toc-text">贡献</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Causal-Profiling-Overview"><span class="toc-number">1.3.</span> <span class="toc-text">Causal Profiling Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Profiler-startup"><span class="toc-number">1.3.1.</span> <span class="toc-text">Profiler startup.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Experiment-initialization"><span class="toc-number">1.3.2.</span> <span class="toc-text">Experiment initialization.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applying-a-virtual-speedup"><span class="toc-number">1.3.3.</span> <span class="toc-text">Applying a virtual speedup.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%901"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">例子1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%902%EF%BC%9A%E5%8A%A0%E9%80%9F%E7%BA%BF%E7%A8%8Bt1%EF%BC%8C%E5%AF%BC%E8%87%B4t2%E6%88%90%E4%B8%BA%E7%93%B6%E9%A2%88"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">例子2：加速线程t1，导致t2成为瓶颈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ending-an-experiment"><span class="toc-number">1.3.4.</span> <span class="toc-text">Ending an experiment.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Producing-a-causal-profile"><span class="toc-number">1.3.5.</span> <span class="toc-text">Producing a causal profile.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interpreting-a-causal-profile"><span class="toc-number">1.3.6.</span> <span class="toc-text">Interpreting a causal profile.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation"><span class="toc-number">1.4.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Core-Mechanisms"><span class="toc-number">1.4.1.</span> <span class="toc-text">Core Mechanisms</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Performance-Experiment-Implementation"><span class="toc-number">1.4.2.</span> <span class="toc-text">Performance Experiment Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E9%87%8F%E5%BB%B6%E8%BF%9F%E3%80%82"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">测量延迟。</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Virtual-Speedup-Implementation"><span class="toc-number">1.4.3.</span> <span class="toc-text">Virtual Speedup Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Handling-Suspended-Threads"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">Handling Suspended Threads</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attributing-Samples-to-Source-Lines"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">Attributing Samples to Source Lines</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization-Minimizing-Delays"><span class="toc-number">1.4.4.</span> <span class="toc-text">Optimization: Minimizing Delays</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Adjusting-for-phases"><span class="toc-number">1.4.4.1.</span> <span class="toc-text">Adjusting for phases</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evaluation"><span class="toc-number">1.5.</span> <span class="toc-text">Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-dedup"><span class="toc-number">1.5.1.</span> <span class="toc-text">Case Study: dedup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-ferret"><span class="toc-number">1.5.2.</span> <span class="toc-text">Case Study: ferret</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-SQLite"><span class="toc-number">1.5.3.</span> <span class="toc-text">Case Study: SQLite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-fluidanimate"><span class="toc-number">1.5.4.</span> <span class="toc-text">Case Study: fluidanimate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-streamcluster"><span class="toc-number">1.5.5.</span> <span class="toc-text">Case Study: streamcluster</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-Memcached"><span class="toc-number">1.5.6.</span> <span class="toc-text">Case Study: Memcached</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-blackscholes"><span class="toc-number">1.5.7.</span> <span class="toc-text">Case Study: blackscholes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-Study-swaptions"><span class="toc-number">1.5.8.</span> <span class="toc-text">Case Study: swaptions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Effectiveness-Summary"><span class="toc-number">1.5.9.</span> <span class="toc-text">Effectiveness Summary</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Accuracy"><span class="toc-number">1.5.10.</span> <span class="toc-text">Accuracy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Efficiency"><span class="toc-number">1.5.11.</span> <span class="toc-text">Efficiency</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Related-Work"><span class="toc-number">1.6.</span> <span class="toc-text">Related Work</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-number">1.6.1.</span> <span class="toc-text">通用分析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E5%88%86%E6%9E%90%E5%99%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">并行分析器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%93%B6%E9%A2%88%E8%AF%86%E5%88%AB%E3%80%82"><span class="toc-number">1.6.3.</span> <span class="toc-text">瓶颈识别。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E5%B9%B6%E8%A1%8C%E5%8C%96%E5%92%8C%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E3%80%82"><span class="toc-number">1.6.4.</span> <span class="toc-text">分析并行化和可扩展性。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%BD%92%E5%9B%A0%E5%88%86%E6%9E%90%E5%99%A8%E3%80%82"><span class="toc-number">1.6.5.</span> <span class="toc-text">时间归因分析器。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E6%8C%87%E5%AF%BC%E5%92%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.6.6.</span> <span class="toc-text">性能指导和实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">1.7.</span> <span class="toc-text">结论</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">16</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title">coz</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/profiling/">profiling</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="COZ-Finding-Code-that-Counts-with-Causal-Profiling"><a href="#COZ-Finding-Code-that-Counts-with-Causal-Profiling" class="headerlink" title="COZ: Finding Code that Counts with Causal Profiling"></a>COZ: Finding Code that Counts with Causal Profiling</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>提高性能是软件开发者关注的中心问题。为了确定优化机会，开发人员依靠软件分析器。然而，这些分析器只能报告程序在何处花费时间：优化该代码可能对性能没有影响。因此，过去的性能分析器既浪费开发人员的时间，也使他们难以发现重要的优化机会。</p>
+<p>介绍了一种叫做“因果分析”的技术。这种技术与以往的性能分析方法不同，能够精确地指出程序员应该将优化工作的重点放在哪里，并量化他们可能产生的影响。“因果分析”通过在程序执行过程中运行性能实验来实现这一点。每个实验通过插入暂停来减慢所有其他并发运行的代码，从而计算出任何潜在优化的影响。关键在于，这种速度下降与加快运行该行的速度具有相同的相对效果，因此可以“虚拟地”加速它。这种方法可以确定哪些部分的代码可能会对程序的总体性能产生最大的影响，因此可以为程序员提供优化工作的重点。</p>
+<p>一种名为COZ的因果分析工具，该工具被用于评估一系列高度优化的应用，包括Memcached、SQLite和PARSEC基准测试套件。COZ能够识别之前未知的优化机会，这些优化机会既具有重要意义又具有针对性。在COZ的指导下，我们将Memcached的性能提高了9%，将SQLite的性能提高了25%，并将六个PARSEC应用加速了高达68%。在大多数情况下，这些优化仅涉及修改不到10行的代码。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>手动检查程序以找到优化的操作机会是不切实际的，因此开发人员使用分析器。传统的分析器按其对总执行时间的贡献对代码进行排名。突出的例子包括oprofile、perf和gprof [17、27、29]。不幸的是，即使分析器准确地报告程序花费时间的地方，这些信息也可能误导程序员。长时间运行的代码不一定是优化的好选择。例如，优化在文件下载期间绘制加载动画的代码不会使程序运行更快，尽管这段代码的运行时间与下载时间一样长。</p>
+<p>这个现象并不仅限于I/O操作。图1展示了一个简单的程序，说明了现有分析器的缺点，例如gprof分析器的图2a。该程序产生两个线程，分别调用函数fa和fb。大多数分析器会报告这些函数约占总执行时间的一半。其他分析器可能会报告fa处于关键路径上，或者主线程花费大致相等的时间等待fa和fb [ 23 ]。虽然准确，但所有这些信息都可能误导。完全优化fa只会使程序加速4.5%，因为fb成为新的关键路径。</p>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/e21794df244cee59295e4e998dfcd980.png" alt="e21794df244cee59295e4e998dfcd980"></p>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/494414da71cb9d7aeb2ade516db65299.png" alt="494414da71cb9d7aeb2ade516db65299"></p>
+<p>在因果分析中，y轴显示了通过加速每个代码行以x轴上显示的速度百分比而实现的程序加速。灰色区域显示标准误差。</p>
+<ul>
+<li>gprof报告fa和fb占总运行时间的相似部分，但优化fa最多可以提高性能4.5%，而优化fb不会影响性能。</li>
+<li>因果分析预测两种结果在0.5%以内。</li>
+</ul>
+<p>传统profiler不能分析潜在的优化效果，开发者要根据对程序的了解自己预测优化效果。</p>
+<p>causal profiling，该方法能够准确、精确地指出程序员应该集中精力进行优化的地方，并量化其潜在影响。图2b显示了我们因果分析器原型COZ的运行结果。该分析图绘制了一行代码的假设加速(x轴)与它对执行时间的影响(y轴)的关系。图形显示了单独优化fa或fb不会有太大影响。</p>
+<font color="red"> coz怎么看出来的单独优化效果不好？ </font>
+
+<p>causal profiling进行一系列性能实验以观察潜在优化措施的效果。当然，不可能通过任意数量自动加速任何一行代码。相反，因果分析器使用虚拟加速的新技术来模拟通过固定数量优化特定代码行的影响。每当该行运行时，通过插入暂停来减慢所有其他线程，从而使该行虚拟加速。关键的见解是这种放缓与加快该行的运行速度具有相同的相对效果，从而“虚拟地”加速它。图3显示了虚拟加速和实际加速的等效性。</p>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/6f4f0a92e3fd513d05007fcc710f4f9e.png" alt="6f4f0a92e3fd513d05007fcc710f4f9e"></p>
+<p>每次性能实验都测量了通过特定量来虚拟加速一行代码的效果。通过在0%（无变化）和100%（该行代码完全消除）的虚拟加速范围内进行许多性能实验，因果分析器可以预测任何潜在优化对程序性能的影响。</p>
+<p>causal profiling与传统的分析方法的另一个不同之处是，使得开发人员可以查看优化对吞吐量和延迟的影响。</p>
+<ol>
+<li>为了分析吞吐量，开发人员指定一个progress point，表示代码中工作结束相对应的行,通过测量每个progress point的访问率，以确定任何潜在优化对吞吐量的影响。</li>
+<li>为了分析延迟，程序员们会放置两个progress point，它们对应于感兴趣的事件的开始和结束，例如当事务开始和完成时。因果分析器然后报告潜在优化对这两个progress point之间的平均延迟的影响。</li>
+</ol>
+<p>为了证明causal profiling的有效性，我们开发了COZ，这是一种用于Linux的因果分析工具。我们发现COZ只产生较低的执行时间开销（平均：17%，最小：0.1%，最大：65%），使其比gprof快得多（最高达6倍的开销）。<br>我们发现因果分析可以准确地预测优化机会，并且能够有效地指导优化工作。我们将COZ应用于Memcached、SQLite和广泛研究的PARSEC基准测试套件。在COZ输出的指导下，我们将Memcached的性能提高了9%，将SQLite的性能提高了25%，并将六个PARSEC应用程序的性能提高了高达68%。这些优化通常涉及修改不到10行的代码。当可能准确测量COZ所确定的优化行的大小时，我们将观察到的性能改进与COZ的预测进行比较：在每种情况下，我们发现我们优化的实际效果与COZ的预测相匹配。</p>
+<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ol>
+<li>它提供了causal profiling，识别出可以进行优化并产生最大影响的代码。使用虚拟加速和progress point，因果分析直接测量潜在优化对吞吐量和延迟的影响（第2节）。</li>
+<li>它介绍了COZ，这是一种在未修改的Linux二进制文件上工作的因果分析器。它描述了COZ的实现（第3节），并展示了其在识别优化机会方面的效率和效果（第4节）。</li>
+</ol>
+<h2 id="Causal-Profiling-Overview"><a href="#Causal-Profiling-Overview" class="headerlink" title="Causal Profiling Overview"></a>Causal Profiling Overview</h2><h3 id="Profiler-startup"><a href="#Profiler-startup" class="headerlink" title="Profiler startup."></a>Profiler startup.</h3><p>用户使用 coz run —- <program> <args> 形式的命令调用 COZ。在程序执行开始时，COZ 收集可执行文件和所有已加载库的调试信息。用户可以指定文件和二进制范围，这将限制 COZ 的实验，仅在指定的文件中进行加速。默认情况下，COZ 将考虑来自主可执行文件的任何源文件的加速。</args></program></p>
+<p><strong>COZ 使用程序的调试信息和指定的范围从指令构建到源行的映射。一旦构建了源映射，COZ 将创建一个分析器线程并恢复正常执行。</strong></p>
+<h3 id="Experiment-initialization"><a href="#Experiment-initialization" class="headerlink" title="Experiment initialization."></a>Experiment initialization.</h3><p><strong>COZ需要选择两个参数：代码行line和加速百分比。</strong></p>
+<p>这两个参数都必须随机选择；任何系统性的方法来探索lines或加速都可能导致剖析结果的系统性偏差。人们可能认为COZ可以排除在早期实验中没有表现出性能影响的lines或虚拟加速量，但基于过去结果的实验优先级将阻止COZ识别重要lines，如果其性能仅在某些预热期之后才重要。一旦选择了一条line和加速，剖析器线程就会保存每个progress point的访问次数并开始实验。</p>
+<h3 id="Applying-a-virtual-speedup"><a href="#Applying-a-virtual-speedup" class="headerlink" title="Applying a virtual speedup."></a>Applying a virtual speedup.</h3><p>每次被分析的程序创建线程时，COZ 就会开始从这个线程中采样指令指针。COZ 在每个线程中处理样本以实现虚拟加速的采样版本。在3.4节中，我们展示了图3所示的虚拟加速机制与COZ使用的采样方法之间的等价性。</p>
+<p><strong>每次有样本可用时，线程会检查样本是否落在所选用于虚拟加速的代码行中。如果是，它就会强制其他线程暂停。此过程一直持续到分析器线程表明实验已完成。</strong></p>
+<h4 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h4><p>f=100<br>g=30</p>
+<ul>
+<li>t1：100 + 30 + 100 = 230</li>
+<li>t2： 30 + 100 +30 = 160</li>
+</ul>
+<p>优化f为60后：</p>
+<ul>
+<li>t1：60 + 30 + 60 = 150 （优化了80）</li>
+<li>t2：30 + 60 +30 = 120</li>
+</ul>
+<p>采用virtual加速f为60：</p>
+<ul>
+<li>t1：100 + 40 + 30 + 100 = 270 （270 - 40*3 = 150）</li>
+<li>t2：30 + 40 + 100 +30 +40 = 240</li>
+</ul>
+<p>可以看出virtual加速计算出来的加速后时间150等于实际加速效果.</p>
+<h4 id="例子2：加速线程t1，导致t2成为瓶颈"><a href="#例子2：加速线程t1，导致t2成为瓶颈" class="headerlink" title="例子2：加速线程t1，导致t2成为瓶颈"></a>例子2：加速线程t1，导致t2成为瓶颈</h4><p>f=100<br>g=60</p>
+<ul>
+<li>t1：100 + 100 = 200</li>
+<li>t2： 60 + 60 = 120</li>
+</ul>
+<p>优化f为50后：</p>
+<ul>
+<li>t1：50 + 50 = 100</li>
+<li>t2： 60 + 60 = 120 （优化效果为200到120）</li>
+</ul>
+<p>采用virtual加速f为50：</p>
+<ul>
+<li>t1：100 + 100 = 200</li>
+<li>t2：60 + 50 + 60 +50 = 220 （220 - 50*2 = 120）</li>
+</ul>
+<p>可以看出virtual加速计算出来的加速后时间120等于实际加速效果.</p>
+<h3 id="Ending-an-experiment"><a href="#Ending-an-experiment" class="headerlink" title="Ending an experiment."></a>Ending an experiment.</h3><p>经过预定的时间后，COZ 会结束实验。如果在实验过程中对进展点的访问次数太少（默认最小值为5），COZ 会将剩余的执行时间加倍。一旦实验完成，分析线程会记录实验结果，包括:</p>
+<ul>
+<li>实验的有效持续时间（运行时间减去插入的总延迟）</li>
+<li>选定的行和加速效果</li>
+<li>所有进展点的访问次数。</li>
+</ul>
+<p>在开始下一个实验之前，COZ 将暂停一段短暂的冷却时间，以便在下次实验开始之前处理任何剩余的样本。</p>
+<h3 id="Producing-a-causal-profile"><a href="#Producing-a-causal-profile" class="headerlink" title="Producing a causal profile."></a>Producing a causal profile.</h3><p>产生因果剖面。在应用程序被COZ分析后，所有性能实验的结果可以组合起来产生profile文件。</p>
+<p>每个实验有两个自变量：</p>
+<ul>
+<li>选择的用于虚拟加速的代码行line和</li>
+<li>虚拟加速值。</li>
+</ul>
+<p>COZ记录了因变量：</p>
+<ul>
+<li>每个progress point的访问次数</li>
+<li>实验的有效持续时间（实际运行时间减去所有暂停的时间）。</li>
+</ul>
+<p>具有相同自变量的实验可以合并：将progress point访问次数和实验持续时间相加来组合。 </p>
+<p>COZ就按照加速代码行对实验进行分组。</p>
+<ul>
+<li>任何没有0%虚拟加速测量的代码行line都会被丢弃；如果没有这个基线测量，我们无法计算相对于原始程序的百分比加速。单独测量每个代码行的基线，可确保任何与线路相关的虚拟加速开销，例如在频繁执行的线路运行时插入延迟所需的额外跨线程通信，不会影响性能剖面结果。</li>
+<li>默认情况下，COZ还将丢弃任何具有少于5个不同虚拟加速量的line(只显示75%虚拟加速效果的图不是特别有用)。</li>
+<li>最后，我们计算相对于基线（虚拟速度提升0%）的加速比</li>
+</ul>
+<p>COZ然后绘制每个线路的速度提升表格，产生本文中显示的性能图。</p>
+<h3 id="Interpreting-a-causal-profile"><a href="#Interpreting-a-causal-profile" class="headerlink" title="Interpreting a causal profile."></a>Interpreting a causal profile.</h3><p>一旦生成了因果剖面图，用户就可以解释它们，并做出一个有根据的选择，哪些线条可能需要进行优化。为了帮助用户识别重要的线条，COZ按照线性回归的斜率对图形进行排序。</p>
+<font color="blue"> 
+1. 陡峭的上升斜率表示一条线，表示优化很有效果
+2. 平坦的线条表示优化此线条不会提高程序性能
+3. COZ还找到具有陡峭下降斜率的线条，这意味着对此代码行的任何优化实际上都会损害性能。这种向下倾斜的剖面图是contention的一个强烈迹象；几乎加速的代码行干扰了程序的关键路径，优化此线条增加了干扰量。这种现象非常普遍，往往会导致重大的优化机会。在我们的评估中，我们识别和修复了三个应用程序中的争用问题：fluidanimate、streamcluster和memcached，分别提高了速度的37.5%，68.4%和9.4%。
+
+</font> 
+
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><h3 id="Core-Mechanisms"><a href="#Core-Mechanisms" class="headerlink" title="Core Mechanisms"></a>Core Mechanisms</h3><p>使用LD—PRELOAD库实现对程序地址空间的分析,可以在程序的startup和shutdown中间进行采样，采样是基于perf—event API获取程序PC和user-space调用栈，调用间隔是1ms，COZ默认处理10个样本为一批（每批更频繁地采样不太可能提高准确性，还会增加开销）。</p>
+<p><strong>Attributing samples to source locations.</strong></p>
+<p>COZ 使用 DWARF调试信息，用于将采样程序计数器值映射到源代码位置。程序不需要包含DWARF行信息；COZ将使用类似GDB的进程定位外部调试信息.<br>DWARF（Debug With Arbitrary Record Format）是一种用于调试和记录程序执行信息的标准。它被广泛用于Unix和Unix-like操作系统中，特别是在GCC（GNU Compiler Collection）编译器套件中。DWARF提供了有关程序执行期间变量的值、函数调用的参数、返回值和源代码行号等信息，使得调试器能够更准确地确定程序在何处出错，并提供更详细的错误信息。DWARF还提供了用于记录程序执行期间发生的各种事件的信息，例如函数调用、跳转和返回等。这些信息对于理解程序的执行流程非常有用。DWARF信息被存储在编译生成的二进制文件中，可以通过调试器进行读取和分析。</p>
+<h3 id="Performance-Experiment-Implementation"><a href="#Performance-Experiment-Implementation" class="headerlink" title="Performance Experiment Implementation"></a>Performance Experiment Implementation</h3><p>COZ使用专用的分析线程进行实验。此线程负责选择加入一条line来加速，选择虚拟的加速比例，对progress points测量虚拟加速情况，以及编写proﬁler输出。</p>
+<p>加速比例从0%~100%，以5%的步长增加。p0表示不进行虚机加速所用的程序时间（progress point之间的），ps表示进行虚拟加速后的实践。那么程序性能的影响就是1-ps/p0.</p>
+<p>Lines for virtual speedup must be selected randomly to prevent bias in the results of performance experiments. </p>
+<font color="red"> 为何不随机就会有偏差？ </font>
+例如，如果一个line对initialization有性能影响，但是对后续执行阶段没有，就会夸大效果，如果对initialization没有性能影响，可能后续执行就不会再实验了。
+
+### Progress Point Implementation
+
+COZ支持三种progress point：源代码级、断点、采样。
+1. 源代码级progress point。是唯一需要程序修改的progress point。要指示源代码级的progress point，开发人员只需在程序的源代码中插入COZ PROGRESS宏。
+2. 断点progress point。在命令行中指定。COZ使用Linux perf事件API在第一条指令处设置断点。
+3. 采样progress point。在命令行上指定。然而，与源代码级和断点progress point不同，采样progress point等不记录访问progress point的次数。相反，采样progress point会计算落到指定代码行的样本数量。
+
+ <font color="red"> 在后面评估case中如何使用的？ </font>
+
+<h4 id="测量延迟。"><a href="#测量延迟。" class="headerlink" title="测量延迟。"></a>测量延迟。</h4><p>源代码级和断点progress point数还可以用来衡量优化措施对于延迟的影响（而不是吞吐量）。要测量延迟，开发人员必须指定两个progress point：一个在开始时，另一个在最后。起始progress pointd的visit rate是arrival rate，起点和终点的计数之间的差异告诉我们目前有多少请求正在进行中。L 为正在处理的请求数，λ 为 arrival rate。根据Little’s Law，我们可以计算出平均延迟W，<br>这几乎适用于任何排队系统：L = λW [ 30 ]。重写Little定律，然后计算平均延迟L/λ。</p>
+<h3 id="Virtual-Speedup-Implementation"><a href="#Virtual-Speedup-Implementation" class="headerlink" title="Virtual Speedup Implementation"></a>Virtual Speedup Implementation</h3><script type="math/tex; mode=display">s \approx \frac{n * \bar{t}}{P}</script><ul>
+<li>s: The number of samples in the selected line</li>
+<li>P: the period of time between samples</li>
+<li>t: the average time required to run the selected line once</li>
+<li>n: is the number of times the selected line is executed.</li>
+</ul>
+<script type="math/tex; mode=display">\bar{t_{e}} = \frac{(n -s)*\bar{t} + s*(\bar{t}-d)}{n}</script><ul>
+<li>$\bar{t_{e}}$ The effective average time to run the selected line</li>
+<li>d: 加速的时间</li>
+</ul>
+<script type="math/tex; mode=display">\bar{t_{e}} = \bar{t} * (1- \frac{d}{P} )</script><script type="math/tex; mode=display">\triangle{\bar{t}} = (1- \frac{\bar{t_{e}}}{\bar{t}}) = \frac{d}{P}</script><ul>
+<li>$\triangle{\bar{t}}$:the amount of virtual Potentially unblocking calls<br>speedup</li>
+</ul>
+<ul>
+<li>Pausing other threads.为了降低overhead，不适用POSIX的signal，使用counter对每个线程的pause计数，有global count和每个线程自己的local counter，local小于global就需要pause。</li>
+</ul>
+<ul>
+<li>Ensuring accurate timing.使用nanosleep，保证pause的实践至少是要求的时间，超过的部分会在将来的pause减掉。</li>
+<li>Thread creation.新的线程创建继承父进程的local delay counter。</li>
+</ul>
+<h4 id="Handling-Suspended-Threads"><a href="#Handling-Suspended-Threads" class="headerlink" title="Handling Suspended Threads"></a>Handling Suspended Threads</h4><ul>
+<li>由于IO挂起的线程，在不阻塞后，加上插入pause。</li>
+<li><p>由于线程间同步原因挂起的线程，在不阻塞后，不需要pause（因为释放mutex的线程在释放前已经执行了delay，那么等待mutex的线程等同于被delay了）。</p>
+</li>
+<li><p>表1：当线程invoking其他线程之前需要吧delay全部执行。</p>
+</li>
+<li>表2：当线程进入阻塞前后，需要更新delay counter。<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/446c965e2bbacbe4fd777574deef9415.png" alt="446c965e2bbacbe4fd777574deef9415"></li>
+</ul>
+<h4 id="Attributing-Samples-to-Source-Lines"><a href="#Attributing-Samples-to-Source-Lines" class="headerlink" title="Attributing Samples to Source Lines"></a>Attributing Samples to Source Lines</h4><p>怎么样将采样对应到代码行：根据调用栈，找到最上层的调用函数。</p>
+<p>When a sample does not fall in any in-scope source line, the profiler walks the sampled callchain to find the first in-scope address. </p>
+<p> For example, a program may call printf, which calls vfprintf, which in turn calls strlen. Any samples collected during this chain of calls will be attributed to the source line that issues the original printf call.</p>
+<h3 id="Optimization-Minimizing-Delays"><a href="#Optimization-Minimizing-Delays" class="headerlink" title="Optimization: Minimizing Delays"></a>Optimization: Minimizing Delays</h3><p>当所有线程都执行了代码行，对所有线程都进行delay，是不必要的，会降低执行效率。<br>当线程采样到选定的代码行，就增加该线程的local delay counter，如果local小于global，coz插入pause。如果local delay count大于global，那么就增加global delay count。</p>
+<h4 id="Adjusting-for-phases"><a href="#Adjusting-for-phases" class="headerlink" title="Adjusting for phases"></a>Adjusting for phases</h4><p>一个程序在不执行选定代码行的阶段时，cox不会进行performance测试，这就会带来偏差，导致优化效果overstate。</p>
+<p>程序执行分完成两个阶段：</p>
+<ul>
+<li>A：选定行会执行</li>
+<li>B：选定行不执行</li>
+</ul>
+<script type="math/tex; mode=display">T = {t_{A}} + {t_{B}}</script><ul>
+<li>总执行时间T等于两个阶段的时间和。</li>
+</ul>
+<script type="math/tex; mode=display">P = \frac{T}{N} = \frac{ {t_{A}} + {t_{B}} }{N}</script><ul>
+<li>P : The average progress rate, 处理效率，即吞吐。</li>
+</ul>
+<script type="math/tex; mode=display">s_{obs} = s * \frac{t_{obs}}{t_{A}}</script><script type="math/tex; mode=display">t_{A} \approx s * \frac{t_{obs}}{s_{obs}}</script><ul>
+<li>$s_{obs}$ :性能测试期间采样到指定代码行的次数</li>
+<li>$t_{obs}$ ：性能测试的时间</li>
+</ul>
+<script type="math/tex; mode=display">\triangle{p_{A}} = \frac{p_{A}- p_{A}^{'}}{p_{A}}</script><script type="math/tex; mode=display">\triangle{p_{A}} = \frac{\frac{t_{A}}{n_{A}} - \frac{t_{A}^{'}}{n_{A}}}{\frac{t_{A}}{n_{A}}} = \frac{t_{A}-t_{A}^{'}}{t_{A}}</script><script type="math/tex; mode=display">{P^{'}} = \frac{t_{A}^{'}+t_{B}}{N}</script><script type="math/tex; mode=display">\triangle{P} = \frac{P- P^{'}}{P} = \frac{\frac{t_{A}+t_{B}}{N}  - \frac{t_{A}^{'}+t_{B}}{N} }{\frac{T}{N}} = \frac{t_{A}-t_{A}^{'}}{T}</script><script type="math/tex; mode=display">\triangle{P} = \triangle{p_{A}}\frac{t_{A}}{T} \approx \triangle{p_{A}}* \frac{t_{obs}}{s_{obs}} * \frac{s}{T}</script><h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>table3 总结了优化效果。</p>
+<ol>
+<li>cases where COZ found optimization op- portunities that gprof and perf did not (dedup, ferret, and SQLite); </li>
+<li>cases where COZ identified contention (fluidani- mate, streamcluster, and Memcached); </li>
+<li>cases where both COZ and a conventional profiler identified the optimiza- tion we implemented (blackscholes and swaptions).</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/3e570a7f1535a9fe210216f56bd2757e.png" alt="3e570a7f1535a9fe210216f56bd2757e"></p>
+<h3 id="Case-Study-dedup"><a href="#Case-Study-dedup" class="headerlink" title="Case Study: dedup"></a>Case Study: dedup</h3><p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/1eb0da42674b21e5a56771950809904a.png" alt="1eb0da42674b21e5a56771950809904a"></p>
+<ul>
+<li>coz: We placed a progress point immediately after dedup completes compression of a single block of data (encoder.c:189).</li>
+<li>分析:定位到hashtable.c:217,即hashtable search 是做hash遍历，发现如图4：hash map不均衡，97%的bucket内有使用。</li>
+<li>优化：采用remove bit shifting step和对32 bit chunks的key使用bitwise的XOR，来提高性能。</li>
+<li><p>优化效果 8.95% ± 0.27% 。</p>
+</li>
+<li><p>gprof的缺陷： hashtable search had the largest share of highest execution time at 14.38%, but calls to hashtable search from the hash computation stage accounted for just 0.48% of execution time; Gprof’s call graph actually obscured the importance of this code.</p>
+</li>
+</ul>
+<h3 id="Case-Study-ferret"><a href="#Case-Study-ferret" class="headerlink" title="Case Study: ferret"></a>Case Study: ferret</h3><ul>
+<li>分析吞吐，We first inserted a progress point in the final stage of the image search pipeline to measure throughput (ferret-parallel.c:398).</li>
+</ul>
+<ul>
+<li><p>优化方案：thread allocation of 20, 1, 22, and 21 to segmentation, feature extraction, indexing, and ranking respectively.</p>
+</li>
+<li><p>优化效果： 21.27% ± 0.17% speedup </p>
+</li>
+<li><p>gprof的缺陷：优化前后用gprof观察不到显著区别。<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/4927328700490394c84d46a6cdcc94be.png" alt="4927328700490394c84d46a6cdcc94be"></p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/2b18748360aca39c287e308e1690ce15.png" alt="2b18748360aca39c287e308e1690ce15"></p>
+<h3 id="Case-Study-SQLite"><a href="#Case-Study-SQLite" class="headerlink" title="Case Study: SQLite"></a>Case Study: SQLite</h3><ul>
+<li><p>Replacing these indirect calls with direct calls resulted in a 25.60% ± 1.00% speedup.</p>
+</li>
+<li><p>perf缺陷：不是热点，没有发现问题。</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/f7fcf04e3d0a329add71693e81f2a2f9.png" alt="f7fcf04e3d0a329add71693e81f2a2f9"></p>
+<h3 id="Case-Study-fluidanimate"><a href="#Case-Study-fluidanimate" class="headerlink" title="Case Study: fluidanimate"></a>Case Study: fluidanimate</h3><ul>
+<li>coz: We placed a progress point immediately after the barrier, so it executes each time all threads complete a phase of the computation.</li>
+<li>COZ also identified two significant points of contention, indicated by a downward sloping causal profile.</li>
+<li>优化方案：Removing this spinning from the barrier would reduce the contention, but it was simpler to replace the custom barrier with the default pthread barrier implementation</li>
+<li>效果：37.5% ± 0.56%</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/284c3a1234d65ab474aa310ab7da77f7.png" alt="284c3a1234d65ab474aa310ab7da77f7"></p>
+<h3 id="Case-Study-streamcluster"><a href="#Case-Study-streamcluster" class="headerlink" title="Case Study: streamcluster"></a>Case Study: streamcluster</h3><ul>
+<li>worker threads execute in concurrent phases separated by a custom barrier, where we placed a progress point. </li>
+<li>Replacing this barrier with the default pthread barrier led to a 68.4% ± 1.12% speedup.</li>
+</ul>
+<h3 id="Case-Study-Memcached"><a href="#Case-Study-Memcached" class="headerlink" title="Case Study: Memcached"></a>Case Study: Memcached</h3><ul>
+<li><p>We placed a progress point at the end of the process command function, which handles each client request.</p>
+</li>
+<li><p>Because reference counts are updated atomically, we can safely remove the lock from this function, which resulted in a 9.39% ± 0.95% speedup.</p>
+</li>
+</ul>
+<h3 id="Case-Study-blackscholes"><a href="#Case-Study-blackscholes" class="headerlink" title="Case Study: blackscholes"></a>Case Study: blackscholes</h3><ul>
+<li>We placed a progress point after each thread completes one round of the iterative approximation to the dif- ferential equation (blackscholes.c:259).</li>
+<li>Manu- ally eliminating common subexpressions and combining 61 piecewise calculations into 4 larger expressions resulted in a 2.56% ± 0.41% program speedup.<h3 id="Case-Study-swaptions"><a href="#Case-Study-swaptions" class="headerlink" title="Case Study: swaptions"></a>Case Study: swaptions</h3></li>
+<li>We placed a progress point after each iteration of the main loop ex- ecuted by worker threads (HJM Securities.cpp:99).</li>
+<li>Reordering these loops and replacing the first loop with a call to memset sped execution by 15.8% ± 1.10%.</li>
+</ul>
+<h3 id="Effectiveness-Summary"><a href="#Effectiveness-Summary" class="headerlink" title="Effectiveness Summary"></a>Effectiveness Summary</h3><p>In most cases, COZ identified around 20 lines of interest, with as many as 50 for larger programs (Mem- cached and x264). COZ identified optimization opportunities in all of the PARSEC benchmarks, but some required more invasive changes that are out of scope for this paper.<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/b2de75fd51419add7018a677acc21e78.png" alt="b2de75fd51419add7018a677acc21e78"></p>
+<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><ul>
+<li>为了优化 ferret，我们将索引阶段的线程数从 16 个增加到 22 个，这将第 320 行的吞吐量提高了 27%。 COZ 预测这一改进将导致程序加速 21.4%，这与我们观察到的 21.2% 几乎相同。</li>
+<li>对于dedup，COZ 识别了遍历哈希桶链表的 while 循环的顶部。 通过替换退化哈希函数，我们将每个哈希桶中的平均元素数量从 76.7 个减少到 2.09 个。 此更改将迭代次数从 77.7 次减少到 3.09 次（考虑到循环的最终行程）。 这一减少相当于 COZ 线加速了 96%。 对于这次加速，COZ 预测性能提升为 9%，非常接近我们观察到的 8.95% 的加速。</li>
+</ul>
+<h3 id="Efficiency"><a href="#Efficiency" class="headerlink" title="Efficiency"></a>Efficiency</h3><p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/7eb9496c751a289797b09bc05984b12a.png" alt="7eb9496c751a289797b09bc05984b12a"></p>
+<p>减少开销。<br>大多数程序都有足够长的运行时间（平均：103 秒）来分摊处理调试信息的成本，但在启动时处理特别大的可执行文件可能会很昂贵（例如 x264 和 vips）。 可以修改 COZ 以延迟收集和处理调试信息，以减少启动开销。 采样开销主要来自于在线程创建和退出时使用 perf event API 启动和停止采样。 可以通过全局采样而不是按线程采样来摊销此成本，这需要大多数计算机上的 root 权限。 如果 perf 事件 API 支持对进程中的所有线程进行采样，则可以消除此开销。 延迟开销是 COZ 总开销的最大组成部分，可以通过允许程序在每次实验之间正常执行一段时间来减少。 增加实验之间的时间将显着减少开销，但需要更长的分析运行才能收集可用的配置文件。<br>效率总结。<br>COZ 的分析开销平均为 17.6%（最小值：0.1%，最大值：65%）。 对于除三个基准之外的所有基准，其开销均低于 30%。 鉴于广泛使用的 gprof 分析器可能会产生更高的开销（例如，雪貂为 6 倍，而 COZ 为 6%），这些结果证实 COZ 在实践中具有足够低的开销。</p>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>因果分析识别并量化优化机会，而过去大多数分析器的工作都集中在以较低的开销收集详细的（尽管不一定是可操作的）信息。</p>
+<h3 id="通用分析器"><a href="#通用分析器" class="headerlink" title="通用分析器"></a>通用分析器</h3><p>通用分析器通常使用仪器、采样或两者来实现。 基于抽样（包括因果分析）的系统可以任意减少探测效应，尽管抽样必须是无偏的[35]。<br>UNIX prof 工具和 oprofile 都专门使用采样 [29, 42]。 Oprofile 可以使用各种硬件性能计数器进行采样，这些计数器可用于识别缓存恶意代码、预测不佳的分支和其他硬件瓶颈。 Gprof 结合了仪器和采样来测量执行时间 [17]。 Gprof 生成一个调用图配置文件，它对按调用者隔离的函数的调用进行计数。 乔，莫斯利，等人通过交错检测和未检测执行来减少 Gprof 调用图分析的开销 [9]。 路径分析器添加了更多详细信息，计算通过过程或跨过程的每个路径的执行情况 [2, 6]。</p>
+<h3 id="并行分析器"><a href="#并行分析器" class="headerlink" title="并行分析器"></a>并行分析器</h3><p>过去有关并行分析的工作主要集中在识别关键路径或瓶颈上，尽管优化关键路径或消除瓶颈可能不会显着提高程序性能。<br>关键路径分析。 IPS 使用消息传递程序的跟踪来识别关键路径，并报告每个过程对关键路径贡献的时间量 [34]。 IPS-2 通过对共享内存并行性的有限支持扩展了这种方法 [33, 44]。 其他关键路径分析器依赖具有first-class线程和同步的语言来识别关键路径 [21,37,40]。 识别关键路径可以帮助开发人员找到优化会产生一定影响的代码，但这些方法不会向开发人员提供有关在关键路径更改之前可能获得多少性能增益的任何信息。 Hollingsworth 和 Miller 引入了两个新指标来估算优化潜力：松弛，在关键路径发生变化之前可以改进多少过程； 逻辑归零，即完全删除程序时关键路径长度的减少[22]。 这些指标类似于因果分析器测量的优化潜力，但只能使用完整的程序活动图来计算。 收集程序活动图的成本很高，并且可能会引入显著的探测效应。</p>
+<h3 id="瓶颈识别。"><a href="#瓶颈识别。" class="headerlink" title="瓶颈识别。"></a>瓶颈识别。</h3><p>有几种方法使用硬件性能计数器来识别硬件级性能瓶颈[8,12,32]。 基于二进制检测的技术可以识别缓存和堆性能问题、争用锁和其他程序热点[5,31,36]。 ParaShares 和 Harmony 识别在很少或没有并行性的时期运行的基本块 [25, 26]。 这些工具识别的代码是并行化或经典串行优化的良好候选者。 Bottlenecks 是一种配置文件分析工具，它使用启发式方法通过调用树配置文件 [3] 来识别瓶颈。 给定不同执行的调用树配置文件，瓶颈可以查明哪些过程导致性能差异。 FreeLunch 分析器和 Visual Studio 的争用分析器可识别导致大量线程阻塞时间的锁 [11, 16]。 BIS 使用类似的技术来识别非对称多处理器上高度竞争的关键部分，并自动将性能关键代码迁移到更快的内核 [24]。 瓶图以视觉格式呈现线程执行时间和并行性，突出显示程序瓶颈[13]。 与因果分析不同，这些工具无法预测消除瓶颈对性能的影响。 所有这些系统只能识别显式线程通信引起的瓶颈，而因果分析可以测量任何来源的并行性能问题，包括缓存一致性协议、调度依赖性和 I/O。</p>
+<h3 id="分析并行化和可扩展性。"><a href="#分析并行化和可扩展性。" class="headerlink" title="分析并行化和可扩展性。"></a>分析并行化和可扩展性。</h3><p>已经开发了几个系统来测量串行程序中潜在的并行性[15,43,45]。 与因果分析一样，这些系统可以识别可以从开发人员时间中受益的代码。 与因果分析不同，这些工具的目的不是诊断已经并行化的代码中的性能问题。<br>Kulkarni、Pai 和 Schuff 提出了可用并行性和可扩展性的一般指标[28]。 Cilkview 可扩展性分析器使用 Cilk 约束并行性的性能模型来估计添加额外硬件线程的性能影响 [20]。 因果分析可以检测由于当前硬件平台上的扩展不良而导致的性能问题。</p>
+<h3 id="时间归因分析器。"><a href="#时间归因分析器。" class="headerlink" title="时间归因分析器。"></a>时间归因分析器。</h3><p>时间归因分析器根据其他线程正在执行的操作将“责任”分配给并发执行的代码。 Quartz 引入了“正常处理器时间”的概念，这会给在大部分其他线程被阻塞时运行的代码分配很高的成本[4]。 CPPROFJ 通过方面[19]将此方法扩展到 Java 程序。 CPPROFJ 对时间使用更精细的类别：正在运行、阻塞较高优先级线程、等待监视器以及阻塞其他事件。 Tallent 和 Mellor-Crummey 进一步扩展了这种方法来支持 Cilk 程序，并添加了管理并行性所花费的时间类别 [41]。 WAIT 工具添加了细粒度的分类来识别大规模生产 Java 系统中的瓶颈 [1]。 与因果分析不同，这些分析器只能捕获直接影响其调度程序状态的线程之间的干扰。</p>
+<h3 id="性能指导和实验"><a href="#性能指导和实验" class="headerlink" title="性能指导和实验"></a>性能指导和实验</h3><p>一些系统已经利用延迟来提取有关程序执行时间的信息。 </p>
+<ol>
+<li>米特科维奇等人使用延迟来验证单线程 Java 程序上分析器的输出 [35]。 </li>
+<li>斯内利克，Ja ́Ja ́ 等人使用延迟来分析并行程序[38]。 这种方法测量组合减速的影响，这需要针对指数数量的配置中的每一个完整执行程序。 主动依赖发现（ADD）向分布式系统引入性能扰动并测量其对响应时间的影响[7]。 ADD需要系统组件的完整枚举，并且需要开发人员手动插入性能扰动。 </li>
+<li>古纳维，阿格拉瓦尔等人使用延迟来识别 EMC Centera 存储系统中事件之间的因果关系，以分析 Centera 的协议和策略 [18]。 </li>
+<li>Song 和 Lu 使用机器学习来识别源代码中的性能反模式 [39]。 </li>
+</ol>
+<p>与因果分析不同，这些方法不能预测潜在优化的效果。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>分析器是程序员工具箱中用于识别性能调整机会的主要工具。 以前的分析器仅观察实际执行并将代码与执行时间或性能计数器关联起来。 该信息的用途可能有限，因为所花费的时间不一定对应于程序员应该将优化工作的重点放在哪里。 过去的分析器还仅限于报告端到端执行时间，这对于服务器和交互式应用程序来说并不重要，因为它们感兴趣的关键指标是吞吐量和延迟。 因果分析是一种基于实验的新方法，可在假设的优化及其效果之间建立因果关系。 通过虚拟地加速代码行，因果分析可以识别并量化任何程度的优化对任何代码行的吞吐量或延迟的影响。 我们的原型因果分析器 COZ 在指导优化工作方面高效、准确且有效。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Looking4Socrates</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://looking4socrates.github.io/2023/11/15/coz/">https://looking4socrates.github.io/2023/11/15/coz/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://looking4socrates.github.io">Looking For Socrates</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/profiling/">profiling</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/11/15/hexo/"><i class="fa fa-chevron-left">  </i><span>hexo</span></a></div><div class="next-post pull-right"><a href="/2023/09/18/linux-kernel/"><span>linux_kernel</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2023 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
