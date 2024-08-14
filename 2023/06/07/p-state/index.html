@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="C-state and P-state"><meta name="keywords" content=""><meta name="author" content="Looking4Socrates"><meta name="copyright" content="Looking4Socrates"><title>C-state and P-state | Looking For Socrates</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="CPU频率调节器（Governor）和P-state、C-state"><meta name="keywords" content=""><meta name="author" content="Looking4Socrates"><meta name="copyright" content="Looking4Socrates"><title>CPU频率调节器（Governor）和P-state、C-state | Looking For Socrates</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
@@ -10,29 +10,278 @@
   hexoVersion: '6.3.0'
 } </script><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#P-state%E5%92%8CC-state"><span class="toc-number">1.</span> <span class="toc-text">P-state和C-state</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C-state%EF%BC%8C%E4%B9%9F%E5%8F%AB%E5%81%9ACPU%E7%A9%BA%E9%97%B2%E7%8A%B6%E6%80%81%EF%BC%8C%E6%98%AFCPU%E5%9C%A8%E6%B2%A1%E6%9C%89%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1%E6%97%B6%E7%9A%84%E5%90%84%E7%A7%8D%E4%BC%91%E7%9C%A0%E7%8A%B6%E6%80%81%E3%80%82"><span class="toc-number">1.1.</span> <span class="toc-text">C-state，也叫做CPU空闲状态，是CPU在没有执行任务时的各种休眠状态。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P-state%EF%BC%88P-%E7%8A%B6%E6%80%81%EF%BC%89%E6%98%AF-CPU-%E7%9A%84%E6%80%A7%E8%83%BD%E7%8A%B6%E6%80%81%EF%BC%8C%E7%94%A8%E4%BA%8E%E8%B0%83%E6%95%B4-CPU-%E7%9A%84%E5%B7%A5%E4%BD%9C%E9%A2%91%E7%8E%87%E5%92%8C%E7%94%B5%E5%8E%8B%E4%BB%A5%E6%BB%A1%E8%B6%B3%E5%A4%84%E7%90%86%E9%9C%80%E6%B1%82%E3%80%82"><span class="toc-number">1.2.</span> <span class="toc-text">P-state（P 状态）是 CPU 的性能状态，用于调整 CPU 的工作频率和电压以满足处理需求。</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">16</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title">C-state and P-state</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/cpu/">cpu</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="P-state和C-state"><a href="#P-state和C-state" class="headerlink" title="P-state和C-state"></a>P-state和C-state</h2><h3 id="C-state，也叫做CPU空闲状态，是CPU在没有执行任务时的各种休眠状态。"><a href="#C-state，也叫做CPU空闲状态，是CPU在没有执行任务时的各种休眠状态。" class="headerlink" title="C-state，也叫做CPU空闲状态，是CPU在没有执行任务时的各种休眠状态。"></a>C-state，也叫做CPU空闲状态，是CPU在没有执行任务时的各种休眠状态。</h3><p>各个不同级别的C-state表示着CPU在休眠期间可以关闭的部分和能耗。一般来说，数字越大的C-state说明CPU关闭的部分越多，能耗也就越低。主要有以下几个级别：</p>
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#cpu%E9%A2%91%E7%8E%87%E8%B0%83%E8%8A%82%E5%99%A8governor"><span class="toc-number">1.</span> <span class="toc-text">CPU频率调节器（Governor）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#performance%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">1.performance模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#powersave%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">2.powersave模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conservative%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">3.conservative模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ondemand%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.4.</span> <span class="toc-text">4.ondemand模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#schedutil%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.5.</span> <span class="toc-text">5.schedutil模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%90%88%E9%80%82%E7%9A%84%E8%B0%83%E8%8A%82%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.6.</span> <span class="toc-text">选择合适的调节器模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#p-state-performance-state"><span class="toc-number">2.</span> <span class="toc-text">P-state (Performance State)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bp-state%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">查看P-state信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bc-state%E4%BF%A1%E6%81%AF"><span class="toc-number">2.3.</span> <span class="toc-text">查看C-state信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpu%E9%A2%91%E7%8E%87%E8%B0%83%E8%8A%82%E5%99%A8governor%E4%B8%8Ep-state%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.</span> <span class="toc-text">CPU频率调节器（Governor）与P-state的关系</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">6</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title">CPU频率调节器（Governor）和P-state、C-state</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/cpu/">cpu</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="cpu频率调节器governor">CPU频率调节器（Governor）</h2>
+<h3 id="performance模式">1.performance模式</h3>
 <ul>
-<li>C0: CPU处于活动状态，正在执行指令。</li>
-<li>C1 (Halt): CPU停止执行指令，但可以立即返回C0状态。</li>
-<li>C2 (Stop-Clock): 相较于C1，CPU处于更深的休眠状态，关闭更多的内部部品以节省能源，但返回C0状态的代价也比C1略高。</li>
-<li>C3 (Sleep): CPU的所有内部缓存都被刷新到主内存中，所有的时钟都被关闭。因此，C3节省的能耗比C2多，但从C3返回C0需要更多的时间。</li>
-<li>C4, C5, C6等: 这些都是更深度的C-states，会关闭更多的CPU部分以进一步节省能耗。从这些状态返回C0则需要更多的时间。</li>
+<li>描述:performance模式将CPU频率固定在最高可用频率。这意味着无论系统负载如何，CPU都会一直运行在其最大频率以提供最佳性能。</li>
+<li>工作原理: 在这种模式下，CPU不进行频率调整，直接运行在最高频率。</li>
+<li>适用场景:
+<ul>
+<li>高性能计算任务</li>
+<li>游戏服务器</li>
+<li>需要最低延迟和最高吞吐量的应用程序</li>
+</ul></li>
+<li>优点:
+<ul>
+<li>最大化性能</li>
+<li>最低延迟</li>
+</ul></li>
+<li>缺点:
+<ul>
+<li>高功耗</li>
+<li>高温度</li>
+<li>可能会缩短硬件寿命</li>
+</ul></li>
 </ul>
-<p>需要注意的是，具体的CPU型号可能支持的C-state级别以及每个级别的具体作用可能不同，也可能有额外的C-state级别。另外，操作系统和BIOS设置也可能限制了可用的C-state级别。</p>
-<h3 id="P-state（P-状态）是-CPU-的性能状态，用于调整-CPU-的工作频率和电压以满足处理需求。"><a href="#P-state（P-状态）是-CPU-的性能状态，用于调整-CPU-的工作频率和电压以满足处理需求。" class="headerlink" title="P-state（P 状态）是 CPU 的性能状态，用于调整 CPU 的工作频率和电压以满足处理需求。"></a>P-state（P 状态）是 CPU 的性能状态，用于调整 CPU 的工作频率和电压以满足处理需求。</h3><p>不同的 CPU 型号和架构具有不同的 P-state 支持，下面是常见的一些 P-state 级别及其特点：</p>
-<ol>
-<li><p>P0 状态（最高性能状态）：CPU 运行在最高的工作频率，以实现最大的性能。在 P0 状态下，CPU 消耗的功耗和发热最高。</p>
-</li>
-<li><p>P1 状态：CPU 运行在次高的工作频率，提供相对较高的性能，同时功耗和发热也高于较低级别的 P-state。</p>
-</li>
-<li><p>P2 状态：CPU 运行在较低的工作频率，提供一定的性能，功耗和发热相对较低。</p>
-</li>
-<li><p>P3 状态：CPU 运行在较低的工作频率，提供更低的性能，功耗和发热最低。通常在轻负载或空闲状态下使用。</p>
-</li>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 performance 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g performance</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="powersave模式">2.powersave模式</h3>
+<ul>
+<li>描述:powersave模式将CPU频率固定在最低可用频率。这意味着无论系统负载如何，CPU都会一直运行在最低频率以最大限度地节省能量。</li>
+<li>工作原理: 在这种模式下，CPU不进行频率调整，直接运行在最低频率。</li>
+<li>适用场景:
+<ul>
+<li>电池供电的设备（如笔记本电脑）</li>
+<li>服务器待机模式</li>
+<li>对性能要求不高但对能效要求高的场景</li>
+</ul></li>
+<li>优点:
+<ul>
+<li>最低功耗</li>
+<li>降低发热量</li>
+<li>延长电池寿命</li>
+</ul></li>
+<li>缺点:
+<ul>
+<li>性能较低</li>
+<li>可能导致高负载任务运行缓慢 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 powersave 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g powersave</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+</ul>
+<h3 id="conservative模式">3.conservative模式</h3>
+<ul>
+<li>描述:conservative模式根据系统负载逐步调整CPU频率。当负载增加时，频率逐步提升；当负载减少时，频率逐步降低。相比ondemand模式，conservative模式的频率调整更加缓和。</li>
+<li>工作原理:conservative模式会监控CPU负载，当负载超过某个阈值时，逐步提升频率；当负载低于某个阈值时，逐步降低频率。</li>
+<li>适用场景:
+<ul>
+<li>需要平衡性能和能效的任务</li>
+<li>希望避免频繁的频率波动</li>
+</ul></li>
+<li>优点:
+<ul>
+<li>平衡性能和能效</li>
+<li>频率调整较为平缓，减少频率变化带来的开销</li>
+</ul></li>
+<li>缺点:
+<ul>
+<li>响应速度较慢，可能导致短暂的高负载任务性能不佳 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 conservative 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g conservative</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+</ul>
+<h3 id="ondemand模式">4.ondemand模式</h3>
+<ul>
+<li>描述:ondemand模式根据系统负载快速调整CPU频率。当负载增加时，立即将频率提升到最高；当负载减少时，立即将频率降低到最低。</li>
+<li>工作原理:ondemand模式会监控CPU负载，当负载超过某个阈值时，立即将频率提升到最高；当负载低于某个阈值时，立即将频率降低到最低。</li>
+<li>适用场景:
+<ul>
+<li>动态负载环境，例如桌面系统、普通服务器</li>
+<li>需要快速响应负载变化的场景</li>
+</ul></li>
+<li>优点:
+<ul>
+<li>能快速响应负载变化</li>
+<li>性能与能效平衡较好</li>
+</ul></li>
+<li>缺点:
+<ul>
+<li>频繁的频率切换可能导致系统不稳定</li>
+<li>频率切换带来的开销 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 ondemand 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g ondemand</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+</ul>
+<h3 id="schedutil模式">5.schedutil模式</h3>
+<ul>
+<li>描述:schedutil模式基于Linux内核调度器的负载跟踪机制来调整CPU频率。这个调节器利用调度器的负载信息，通常能提供较好的性能和能效平衡。</li>
+<li>工作原理:schedutil模式直接从调度器获取负载信息，并根据这个信息来调整CPU频率。频率调整更加智能和动态。</li>
+<li>适用场景:
+<ul>
+<li>现代Linux系统</li>
+<li>需要智能频率调整的场景</li>
+</ul></li>
+<li>优点:
+<ul>
+<li>调整频率更智能</li>
+<li>性能和能效平衡较好</li>
+<li>频率调整更加平滑</li>
+</ul></li>
+<li>缺点:
+<ul>
+<li>需要较新的内核版本支持</li>
+<li>可能在某些特定场景下不如专门的调节器高效 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 schedutil 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g schedutil</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+</ul>
+<h3 id="选择合适的调节器模式">选择合适的调节器模式</h3>
+<p>选择合适的调节器模式需要根据具体的使用场景和需求来决定： *
+高性能需求: * 选择performance模式 *
+适用于需要最高性能的场景，如高性能计算、游戏服务器等。 * 节能需求: *
+选择powersave模式 *
+适用于对能效要求高的场景，如电池供电设备、待机模式等。 * 平衡性能和能效:
+* 选择conservative、ondemand或schedutil模式 *
+适用于需要动态调整频率以平衡性能和能效的场景，如桌面系统、普通服务器等。</p>
+<h2 id="p-state-performance-state">P-state (Performance State)</h2>
+<h3 id="概述">概述</h3>
+<p>P-state代表CPU的不同性能状态，每个P-state定义了一个特定的电压和频率组合。更高的P-state（如P0）通常意味着更高的频率和电压，从而提供更高的性能和更高的功耗。更低的P-state（如P1,
+P2等）则意味着较低的频率和电压，从而降低性能和功耗。 ### 工作原理
+在操作系统或固件的控制下，P-state可以动态调整，以适应当前的工作负载。当系统负载较高时，CPU会使用较高的P-state以获得更高的性能。当系统负载较低时，CPU会使用较低的P-state以节省能量。
+### 具体实现 * Intel P-state 驱动：Linux内核中有一个专用的Intel
+P-state驱动程序，它可以直接与Intel处理器硬件交互，以更高效地管理P-state。
+* AMD P-state
+驱动：类似地，AMD处理器也有专用的P-state驱动程序，能够更精细地控制P-state。
+### P-state 的调节器（Governor） * performance: 固定选择最高的P-state。
+* powersave: 固定选择最低的P-state。 * conservative:
+根据系统负载逐步调整P-state。 * ondemand: 根据系统负载快速调整P-state。
+* schedutil: 基于调度器的负载跟踪机制来调整P-state。</p>
+<h3 id="查看p-state信息">查看P-state信息</h3>
+<ol type="1">
+<li>cpupower 工具 cpupower
+是一个命令行工具，可以用来查看和管理CPU的P-state。 安装 cpupower： sudo
+apt-get install linux-tools-common linux-tools-$(uname -r)
+查看P-state信息： sudo cpupower frequency-info
+该命令将显示当前CPU频率、可用频率范围、当前调速器（governor）等信息。</li>
+<li>/sys 文件系统 Linux内核通过 /sys
+文件系统暴露了许多与CPU相关的信息，包括P-state。
+查看当前调速器（governor）： cat
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 查看当前CPU频率：
+cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+查看可用频率范围： cat
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+查看可用的调速器（governor）： cat
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors ###
+设置P-state</li>
+<li>使用 cpupower 工具 你可以使用 cpupower
+工具来设置P-state，例如设置调速器（governor）和频率范围。
+设置调速器（governor）： sudo cpupower frequency-set -g performance
+将调速器设置为 performance 模式。这意味着CPU将尽可能运行在最高频率。
+设置最小和最大频率： sudo cpupower frequency-set -d 1.2GHz -u 2.8GHz
+将CPU频率限制在1.2GHz到2.8GHz之间。</li>
+<li>修改 /sys 文件系统 你也可以直接修改 /sys
+文件系统中的配置文件来设置P-state。 设置调速器（governor）： echo
+"performance" | sudo tee
+/sys/devices/system/cpu/cpu<em>/cpufreq/scaling_governor 将调速器设置为
+performance 模式。 设置最小和最大频率： echo 1200000 | sudo tee
+/sys/devices/system/cpu/cpu</em>/cpufreq/scaling_min_freq echo 2800000 |
+sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+将CPU频率限制在1.2GHz到2.8GHz之间。注意，频率值以千赫兹（kHz）为单位。
+### 高级配置</li>
+<li>BIOS/UEFI 设置
+有些系统允许在BIOS或UEFI设置中配置P-state。你可以在启动计算机时进入BIOS/UEFI设置界面，通常通过按下特定的键（如F2,
+Del,
+Esc等）。在电源管理或高级设置菜单中，你可能会找到P-state相关的设置。</li>
+<li>内核参数 你可以通过内核参数来配置P-state。例如，Intel处理器可以使用
+intel_pstate 驱动，并通过内核参数进行配置。 编辑GRUB配置文件
+/etc/default/grub： sudo nano /etc/default/grub 在
+GRUB_CMDLINE_LINUX_DEFAULT 行中添加：
+GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=enable"
+更新GRUB配置并重启系统： sudo update-grub sudo reboot</li>
+<li>使用 turbostat 工具 turbostat
+是另一个强大的工具，可以提供详细的CPU状态信息，包括P-state。 安装
+turbostat： sudo apt-get install linux-tools-common linux-tools-$(uname
+-r) 运行 turbostat： sudo turbostat ### 总结
+通过上述方法，你可以在Linux系统中查看和设置P-state。了解和调整P-state可以帮助优化系统的功耗和性能，特别是在不同的应用场景中。通过合理的配置，可以在性能和能效之间找到最佳平衡点。
+## C-state (CPU Idle State) ### 概述
+C-state代表CPU的空闲状态，用于减少CPU在空闲时的功耗。C-state的等级越高，CPU的功耗越低，但从这种状态恢复到工作状态所需的时间也越长。
+### 工作原理
+当CPU没有工作负载时，它可以进入不同的C-state以节省能量。C-state从C0（完全活跃）到更高的C-state（如C1,
+C2,
+C3等），每个状态减少更多的功耗，但也增加了从该状态恢复到C0的延迟。</li>
 </ol>
-<p>不同的 P-state 级别允许动态调整 CPU 的工作频率和电压，以平衡性能和功耗。当 CPU 负载较高时，会提高 P-state 级别以获得更高的性能，而在负载较低时可以降低 P-state 级别以降低功耗。具体支持的 P-state 级别取决于 CPU 的型号、架构和供应商。</p>
-<figure class="highlight tp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CPU <span class="keyword">P</span>-states represent voltage-frequency control states defined as performance states in the industry standard Advanced Configuration and Power Interface (ACPI) specification (see http:<span class="comment">//www.acpi.info for more details).</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">In voltage-frequency control, the voltage and clocks that drive circuits are increased or decreased in response to a workload. The operating system requests specific P-states based on the current workload. The processor may accept or reject the request and set the P-state based on its own state.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">P-states columns represent the processor’s supported frequencies and the time spent in each frequency during the collection period.</span></span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight smali"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C-State residencies are collected from hardware<span class="built_in"> and/or </span>the operating<span class="keyword"> system</span> (OS).</span><br><span class="line">For<span class="keyword"> system</span>s that collect OS C-State residencies, CPU C-states are core power states requested by the Operating System Directed Power Management (OSPM) infrastructure that define the degree to which the processor is <span class="string">"idle"</span>.</span><br><span class="line"></span><br><span class="line">For<span class="keyword"> system</span>s that collect hardware C-State residencies, CPU C-States are obtained by reading the processor’s</span><br><span class="line">MSRs which count the actual time spent in each C-State.</span><br><span class="line">C-States range from C0 to Cn. C0 indicates an active state. All other C-states (C1-Cn) represent idle sleep states where the processor clock is inactive (cannot<span class="built_in"> execute </span>instructions)<span class="built_in"> and </span>different parts of the processor are powered down. As the C-States get deeper, the exit latency duration becomes longer (the time to transition to C0)<span class="built_in"> and </span>the power savings becomes greater.</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Looking4Socrates</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://looking4socrates.github.io/2023/06/07/p-state/">https://looking4socrates.github.io/2023/06/07/p-state/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://looking4socrates.github.io">Looking For Socrates</a>！</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/benchmark/"><i class="fa fa-chevron-left">  </i><span>benchmark</span></a></div><div class="next-post pull-right"><a href="/2023/05/30/Ampere-Altra/"><span>Ampere Altra</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2023 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<ul>
+<li>C0: 活跃状态，CPU正在执行指令。</li>
+<li>C1: 轻度空闲状态，CPU停止执行指令，但可以迅速恢复到C0。</li>
+<li>C2: 中度空闲状态，进一步减少功耗，但恢复时间较长。</li>
+<li>C3: 深度空闲状态，CPU缓存被刷新，功耗进一步降低，恢复时间更长。</li>
+<li>Cn: 更高级的空闲状态，可能进一步降低功耗，但恢复时间也更长。 C-state
+的管理</li>
+<li>操作系统控制：操作系统可以通过ACPI（Advanced Configuration and Power
+Interface）管理C-state。操作系统通过查询硬件和固件，决定进入哪个C-state。</li>
+<li>硬件控制：一些C-state（如C1E）由硬件自动管理，而不需要操作系统干预。</li>
+</ul>
+<h3 id="查看c-state信息">查看C-state信息</h3>
+<ol type="1">
+<li>cpupower 工具 cpupower
+是一个命令行工具，用于管理和查看CPU的电源管理设置。你可以使用它来查看C-state信息。
+安装 cpupower： sudo apt-get install linux-tools-common
+linux-tools-$(uname -r) 查看C-state信息： sudo cpupower idle-info</li>
+<li>/sys 文件系统 Linux内核通过 /sys
+文件系统暴露了许多与CPU相关的信息，包括C-state。 查看C-state统计信息：
+cat /sys/devices/system/cpu/cpu0/cpuidle/state<em>/name cat
+/sys/devices/system/cpu/cpu0/cpuidle/state</em>/usage
+这将显示每个C-state的名称和使用次数。</li>
+<li>turbostat 工具 turbostat
+是另一个强大的工具，可以提供详细的CPU状态信息，包括C-state。 安装
+turbostat： sudo apt-get install linux-tools-common linux-tools-$(uname
+-r) 运行 turbostat： sudo turbostat ### 修改C-state设置</li>
+<li>禁用特定的C-state
+可以通过内核参数在启动时禁用特定的C-state。例如，要禁用C6状态，可以在引导加载器（如GRUB）的配置文件中添加以下参数：
+编辑GRUB配置文件 /etc/default/grub： sudo nano /etc/default/grub 在
+GRUB_CMDLINE_LINUX_DEFAULT 行中添加：
+GRUB_CMDLINE_LINUX_DEFAULT="intel_idle.max_cstate=5"
+这将最大C-state限制为C5，从而禁用C6。 更新GRUB配置： sudo update-grub
+重启系统： sudo reboot</li>
+<li>使用 cpupower 工具 cpupower 工具也可以用于设置C-state。
+限制最大C-state： sudo cpupower idle-set -d 3 这将禁用C-state
+3及其以上的状态。 启用所有C-state： sudo cpupower idle-set -e all ###
+高级配置</li>
+<li>BIOS/UEFI 设置
+很多系统允许在BIOS或UEFI固件中配置C-state。你可以在启动计算机时进入BIOS/UEFI设置界面，通常通过按下特定的键（如F2,
+Del,
+Esc等）。在电源管理或高级设置菜单中，你可能会找到C-state相关的设置，可以启用或禁用特定的C-state。</li>
+<li>内核配置 在编译自定义内核时，可以通过配置选项来控制C-state。
+编辑内核配置： make menuconfig 导航到 Processor type and features -&gt;
+CPU idle PM support，然后根据需要启用或禁用特定的C-state支持。 ##
+P-state 和 C-state 的区别</li>
+</ol>
+<ul>
+<li>P-state:
+主要用于动态调整CPU的频率和电压，以平衡性能和能效。在运行负载时使用。</li>
+<li>C-state:
+主要用于减少CPU在空闲状态下的功耗。不同的C-state代表不同的空闲深度和恢复时间。
+### 交互与优化
+P-state和C-state经常一起工作，以优化系统的整体性能和能效。</li>
+<li>高负载场景：在高负载情况下，CPU通常在较高的P-state（如P0）运行，以提供最高性能。此时，CPU可能很少进入高等级的C-state。</li>
+<li>低负载或空闲场景：在低负载或空闲情况下，CPU可能会使用较低的P-state，并进入较高等级的C-state，以最大限度地节省能量。</li>
+</ul>
+<h2 id="cpu频率调节器governor与p-state的关系">CPU频率调节器（Governor）与P-state的关系</h2>
+<p>在现代CPU中，特别是Intel和AMD的处理器中，P-state（Performance
+State）和频率调节器（governor）是密切相关的概念，但它们工作在不同的层面上。
+CPU频率调节器（governor）在操作系统层面工作，它们决定了在给定的负载条件下选择哪一个P-state。可以认为，governor是操作系统用于管理和选择P-state的策略。
+### 工作原理 1. Governor（操作系统层面）监控系统负载。 2.
+根据系统负载，Governor决定需要哪种性能状态。 3.
+Governor选择相应的P-state。 4. CPU根据选择的P-state调整其频率和电压。
+### 各种Governor与P-state的关系 performance 模式 * 描述:
+固定选择最高的P-state（如P0）。 * P-state选择:
+始终选择最高性能的P-state。 * 适用场景: 高性能计算任务、游戏服务器等。
+powersave 模式 * 描述: 固定选择最低的P-state。 * P-state选择:
+始终选择最低性能的P-state。 * 适用场景: 电池供电设备、服务器待机模式等。
+conservative 模式 * 描述: 根据系统负载逐步调整P-state。 * P-state选择:
+根据负载情况在不同的P-state之间逐步切换。 * 适用场景:
+平衡性能和能效的任务。 ondemand 模式 * 描述:
+根据系统负载快速调整P-state。 * P-state选择:
+负载高时立即选择最高的P-state，负载低时立即选择最低的P-state。 *
+适用场景: 动态负载环境，例如桌面系统、普通服务器。 schedutil 模式 *
+描述: 基于Linux内核调度器的负载跟踪机制来调整P-state。 * P-state选择:
+根据调度器的负载信息动态调整P-state。 * 适用场景:
+现代Linux系统，适用于各种任务。 ### Intel P-state 驱动
+对于Intel处理器，Linux内核提供了一个专用的Intel
+P-state驱动程序，它直接与CPU硬件交互来控制P-state。这种驱动程序可以更高效地管理P-state，因为它可以更精细地调整频率和电压。
+Intel P-state 驱动的Governor * powersave: 在Intel
+P-state驱动中，powersave governor并不像传统的powersave
+governor那样固定在最低频率。相反，它会动态调整频率，但倾向于更低的频率，以节省能量。
+* performance: 在Intel P-state驱动中，performance
+governor将频率尽可能地保持在最高。 ### AMD P-state 驱动
+类似地，AMD处理器也有专用的P-state驱动程序，能够更精细地控制P-state。不同的调节器模式在AMD处理器上也会有相似的效果。
+### 总结 * P-state: 由硬件和固件管理，定义不同的频率和电压组合。 *
+Governor: 由操作系统管理，决定选择哪个P-state以平衡性能和能效。 *
+Governor与P-state的关系:
+Governor通过监控系统负载来选择合适的P-state，从而动态调整CPU频率和电压。
+了解P-state与Governor的关系有助于更好地优化系统性能和能效，通过选择合适的Governor，可以在不同的使用场景中实现最佳的性能和能效平衡。</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Looking4Socrates</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://looking4socrates.github.io/2023/06/07/p-state/">https://looking4socrates.github.io/2023/06/07/p-state/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://looking4socrates.github.io">Looking For Socrates</a>！</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2023/06/07/interview/"><i class="fa fa-chevron-left">  </i><span>question</span></a></div><div class="next-post pull-right"><a href="/2023/05/29/Memory-Consistency-Models-X86-VS-ARM/"><span>Memory Consistency Models (X86 VS ARM)</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2024 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

@@ -10,417 +10,1397 @@
   hexoVersion: '6.3.0'
 } </script><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">16</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">7</span></a></div></div></div><nav id="nav" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="site-info"><div id="site-title">Looking For Socrates</div><div id="site-sub-title">The unexamined life is not worth living.</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/16/%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%AA%8C%E8%AF%81/">形式化验证</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time><div class="content"><h2 id="形式化验证"><a href="#形式化验证" class="headerlink" title="形式化验证"></a>形式化验证</h2><p>形式化验证工具是一类用于验证硬件或软件系统设计是否满足特定规范或性质的工具。这些工具基于数学模型和逻辑推理，能够自动化地验证系统的正确性。以下是几种常见的形式化验证工具：</p>
-<ol>
-<li>模型检查器（Model Checkers）：<ul>
-<li>SPIN：用于验证并发系统的模型检查器，使用 Promela 语言描述系统模型。</li>
-<li>NuSMV 和 SPIN：用于验证硬件和软件系统的模型检查器，使用类似于时序逻辑（temporal logic）的规范语言。</li>
-<li>UPPAAL：用于验证实时系统的模型检查器，可以验证具有时间约束的系统行为。</li>
-</ul>
-</li>
-<li>定理证明器（Theorem Provers）：<ul>
-<li>Isabelle/HOL：支持高阶逻辑（Higher Order Logic），能够进行复杂的数学定理证明。</li>
-<li>Coq：基于计算的定理证明器，支持依赖类型（dependent types），用于证明程序正确性和数学定理。</li>
-</ul>
-</li>
-<li>符号执行工具（Symbolic Execution Tools）：<ul>
-<li>KLEE：用于自动化生成测试用例和验证程序的符号执行工具，主要用于 C 和 C++ 代码的验证。</li>
-<li>SAGE：用于自动化分析和发现软件漏洞的符号执行工具。</li>
-</ul>
-</li>
-<li>形式化语言和工具：<ul>
-<li>ACL2：一个包含逻辑和编程环境的工具，用于验证计算机系统和算法的正确性。</li>
-<li>TLA+：一种用于设计和验证分布式系统的形式化语言和工具。<br>这些工具在验证对象、验证领域和使用方式上有所不同。有些工具更适合硬件系统（如处理器、芯片等）的验证，而有些则更适合软件系统（如程序、算法等）的验证。它们的共同目标是提供自动化的、精确的、可靠的验证手段，帮助设计者发现并修复系统设计中的潜在问题，确保系统符合规范和性能要求。<br>选择合适的形式化验证工具通常取决于你的验证需求、所验证对象的类型以及你的经验和熟悉程度。深入了解每个工具的优势和适用范围能够更好地选择合适的工具来完成你的验证任务。</li>
-</ul>
-</li>
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">6</span></a></div></div></div><nav id="nav" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="site-info"><div id="site-title">Looking For Socrates</div><div id="site-sub-title">The unexamined life is not worth living.</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2024/08/14/Async-RTL/">Async-RTL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-08-14</time><div class="content"><p>异步时钟传输是指在没有共享时钟信号的情况下，数据在不同时钟域之间的传输。异步时钟传输可以分为单bit传输和多bit传输。每种传输方式都有不同的方法和挑战。</p>
+<h3 id="单bit传输">单bit传输</h3>
+<p>单bit传输通常用于简单的信号传递，例如控制信号。因为只涉及一个比特，这种传输方式相对简单，主要关注信号的稳定性和正确同步。常见方法有：</p>
+<ol type="1">
+<li><strong>双FF同步器（Two Flip-Flop Synchronizer）</strong>：
+<ul>
+<li><strong>工作原理</strong>：将输入信号通过两个串联的触发器（Flip-Flop），这样可以有效地减少亚稳态（Metastability）的概率。</li>
+<li><strong>优点</strong>：简单、可靠。</li>
+<li><strong>缺点</strong>：可能会有一个时钟周期的延迟。</li>
+<li><strong>电路示例</strong>： <figure class="highlight verilog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> synchronizer (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> clk,      <span class="comment">// 目标时钟域</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> async_in, <span class="comment">// 异步输入信号</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> sync_out <span class="comment">// 同步输出信号</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">reg</span> ff1, ff2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk) <span class="keyword">begin</span></span><br><span class="line">    ff1 &lt;= async_in;</span><br><span class="line">    ff2 &lt;= ff1;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> sync_out = ff2;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
 </ol>
-<h2 id="验证流程"><a href="#验证流程" class="headerlink" title="验证流程"></a>验证流程</h2><p>当涉及形式化验证时，一个经典的例子是验证缓存一致性协议。在多核处理器系统中，为了保证数据的一致性，通常会使用缓存一致性协议，比如 MESI 协议。</p>
+<h3 id="多bit传输">多bit传输</h3>
+<p>多bit传输涉及到多个数据位的同步传输，通常用在数据总线、地址总线等场景。由于多个比特需要同时传输，面临的问题更复杂。一些常用方法包括：</p>
+<ol type="1">
+<li><strong>握手协议（Handshake Protocol）</strong>：
+<ul>
+<li><strong>工作原理</strong>：发送方和接收方通过握手信号（如有效信号valid、确认信号acknowledge）来协调数据传输。</li>
+<li><strong>优点</strong>：可靠性高，适用于任意数量的数据位。</li>
+<li><strong>缺点</strong>：复杂度较高，传输速度可能较慢。</li>
+<li><strong>电路示例</strong>： <figure class="highlight verilog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> async_fifo (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> wr_clk,          <span class="comment">// 写时钟</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> rd_clk,          <span class="comment">// 读时钟</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] din,       <span class="comment">// 写数据</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> wr_en,           <span class="comment">// 写使能</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] dout,     <span class="comment">// 读数据</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> rd_en,           <span class="comment">// 读使能</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> empty,          <span class="comment">// FIFO空标志</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> full            <span class="comment">// FIFO满标志</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// FIFO实现细节省略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+<li><strong>异步FIFO（Asynchronous FIFO）</strong>：
+<ul>
+<li><strong>工作原理</strong>：利用FIFO（先进先出队列）来缓冲在不同时钟域之间传输的数据。写操作和读操作分别在不同的时钟域中进行。</li>
+<li><strong>优点</strong>：适合高吞吐量、多比特传输。</li>
+<li><strong>缺点</strong>：实现和验证较复杂。</li>
+<li><strong>电路示例</strong>： <figure class="highlight verilog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> async_fifo (</span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> wr_clk,          <span class="comment">// 写时钟</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> rd_clk,          <span class="comment">// 读时钟</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] din,       <span class="comment">// 写数据</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> wr_en,           <span class="comment">// 写使能</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> [<span class="number">7</span>:<span class="number">0</span>] dout,     <span class="comment">// 读数据</span></span><br><span class="line">    <span class="keyword">input</span> <span class="keyword">wire</span> rd_en,           <span class="comment">// 读使能</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> empty,          <span class="comment">// FIFO空标志</span></span><br><span class="line">    <span class="keyword">output</span> <span class="keyword">wire</span> full            <span class="comment">// FIFO满标志</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// FIFO实现细节省略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+<li><strong>Gray Code 编码</strong>：
+<ul>
+<li><strong>工作原理</strong>：在多比特传输中，使用Gray
+Code编码可以减少传输过程中数据变化的比特数，从而减少亚稳态的概率。</li>
+<li><strong>优点</strong>：减少同步误差。</li>
+<li><strong>缺点</strong>：需要额外的编码和解码逻辑。</li>
+<li><strong>电路示例</strong>： <figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Gray Code转换逻辑省略</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+</ol>
+<h3 id="总结">总结</h3>
+<ul>
+<li><strong>单bit传输</strong>：主要使用双FF同步器，简单高效。</li>
+<li><strong>多bit传输</strong>：可以使用握手协议、异步FIFO和Gray
+Code编码等方法，根据应用场景选择合适的方式。</li>
+</ul>
+<p>每种方法都有其适用的场景和优缺点，设计时需要根据具体需求进行选择和优化。</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2024/08/14/ISA-Diff/">ISA-Diff</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-08-14</time><div class="content"><p>当然，以下是x86、POWER、ARM和RISC-V架构中缓存管理指令、同步管理指令以及TLB（Translation
+Lookaside Buffer）管理指令的完整对比和描述。</p>
+<hr>
+<h3 id="总结">总结</h3>
+<p>以下是x86、POWER、ARM和RISC-V架构在缓存管理、同步管理和TLB管理指令上的对比：</p>
+<ul>
+<li><strong>缓存管理指令</strong>：
+<ul>
+<li><strong>x86</strong>：CLFLUSH, CLFLUSHOPT, CLWB, MFENCE</li>
+<li><strong>POWER</strong>：dcbf, dcbst, icbi, sync</li>
+<li><strong>ARM</strong>：DC CIVAC, DC CVAC, DC IVAC, ISB</li>
+<li><strong>RISC-V</strong>：FENCE, FENCE.I</li>
+</ul></li>
+<li><strong>同步管理指令</strong>：
+<ul>
+<li><strong>x86</strong>：LOCK前缀, XCHG, XADD</li>
+<li><strong>POWER</strong>：lwarx, stwcx., sync</li>
+<li><strong>ARM</strong>：LDREX, STREX, DMB, DSB</li>
+<li><strong>RISC-V</strong>：LR.W, SC.W, AMO指令</li>
+</ul></li>
+<li><strong>TLB管理指令</strong>：
+<ul>
+<li><strong>x86</strong>：INVLPG, MOV to CR3</li>
+<li><strong>POWER</strong>：tlbie, tlbsync</li>
+<li><strong>ARM</strong>：TLBI, DSB ISH</li>
+<li><strong>RISC-V</strong>：SFENCE.VMA, HFENCE.VVMA</li>
+</ul></li>
+</ul>
+<h2 id="同步管理指令对比">同步管理指令对比</h2>
+<p>在处理器架构中，同步管理指令用于确保多线程或多核环境下的内存操作顺序和一致性。这些指令在不同的架构中有不同的实现方式和命名。以下是x86、POWER、ARM和RISC-V架构中同步管理指令的详细对比。</p>
+<h3 id="x86架构的同步管理指令">1.
+<strong>x86架构的同步管理指令</strong></h3>
+<p>x86架构提供了一组丰富的同步管理指令，主要用于内存屏障和I/O同步。这些指令包括：</p>
+<ul>
+<li><strong>MFENCE</strong>:
+确保所有之前的内存读写操作完成，适用于所有类型的内存访问。</li>
+<li><strong>LFENCE</strong>:
+确保所有之前的读操作完成，通常用于内存读操作的同步。</li>
+<li><strong>SFENCE</strong>:
+确保所有之前的写操作完成，通常用于内存写操作的同步。</li>
+<li><strong>LOCK前缀</strong>:
+用于原子操作指令前，确保该指令在多处理器环境中的原子性。例如，<code>LOCK XCHG</code>指令。</li>
+</ul>
+<h3 id="power架构的同步管理指令">2.
+<strong>POWER架构的同步管理指令</strong></h3>
+<p>POWER架构提供了一组同步管理指令，主要用于确保内存操作和指令执行的顺序。这些指令包括：</p>
+<ul>
+<li><strong>sync</strong>:
+全局同步指令，确保所有之前的读写操作完成，并且在多处理器环境中同步所有处理器的视图。</li>
+<li><strong>lwsync (Light-Weight Sync)</strong>:
+轻量级同步指令，确保之前的存储操作在同一个处理器上完成，但不保证全局同步。</li>
+<li><strong>eieio (Enforce In-Order Execution of I/O)</strong>:
+确保I/O操作按照程序顺序执行，主要用于I/O设备的同步。</li>
+<li><strong>isync</strong>:
+确保之前的所有指令执行完成，通常用于指令流的同步，确保后续指令不会被重新排列。</li>
+<li><strong>lwarx (Load Word and Reserve Indexed)</strong>:
+加载并保留，用于实现原子操作。</li>
+<li><strong>stwcx. (Store Word Conditional Indexed)</strong>:
+条件存储，如果保留仍有效，则存储成功，用于实现原子操作。</li>
+</ul>
+<h3 id="arm架构的同步管理指令">3.
+<strong>ARM架构的同步管理指令</strong></h3>
+<p>ARM架构（如ARMv8）提供了一组同步管理指令，用于确保内存操作的顺序和一致性。这些指令包括：</p>
+<ul>
+<li><strong>DSB (Data Synchronization Barrier)</strong>:
+确保所有之前的内存读写操作完成，适用于所有类型的内存访问。</li>
+<li><strong>DMB (Data Memory Barrier)</strong>:
+确保之前的内存操作按照指定的顺序完成，可以指定不同的内存域（如系统域或内存域）。</li>
+<li><strong>ISB (Instruction Synchronization Barrier)</strong>:
+确保之前的所有指令执行完成，通常用于指令流的同步，确保后续指令不会被重新排列。</li>
+<li><strong>LDREX/STREX (Load-Exclusive/Store-Exclusive)</strong>:
+用于实现原子操作。ARMv8-A引入了更为细粒度的指令：
+<ul>
+<li><strong>LDAXR/STLXR (Load-Acquire/Store-Release)</strong>:
+用于实现同步的原子操作。</li>
+<li><strong>LDXR/STXR (Load-Exclusive/Store-Exclusive)</strong>:
+通用的原子操作。</li>
+</ul></li>
+<li><strong>CAS (Compare-And-Swap)</strong>:
+ARMv8.1引入的比较并交换指令，用于原子操作。</li>
+<li><strong>SWP (Swap)</strong>:
+交换指令，用于将寄存器值与内存中的值进行交换。</li>
+</ul>
+<h3 id="risc-v架构的同步管理指令">4.
+<strong>RISC-V架构的同步管理指令</strong></h3>
+<p>RISC-V架构的同步管理指令相对简洁，主要包括内存屏障和I/O同步指令。这些指令包括：</p>
+<ul>
+<li><strong>FENCE</strong>:
+用于内存和I/O访问的同步操作，确保之前的所有内存和I/O操作完成。可以通过参数指定同步的类型和范围，如
+<code>FENCE rw,rw</code> 表示所有读写操作的屏障。</li>
+<li><strong>FENCE.I</strong>:
+确保之前的所有指令已被处理，通常用于指令流的同步，确保后续指令不会被重新排列。</li>
+<li><strong>LR/SC (Load-Reserved/Store-Conditional)</strong>:
+用于实现原子操作：
+<ul>
+<li><strong>LR.W</strong>: 加载保留字。</li>
+<li><strong>SC.W</strong>: 条件存储字，如果保留仍有效，则存储成功。</li>
+</ul></li>
+<li><strong>AMO指令 (Atomic Memory Operations)</strong>:
+包括一系列的原子内存操作指令，如：
+<ul>
+<li><strong>AMOSWAP</strong>: 原子交换。</li>
+<li><strong>AMOADD</strong>: 原子加法。</li>
+<li><strong>AMOXOR</strong>: 原子异或。</li>
+<li><strong>AMOAND</strong>: 原子与。</li>
+<li><strong>AMOMIN</strong>: 原子最小值。</li>
+<li><strong>AMOMAX</strong>: 原子最大值。</li>
+<li><strong>AMOMINU</strong>: 无符号原子最小值。</li>
+<li><strong>AMOMAXU</strong>: 无符号原子最大值。</li>
+</ul></li>
+</ul>
+<h3 id="总结-1">总结</h3>
+<ul>
+<li><strong>x86架构</strong>：提供了丰富的同步管理指令，包括内存屏障和I/O同步，适用于多处理器环境中的强一致性要求。</li>
+<li><strong>POWER架构</strong>：提供了多种同步管理指令，涵盖全局同步、轻量级同步和I/O同步，适用于高性能计算和企业级应用。</li>
+<li><strong>ARM架构</strong>：提供了一组同步管理指令，用于确保内存操作的顺序和一致性，广泛应用于移动设备和嵌入式系统。</li>
+<li><strong>RISC-V架构</strong>：同步管理指令相对简洁，主要包括内存屏障和I/O同步，具有高度的灵活性和可扩展性。</li>
+</ul>
+<p>各个架构在同步管理指令上的设计反映了其自身的设计目标和应用需求，选择哪种架构通常取决于具体的应用场景和一致性要求。</p>
+<h2 id="cache管理指令对比">cache管理指令对比</h2>
+<p>POWER、ARM 和 RISC-V
+处理器架构在缓存管理指令方面有一些显著的区别和特点。缓存管理指令用于控制和优化缓存的行为，以提高处理器性能和数据一致性。以下是对这三种架构的缓存管理指令的对比：</p>
+<h3 id="power架构的缓存管理指令">1.
+<strong>POWER架构的缓存管理指令</strong></h3>
+<p>POWER架构（如POWER8和POWER9）提供了一组丰富的缓存管理指令，主要用于控制缓存的行为和保持数据一致性。这些指令包括：</p>
+<ul>
+<li><strong>dcbf (Data Cache Block Flush)</strong>:
+将指定地址的缓存块从数据缓存中清除。如果该缓存块被修改过，则将其写回到主存。</li>
+<li><strong>dcbst (Data Cache Block Store)</strong>:
+将指定地址的缓存块写回主存，但不从缓存中清除。</li>
+<li><strong>dcbt (Data Cache Block Touch)</strong>:
+预取指定地址的缓存块到数据缓存中，以便后续访问更快。</li>
+<li><strong>dcbtst (Data Cache Block Touch for Store)</strong>:
+类似于dcbt，但专门针对即将写入的数据进行预取。</li>
+<li><strong>dcbi (Data Cache Block Invalidate)</strong>:
+将指定地址的缓存块从数据缓存中无效化，不进行写回操作。</li>
+<li><strong>icbi (Instruction Cache Block Invalidate)</strong>:
+将指定地址的缓存块从指令缓存中无效化。</li>
+<li><strong>sync</strong>: 确保所有之前的存储操作完成。</li>
+<li><strong>isync</strong>: 确保之前的指令执行完成。</li>
+</ul>
+<h3 id="arm架构的缓存管理指令">2.
+<strong>ARM架构的缓存管理指令</strong></h3>
+<p>ARM架构（如ARMv8）同样提供了一组缓存管理指令，用于优化缓存行为和维护数据一致性。这些指令包括：</p>
+<ul>
+<li><strong>DC ZVA (Data Cache Zero by Virtual Address)</strong>:
+将一个缓存线清零。</li>
+<li><strong>DC IVAC (Data Cache Invalidate by Virtual Address to
+PoC)</strong>: 使指定虚拟地址的缓存块无效。</li>
+<li><strong>DC ISW (Data Cache Invalidate by Set/Way)</strong>:
+按照set/way无效缓存。</li>
+<li><strong>DC CSW (Data Cache Clean by Set/Way)</strong>:
+按照set/way清理缓存。</li>
+<li><strong>DC CVAU (Data Cache Clean by Virtual Address to
+PoU)</strong>: 将指定虚拟地址的缓存块写回到主存。</li>
+<li><strong>DC CVAP (Data Cache Clean by Virtual Address to
+PoP)</strong>: 将指定虚拟地址的缓存块写回到持久存储。</li>
+<li><strong>DC CVAC (Data Cache Clean by Virtual Address to
+PoC)</strong>: 将指定虚拟地址的缓存块写回到主存并保持在缓存中。</li>
+<li><strong>IC IVAU (Instruction Cache Invalidate by Virtual Address to
+PoU)</strong>: 使指定虚拟地址的指令缓存块无效。</li>
+<li><strong>IC IALLU (Instruction Cache Invalidate All to PoU)</strong>:
+无效所有指令缓存。</li>
+<li><strong>DSB (Data Synchronization Barrier)</strong>:
+确保所有之前的存储操作完成。</li>
+<li><strong>ISB (Instruction Synchronization Barrier)</strong>:
+确保之前的指令执行完成。</li>
+</ul>
+<h3 id="risc-v架构的缓存管理指令">3.
+<strong>RISC-V架构的缓存管理指令</strong></h3>
+<p>RISC-V架构相对于POWER和ARM，缓存管理指令较为简单和灵活。RISC-V的缓存管理指令集往往依赖于具体的实现和扩展。以下是一些常见的缓存管理指令：</p>
+<ul>
+<li><strong>SFENCE.VMA (Supervisor Memory Management Fence for Virtual
+Memory Area)</strong>:
+用于虚拟内存管理的同步操作，确保之前的所有内存访问完成。</li>
+<li><strong>FENCE</strong>:
+用于内存和I/O访问的同步操作，确保之前的所有内存和I/O操作完成。</li>
+</ul>
+<p>RISC-V的缓存管理指令没有ARM和POWER那么丰富，主要是因为RISC-V追求简洁和模块化设计。具体的缓存管理操作可能由特定的实现和扩展提供，例如通过自定义的控制寄存器或特定的指令集扩展。
+### 4. <strong>x86架构的缓存管理指令</strong>
+x86架构（包括Intel和AMD处理器）有一组丰富的缓存管理指令，主要用于控制缓存行为、优化性能和维护数据一致性。这些指令包括：</p>
+<ul>
+<li><strong>CLFLUSH</strong>:
+刷新指定地址的缓存行，将其从缓存中清除并写回内存。</li>
+<li><strong>CLFLUSHOPT</strong>:
+类似于CLFLUSH，但具有更好的性能优化。</li>
+<li><strong>CLWB (Cache Line Write Back)</strong>:
+将缓存行写回内存但不清除缓存行。</li>
+<li><strong>INVD</strong>: 使整个数据缓存无效，不进行写回操作。</li>
+<li><strong>WBINVD</strong>: 将整个缓存内容写回内存并清除缓存。</li>
+<li><strong>PREFETCHNTA, PREFETCHT0, PREFETCHT1, PREFETCHT2</strong>:
+预取数据到缓存中，不同级别的预取指令用于不同的缓存层级优化（如L1、L2、L3）。</li>
+</ul>
+<h3 id="总结-2">总结</h3>
+<ul>
+<li><p><strong>POWER架构</strong>：提供了丰富的缓存管理指令，能够对缓存进行细粒度的控制，适用于高性能计算和企业级应用。</p></li>
+<li><p><strong>ARM架构</strong>：同样提供了一组丰富的缓存管理指令，涵盖数据缓存和指令缓存的各种操作，适用于广泛的应用场景，包括移动设备和嵌入式系统。</p></li>
+<li><p><strong>RISC-V架构</strong>：缓存管理指令相对简洁，依赖于具体的实现和扩展。这种设计使RISC-V具有高度的灵活性和可扩展性。</p></li>
+<li><p><strong>x86架构</strong>：提供了详细的缓存管理指令，能够进行缓存刷新、写回和预取等操作，适用于高性能桌面和服务器环境。</p></li>
+</ul>
+<p>每种架构在缓存管理指令上的设计都反映了其自身的设计目标和应用需求，选择哪种架构通常取决于具体的应用场景和性能需求。</p>
+<h2 id="tlb管理指令">TLB管理指令</h2>
+<h3 id="x86架构">x86架构</h3>
+<ul>
+<li><strong>INVLPG (Invalidate TLB Entry)</strong>
+<ul>
+<li><strong>语法</strong>：<code>INVLPG [mem]</code></li>
+<li><strong>用途</strong>：使指定虚拟地址的TLB条目无效。用于确保某个特定地址的页表更改被正确反映。</li>
+<li><strong>示例</strong>：<code>INVLPG [rax]</code>
+使寄存器<code>rax</code>指向的地址的TLB条目无效。</li>
+</ul></li>
+<li><strong>MOV to CR3</strong>
+<ul>
+<li><strong>语法</strong>：<code>MOV CR3, r32</code></li>
+<li><strong>用途</strong>：加载CR3寄存器，刷新整个TLB。CR3寄存器通常保存页表基地址，更新CR3会导致整个TLB被刷新。</li>
+<li><strong>示例</strong>：<code>MOV CR3, rax</code>
+使用寄存器<code>rax</code>的值更新CR3寄存器，刷新TLB。</li>
+</ul></li>
+<li><strong>INVPCID (Invalidate Process-Context Identifier)</strong>
+<ul>
+<li><strong>语法</strong>：<code>INVPCID r32, m128</code></li>
+<li><strong>用途</strong>：使具有特定PCID（Process-Context
+Identifier）的TLB条目无效。支持细粒度的TLB管理，包括单个地址、单个PCID或整个上下文。</li>
+<li><strong>示例</strong>：
+<ul>
+<li><code>INVPCID eax, [rcx]</code>
+使寄存器<code>eax</code>和<code>rcx</code>指向的PCID和地址条目无效。</li>
+<li>用于虚拟化和多进程环境，以提高性能。</li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="power架构">POWER架构</h3>
+<ul>
+<li><strong>tlbie (TLB Invalidate Entry)</strong>
+<ul>
+<li><strong>语法</strong>：<code>tlbie RA</code></li>
+<li><strong>用途</strong>：使特定的TLB条目无效。用于在页表更新后无效化某个特定地址的TLB条目。</li>
+<li><strong>示例</strong>：<code>tlbie r3</code>
+使寄存器<code>r3</code>指向的地址的TLB条目无效。</li>
+</ul></li>
+<li><strong>tlbia (TLB Invalidate All)</strong>
+<ul>
+<li><strong>语法</strong>：<code>tlbia</code></li>
+<li><strong>用途</strong>：使所有TLB条目无效。用于彻底刷新TLB。</li>
+<li><strong>示例</strong>：<code>tlbia</code> 使整个TLB无效。</li>
+</ul></li>
+<li><strong>tlbsync</strong>
+<ul>
+<li><strong>语法</strong>：<code>tlbsync</code></li>
+<li><strong>用途</strong>：同步TLB操作。确保所有先前的TLB无效化操作完成。</li>
+<li><strong>示例</strong>：<code>tlbsync</code>
+确保所有先前的TLB操作已完成。</li>
+</ul></li>
+</ul>
+<h3 id="arm架构">ARM架构</h3>
+<ul>
+<li><strong>TLBI (TLB Invalidate)</strong>
+<ul>
+<li><strong>语法</strong>：<code>TLBI &lt;type&gt; [&lt;Xt&gt;]</code></li>
+<li><strong>用途</strong>：使TLB条目无效。可以无效化整个TLB或特定条目。<type>参数指定无效化的范围，如<code>VMALLE1</code>表示无效化所有EL1的TLB条目。</type></li>
+<li><strong>示例</strong>：
+<ul>
+<li><code>TLBI VMALLE1</code> 使所有EL1的TLB条目无效。</li>
+<li><code>TLBI VAE1, &lt;Xt&gt;</code>
+使寄存器<code>Xt</code>指向的虚拟地址的TLB条目无效。</li>
+</ul></li>
+</ul></li>
+<li><strong>DSB (Data Synchronization Barrier)</strong>
+<ul>
+<li><strong>语法</strong>：<code>DSB ISH</code></li>
+<li><strong>用途</strong>：数据同步屏障。确保所有先前的内存访问完成，常与TLBI一起使用以确保TLB无效化操作完成。</li>
+<li><strong>示例</strong>：<code>DSB ISH</code>
+确保所有先前的内存访问已完成。</li>
+</ul></li>
+<li><strong>ISB (Instruction Synchronization Barrier)</strong>
+<ul>
+<li><strong>语法</strong>：<code>ISB</code></li>
+<li><strong>用途</strong>：指令同步屏障。确保之前的所有指令完成，常用于自修改代码。</li>
+<li><strong>示例</strong>：<code>ISB</code>
+确保所有先前的指令已完成。</li>
+</ul></li>
+</ul>
+<h3 id="risc-v架构">RISC-V架构</h3>
+<ul>
+<li><strong>SFENCE.VMA (Supervisor Fence Virtual Memory Access)</strong>
+<ul>
+<li><strong>语法</strong>：<code>SFENCE.VMA rs1, rs2</code></li>
+<li><strong>用途</strong>：刷新虚拟内存访问。用于刷新整个TLB或特定地址范围的TLB条目。</li>
+</ul></li>
+<li><strong>HFENCE.VVMA (Hypervisor Fence Virtual Memory
+Access)</strong>
+<ul>
+<li><strong>语法</strong>：<code>HFENCE.VVMA rs1, rs2</code></li>
+<li><strong>用途</strong>：指令用于刷新虚拟机的虚拟地址转换缓存（如
+TLB，Translation Lookaside
+Buffer）。当虚拟机监控器（hypervisor）更改了虚拟机的页表条目或者其他影响虚拟地址映射的参数时，需要执行这个指令来确保这些更改对虚拟机是可见的。这个指令确保了在执行它之后的指令看到的是最新的地址映射。</li>
+</ul></li>
+<li><strong>HFENCE.GVMA(Hypervisor Guest VMA Fence)</strong>
+<ul>
+<li><strong>语法</strong>：<code>HFENCE.VVMA rs1, rs2</code></li>
+<li><strong>用途</strong>：指令用于刷新嵌套虚拟化环境中的客户虚拟机（guest
+virtual
+machine）的虚拟地址转换缓存。在嵌套虚拟化中，一个虚拟机内部运行着另一个虚拟机。当外层虚拟机（也就是客户虚拟机的监控器）更改了内层虚拟机的页表条目或其他影响地址映射的参数时，需要执行
+<code>HFENCE.GVMA</code> 指令来确保这些更改对内层虚拟机是可见的。</li>
+</ul></li>
+</ul>
+<h3 id="对比和区别">对比和区别</h3>
+<ol type="1">
+<li><strong>指令数量和复杂性</strong>：
+<ul>
+<li><strong>x86</strong>：提供的指令较少但功能集中（INVLPG、MOV to
+CR3、INVPCID）。</li>
+<li><strong>POWER</strong>：提供了细粒度控制和同步（tlbie、tlbia、tlbsync）。</li>
+<li><strong>ARM</strong>：提供了多种无效化选项和同步（TLBI、DSB、ISB）。</li>
+<li><strong>RISC-V</strong>：提供了针对不同使用场景的指令（SFENCE.VMA、HFENCE.VVMA），灵活性更高。</li>
+</ul></li>
+<li><strong>指令用途和范围</strong>：
+<ul>
+<li><strong>x86</strong>：INVLPG和MOV to
+CR3分别用于单个地址和整个TLB的刷新，INVPCID支持细粒度的TLB管理。</li>
+<li><strong>POWER</strong>：tlbie用于单个地址的TLB无效化，tlbia用于整个TLB无效化，tlbsync确保TLB操作完成。</li>
+<li><strong>ARM</strong>：TLBI提供了多种无效化选项，DSB确保操作顺序，ISB用于指令同步。</li>
+<li><strong>RISC-V</strong>：SFENCE.VMA和HFENCE.VVMA提供了针对普通和虚拟化环境的TLB刷新指令。</li>
+</ul></li>
+<li><strong>应用场景</strong>：
+<ul>
+<li><strong>x86</strong>：适用于需要快速无效化单个地址或整个TLB切换的场景，支持多进程和虚拟化环境。</li>
+<li><strong>POWER</strong>：适用于需要细粒度控制和同步的场景，提供了全面的TLB管理。</li>
+<li><strong>ARM</strong>：适用于需要多种无效化选项和同步的场景（特别是嵌入式和移动设备）。</li>
+<li><strong>RISC-V</strong>：适用于灵活的TLB管理需求，特别是支持虚拟化的场景。</li>
+</ul></li>
+</ol>
+<p>通过以上对比，可以看出不同架构在TLB管理指令上各有特色，适用于不同的应用场景和需求。开发者可以根据具体的应用需求选择适合的指令集架构和相应的TLB管理指令。</p>
+<h2 id="指令预取到哪一级缓存">指令预取到哪一级缓存</h2>
+<p>在处理器架构中，缓存管理指令能否指定将数据或指令预取到哪一级缓存（L1、L2
+或更高）取决于具体的架构和实现。以下是对于 POWER、ARM 和 RISC-V
+架构缓存管理指令在这方面的支持情况的详细说明。</p>
+<h3 id="power架构-1">POWER架构</h3>
+<p>在POWER架构中，缓存管理指令的设计相对丰富，提供了多种缓存控制功能。然而，具体到预取到哪一级缓存，POWER架构的指令集并没有直接提供细粒度的控制选项。通常，预取操作（如
+<code>dcbt</code> 和
+<code>dcbtst</code>）是由硬件自动决定预取的目标缓存层级。硬件会根据预取策略和当前的缓存层级来决定数据应该预取到L1缓存还是L2缓存。</p>
+<h3 id="arm架构-1">ARM架构</h3>
+<p>ARM架构（如
+ARMv8）提供了一些更细粒度的缓存管理指令，但同样没有明确的指令可以直接指定将数据或指令预取到特定的缓存层级。预取指令（如
+<code>PRFM</code>
+指令）允许预取数据到缓存中，但具体的缓存层级由硬件实现决定。硬件预取机制会根据当前的系统配置和缓存层级自动选择最合适的缓存层级进行预取。</p>
+<p>ARM架构的缓存管理指令如 <code>DC</code> 系列和 <code>IC</code>
+系列指令，主要用于操作特定地址范围的缓存块，包括清理、无效化和写回等操作，但它们也没有直接控制缓存层级的功能。</p>
+<h3 id="risc-v架构-1">RISC-V架构</h3>
+<p>RISC-V架构的缓存管理指令集相对简洁且灵活，通常依赖于具体实现和扩展。RISC-V没有标准化的指令来指定预取到特定缓存层级。缓存控制和预取策略通常由硬件实现负责，具体的行为可能通过自定义扩展或特定的控制寄存器来实现。</p>
+<p>例如，某些RISC-V实现可能会提供特定的控制寄存器或自定义指令来实现预取操作，但这些通常不是RISC-V标准指令集的一部分。</p>
+<h3 id="总结-3">总结</h3>
+<p>总体而言，虽然POWER、ARM和RISC-V处理器架构提供了丰富的缓存管理指令，但它们通常没有直接的指令来指定将数据或指令预取到特定的缓存层级。预取操作的目标缓存层级通常由硬件自动决定，基于当前系统配置和预取策略。</p>
+<ul>
+<li><strong>POWER架构</strong>：预取操作由硬件决定目标缓存层级。</li>
+<li><strong>ARM架构</strong>：预取指令如 <code>PRFM</code>
+由硬件决定目标缓存层级。</li>
+<li><strong>RISC-V架构</strong>：标准指令集中没有预取到特定缓存层级的指令，具体实现可能提供自定义方法。</li>
+</ul>
+<p>各个架构在缓存管理上的设计反映了其追求平衡性能和灵活性的不同策略。对于特定应用场景，深入理解硬件实现和预取策略是优化性能的关键。</p>
+<p>非常感谢您的指正。您的观察是正确的。POWER架构确实有事务指令，而ARM和RISC-V架构都使用了LR/SC指令。以下是修正和补充后的信息：</p>
+<hr>
+<h2 id="各架构独有的特殊指令对比">各架构独有的特殊指令对比</h2>
+<h3 id="x86架构-1">1. <strong>x86架构</strong></h3>
+<h4 id="独有的特殊指令">独有的特殊指令</h4>
+<ul>
+<li><strong>REP指令前缀</strong>：
+<ul>
+<li><code>REP MOVSB</code>, <code>REP MOVSW</code>,
+<code>REP MOVSD</code>: 按字节、字、双字拷贝数据。</li>
+<li><code>REP STOSB</code>, <code>REP STOSW</code>,
+<code>REP STOSD</code>: 按字节、字、双字设置数据。</li>
+<li><code>REP SCASB</code>, <code>REP SCASW</code>,
+<code>REP SCASD</code>: 按字节、字、双字扫描数据。</li>
+<li><code>REP LODSB</code>, <code>REP LODSW</code>,
+<code>REP LODSD</code>: 按字节、字、双字加载数据。</li>
+</ul></li>
+<li><strong>XLAT</strong>: 翻译字节到表项，通过查找表进行数据转换。</li>
+<li><strong>BSWAP</strong>: 字节交换，将寄存器中的字节顺序反转。</li>
+<li><strong>CPUID</strong>: 获取处理器信息和功能标识。</li>
+<li><strong>RDTSC</strong>: 读取时间戳计数器，用于高精度计时。</li>
+<li><strong>RDMSR/WRMSR</strong>: 读取/写入Model-Specific
+Register（MSR），用于访问处理器的特定功能。</li>
+<li><strong>SYSENTER/SYSEXIT</strong>:
+快速系统调用和返回指令，用于提高系统调用的效率。</li>
+<li><strong>XADD</strong>:
+交换并加法，原子性地交换两个操作数并执行加法。</li>
+</ul>
+<h3 id="power架构-2">2. <strong>POWER架构</strong></h3>
+<h4 id="独有的特殊指令-1">独有的特殊指令</h4>
+<ul>
+<li><strong>Transactional Memory (事务内存指令)</strong>：
+<ul>
+<li><strong>tbegin.</strong>: 开始一个事务。</li>
+<li><strong>tend.</strong>: 结束一个事务。</li>
+<li><strong>tabort.</strong>: 中止一个事务。</li>
+<li><strong>tcheck.</strong>: 检查事务状态。</li>
+</ul></li>
+<li><strong>mfcr (Move from Condition Register)</strong>:
+从条件寄存器中移动数据。</li>
+<li><strong>mtcrf (Move to Condition Register Fields)</strong>:
+将数据移动到条件寄存器的特定字段。</li>
+<li><strong>mfspr (Move from Special Purpose Register)</strong>:
+从特殊用途寄存器中移动数据。</li>
+<li><strong>mtspr (Move to Special Purpose Register)</strong>:
+将数据移动到特殊用途寄存器。</li>
+<li><strong>mtmsr (Move to Machine State Register)</strong>:
+将数据移动到机器状态寄存器。</li>
+<li><strong>mfsr (Move from Segment Register)</strong>:
+从段寄存器中移动数据。</li>
+<li><strong>mtsr (Move to Segment Register)</strong>:
+将数据移动到段寄存器。</li>
+<li><strong>rlwimi (Rotate Left Word Immediate then Mask
+Insert)</strong>: 左旋转字并插入掩码。</li>
+<li><strong>rlwinm (Rotate Left Word Immediate then AND with
+Mask)</strong>: 左旋转字并与掩码进行AND操作。</li>
+<li><strong>dcbz (Data Cache Block Zero)</strong>:
+将数据缓存块清零。</li>
+</ul>
+<h3 id="arm架构-2">3. <strong>ARM架构</strong></h3>
+<h4 id="独有的特殊指令-2">独有的特殊指令</h4>
+<ul>
+<li><strong>UDF (Undefined Instruction)</strong>:
+生成未定义指令异常，用于调试和陷阱。</li>
+<li><strong>SVC (Supervisor Call)</strong>:
+生成一个系统调用异常，进入特权模式。</li>
+<li><strong>MCR/MRC (Move to/from Coprocessor)</strong>:
+将数据移动到协处理器或从协处理器移动数据。</li>
+<li><strong>VMOV (Vector Move)</strong>: 在NEON寄存器之间移动数据。</li>
+<li><strong>VADD (Vector Add)</strong>:
+在NEON寄存器中执行向量加法。</li>
+<li><strong>VMLA/VMLS (Vector Multiply-Accumulate/Subtract)</strong>:
+在NEON寄存器中执行向量乘法并累加或减去。</li>
+<li><strong>PLD (Preload Data)</strong>: 预取数据到缓存中。</li>
+<li><strong>WFI (Wait For Interrupt)</strong>:
+进入低功耗状态等待中断。</li>
+<li><strong>WFE (Wait For Event)</strong>: 进入低功耗状态等待事件。</li>
+<li><strong>LDREX/STREX (Load-Exclusive/Store-Exclusive)</strong>:
+用于实现原子操作。ARMv8-A引入了更为细粒度的指令：
+<ul>
+<li><strong>LDAXR/STLXR (Load-Acquire/Store-Release)</strong>:
+用于实现同步的原子操作。</li>
+<li><strong>LDXR/STXR (Load-Exclusive/Store-Exclusive)</strong>:
+通用的原子操作。</li>
+</ul></li>
+</ul>
+<h3 id="risc-v架构-2">4. <strong>RISC-V架构</strong></h3>
+<h4 id="独有的特殊指令-3">独有的特殊指令</h4>
+<ul>
+<li><strong>ECALL (Environment Call)</strong>:
+生成一个环境调用异常，通常用于系统调用。</li>
+<li><strong>EBREAK (Environment Breakpoint)</strong>:
+生成一个环境断点异常，通常用于调试。</li>
+<li><strong>FENCE</strong>: 内存屏障指令，用于同步内存和I/O操作。</li>
+<li><strong>FENCE.I</strong>:
+指令屏障，确保之前的所有指令已被处理。</li>
+<li><strong>CSR指令 (Control and Status Register)</strong>:
+<ul>
+<li><strong>CSRRW (Read and Write CSR)</strong>:
+读取和写入控制和状态寄存器。</li>
+<li><strong>CSRRS (Read and Set CSR)</strong>:
+读取和设置控制和状态寄存器的位。</li>
+<li><strong>CSRRC (Read and Clear CSR)</strong>:
+读取和清除控制和状态寄存器的位。</li>
+</ul></li>
+<li><strong>LR/SC (Load-Reserved/Store-Conditional)</strong>:
+用于实现原子操作，确保数据一致性：
+<ul>
+<li><strong>LR.W</strong>: 加载保留字。</li>
+<li><strong>SC.W</strong>: 条件存储字，如果保留仍有效，则存储成功。</li>
+</ul></li>
+<li><strong>AMO指令 (Atomic Memory Operations)</strong>:
+一组原子内存操作指令，如AMOSWAP、AMOADD、AMOXOR等。</li>
+<li><strong>AUIPC (Add Upper Immediate to PC)</strong>:
+将一个立即数加到当前PC并将结果存储在寄存器中。</li>
+<li><strong>LUI (Load Upper Immediate)</strong>:
+将一个立即数加载到寄存器的高位。</li>
+</ul>
+<hr>
+<h3 id="总结-4">总结</h3>
+<ul>
+<li><strong>x86架构</strong>：提供了丰富的指令集，包括许多用于字符串操作、系统调用、处理器信息获取等的特殊指令，主要用于高性能和通用计算。</li>
+<li><strong>POWER架构</strong>：提供了多种专门用于高性能计算和嵌入式系统的特殊指令，特别是在事务内存、寄存器操作和条件处理方面。</li>
+<li><strong>ARM架构</strong>：提供了一组丰富的特殊指令，广泛应用于移动设备和嵌入式系统，特别是在节能和多媒体处理方面。其原子操作通过LDREX/STREX指令实现。</li>
+<li><strong>RISC-V架构</strong>：指令集简洁但功能完备，具有高度的灵活性和可扩展性，特别是在原子操作和控制寄存器管理方面。</li>
+</ul>
+<p>这些特殊指令反映了各个架构的设计目标和应用需求，选择哪种架构通常取决于具体的应用场景和性能需求。</p>
+<h2 id="arm架构中的ldaxrstlxr和ldxrstxr指令的区别">ARM架构中的LDAXR/STLXR和LDXR/STXR指令的区别</h2>
+<h3 id="arm架构中的ldaxrstlxr和ldxrstxr指令">ARM架构中的LDAXR/STLXR和LDXR/STXR指令</h3>
+<p>ARM架构中提供了一组用于实现原子操作的指令，其中包括Load-Exclusive和Store-Exclusive指令。这些指令有不同的变种，以满足不同的同步需求。</p>
+<h4 id="ldaxrstlxr">LDAXR/STLXR</h4>
+<p><strong>LDAXR（Load-Acquire Exclusive
+Register）</strong>和<strong>STLXR（Store-Release Exclusive
+Register）</strong>指令用于实现同步的原子操作。这些指令在执行时包含了内存顺序语义，以确保在多处理器环境中的正确性。</p>
+<ul>
+<li><strong>LDAXR</strong>：
+<ul>
+<li><strong>功能</strong>：从内存地址加载数据到寄存器，并保留该地址以备后续的STLXR操作使用。</li>
+<li><strong>内存顺序语义</strong>：具有Acquire语义，保证在此指令之后的内存访问不会被重新排序到此指令之前。</li>
+<li><strong>语法</strong>：<code>LDAXR &lt;Rt&gt;, [&lt;Rn&gt;]</code></li>
+<li><strong>例子</strong>：<code>LDAXR W0, [X1]</code></li>
+</ul></li>
+<li><strong>STLXR</strong>：
+<ul>
+<li><strong>功能</strong>：将寄存器中的数据存储到内存地址，并根据保留状态决定存储是否成功。</li>
+<li><strong>内存顺序语义</strong>：具有Release语义，保证在此指令之前的内存访问不会被重新排序到此指令之后。</li>
+<li><strong>语法</strong>：<code>STLXR &lt;Ws&gt;, &lt;Wt&gt;, [&lt;Rn&gt;]</code></li>
+<li><strong>例子</strong>：<code>STLXR W0, W2, [X1]</code></li>
+</ul></li>
+</ul>
+<h4 id="ldarldxr和stlrstxr">LDAR/LDXR和STLR/STXR</h4>
+<p><strong>LDXR（Load-Exclusive
+Register）</strong>和<strong>STXR（Store-Exclusive
+Register）</strong>指令用于实现通用的原子操作，但没有内存顺序语义。这些指令适用于不需要特定内存顺序的原子操作。</p>
+<ul>
+<li><strong>LDXR</strong>：
+<ul>
+<li><strong>功能</strong>：从内存地址加载数据到寄存器，并保留该地址以备后续的STXR操作使用。</li>
+<li><strong>内存顺序语义</strong>：没有内存顺序语义，仅实现原子加载操作。</li>
+<li><strong>语法</strong>：<code>LDXR &lt;Rt&gt;, [&lt;Rn&gt;]</code></li>
+<li><strong>例子</strong>：<code>LDXR W0, [X1]</code></li>
+</ul></li>
+<li><strong>STXR</strong>：
+<ul>
+<li><strong>功能</strong>：将寄存器中的数据存储到内存地址，并根据保留状态决定存储是否成功。</li>
+<li><strong>内存顺序语义</strong>：没有内存顺序语义，仅实现原子存储操作。</li>
+<li><strong>语法</strong>：<code>STXR &lt;Ws&gt;, &lt;Wt&gt;, [&lt;Rn&gt;]</code></li>
+<li><strong>例子</strong>：<code>STXR W0, W2, [X1]</code></li>
+</ul></li>
+</ul>
+<h3 id="主要区别">主要区别</h3>
+<ol type="1">
+<li><p><strong>内存顺序语义</strong>：</p>
+<ul>
+<li><strong>LDAXR/STLXR</strong>：具有Acquire和Release语义，保证内存访问顺序，适用于需要严格内存排序的同步操作。</li>
+<li><strong>LDXR/STXR</strong>：没有内存顺序语义，仅提供原子性，不保证内存访问顺序，适用于不需要严格内存排序的原子操作。</li>
+</ul></li>
+<li><p><strong>使用场景</strong>：</p>
+<ul>
+<li><strong>LDAXR/STLXR</strong>：适用于实现锁、信号量等需要严格内存顺序的同步原语。</li>
+<li><strong>LDXR/STXR</strong>：适用于实现简单的原子操作，如计数器增加、标志位设置等，不要求严格的内存顺序。</li>
+</ul></li>
+</ol>
+<h3 id="示例代码">示例代码</h3>
+<p>以下是使用LDAXR/STLXR和LDXR/STXR的示例代码，分别用于实现自旋锁和简单的计数器增加操作：</p>
+<h4 id="自旋锁使用ldaxrstlxr">自旋锁（使用LDAXR/STLXR）</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spin_lock:</span><br><span class="line">    LDAXR W0, [X1]        // 尝试加载锁的状态</span><br><span class="line">    CMP W0, #0            // 检查锁是否被占用</span><br><span class="line">    B.NE spin_lock        // 如果锁被占用，继续自旋</span><br><span class="line">    STLXR W0, W2, [X1]    // 尝试存储1到锁地址，以占用锁</span><br><span class="line">    CBNZ W0, spin_lock    // 如果存储失败，继续自旋</span><br><span class="line">    RET</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="计数器增加使用ldxrstxr">计数器增加（使用LDXR/STXR）</h4>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">increase_counter:</span><br><span class="line">    LDXR W0, [X1]         // 加载计数器的当前值</span><br><span class="line">    ADD W0, W0, #1        // 增加计数器</span><br><span class="line">    STXR W0, W0, [X1]     // 尝试存储新值到计数器地址</span><br><span class="line">    CBNZ W0, increase_counter  // 如果存储失败，继续重试</span><br><span class="line">    RET</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="总结-5">总结</h3>
+<ul>
+<li><strong>LDAXR/STLXR</strong>：用于需要严格内存顺序的同步操作，保证Acquire和Release语义。</li>
+<li><strong>LDXR/STXR</strong>：用于不需要严格内存顺序的原子操作，仅提供原子性。</li>
+</ul>
+<p>这些指令的设计旨在满足不同的同步需求，选择使用哪种指令取决于具体的应用场景和性能要求。</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2024/01/08/DeepLearning/">DeepLearning</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2024-01-08</time><div class="content"></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/16/%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%AA%8C%E8%AF%81/">形式化验证</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time><div class="content"><h2 id="形式化验证">形式化验证</h2>
+<p>形式化验证工具是一类用于验证硬件或软件系统设计是否满足特定规范或性质的工具。这些工具基于数学模型和逻辑推理，能够自动化地验证系统的正确性。以下是几种常见的形式化验证工具：
+1. 模型检查器（Model Checkers）： *
+SPIN：用于验证并发系统的模型检查器，使用 Promela 语言描述系统模型。 *
+NuSMV 和
+SPIN：用于验证硬件和软件系统的模型检查器，使用类似于时序逻辑（temporal
+logic）的规范语言。 *
+UPPAAL：用于验证实时系统的模型检查器，可以验证具有时间约束的系统行为。
+2. 定理证明器（Theorem Provers）： * Isabelle/HOL：支持高阶逻辑（Higher
+Order Logic），能够进行复杂的数学定理证明。 *
+Coq：基于计算的定理证明器，支持依赖类型（dependent
+types），用于证明程序正确性和数学定理。 3. 符号执行工具（Symbolic
+Execution Tools）： *
+KLEE：用于自动化生成测试用例和验证程序的符号执行工具，主要用于 C 和 C++
+代码的验证。 * SAGE：用于自动化分析和发现软件漏洞的符号执行工具。 4.
+形式化语言和工具： *
+ACL2：一个包含逻辑和编程环境的工具，用于验证计算机系统和算法的正确性。 *
+TLA+：一种用于设计和验证分布式系统的形式化语言和工具。
+这些工具在验证对象、验证领域和使用方式上有所不同。有些工具更适合硬件系统（如处理器、芯片等）的验证，而有些则更适合软件系统（如程序、算法等）的验证。它们的共同目标是提供自动化的、精确的、可靠的验证手段，帮助设计者发现并修复系统设计中的潜在问题，确保系统符合规范和性能要求。
+选择合适的形式化验证工具通常取决于你的验证需求、所验证对象的类型以及你的经验和熟悉程度。深入了解每个工具的优势和适用范围能够更好地选择合适的工具来完成你的验证任务。</p>
+<h2 id="验证流程">验证流程</h2>
+<p>当涉及形式化验证时，一个经典的例子是验证缓存一致性协议。在多核处理器系统中，为了保证数据的一致性，通常会使用缓存一致性协议，比如
+MESI 协议。</p>
 <p>考虑一个简化的缓存一致性协议，我们可以使用模型检查器来验证它是否满足一致性和正确性属性。以下是一个可能的验证流程：</p>
-<ol>
+<ol type="1">
 <li>建立模型：</li>
 </ol>
 <ul>
 <li>使用模型检查器的输入语言描述缓存一致性协议，定义缓存的状态、操作和状态转换规则。</li>
 </ul>
-<ol>
+<ol start="2" type="1">
 <li>定义性质：</li>
 </ol>
 <ul>
 <li>定义需要验证的性质。例如，我们可能希望验证所有核心对于共享数据的访问是否都能够遵守一致性协议的规定。</li>
 </ul>
-<ol>
+<ol start="3" type="1">
 <li>模型检查：</li>
 </ol>
-<p>运行模型检查器对定义的性质进行验证。模型检查器将会尝试在状态空间中寻找违反性质的情况。</p>
-<ol>
-<li>分析结果：</li>
-</ol>
+<p>运行模型检查器对定义的性质进行验证。模型检查器将会尝试在状态空间中寻找违反性质的情况。
+4. 分析结果：</p>
 <ul>
-<li><p>如果模型检查器找到违反性质的情况，它将会给出一个反例（counterexample），展示了违反性质的状态序列，帮助识别问题所在。</p>
-</li>
-<li><p>如果验证通过，那么协议就在给定性质下被证明是正确的。</p>
-</li>
+<li><p>如果模型检查器找到违反性质的情况，它将会给出一个反例（counterexample），展示了违反性质的状态序列，帮助识别问题所在。</p></li>
+<li><p>如果验证通过，那么协议就在给定性质下被证明是正确的。</p></li>
 </ul>
 <p>这种验证过程允许工程师在设计阶段发现潜在的问题，例如在并发操作中可能出现的竞争条件或不一致性情况。通过形式化验证，可以确保缓存一致性协议在不同场景下都能正确地维护数据的一致性。</p>
 <p>这只是形式化验证的一个示例。实际上，在硬件、软件、协议和系统设计中，形式化验证都可以应用于不同的场景，以确保设计的正确性和一致性。</p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>对于缓存一致性协议的形式化验证，可以使用类似于模型检查器（如 SPIN）的工具来实现。</p>
-<p>举例来说，可以使用 Promela 语言描述缓存一致性协议的状态转换和规则，然后使用 SPIN 工具进行模型检查。以下是一个简化的例子：</p>
-<p>假设有一个简单的缓存一致性协议，包含了两个核心（Core 0 和 Core 1）以及一个共享的内存（Memory）。协议使用 MESI 协议进行缓存管理。</p>
+<h2 id="例子">例子</h2>
+<p>对于缓存一致性协议的形式化验证，可以使用类似于模型检查器（如
+SPIN）的工具来实现。</p>
+<p>举例来说，可以使用 Promela
+语言描述缓存一致性协议的状态转换和规则，然后使用 SPIN
+工具进行模型检查。以下是一个简化的例子：</p>
+<p>假设有一个简单的缓存一致性协议，包含了两个核心（Core 0 和 Core
+1）以及一个共享的内存（Memory）。协议使用 MESI 协议进行缓存管理。</p>
 <p>下面是一个可能的 Promela 代码片段示例：</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">mtype = {INVALID, SHARED, MODIFIED, EXCLUSIVE};</span><br><span class="line"></span><br><span class="line">chan core_to_mem = [2] of {mtype, mtype};  // 两个核心和内存之间的通道</span><br><span class="line"></span><br><span class="line">proctype Core(int id; chan c_to_m; chan m_to_c) {</span><br><span class="line">    mtype cache_state = INVALID;</span><br><span class="line">    mtype memory_state = INVALID;</span><br><span class="line"></span><br><span class="line">    do</span><br><span class="line">    :: </span><br><span class="line">        // 读取或写入操作的模拟</span><br><span class="line">        if</span><br><span class="line">            :: (cache_state == INVALID) -&gt; </span><br><span class="line">                // 从内存读取数据</span><br><span class="line">                c_to_m ! (id, READ);</span><br><span class="line">                m_to_c ? memory_state;</span><br><span class="line">                cache_state = memory_state;</span><br><span class="line">            :: (cache_state == SHARED) -&gt; </span><br><span class="line">                // 从共享缓存读取数据</span><br><span class="line">                // ...</span><br><span class="line">            :: (cache_state == MODIFIED) -&gt; </span><br><span class="line">                // 在本地缓存中执行写操作</span><br><span class="line">                // ...</span><br><span class="line">        fi;</span><br><span class="line">        // 省略其他操作...</span><br><span class="line">    od;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 内存处理进程</span><br><span class="line">proctype Memory(chan m_to_c; chan c_to_m) {</span><br><span class="line">    mtype memory_state = INVALID;</span><br><span class="line"></span><br><span class="line">    do</span><br><span class="line">    :: </span><br><span class="line">        // 处理来自核心的读写请求</span><br><span class="line">        c_to_m ? memory_state;</span><br><span class="line">        m_to_c ! memory_state;</span><br><span class="line">        // 处理缓存和内存之间的通信</span><br><span class="line">        // ...</span><br><span class="line">    od;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 主进程，启动核心和内存</span><br><span class="line">active [2] proctype Cores() {</span><br><span class="line">    chan core_to_mem = [2] of {mtype, mtype};</span><br><span class="line">    chan mem_to_core = [2] of {mtype, mtype};</span><br><span class="line"></span><br><span class="line">    run Core(0, core_to_mem[0], mem_to_core[0]);</span><br><span class="line">    run Core(1, core_to_mem[1], mem_to_core[1]);</span><br><span class="line">    run Memory(mem_to_core[0], core_to_mem[0]);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>这个示例中使用了 Promela 语言来描述了两个核心和内存之间的通信以及状态转换规则。你可以使用 SPIN 工具对这个模型进行模型检查，验证在不同的操作序列下，是否会出现不一致性或违反协议规则的情况。</p>
+<p>这个示例中使用了 Promela
+语言来描述了两个核心和内存之间的通信以及状态转换规则。你可以使用 SPIN
+工具对这个模型进行模型检查，验证在不同的操作序列下，是否会出现不一致性或违反协议规则的情况。</p>
 <p>这个示例是一个简化的模型，实际的协议会更加复杂，但基本思路是使用类似的形式化语言描述系统的状态和行为，然后使用相应的模型检查器或形式化验证工具进行验证。</p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/16/gem5/">gem5</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/PerformanceModel/">PerformanceModel</a></span><div class="content"><p>首先分析事件驱动的步骤：</p>
-<p>在gem5模拟器中，simulate.cc 中 doSimLoop循环的调用eventq的service成员函数；该成员函数会从二级链表的event中，抽取event，调用event→process（）；<br>event是一个指针，是gem5中其他组件的基类之一，因此可以通过多态的方法，访问其他组件的process函数；<br>在调用process函数之前，调用setCurTick(event→when())，即将event的when设置为当前的curTick(),这时也就对系统的时间进行了更新；然后调用event→process（）；即调用了一个具体对象的process，假如这个对象是ALU；<br>这时ALU将会执行其功能的具体任务，这时它可能只能完成一个颗粒度的任务，比如一个时钟的加，或者三个时钟的乘法（具体乘法是由process函数分三步完成，每步一个cycle还是一步完成，一步三个cycle是可以DIY的），完成之后。然后调用schedule函数，这个函数是经由Eventwrapper包装，实际上是EventQueue的成员函数，它实现了：<br>更新when，也就是下一次什么时候再次触发event<br>将event插入到event queue中，在插入event queue时，queue时二级链表，这个链表是按照各个器件下一次发生的时间进行排序的，在插入时，也是要进行一次排序，找到合适的位置进行插入。（在queue中 有bin，怀疑是同一批时间的在一个bin，不同时间的是不同的bin）。<br>when的值，是在调用schedule时，可以将下一次的时间通过调用clockEdge(Cycles(n))获取的。<br>总体说来，就是不同的器件在process中：</p>
+<p>在gem5模拟器中，simulate.cc 中
+doSimLoop循环的调用eventq的service成员函数；该成员函数会从二级链表的event中，抽取event，调用event→process（）；
+event是一个指针，是gem5中其他组件的基类之一，因此可以通过多态的方法，访问其他组件的process函数；
+在调用process函数之前，调用setCurTick(event→when())，即将event的when设置为当前的curTick(),这时也就对系统的时间进行了更新；然后调用event→process（）；即调用了一个具体对象的process，假如这个对象是ALU；
+这时ALU将会执行其功能的具体任务，这时它可能只能完成一个颗粒度的任务，比如一个时钟的加，或者三个时钟的乘法（具体乘法是由process函数分三步完成，每步一个cycle还是一步完成，一步三个cycle是可以DIY的），完成之后。然后调用schedule函数，这个函数是经由Eventwrapper包装，实际上是EventQueue的成员函数，它实现了：
+更新when，也就是下一次什么时候再次触发event 将event插入到event
+queue中，在插入event
+queue时，queue时二级链表，这个链表是按照各个器件下一次发生的时间进行排序的，在插入时，也是要进行一次排序，找到合适的位置进行插入。（在queue中
+有bin，怀疑是同一批时间的在一个bin，不同时间的是不同的bin）。
+when的值，是在调用schedule时，可以将下一次的时间通过调用clockEdge(Cycles(n))获取的。
+总体说来，就是不同的器件在process中：</p>
 <p>1）完成自身的功能；</p>
 <p>2）将下一次何时触发，插入queue中</p>
 <p>要注意的是，插入queue中的是每个对象的event指针，不需要复制，也不是完整的对象，只是指针。</p>
-<p>如果A器件在100 cycle时，执行process，完成自身功能后，将event-&gt;when设置为107，插入queue中；表示下一次在107时刻触发；然后，B器件在100 cycle时，执行process，完成自身功能后，将event-&gt;when设置为120，插入queue中；表示下一次在120时刻触发；然后C器件在103 cycle时，执行process，完成自身功能后，将event-&gt;when设置为109，插入queue中；表示下一次在109时刻触发；</p>
+<p>如果A器件在100
+cycle时，执行process，完成自身功能后，将event-&gt;when设置为107，插入queue中；表示下一次在107时刻触发；然后，B器件在100
+cycle时，执行process，完成自身功能后，将event-&gt;when设置为120，插入queue中；表示下一次在120时刻触发；然后C器件在103
+cycle时，执行process，完成自身功能后，将event-&gt;when设置为109，插入queue中；表示下一次在109时刻触发；</p>
 <p>那么在gem5中，执行的过程将是</p>
-<ol>
+<ol type="1">
 <li>a调度，更新系统时间为100，执行完毕后，插入事件a 107；</li>
 <li>b调度，更新系统时间（或不更新），执行完毕后，插入事件b 120；</li>
 <li>查找queue，发现下一次是c触发，将系统时间更新为103，执行完毕后，插入事件c109；</li>
 <li>查找queue，发现下一次是a触发，将系统时间更新为107，执行完毕后，插入下一次a事件；</li>
 <li>查找queue，发现下一次是c触发，将系统时间更新为109，执行完毕后，插入下一次c事件；</li>
-<li>查找queue，发现下一次是b触发，将系统时间更新为120，执行完毕后，插入下一次b事件；<br>这就是基于事件驱动的原理。</li>
+<li>查找queue，发现下一次是b触发，将系统时间更新为120，执行完毕后，插入下一次b事件；
+这就是基于事件驱动的原理。</li>
 </ol>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/16/roofline/">roofline</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time><div class="content"><h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>计算机体系结构中的传统智慧导致了同构设计。几乎每台台式机和服务器都使用缓存、流水线、超标量指令和无序执行。尽管指令集不同，但微处理器都属于同一类设计。 转到多核意味着微处理器将变得更加多样化，因为它们还没有传统智慧。例如，一些提供许多简单的处理器而不是较少的复杂处理器，一些依赖于多线程，而一些甚至用显式寻址的本地存储来替换缓存。 制造商可能会提供多个产品，每个产品的核心数量不同，以覆盖多个价格性能点，因为每芯片的核心数量可能会每两年翻一番[4]。 虽然多样性可能在这个不确定的时期是可以理解的，但它加剧了程序员、编译器编写员甚至架构师已经困难的工作。因此，一个易于理解的模型，提供性能指导方针，可能是特别有价值的。 模型不需要完美，只需要有洞察力。例如，缓存的3Cs模型是一种比喻[19]。它不是一个完美的模型，因为它忽略了可能很重要的因素，如块大小、块分配策略和块替换策略。此外，它还有怪癖。例如，在一个设计中，未命中的可以标记为容量，而在同一大小的另一个缓存中可以标记为冲突。然而，3Cs模型已经流行了将近20年，因为它提供了对程序行为的洞察，帮助程序员、编译器编写员和架构师改善各自的设计。 本文提出了这样一个模型，并使用四个关键的浮点内核在四种不同的多核计算机上进行了演示。</p>
-<h2 id="performance-model"><a href="#performance-model" class="headerlink" title="performance model"></a>performance model</h2><p>Stochastic analytical models [14][28] and statistical performance<br>models [7][27] 可以准确地预测程序在多处理器上的性能。然而，它们很少提供如何提高程序、编译器或计算机的性能的见解，或者可能难以被非专家使用[27]。另一种更简单的替代方法是bound and bottleneck 分析。与其尝试预测性能，它提供了[20]“对影响计算机系统性能的主要因素的重要见解。特别是，系统瓶颈的关键影响被突出和量化。”</p>
-<p>最著名的例子无疑是阿姆达尔定律（Amdahl’s Law），该定律简单地表明，并行计算机的性能提升受到并行程序串行部分（serial portion）的限制。它最近被应用于异构多核计算机[4][18]。</p>
-<h2 id="roofline-model"><a href="#roofline-model" class="headerlink" title="roofline model"></a>roofline model</h2><p>我们认为，在不久的过去和可预见的未来，芯片外的内存带宽往往会是制约资源[23]。因此，我们需要一个模型来将处理器性能与芯片外内存流量联系起来。<br>为了实现这一目标，我们使用operational intensity 来表示DRAM operations per byte。我们将总字节访问定义为经过缓存层次结构过滤后进入主内存的字节。也就是说，我们衡量的是缓存和内存之间的流量，而不是处理器和缓存之间的流量。因此，operational intensity表明内核在特定计算机上所需的DRAM带宽。</p>
-<p>我们使用operational intensity而不是arithmetic intensity [16] or machine balance [8][11] 有两个原因。首先，arithmetic intensity 和machine balance衡量的是处理器和缓存之间的流量，而我们想要衡量的是缓存和DRAM之间的流量。这个微妙的变化允许我们将计算机的内存优化纳入我们的边界和瓶颈模型。其次，我们认为该模型适用于非算术运算的kernel（见第7部分），因此我们需要一个比算术更一般的术语。<br>所提出的模型将loating-point performance, operational intensity, and memory performance 结合在一个二维图中。可以使用硬件规格或微基准测试来找到峰值浮点性能。我们在这里考虑的内核工作集无法完全适应芯片上缓存，因此峰值内存性能由缓存背后的内存系统定义。尽管您可以使用STREAM基准[22]找到内存性能，但为了这项工作，我们编写了一系列逐步优化的微基准测试，旨在确定可持续的DRAM带宽。它们包括获得最佳内存性能的所有技术，包括预取和数据对齐。（附录中的A.1部分给出了如何测量处理器和内存性能以及operational intensity的更多细节。）</p>
-<p>图1a显示了双插槽系统中2.2 GHz AMD Opteron X2型号2214的模型，该图采用对数-对数刻度。Y轴表示可达到的浮点运算性能，X轴表示运算强度，从每DRAM字节1/4 Flops到每DRAM字节16 Flops不等。通过基准测试，模拟器在双精度浮点运算上的峰值性能为每秒17.6 GFlops，内存带宽峰值每秒15 GBytes。后一个测量值是计算机内存的稳定状态带宽潜力，而不是DRAM芯片的引脚带宽。</p>
-<p>Attainable GFlops/sec = Min(Peak Floating Point Performance,<br>Peak Memory Bandwidth x Operational Intensity)</p>
-<p>屋脊点（即对角线屋顶和水平屋顶的交汇点）反映了计算机整体性能。屋脊点的x坐标是实现最大性能所需的最小operational intensity。如果屋脊点在右侧很远的地方，那么只有具有非常高operational intensity的kernel才能实现该计算机的最大性能。如果它在左侧很远的地方，那么几乎任何kernel都可能达到最大性能。我们将看到（第6.3.5节），屋脊点表明程序员和编译器编写者实现峰值性能的难度水平。</p>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/5d34f76673fab7d9166f8768110ce4b8.png" alt="5d34f76673fab7d9166f8768110ce4b8"></p>
-<p>如图1b所示：operational intensity 更高才能发挥出Opteron X4的性能。</p>
-<h2 id="ADDING-CEILINGS-TO-THE-MODEL"><a href="#ADDING-CEILINGS-TO-THE-MODEL" class="headerlink" title="ADDING CEILINGS TO THE MODEL"></a>ADDING CEILINGS TO THE MODEL</h2></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/15/hexo/">hexo</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-15</time><div class="content"><h2 id="搭建blog"><a href="#搭建blog" class="headerlink" title="搭建blog"></a>搭建blog</h2><p>工具：</p>
-<ol>
-<li>hexo</li>
-<li>github</li>
-<li>vscode</li>
-<li>Markdown All in One(vscode扩展)</li>
-<li>picgo(vscode扩展)</li>
-<li>hexo主题</li>
-</ol>
-<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51216553/article/details/118958664">https://blog.csdn.net/weixin_51216553/article/details/118958664</a></p>
-<h3 id="hexo-使用"><a href="#hexo-使用" class="headerlink" title="hexo 使用"></a>hexo 使用</h3><p>liuyueji@408570 Desktop % cd blog</p>
-<p>liuyueji@408570 blog % hexo new coz<br>INFO  Validating config<br>INFO  Created: ~/Desktop/blog/source/_posts/coz.md</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/16/roofline/">roofline</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-16</time><div class="content"><h2 id="introduction">introduction</h2>
+<p>计算机体系结构中的传统智慧导致了同构设计。几乎每台台式机和服务器都使用缓存、流水线、超标量指令和无序执行。尽管指令集不同，但微处理器都属于同一类设计。
+转到多核意味着微处理器将变得更加多样化，因为它们还没有传统智慧。例如，一些提供许多简单的处理器而不是较少的复杂处理器，一些依赖于多线程，而一些甚至用显式寻址的本地存储来替换缓存。
+制造商可能会提供多个产品，每个产品的核心数量不同，以覆盖多个价格性能点，因为每芯片的核心数量可能会每两年翻一番[4]。
+虽然多样性可能在这个不确定的时期是可以理解的，但它加剧了程序员、编译器编写员甚至架构师已经困难的工作。因此，一个易于理解的模型，提供性能指导方针，可能是特别有价值的。
+模型不需要完美，只需要有洞察力。例如，缓存的3Cs模型是一种比喻[19]。它不是一个完美的模型，因为它忽略了可能很重要的因素，如块大小、块分配策略和块替换策略。此外，它还有怪癖。例如，在一个设计中，未命中的可以标记为容量，而在同一大小的另一个缓存中可以标记为冲突。然而，3Cs模型已经流行了将近20年，因为它提供了对程序行为的洞察，帮助程序员、编译器编写员和架构师改善各自的设计。
+本文提出了这样一个模型，并使用四个关键的浮点内核在四种不同的多核计算机上进行了演示。</p>
+<h2 id="performance-model">performance model</h2>
+<p>Stochastic analytical models [14][28] and statistical performance
+models [7][27]
+可以准确地预测程序在多处理器上的性能。然而，它们很少提供如何提高程序、编译器或计算机的性能的见解，或者可能难以被非专家使用[27]。另一种更简单的替代方法是bound
+and bottleneck
+分析。与其尝试预测性能，它提供了[20]“对影响计算机系统性能的主要因素的重要见解。特别是，系统瓶颈的关键影响被突出和量化。”</p>
+<p>最著名的例子无疑是阿姆达尔定律（Amdahl's
+Law），该定律简单地表明，并行计算机的性能提升受到并行程序串行部分（serial
+portion）的限制。它最近被应用于异构多核计算机[4][18]。</p>
+<h2 id="roofline-model">roofline model</h2>
+<p>我们认为，<strong>在不久的过去和可预见的未来，芯片外的内存带宽往往会是制约资源[23]</strong>。因此，我们需要一个模型来将处理器性能与芯片外内存流量联系起来。
+为了实现这一目标，我们使用operational intensity 来表示DRAM operations
+per
+byte。我们将总字节访问定义为经过缓存层次结构过滤后进入主内存的字节。也就是说，我们衡量的是缓存和内存之间的流量，而不是处理器和缓存之间的流量。因此，operational
+intensity表明内核在特定计算机上所需的DRAM带宽。</p>
+<p>我们使用operational intensity而不是arithmetic intensity [16] or
+machine balance [8][11] 有两个原因。首先，arithmetic intensity 和machine
+balance衡量的是处理器和缓存之间的流量，而我们想要衡量的是缓存和DRAM之间的流量。这个微妙的变化允许我们将计算机的内存优化纳入我们的边界和瓶颈模型。其次，我们认为该模型适用于非算术运算的kernel（见第7部分），因此我们需要一个比算术更一般的术语。</p>
+<p>所提出的<strong>模型将floating-point performance, operational
+intensity, and memory performance
+结合在一个二维图中</strong>。可以使用硬件规格或微基准测试来找到峰值浮点性能。我们在这里考虑的内核工作集无法完全适应芯片上缓存，因此峰值内存性能由缓存背后的内存系统定义。尽管您可以使用STREAM基准[22]找到内存性能，但为了这项工作，我们编写了一系列逐步优化的微基准测试，旨在确定可持续的DRAM带宽。它们包括获得最佳内存性能的所有技术，包括预取和数据对齐。（附录中的A.1部分给出了如何测量处理器和内存性能以及operational
+intensity的更多细节。）</p>
+<p>图1a显示了双插槽系统中2.2 GHz AMD Opteron
+X2型号2214的模型，该图采用对数-对数刻度。Y轴表示可达到的浮点运算性能，X轴表示运算强度，从每DRAM字节1/4
+Flops到每DRAM字节16
+Flops不等。通过基准测试，模拟器在双精度浮点运算上的峰值性能为每秒17.6
+GFlops，内存带宽峰值每秒15
+GBytes。后一个测量值是计算机内存的稳定状态带宽潜力，而不是DRAM芯片的引脚带宽。</p>
+<p>Attainable GFlops/sec = Min(Peak Floating Point Performance, Peak
+Memory Bandwidth x Operational Intensity)</p>
+<p>屋脊点（即对角线屋顶和水平屋顶的交汇点）反映了计算机整体性能。屋脊点的x坐标是实现最大性能所需的最小operational
+intensity。如果屋脊点在右侧很远的地方，那么只有具有非常高operational
+intensity的kernel才能实现该计算机的最大性能。如果它在左侧很远的地方，那么几乎任何kernel都可能达到最大性能。我们将看到（第6.3.5节），屋脊点表明程序员和编译器编写者实现峰值性能的难度水平。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/5d34f76673fab7d9166f8768110ce4b8.png" alt="5d34f76673fab7d9166f8768110ce4b8">
+<figcaption aria-hidden="true">5d34f76673fab7d9166f8768110ce4b8</figcaption>
+</figure>
+<p>如图1b所示：operational intensity 更高才能发挥出Opteron
+X4的性能。</p>
+<h2 id="adding-ceilings-to-the-model">ADDING CEILINGS TO THE MODEL</h2>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/15/hexo/">hexo</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-15</time><div class="content"><h2 id="搭建blog">搭建blog</h2>
+<p>工具： 1. hexo 2. github 3. vscode 4. Markdown All in One(vscode扩展)
+5. picgo(vscode扩展) 6. hexo主题</p>
+<h2 id="hexo">hexo</h2>
+<h3 id="安装">安装</h3>
+<p>https://blog.csdn.net/weixin_51216553/article/details/118958664</p>
+<h3 id="hexo-使用">hexo 使用</h3>
+<p>liuyueji@408570 Desktop % cd blog</p>
+<p>liuyueji@408570 blog % hexo new coz INFO Validating config INFO
+Created: ~/Desktop/blog/source/_posts/coz.md</p>
 <ul>
-<li>换主题<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g</span></span><br><span class="line"><span class="attribute">hexo s</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-</li>
+<li>换主题</li>
 </ul>
-<h4 id="history"><a href="#history" class="headerlink" title="history"></a>history</h4><p> 1269  hexo g<br> 1270  hexo s<br> 1271  hexo d<br> 1272  hexo new page 404<br> 1273  vi ~/Desktop/blog/source/404/index.md<br> 1274  cp themes/melody/_config.yml _config.melody.yml<br> 1275  vi _config.melody.yml<br> 1276  vi _config.yml<br> 1277  vi _config.yml<br> 1278  vi _config.melody.yml<br> 1279  hexo clean<br> 1280  hexo g<br> 1281  hexo s<br> 1282  hexo clean<br> 1283  hexo g<br> 1284  hexo s</p>
-<h2 id="vscode使用picgo扩展上传照片："><a href="#vscode使用picgo扩展上传照片：" class="headerlink" title="vscode使用picgo扩展上传照片："></a>vscode使用picgo扩展上传照片：</h2><p>option+command+u</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>VSCode+PicGo+Github搭建免费Markdown图床<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7031461637986975757">https://juejin.cn/post/7031461637986975757</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44314954/article/details/122951033">https://blog.csdn.net/qq_44314954/article/details/122951033</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43827595/article/details/104274769">https://blog.csdn.net/qq_43827595/article/details/104274769</a></p>
-<h2 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a>markdown</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42782150/article/details/104878759">https://blog.csdn.net/weixin_42782150/article/details/104878759</a></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/15/coz/">coz</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/profiling/">profiling</a></span><div class="content"><h1 id="COZ-Finding-Code-that-Counts-with-Causal-Profiling"><a href="#COZ-Finding-Code-that-Counts-with-Causal-Profiling" class="headerlink" title="COZ: Finding Code that Counts with Causal Profiling"></a>COZ: Finding Code that Counts with Causal Profiling</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>提高性能是软件开发者关注的中心问题。为了确定优化机会，开发人员依靠软件分析器。然而，这些分析器只能报告程序在何处花费时间：优化该代码可能对性能没有影响。因此，过去的性能分析器既浪费开发人员的时间，也使他们难以发现重要的优化机会。</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g</span></span><br><span class="line"><span class="attribute">hexo s</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="history">history</h4>
+<p>1269 hexo g 1270 hexo s 1271 hexo d 1272 hexo new page 404 1273 vi
+~/Desktop/blog/source/404/index.md 1274 cp themes/melody/_config.yml
+_config.melody.yml 1275 vi _config.melody.yml 1276 vi _config.yml 1277
+vi _config.yml 1278 vi _config.melody.yml 1279 hexo clean 1280 hexo g
+1281 hexo s 1282 hexo clean 1283 hexo g 1284 hexo s</p>
+<h2 id="vscode使用picgo扩展上传照片">vscode使用picgo扩展上传照片：</h2>
+<p>option+command+u</p>
+<h3 id="参考链接">参考链接</h3>
+<p>VSCode+PicGo+Github搭建免费Markdown图床
+https://juejin.cn/post/7031461637986975757</p>
+<p>https://blog.csdn.net/qq_44314954/article/details/122951033</p>
+<p>https://blog.csdn.net/qq_43827595/article/details/104274769</p>
+<h3 id="图床">图床</h3>
+<p>使用账号gmail邮箱</p>
+<h2 id="markdown">markdown</h2>
+<p>https://blog.csdn.net/weixin_42782150/article/details/104878759</p>
+<h3 id="公式显示问题">公式显示问题</h3>
+<p>http://chenhao.space/post/59292.html#step-2-stop-using-hexo-math</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/11/15/coz/">coz</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-11-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/profiling/">profiling</a></span><div class="content"><h1 id="coz-finding-code-that-counts-with-causal-profiling">COZ: Finding
+Code that Counts with Causal Profiling</h1>
+<h2 id="摘要">摘要</h2>
+<p>提高性能是软件开发者关注的中心问题。为了确定优化机会，开发人员依靠软件分析器。然而，这些分析器只能报告程序在何处花费时间：优化该代码可能对性能没有影响。因此，过去的性能分析器既浪费开发人员的时间，也使他们难以发现重要的优化机会。</p>
 <p>介绍了一种叫做“因果分析”的技术。这种技术与以往的性能分析方法不同，能够精确地指出程序员应该将优化工作的重点放在哪里，并量化他们可能产生的影响。“因果分析”通过在程序执行过程中运行性能实验来实现这一点。每个实验通过插入暂停来减慢所有其他并发运行的代码，从而计算出任何潜在优化的影响。关键在于，这种速度下降与加快运行该行的速度具有相同的相对效果，因此可以“虚拟地”加速它。这种方法可以确定哪些部分的代码可能会对程序的总体性能产生最大的影响，因此可以为程序员提供优化工作的重点。</p>
 <p>一种名为COZ的因果分析工具，该工具被用于评估一系列高度优化的应用，包括Memcached、SQLite和PARSEC基准测试套件。COZ能够识别之前未知的优化机会，这些优化机会既具有重要意义又具有针对性。在COZ的指导下，我们将Memcached的性能提高了9%，将SQLite的性能提高了25%，并将六个PARSEC应用加速了高达68%。在大多数情况下，这些优化仅涉及修改不到10行的代码。</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>手动检查程序以找到优化的操作机会是不切实际的，因此开发人员使用分析器。传统的分析器按其对总执行时间的贡献对代码进行排名。突出的例子包括oprofile、perf和gprof [17、27、29]。不幸的是，即使分析器准确地报告程序花费时间的地方，这些信息也可能误导程序员。长时间运行的代码不一定是优化的好选择。例如，优化在文件下载期间绘制加载动画的代码不会使程序运行更快，尽管这段代码的运行时间与下载时间一样长。</p>
-<p>这个现象并不仅限于I/O操作。图1展示了一个简单的程序，说明了现有分析器的缺点，例如gprof分析器的图2a。该程序产生两个线程，分别调用函数fa和fb。大多数分析器会报告这些函数约占总执行时间的一半。其他分析器可能会报告fa处于关键路径上，或者主线程花费大致相等的时间等待fa和fb [ 23 ]。虽然准确，但所有这些信息都可能误导。完全优化fa只会使程序加速4.5%，因为fb成为新的关键路径。</p>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/e21794df244cee59295e4e998dfcd980.png" alt="e21794df244cee59295e4e998dfcd980"></p>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/494414da71cb9d7aeb2ade516db65299.png" alt="494414da71cb9d7aeb2ade516db65299"></p>
-<p>在因果分析中，y轴显示了通过加速每个代码行以x轴上显示的速度百分比而实现的程序加速。灰色区域显示标准误差。</p>
-<ul>
-<li>gprof报告fa和fb占总运行时间的相似部分，但优化fa最多可以提高性能4.5%，而优化fb不会影响性能。</li>
-<li>因果分析预测两种结果在0.5%以内。</li>
-</ul>
+<h2 id="介绍">介绍</h2>
+<p>手动检查程序以找到优化的操作机会是不切实际的，因此开发人员使用分析器。传统的分析器按其对总执行时间的贡献对代码进行排名。突出的例子包括oprofile、perf和gprof
+[17、27、29]。不幸的是，即使分析器准确地报告程序花费时间的地方，这些信息也可能误导程序员。长时间运行的代码不一定是优化的好选择。例如，优化在文件下载期间绘制加载动画的代码不会使程序运行更快，尽管这段代码的运行时间与下载时间一样长。</p>
+<p>这个现象并不仅限于I/O操作。图1展示了一个简单的程序，说明了现有分析器的缺点，例如gprof分析器的图2a。该程序产生两个线程，分别调用函数fa和fb。大多数分析器会报告这些函数约占总执行时间的一半。其他分析器可能会报告fa处于关键路径上，或者主线程花费大致相等的时间等待fa和fb
+[ 23
+]。虽然准确，但所有这些信息都可能误导。完全优化fa只会使程序加速4.5%，因为fb成为新的关键路径。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/e21794df244cee59295e4e998dfcd980.png" alt="e21794df244cee59295e4e998dfcd980">
+<figcaption aria-hidden="true">e21794df244cee59295e4e998dfcd980</figcaption>
+</figure>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/494414da71cb9d7aeb2ade516db65299.png" alt="494414da71cb9d7aeb2ade516db65299">
+<figcaption aria-hidden="true">494414da71cb9d7aeb2ade516db65299</figcaption>
+</figure>
+<p>在因果分析中，y轴显示了通过加速每个代码行以x轴上显示的速度百分比而实现的程序加速。灰色区域显示标准误差。
++
+gprof报告fa和fb占总运行时间的相似部分，但优化fa最多可以提高性能4.5%，而优化fb不会影响性能。
++ 因果分析预测两种结果在0.5%以内。</p>
 <p>传统profiler不能分析潜在的优化效果，开发者要根据对程序的了解自己预测优化效果。</p>
-<p>causal profiling，该方法能够准确、精确地指出程序员应该集中精力进行优化的地方，并量化其潜在影响。图2b显示了我们因果分析器原型COZ的运行结果。该分析图绘制了一行代码的假设加速(x轴)与它对执行时间的影响(y轴)的关系。图形显示了单独优化fa或fb不会有太大影响。</p>
-<font color="red"> coz怎么看出来的单独优化效果不好？ </font>
-
-<p>causal profiling进行一系列性能实验以观察潜在优化措施的效果。当然，不可能通过任意数量自动加速任何一行代码。相反，因果分析器使用虚拟加速的新技术来模拟通过固定数量优化特定代码行的影响。每当该行运行时，通过插入暂停来减慢所有其他线程，从而使该行虚拟加速。关键的见解是这种放缓与加快该行的运行速度具有相同的相对效果，从而“虚拟地”加速它。图3显示了虚拟加速和实际加速的等效性。</p>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/6f4f0a92e3fd513d05007fcc710f4f9e.png" alt="6f4f0a92e3fd513d05007fcc710f4f9e"></p>
+<p>causal
+profiling，该方法能够准确、精确地指出程序员应该集中精力进行优化的地方，并量化其潜在影响。图2b显示了我们因果分析器原型COZ的运行结果。该分析图绘制了一行代码的假设加速(x轴)与它对执行时间的影响(y轴)的关系。图形显示了单独优化fa或fb不会有太大影响。</p>
+<p><font color="red"> coz怎么看出来的单独优化效果不好？ </font></p>
+<p>causal
+profiling进行一系列性能实验以观察潜在优化措施的效果。当然，不可能通过任意数量自动加速任何一行代码。相反，因果分析器使用虚拟加速的新技术来模拟通过固定数量优化特定代码行的影响。每当该行运行时，通过插入暂停来减慢所有其他线程，从而使该行虚拟加速。关键的见解是这种放缓与加快该行的运行速度具有相同的相对效果，从而“虚拟地”加速它。图3显示了虚拟加速和实际加速的等效性。</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/6f4f0a92e3fd513d05007fcc710f4f9e.png" alt="6f4f0a92e3fd513d05007fcc710f4f9e">
+<figcaption aria-hidden="true">6f4f0a92e3fd513d05007fcc710f4f9e</figcaption>
+</figure>
 <p>每次性能实验都测量了通过特定量来虚拟加速一行代码的效果。通过在0%（无变化）和100%（该行代码完全消除）的虚拟加速范围内进行许多性能实验，因果分析器可以预测任何潜在优化对程序性能的影响。</p>
-<p>causal profiling与传统的分析方法的另一个不同之处是，使得开发人员可以查看优化对吞吐量和延迟的影响。</p>
-<ol>
-<li>为了分析吞吐量，开发人员指定一个progress point，表示代码中工作结束相对应的行,通过测量每个progress point的访问率，以确定任何潜在优化对吞吐量的影响。</li>
-<li>为了分析延迟，程序员们会放置两个progress point，它们对应于感兴趣的事件的开始和结束，例如当事务开始和完成时。因果分析器然后报告潜在优化对这两个progress point之间的平均延迟的影响。</li>
-</ol>
-<p>为了证明causal profiling的有效性，我们开发了COZ，这是一种用于Linux的因果分析工具。我们发现COZ只产生较低的执行时间开销（平均：17%，最小：0.1%，最大：65%），使其比gprof快得多（最高达6倍的开销）。<br>我们发现因果分析可以准确地预测优化机会，并且能够有效地指导优化工作。我们将COZ应用于Memcached、SQLite和广泛研究的PARSEC基准测试套件。在COZ输出的指导下，我们将Memcached的性能提高了9%，将SQLite的性能提高了25%，并将六个PARSEC应用程序的性能提高了高达68%。这些优化通常涉及修改不到10行的代码。当可能准确测量COZ所确定的优化行的大小时，我们将观察到的性能改进与COZ的预测进行比较：在每种情况下，我们发现我们优化的实际效果与COZ的预测相匹配。</p>
-<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ol>
-<li>它提供了causal profiling，识别出可以进行优化并产生最大影响的代码。使用虚拟加速和progress point，因果分析直接测量潜在优化对吞吐量和延迟的影响（第2节）。</li>
+<p>causal
+profiling与传统的分析方法的另一个不同之处是，使得开发人员可以查看优化对吞吐量和延迟的影响。
+1. 为了分析吞吐量，开发人员指定一个progress
+point，表示代码中工作结束相对应的行,通过测量每个progress
+point的访问率，以确定任何潜在优化对吞吐量的影响。 2.
+为了分析延迟，程序员们会放置两个progress
+point，它们对应于感兴趣的事件的开始和结束，例如当事务开始和完成时。因果分析器然后报告潜在优化对这两个progress
+point之间的平均延迟的影响。</p>
+<p>为了证明causal
+profiling的有效性，我们开发了COZ，这是一种用于Linux的因果分析工具。我们发现COZ只产生较低的执行时间开销（平均：17%，最小：0.1%，最大：65%），使其比gprof快得多（最高达6倍的开销）。
+我们发现因果分析可以准确地预测优化机会，并且能够有效地指导优化工作。我们将COZ应用于Memcached、SQLite和广泛研究的PARSEC基准测试套件。在COZ输出的指导下，我们将Memcached的性能提高了9%，将SQLite的性能提高了25%，并将六个PARSEC应用程序的性能提高了高达68%。这些优化通常涉及修改不到10行的代码。当可能准确测量COZ所确定的优化行的大小时，我们将观察到的性能改进与COZ的预测进行比较：在每种情况下，我们发现我们优化的实际效果与COZ的预测相匹配。</p>
+<h3 id="贡献">贡献</h3>
+<ol type="1">
+<li>它提供了causal
+profiling，识别出可以进行优化并产生最大影响的代码。使用虚拟加速和progress
+point，因果分析直接测量潜在优化对吞吐量和延迟的影响（第2节）。</li>
 <li>它介绍了COZ，这是一种在未修改的Linux二进制文件上工作的因果分析器。它描述了COZ的实现（第3节），并展示了其在识别优化机会方面的效率和效果（第4节）。</li>
 </ol>
-<h2 id="Causal-Profiling-Overview"><a href="#Causal-Profiling-Overview" class="headerlink" title="Causal Profiling Overview"></a>Causal Profiling Overview</h2><h3 id="Profiler-startup"><a href="#Profiler-startup" class="headerlink" title="Profiler startup."></a>Profiler startup.</h3><p>用户使用 coz run —- <program> <args> 形式的命令调用 COZ。在程序执行开始时，COZ 收集可执行文件和所有已加载库的调试信息。用户可以指定文件和二进制范围，这将限制 COZ 的实验，仅在指定的文件中进行加速。默认情况下，COZ 将考虑来自主可执行文件的任何源文件的加速。</args></program></p>
-<p><strong>COZ 使用程序的调试信息和指定的范围从指令构建到源行的映射。一旦构建了源映射，COZ 将创建一个分析器线程并恢复正常执行。</strong></p>
-<h3 id="Experiment-initialization"><a href="#Experiment-initialization" class="headerlink" title="Experiment initialization."></a>Experiment initialization.</h3><p><strong>COZ需要选择两个参数：代码行line和加速百分比。</strong></p>
-<p>这两个参数都必须随机选择；任何系统性的方法来探索lines或加速都可能导致剖析结果的系统性偏差。人们可能认为COZ可以排除在早期实验中没有表现出性能影响的lines或虚拟加速量，但基于过去结果的实验优先级将阻止COZ识别重要lines，如果其性能仅在某些预热期之后才重要。一旦选择了一条line和加速，剖析器线程就会保存每个progress point的访问次数并开始实验。</p>
-<h3 id="Applying-a-virtual-speedup"><a href="#Applying-a-virtual-speedup" class="headerlink" title="Applying a virtual speedup."></a>Applying a virtual speedup.</h3><p>每次被分析的程序创建线程时，COZ 就会开始从这个线程中采样指令指针。COZ 在每个线程中处理样本以实现虚拟加速的采样版本。在3.4节中，我们展示了图3所示的虚拟加速机制与COZ使用的采样方法之间的等价性。</p>
+<h2 id="causal-profiling-overview">Causal Profiling Overview</h2>
+<h3 id="profiler-startup.">Profiler startup.</h3>
+<p>用户使用 coz run --- <program> <args> 形式的命令调用
+COZ。在程序执行开始时，COZ
+收集可执行文件和所有已加载库的调试信息。用户可以指定文件和二进制范围，这将限制
+COZ 的实验，仅在指定的文件中进行加速。默认情况下，COZ
+将考虑来自主可执行文件的任何源文件的加速。</args></program></p>
+<p><strong>COZ
+使用程序的调试信息和指定的范围从指令构建到源行的映射。一旦构建了源映射，COZ
+将创建一个分析器线程并恢复正常执行。</strong></p>
+<h3 id="experiment-initialization.">Experiment initialization.</h3>
+<p><strong>COZ需要选择两个参数：代码行line和加速百分比。</strong></p>
+<p>这两个参数都必须随机选择；任何系统性的方法来探索lines或加速都可能导致剖析结果的系统性偏差。人们可能认为COZ可以排除在早期实验中没有表现出性能影响的lines或虚拟加速量，但基于过去结果的实验优先级将阻止COZ识别重要lines，如果其性能仅在某些预热期之后才重要。一旦选择了一条line和加速，剖析器线程就会保存每个progress
+point的访问次数并开始实验。</p>
+<h3 id="applying-a-virtual-speedup.">Applying a virtual speedup.</h3>
+<p>每次被分析的程序创建线程时，COZ 就会开始从这个线程中采样指令指针。COZ
+在每个线程中处理样本以实现虚拟加速的采样版本。在3.4节中，我们展示了图3所示的虚拟加速机制与COZ使用的采样方法之间的等价性。</p>
 <p><strong>每次有样本可用时，线程会检查样本是否落在所选用于虚拟加速的代码行中。如果是，它就会强制其他线程暂停。此过程一直持续到分析器线程表明实验已完成。</strong></p>
-<h4 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h4><p>f=100<br>g=30</p>
-<ul>
-<li>t1：100 + 30 + 100 = 230</li>
-<li>t2： 30 + 100 +30 = 160</li>
-</ul>
-<p>优化f为60后：</p>
-<ul>
-<li>t1：60 + 30 + 60 = 150 （优化了80）</li>
-<li>t2：30 + 60 +30 = 120</li>
-</ul>
-<p>采用virtual加速f为60：</p>
-<ul>
-<li>t1：100 + 40 + 30 + 100 = 270 （270 - 40*3 = 150）</li>
-<li>t2：30 + 40 + 100 +30 +40 = 240</li>
-</ul>
+<h4 id="例子1">例子1</h4>
+<p>f=100 g=30 + t1：100 + 30 + 100 = 230 + t2： 30 + 100 +30 = 160</p>
+<p>优化f为60后： + t1：60 + 30 + 60 = 150 （优化了80） + t2：30 + 60 +30
+= 120</p>
+<p>采用virtual加速f为60： + t1：100 + 40 + 30 + 100 = 270 （270 - 40*3 =
+150） + t2：30 + 40 + 100 +30 +40 = 240</p>
 <p>可以看出virtual加速计算出来的加速后时间150等于实际加速效果.</p>
-<h4 id="例子2：加速线程t1，导致t2成为瓶颈"><a href="#例子2：加速线程t1，导致t2成为瓶颈" class="headerlink" title="例子2：加速线程t1，导致t2成为瓶颈"></a>例子2：加速线程t1，导致t2成为瓶颈</h4><p>f=100<br>g=60</p>
-<ul>
-<li>t1：100 + 100 = 200</li>
-<li>t2： 60 + 60 = 120</li>
-</ul>
-<p>优化f为50后：</p>
-<ul>
-<li>t1：50 + 50 = 100</li>
-<li>t2： 60 + 60 = 120 （优化效果为200到120）</li>
-</ul>
-<p>采用virtual加速f为50：</p>
-<ul>
-<li>t1：100 + 100 = 200</li>
-<li>t2：60 + 50 + 60 +50 = 220 （220 - 50*2 = 120）</li>
-</ul>
+<h4 id="例子2加速线程t1导致t2成为瓶颈">例子2：加速线程t1，导致t2成为瓶颈</h4>
+<p>f=100 g=60 + t1：100 + 100 = 200 + t2： 60 + 60 = 120</p>
+<p>优化f为50后： + t1：50 + 50 = 100 + t2： 60 + 60 = 120
+（优化效果为200到120）</p>
+<p>采用virtual加速f为50： + t1：100 + 100 = 200 + t2：60 + 50 + 60 +50 =
+220 （220 - 50*2 = 120）</p>
 <p>可以看出virtual加速计算出来的加速后时间120等于实际加速效果.</p>
-<h3 id="Ending-an-experiment"><a href="#Ending-an-experiment" class="headerlink" title="Ending an experiment."></a>Ending an experiment.</h3><p>经过预定的时间后，COZ 会结束实验。如果在实验过程中对进展点的访问次数太少（默认最小值为5），COZ 会将剩余的执行时间加倍。一旦实验完成，分析线程会记录实验结果，包括:</p>
-<ul>
-<li>实验的有效持续时间（运行时间减去插入的总延迟）</li>
-<li>选定的行和加速效果</li>
-<li>所有进展点的访问次数。</li>
-</ul>
-<p>在开始下一个实验之前，COZ 将暂停一段短暂的冷却时间，以便在下次实验开始之前处理任何剩余的样本。</p>
-<h3 id="Producing-a-causal-profile"><a href="#Producing-a-causal-profile" class="headerlink" title="Producing a causal profile."></a>Producing a causal profile.</h3><p>产生因果剖面。在应用程序被COZ分析后，所有性能实验的结果可以组合起来产生profile文件。</p>
-<p>每个实验有两个自变量：</p>
-<ul>
-<li>选择的用于虚拟加速的代码行line和</li>
-<li>虚拟加速值。</li>
-</ul>
-<p>COZ记录了因变量：</p>
-<ul>
-<li>每个progress point的访问次数</li>
-<li>实验的有效持续时间（实际运行时间减去所有暂停的时间）。</li>
-</ul>
-<p>具有相同自变量的实验可以合并：将progress point访问次数和实验持续时间相加来组合。 </p>
-<p>COZ就按照加速代码行对实验进行分组。</p>
-<ul>
-<li>任何没有0%虚拟加速测量的代码行line都会被丢弃；如果没有这个基线测量，我们无法计算相对于原始程序的百分比加速。单独测量每个代码行的基线，可确保任何与线路相关的虚拟加速开销，例如在频繁执行的线路运行时插入延迟所需的额外跨线程通信，不会影响性能剖面结果。</li>
-<li>默认情况下，COZ还将丢弃任何具有少于5个不同虚拟加速量的line(只显示75%虚拟加速效果的图不是特别有用)。</li>
-<li>最后，我们计算相对于基线（虚拟速度提升0%）的加速比</li>
-</ul>
+<p>分析： </p><figure class="highlight asciidoc"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="bullet">* </span>执行下来的最长用时的线程（关键线程）所用的时间=关键线程自己原本执行时间+其他线程导致的pause时间</span><br><span class="line"><span class="bullet">*   </span>virtual加速 = 关键线程的执行时间-所有线程导致的pause时间</span><br><span class="line"><span class="bullet">*              </span>= 关键线程的执行时间-其他线程导致的pause时间-关键线程导致的pause时间</span><br><span class="line"><span class="bullet">*              </span>= 关键线程自己原本执行时间-关键线程导致的pause时间</span><br><span class="line"><span class="bullet">*              </span>= 加速后的关键线程 </span><br><span class="line"><span class="bullet">*            </span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<h3 id="ending-an-experiment.">Ending an experiment.</h3>
+<p>经过预定的时间后，COZ
+会结束实验。如果在实验过程中对进展点的访问次数太少（默认最小值为5），COZ
+会将剩余的执行时间加倍。一旦实验完成，分析线程会记录实验结果，包括: *
+实验的有效持续时间（运行时间减去插入的总延迟） * 选定的行和加速效果 *
+所有进展点的访问次数。</p>
+<p>在开始下一个实验之前，COZ
+将暂停一段短暂的冷却时间，以便在下次实验开始之前处理任何剩余的样本。</p>
+<h3 id="producing-a-causal-profile.">Producing a causal profile.</h3>
+<p>产生因果剖面。在应用程序被COZ分析后，所有性能实验的结果可以组合起来产生profile文件。</p>
+<p>每个实验有两个自变量： * 选择的用于虚拟加速的代码行line和 *
+虚拟加速值。</p>
+<p>COZ记录了因变量： * 每个progress point的访问次数 *
+实验的有效持续时间（实际运行时间减去所有暂停的时间）。</p>
+<p>具有相同自变量的实验可以合并：将progress
+point访问次数和实验持续时间相加来组合。</p>
+<p>COZ就按照加速代码行对实验进行分组。 *
+任何没有0%虚拟加速测量的代码行line都会被丢弃；如果没有这个基线测量，我们无法计算相对于原始程序的百分比加速。单独测量每个代码行的基线，可确保任何与线路相关的虚拟加速开销，例如在频繁执行的线路运行时插入延迟所需的额外跨线程通信，不会影响性能剖面结果。
+*
+默认情况下，COZ还将丢弃任何具有少于5个不同虚拟加速量的line(只显示75%虚拟加速效果的图不是特别有用)。
+* 最后，我们计算相对于基线（虚拟速度提升0%）的加速比</p>
 <p>COZ然后绘制每个线路的速度提升表格，产生本文中显示的性能图。</p>
-<h3 id="Interpreting-a-causal-profile"><a href="#Interpreting-a-causal-profile" class="headerlink" title="Interpreting a causal profile."></a>Interpreting a causal profile.</h3><p>一旦生成了因果剖面图，用户就可以解释它们，并做出一个有根据的选择，哪些线条可能需要进行优化。为了帮助用户识别重要的线条，COZ按照线性回归的斜率对图形进行排序。</p>
-<font color="blue"> 
-1. 陡峭的上升斜率表示一条线，表示优化很有效果
-2. 平坦的线条表示优化此线条不会提高程序性能
-3. COZ还找到具有陡峭下降斜率的线条，这意味着对此代码行的任何优化实际上都会损害性能。这种向下倾斜的剖面图是contention的一个强烈迹象；几乎加速的代码行干扰了程序的关键路径，优化此线条增加了干扰量。这种现象非常普遍，往往会导致重大的优化机会。在我们的评估中，我们识别和修复了三个应用程序中的争用问题：fluidanimate、streamcluster和memcached，分别提高了速度的37.5%，68.4%和9.4%。
-
-</font> 
-
-<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><h3 id="Core-Mechanisms"><a href="#Core-Mechanisms" class="headerlink" title="Core Mechanisms"></a>Core Mechanisms</h3><p>使用LD—PRELOAD库实现对程序地址空间的分析,可以在程序的startup和shutdown中间进行采样，采样是基于perf—event API获取程序PC和user-space调用栈，调用间隔是1ms，COZ默认处理10个样本为一批（每批更频繁地采样不太可能提高准确性，还会增加开销）。</p>
+<h3 id="interpreting-a-causal-profile.">Interpreting a causal
+profile.</h3>
+<p>一旦生成了因果剖面图，用户就可以解释它们，并做出一个有根据的选择，哪些线条可能需要进行优化。为了帮助用户识别重要的线条，COZ按照线性回归的斜率对图形进行排序。
+<font color="blue"> 1. 陡峭的上升斜率表示一条线，表示优化很有效果 2.
+平坦的线条表示优化此线条不会提高程序性能 3.
+COZ还找到具有陡峭下降斜率的线条，这意味着对此代码行的任何优化实际上都会损害性能。这种向下倾斜的剖面图是contention的一个强烈迹象；几乎加速的代码行干扰了程序的关键路径，优化此线条增加了干扰量。这种现象非常普遍，往往会导致重大的优化机会。在我们的评估中，我们识别和修复了三个应用程序中的争用问题：fluidanimate、streamcluster和memcached，分别提高了速度的37.5%，68.4%和9.4%。</font></p><font color="blue">
+</font><p><font color="blue"></font></p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="core-mechanisms">Core Mechanisms</h3>
+<p>使用LD—PRELOAD库实现对程序地址空间的分析,可以在程序的startup和shutdown中间进行采样，采样是基于perf—event
+API获取程序PC和user-space调用栈，调用间隔是1ms，COZ默认处理10个样本为一批（每批更频繁地采样不太可能提高准确性，还会增加开销）。</p>
 <p><strong>Attributing samples to source locations.</strong></p>
-<p>COZ 使用 DWARF调试信息，用于将采样程序计数器值映射到源代码位置。程序不需要包含DWARF行信息；COZ将使用类似GDB的进程定位外部调试信息.<br>DWARF（Debug With Arbitrary Record Format）是一种用于调试和记录程序执行信息的标准。它被广泛用于Unix和Unix-like操作系统中，特别是在GCC（GNU Compiler Collection）编译器套件中。DWARF提供了有关程序执行期间变量的值、函数调用的参数、返回值和源代码行号等信息，使得调试器能够更准确地确定程序在何处出错，并提供更详细的错误信息。DWARF还提供了用于记录程序执行期间发生的各种事件的信息，例如函数调用、跳转和返回等。这些信息对于理解程序的执行流程非常有用。DWARF信息被存储在编译生成的二进制文件中，可以通过调试器进行读取和分析。</p>
-<h3 id="Performance-Experiment-Implementation"><a href="#Performance-Experiment-Implementation" class="headerlink" title="Performance Experiment Implementation"></a>Performance Experiment Implementation</h3><p>COZ使用专用的分析线程进行实验。此线程负责选择加入一条line来加速，选择虚拟的加速比例，对progress points测量虚拟加速情况，以及编写proﬁler输出。</p>
-<p>加速比例从0%~100%，以5%的步长增加。p0表示不进行虚机加速所用的程序时间（progress point之间的），ps表示进行虚拟加速后的实践。那么程序性能的影响就是1-ps/p0.</p>
-<p>Lines for virtual speedup must be selected randomly to prevent bias in the results of performance experiments. </p>
-<font color="red"> 为何不随机就会有偏差？ </font>
-例如，如果一个line对initialization有性能影响，但是对后续执行阶段没有，就会夸大效果，如果对initialization没有性能影响，可能后续执行就不会再实验了。
-
-### Progress Point Implementation
-
-COZ支持三种progress point：源代码级、断点、采样。
-1. 源代码级progress point。是唯一需要程序修改的progress point。要指示源代码级的progress point，开发人员只需在程序的源代码中插入COZ PROGRESS宏。
-2. 断点progress point。在命令行中指定。COZ使用Linux perf事件API在第一条指令处设置断点。
-3. 采样progress point。在命令行上指定。然而，与源代码级和断点progress point不同，采样progress point等不记录访问progress point的次数。相反，采样progress point会计算落到指定代码行的样本数量。
-
- <font color="red"> 在后面评估case中如何使用的？ </font>
-
-<h4 id="测量延迟。"><a href="#测量延迟。" class="headerlink" title="测量延迟。"></a>测量延迟。</h4><p>源代码级和断点progress point数还可以用来衡量优化措施对于延迟的影响（而不是吞吐量）。要测量延迟，开发人员必须指定两个progress point：一个在开始时，另一个在最后。起始progress pointd的visit rate是arrival rate，起点和终点的计数之间的差异告诉我们目前有多少请求正在进行中。L 为正在处理的请求数，λ 为 arrival rate。根据Little’s Law，我们可以计算出平均延迟W，<br>这几乎适用于任何排队系统：L = λW [ 30 ]。重写Little定律，然后计算平均延迟L/λ。</p>
-<h3 id="Virtual-Speedup-Implementation"><a href="#Virtual-Speedup-Implementation" class="headerlink" title="Virtual Speedup Implementation"></a>Virtual Speedup Implementation</h3><script type="math/tex; mode=display">s \approx \frac{n * \bar{t}}{P}</script><ul>
-<li>s: The number of samples in the selected line</li>
-<li>P: the period of time between samples</li>
-<li>t: the average time required to run the selected line once</li>
-<li>n: is the number of times the selected line is executed.</li>
-</ul>
-<script type="math/tex; mode=display">\bar{t_{e}} = \frac{(n -s)*\bar{t} + s*(\bar{t}-d)}{n}</script><ul>
-<li>$\bar{t_{e}}$ The effective average time to run the selected line</li>
-<li>d: 加速的时间</li>
-</ul>
-<script type="math/tex; mode=display">\bar{t_{e}} = \bar{t} * (1- \frac{d}{P} )</script><script type="math/tex; mode=display">\triangle{\bar{t}} = (1- \frac{\bar{t_{e}}}{\bar{t}}) = \frac{d}{P}</script><ul>
-<li>$\triangle{\bar{t}}$:the amount of virtual Potentially unblocking calls<br>speedup</li>
-</ul>
+<p>COZ 使用
+DWARF调试信息，用于将采样程序计数器值映射到源代码位置。程序不需要包含DWARF行信息；COZ将使用类似GDB的进程定位外部调试信息.
+DWARF（Debug With Arbitrary Record
+Format）是一种用于调试和记录程序执行信息的标准。它被广泛用于Unix和Unix-like操作系统中，特别是在GCC（GNU
+Compiler
+Collection）编译器套件中。DWARF提供了有关程序执行期间变量的值、函数调用的参数、返回值和源代码行号等信息，使得调试器能够更准确地确定程序在何处出错，并提供更详细的错误信息。DWARF还提供了用于记录程序执行期间发生的各种事件的信息，例如函数调用、跳转和返回等。这些信息对于理解程序的执行流程非常有用。DWARF信息被存储在编译生成的二进制文件中，可以通过调试器进行读取和分析。</p>
+<h3 id="performance-experiment-implementation">Performance Experiment
+Implementation</h3>
+<p>COZ使用专用的分析线程进行实验。此线程负责选择加入一条line来加速，选择虚拟的加速比例，对progress
+points测量虚拟加速情况，以及编写proﬁler输出。</p>
+<p>加速比例从0%~100%，以5%的步长增加。p0表示不进行虚机加速所用的程序时间（progress
+point之间的），ps表示进行虚拟加速后的实践。那么程序性能的影响就是1-ps/p0.</p>
+<p>Lines for virtual speedup must be selected randomly to prevent bias
+in the results of performance experiments.</p>
+<p><font color="red"> 为何不随机就会有偏差？ </font>
+例如，如果一个line对initialization有性能影响，但是对后续执行阶段没有，就会夸大效果，如果对initialization没有性能影响，可能后续执行就不会再实验了。</p>
+<h3 id="progress-point-implementation">Progress Point
+Implementation</h3>
+<p>COZ支持三种progress point：源代码级、断点、采样。 1. 源代码级progress
+point。是唯一需要程序修改的progress point。要指示源代码级的progress
+point，开发人员只需在程序的源代码中插入COZ PROGRESS宏。 2. 断点progress
+point。在命令行中指定。COZ使用Linux perf事件API在第一条指令处设置断点。
+3. 采样progress point。在命令行上指定。然而，与源代码级和断点progress
+point不同，采样progress point等不记录访问progress
+point的次数。相反，采样progress
+point会计算落到指定代码行的样本数量。</p>
+<p><font color="red"> 在后面评估case中如何使用的？ </font></p>
+<h4 id="测量延迟">测量延迟。</h4>
+<p>源代码级和断点progress
+point数还可以用来衡量优化措施对于延迟的影响（而不是吞吐量）。要测量延迟，开发人员必须指定两个progress
+point：一个在开始时，另一个在最后。起始progress pointd的visit
+rate是arrival
+rate，起点和终点的计数之间的差异告诉我们目前有多少请求正在进行中。L
+为正在处理的请求数，λ 为 arrival rate。根据Little’s
+Law，我们可以计算出平均延迟W， 这几乎适用于任何排队系统：L = λW [ 30
+]。重写Little定律，然后计算平均延迟L/λ。</p>
+<h3 id="virtual-speedup-implementation">Virtual Speedup
+Implementation</h3>
+<p><span class="math display">\[s \approx \frac{n * \bar{t}}{P}
+\]</span> * s: The number of samples in the selected line * P: the
+period of time between samples * t: the average time required to run the
+selected line once * n: is the number of times the selected line is
+executed.</p>
+<p><span class="math display">\[\bar{t_{e}} = \frac{(n -s)*\bar{t} +
+s*(\bar{t}-d)}{n} \]</span> + <span class="math inline">\(\bar{t_{e}}\)</span> The effective average time to
+run the selected line + d: 加速的时间</p>
+<p><span class="math display">\[\bar{t_{e}} = \bar{t} * (1- \frac{d}{P}
+)\]</span></p>
+<p><span class="math display">\[\triangle{\bar{t}} = (1-
+\frac{\bar{t_{e}}}{\bar{t}}) = \frac{d}{P} \]</span></p>
 <ul>
-<li>Pausing other threads.为了降低overhead，不适用POSIX的signal，使用counter对每个线程的pause计数，有global count和每个线程自己的local counter，local小于global就需要pause。</li>
+<li><p><span class="math inline">\(\triangle{\bar{t}}\)</span>:the
+amount of virtual Potentially unblocking calls speedup</p></li>
+<li><p>Pausing other
+threads.为了降低overhead，不适用POSIX的signal，使用counter对每个线程的pause计数，有global
+count和每个线程自己的local
+counter，local小于global就需要pause。</p></li>
+<li><p>Ensuring accurate
+timing.使用nanosleep，保证pause的实践至少是要求的时间，超过的部分会在将来的pause减掉。</p></li>
+<li><p>Thread creation.新的线程创建继承父进程的local delay
+counter。</p></li>
 </ul>
+<h4 id="handling-suspended-threads">Handling Suspended Threads</h4>
 <ul>
-<li>Ensuring accurate timing.使用nanosleep，保证pause的实践至少是要求的时间，超过的部分会在将来的pause减掉。</li>
-<li>Thread creation.新的线程创建继承父进程的local delay counter。</li>
+<li><p>由于IO挂起的线程，在不阻塞后，加上插入pause。</p></li>
+<li><p>由于线程间同步原因挂起的线程，在不阻塞后，不需要pause（因为释放mutex的线程在释放前已经执行了delay，那么等待mutex的线程等同于被delay了）。</p></li>
+<li><p>表1：当线程invoking其他线程之前需要吧delay全部执行。</p></li>
+<li><p>表2：当线程进入阻塞前后，需要更新delay counter。</p></li>
 </ul>
-<h4 id="Handling-Suspended-Threads"><a href="#Handling-Suspended-Threads" class="headerlink" title="Handling Suspended Threads"></a>Handling Suspended Threads</h4><ul>
-<li>由于IO挂起的线程，在不阻塞后，加上插入pause。</li>
-<li><p>由于线程间同步原因挂起的线程，在不阻塞后，不需要pause（因为释放mutex的线程在释放前已经执行了delay，那么等待mutex的线程等同于被delay了）。</p>
-</li>
-<li><p>表1：当线程invoking其他线程之前需要吧delay全部执行。</p>
-</li>
-<li>表2：当线程进入阻塞前后，需要更新delay counter。<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/446c965e2bbacbe4fd777574deef9415.png" alt="446c965e2bbacbe4fd777574deef9415"></li>
-</ul>
-<h4 id="Attributing-Samples-to-Source-Lines"><a href="#Attributing-Samples-to-Source-Lines" class="headerlink" title="Attributing Samples to Source Lines"></a>Attributing Samples to Source Lines</h4><p>怎么样将采样对应到代码行：根据调用栈，找到最上层的调用函数。</p>
-<p>When a sample does not fall in any in-scope source line, the profiler walks the sampled callchain to find the first in-scope address. </p>
-<p> For example, a program may call printf, which calls vfprintf, which in turn calls strlen. Any samples collected during this chain of calls will be attributed to the source line that issues the original printf call.</p>
-<h3 id="Optimization-Minimizing-Delays"><a href="#Optimization-Minimizing-Delays" class="headerlink" title="Optimization: Minimizing Delays"></a>Optimization: Minimizing Delays</h3><p>当所有线程都执行了代码行，对所有线程都进行delay，是不必要的，会降低执行效率。<br>当线程采样到选定的代码行，就增加该线程的local delay counter，如果local小于global，coz插入pause。如果local delay count大于global，那么就增加global delay count。</p>
-<h4 id="Adjusting-for-phases"><a href="#Adjusting-for-phases" class="headerlink" title="Adjusting for phases"></a>Adjusting for phases</h4><p>一个程序在不执行选定代码行的阶段时，cox不会进行performance测试，这就会带来偏差，导致优化效果overstate。</p>
-<p>程序执行分完成两个阶段：</p>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/446c965e2bbacbe4fd777574deef9415.png" alt="446c965e2bbacbe4fd777574deef9415">
+<figcaption aria-hidden="true">446c965e2bbacbe4fd777574deef9415</figcaption>
+</figure>
+<h4 id="attributing-samples-to-source-lines">Attributing Samples to
+Source Lines</h4>
+<p>怎么样将采样对应到代码行：根据调用栈，找到最上层的调用函数。</p>
+<p>When a sample does not fall in any in-scope source line, the profiler
+walks the sampled callchain to find the first in-scope address.</p>
+<p>For example, a program may call printf, which calls vfprintf, which
+in turn calls strlen. Any samples collected during this chain of calls
+will be attributed to the source line that issues the original printf
+call.</p>
+<h3 id="optimization-minimizing-delays">Optimization: Minimizing
+Delays</h3>
+<p>当所有线程都执行了代码行，对所有线程都进行delay，是不必要的，会降低执行效率。
+当线程采样到选定的代码行，就增加该线程的local delay
+counter，如果local小于global，coz插入pause。如果local delay
+count大于global，那么就增加global delay count。</p>
+<h4 id="adjusting-for-phases">Adjusting for phases</h4>
+<p>一个程序在不执行选定代码行的阶段时，cox不会进行performance测试，这就会带来偏差，导致优化效果overstate。</p>
+<p>程序执行分完成两个阶段： + A：选定行会执行 + B：选定行不执行</p>
+<p><span class="math display">\[T = {t_{A}} + {t_{B}} \]</span> *
+总执行时间T等于两个阶段的时间和。</p>
+<p><span class="math display">\[P = \frac{T}{N} = \frac{ {t_{A}} +
+{t_{B}} }{N}\]</span></p>
 <ul>
-<li>A：选定行会执行</li>
-<li>B：选定行不执行</li>
-</ul>
-<script type="math/tex; mode=display">T = {t_{A}} + {t_{B}}</script><ul>
-<li>总执行时间T等于两个阶段的时间和。</li>
-</ul>
-<script type="math/tex; mode=display">P = \frac{T}{N} = \frac{ {t_{A}} + {t_{B}} }{N}</script><ul>
 <li>P : The average progress rate, 处理效率，即吞吐。</li>
 </ul>
-<script type="math/tex; mode=display">s_{obs} = s * \frac{t_{obs}}{t_{A}}</script><script type="math/tex; mode=display">t_{A} \approx s * \frac{t_{obs}}{s_{obs}}</script><ul>
-<li>$s_{obs}$ :性能测试期间采样到指定代码行的次数</li>
-<li>$t_{obs}$ ：性能测试的时间</li>
+<p><span class="math display">\[s_{obs} = s *
+\frac{t_{obs}}{t_{A}}  \]</span></p>
+<p><span class="math display">\[t_{A} \approx s *
+\frac{t_{obs}}{s_{obs}}  \]</span></p>
+<ul>
+<li><span class="math inline">\(s_{obs}\)</span>
+:性能测试期间采样到指定代码行的次数</li>
+<li><span class="math inline">\(t_{obs}\)</span> ：性能测试的时间</li>
 </ul>
-<script type="math/tex; mode=display">\triangle{p_{A}} = \frac{p_{A}- p_{A}^{'}}{p_{A}}</script><script type="math/tex; mode=display">\triangle{p_{A}} = \frac{\frac{t_{A}}{n_{A}} - \frac{t_{A}^{'}}{n_{A}}}{\frac{t_{A}}{n_{A}}} = \frac{t_{A}-t_{A}^{'}}{t_{A}}</script><script type="math/tex; mode=display">{P^{'}} = \frac{t_{A}^{'}+t_{B}}{N}</script><script type="math/tex; mode=display">\triangle{P} = \frac{P- P^{'}}{P} = \frac{\frac{t_{A}+t_{B}}{N}  - \frac{t_{A}^{'}+t_{B}}{N} }{\frac{T}{N}} = \frac{t_{A}-t_{A}^{'}}{T}</script><script type="math/tex; mode=display">\triangle{P} = \triangle{p_{A}}\frac{t_{A}}{T} \approx \triangle{p_{A}}* \frac{t_{obs}}{s_{obs}} * \frac{s}{T}</script><h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>table3 总结了优化效果。</p>
-<ol>
-<li>cases where COZ found optimization op- portunities that gprof and perf did not (dedup, ferret, and SQLite); </li>
-<li>cases where COZ identified contention (fluidani- mate, streamcluster, and Memcached); </li>
-<li>cases where both COZ and a conventional profiler identified the optimiza- tion we implemented (blackscholes and swaptions).</li>
+<p><span class="math display">\[\triangle{p_{A}} = \frac{p_{A}-
+p_{A}^{'}}{p_{A}} \]</span></p>
+<p><span class="math display">\[\triangle{p_{A}} =
+\frac{\frac{t_{A}}{n_{A}} -
+\frac{t_{A}^{'}}{n_{A}}}{\frac{t_{A}}{n_{A}}} =
+\frac{t_{A}-t_{A}^{'}}{t_{A}} \]</span></p>
+<p><span class="math display">\[{P^{'}} =
+\frac{t_{A}^{'}+t_{B}}{N}  \]</span></p>
+<p><span class="math display">\[\triangle{P} = \frac{P- P^{'}}{P} =
+\frac{\frac{t_{A}+t_{B}}{N}  - \frac{t_{A}^{'}+t_{B}}{N}
+}{\frac{T}{N}} = \frac{t_{A}-t_{A}^{'}}{T}\]</span></p>
+<p><span class="math display">\[\triangle{P} =
+\triangle{p_{A}}\frac{t_{A}}{T} \approx \triangle{p_{A}}*
+\frac{t_{obs}}{s_{obs}} * \frac{s}{T}\]</span></p>
+<h2 id="evaluation">Evaluation</h2>
+<p>table3 总结了优化效果。</p>
+<ol type="1">
+<li>cases where COZ found optimization op- portunities that gprof and
+perf did not (dedup, ferret, and SQLite);</li>
+<li>cases where COZ identified contention (fluidani- mate,
+streamcluster, and Memcached);</li>
+<li>cases where both COZ and a conventional profiler identified the
+optimiza- tion we implemented (blackscholes and swaptions).</li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/3e570a7f1535a9fe210216f56bd2757e.png" alt="3e570a7f1535a9fe210216f56bd2757e"></p>
-<h3 id="Case-Study-dedup"><a href="#Case-Study-dedup" class="headerlink" title="Case Study: dedup"></a>Case Study: dedup</h3><p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/1eb0da42674b21e5a56771950809904a.png" alt="1eb0da42674b21e5a56771950809904a"></p>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/3e570a7f1535a9fe210216f56bd2757e.png" alt="3e570a7f1535a9fe210216f56bd2757e">
+<figcaption aria-hidden="true">3e570a7f1535a9fe210216f56bd2757e</figcaption>
+</figure>
+<h3 id="case-study-dedup">Case Study: dedup</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/1eb0da42674b21e5a56771950809904a.png" alt="1eb0da42674b21e5a56771950809904a">
+<figcaption aria-hidden="true">1eb0da42674b21e5a56771950809904a</figcaption>
+</figure>
 <ul>
-<li>coz: We placed a progress point immediately after dedup completes compression of a single block of data (encoder.c:189).</li>
-<li>分析:定位到hashtable.c:217,即hashtable search 是做hash遍历，发现如图4：hash map不均衡，97%的bucket内有使用。</li>
-<li>优化：采用remove bit shifting step和对32 bit chunks的key使用bitwise的XOR，来提高性能。</li>
-<li><p>优化效果 8.95% ± 0.27% 。</p>
-</li>
-<li><p>gprof的缺陷： hashtable search had the largest share of highest execution time at 14.38%, but calls to hashtable search from the hash computation stage accounted for just 0.48% of execution time; Gprof’s call graph actually obscured the importance of this code.</p>
-</li>
+<li><p>coz: We placed a progress point immediately after dedup completes
+compression of a single block of data (encoder.c:189).</p></li>
+<li><p>分析:定位到hashtable.c:217,即hashtable search
+是做hash遍历，发现如图4：hash map不均衡，97%的bucket内有使用。</p></li>
+<li><p>优化：采用remove bit shifting step和对32 bit
+chunks的key使用bitwise的XOR，来提高性能。</p></li>
+<li><p>优化效果 8.95% ± 0.27% 。</p></li>
+<li><p>gprof的缺陷： hashtable search had the largest share of highest
+execution time at 14.38%, but calls to hashtable search from the hash
+computation stage accounted for just 0.48% of execution time; Gprof’s
+call graph actually obscured the importance of this code.</p></li>
 </ul>
-<h3 id="Case-Study-ferret"><a href="#Case-Study-ferret" class="headerlink" title="Case Study: ferret"></a>Case Study: ferret</h3><ul>
-<li>分析吞吐，We first inserted a progress point in the final stage of the image search pipeline to measure throughput (ferret-parallel.c:398).</li>
-</ul>
+<h3 id="case-study-ferret">Case Study: ferret</h3>
 <ul>
-<li><p>优化方案：thread allocation of 20, 1, 22, and 21 to segmentation, feature extraction, indexing, and ranking respectively.</p>
-</li>
-<li><p>优化效果： 21.27% ± 0.17% speedup </p>
-</li>
-<li><p>gprof的缺陷：优化前后用gprof观察不到显著区别。<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/4927328700490394c84d46a6cdcc94be.png" alt="4927328700490394c84d46a6cdcc94be"></p>
-</li>
+<li><p>分析吞吐，We first inserted a progress point in the final stage
+of the image search pipeline to measure throughput
+(ferret-parallel.c:398).</p></li>
+<li><p>优化方案：thread allocation of 20, 1, 22, and 21 to segmentation,
+feature extraction, indexing, and ranking respectively.</p></li>
+<li><p>优化效果： 21.27% ± 0.17% speedup</p></li>
+<li><p>gprof的缺陷：优化前后用gprof观察不到显著区别。 <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/4927328700490394c84d46a6cdcc94be.png" alt="4927328700490394c84d46a6cdcc94be"></p></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/2b18748360aca39c287e308e1690ce15.png" alt="2b18748360aca39c287e308e1690ce15"></p>
-<h3 id="Case-Study-SQLite"><a href="#Case-Study-SQLite" class="headerlink" title="Case Study: SQLite"></a>Case Study: SQLite</h3><ul>
-<li><p>Replacing these indirect calls with direct calls resulted in a 25.60% ± 1.00% speedup.</p>
-</li>
-<li><p>perf缺陷：不是热点，没有发现问题。</p>
-</li>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/2b18748360aca39c287e308e1690ce15.png" alt="2b18748360aca39c287e308e1690ce15">
+<figcaption aria-hidden="true">2b18748360aca39c287e308e1690ce15</figcaption>
+</figure>
+<h3 id="case-study-sqlite">Case Study: SQLite</h3>
+<ul>
+<li><p>Replacing these indirect calls with direct calls resulted in a
+25.60% ± 1.00% speedup.</p></li>
+<li><p>perf缺陷：不是热点，没有发现问题。</p></li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/f7fcf04e3d0a329add71693e81f2a2f9.png" alt="f7fcf04e3d0a329add71693e81f2a2f9"></p>
-<h3 id="Case-Study-fluidanimate"><a href="#Case-Study-fluidanimate" class="headerlink" title="Case Study: fluidanimate"></a>Case Study: fluidanimate</h3><ul>
-<li>coz: We placed a progress point immediately after the barrier, so it executes each time all threads complete a phase of the computation.</li>
-<li>COZ also identified two significant points of contention, indicated by a downward sloping causal profile.</li>
-<li>优化方案：Removing this spinning from the barrier would reduce the contention, but it was simpler to replace the custom barrier with the default pthread barrier implementation</li>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/f7fcf04e3d0a329add71693e81f2a2f9.png" alt="f7fcf04e3d0a329add71693e81f2a2f9">
+<figcaption aria-hidden="true">f7fcf04e3d0a329add71693e81f2a2f9</figcaption>
+</figure>
+<h3 id="case-study-fluidanimate">Case Study: fluidanimate</h3>
+<ul>
+<li>coz: We placed a progress point immediately after the barrier, so it
+executes each time all threads complete a phase of the computation.</li>
+<li>COZ also identified two significant points of contention, indicated
+by a downward sloping causal profile.</li>
+<li>优化方案：Removing this spinning from the barrier would reduce the
+contention, but it was simpler to replace the custom barrier with the
+default pthread barrier implementation</li>
 <li>效果：37.5% ± 0.56%</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/284c3a1234d65ab474aa310ab7da77f7.png" alt="284c3a1234d65ab474aa310ab7da77f7"></p>
-<h3 id="Case-Study-streamcluster"><a href="#Case-Study-streamcluster" class="headerlink" title="Case Study: streamcluster"></a>Case Study: streamcluster</h3><ul>
-<li>worker threads execute in concurrent phases separated by a custom barrier, where we placed a progress point. </li>
-<li>Replacing this barrier with the default pthread barrier led to a 68.4% ± 1.12% speedup.</li>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/284c3a1234d65ab474aa310ab7da77f7.png" alt="284c3a1234d65ab474aa310ab7da77f7">
+<figcaption aria-hidden="true">284c3a1234d65ab474aa310ab7da77f7</figcaption>
+</figure>
+<h3 id="case-study-streamcluster">Case Study: streamcluster</h3>
+<ul>
+<li>worker threads execute in concurrent phases separated by a custom
+barrier, where we placed a progress point.</li>
+<li>Replacing this barrier with the default pthread barrier led to a
+68.4% ± 1.12% speedup.</li>
 </ul>
-<h3 id="Case-Study-Memcached"><a href="#Case-Study-Memcached" class="headerlink" title="Case Study: Memcached"></a>Case Study: Memcached</h3><ul>
-<li><p>We placed a progress point at the end of the process command function, which handles each client request.</p>
-</li>
-<li><p>Because reference counts are updated atomically, we can safely remove the lock from this function, which resulted in a 9.39% ± 0.95% speedup.</p>
-</li>
+<h3 id="case-study-memcached">Case Study: Memcached</h3>
+<ul>
+<li><p>We placed a progress point at the end of the process command
+function, which handles each client request.</p></li>
+<li><p>Because reference counts are updated atomically, we can safely
+remove the lock from this function, which resulted in a 9.39% ± 0.95%
+speedup.</p></li>
 </ul>
-<h3 id="Case-Study-blackscholes"><a href="#Case-Study-blackscholes" class="headerlink" title="Case Study: blackscholes"></a>Case Study: blackscholes</h3><ul>
-<li>We placed a progress point after each thread completes one round of the iterative approximation to the dif- ferential equation (blackscholes.c:259).</li>
-<li>Manu- ally eliminating common subexpressions and combining 61 piecewise calculations into 4 larger expressions resulted in a 2.56% ± 0.41% program speedup.<h3 id="Case-Study-swaptions"><a href="#Case-Study-swaptions" class="headerlink" title="Case Study: swaptions"></a>Case Study: swaptions</h3></li>
-<li>We placed a progress point after each iteration of the main loop ex- ecuted by worker threads (HJM Securities.cpp:99).</li>
-<li>Reordering these loops and replacing the first loop with a call to memset sped execution by 15.8% ± 1.10%.</li>
+<h3 id="case-study-blackscholes">Case Study: blackscholes</h3>
+<ul>
+<li>We placed a progress point after each thread completes one round of
+the iterative approximation to the dif- ferential equation
+(blackscholes.c:259).</li>
+<li>Manu- ally eliminating common subexpressions and combining 61
+piecewise calculations into 4 larger expressions resulted in a 2.56% ±
+0.41% program speedup. ### Case Study: swaptions</li>
+<li>We placed a progress point after each iteration of the main loop ex-
+ecuted by worker threads (HJM Securities.cpp:99).</li>
+<li>Reordering these loops and replacing the first loop with a call to
+memset sped execution by 15.8% ± 1.10%.</li>
 </ul>
-<h3 id="Effectiveness-Summary"><a href="#Effectiveness-Summary" class="headerlink" title="Effectiveness Summary"></a>Effectiveness Summary</h3><p>In most cases, COZ identified around 20 lines of interest, with as many as 50 for larger programs (Mem- cached and x264). COZ identified optimization opportunities in all of the PARSEC benchmarks, but some required more invasive changes that are out of scope for this paper.<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/b2de75fd51419add7018a677acc21e78.png" alt="b2de75fd51419add7018a677acc21e78"></p>
-<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><ul>
-<li>为了优化 ferret，我们将索引阶段的线程数从 16 个增加到 22 个，这将第 320 行的吞吐量提高了 27%。 COZ 预测这一改进将导致程序加速 21.4%，这与我们观察到的 21.2% 几乎相同。</li>
-<li>对于dedup，COZ 识别了遍历哈希桶链表的 while 循环的顶部。 通过替换退化哈希函数，我们将每个哈希桶中的平均元素数量从 76.7 个减少到 2.09 个。 此更改将迭代次数从 77.7 次减少到 3.09 次（考虑到循环的最终行程）。 这一减少相当于 COZ 线加速了 96%。 对于这次加速，COZ 预测性能提升为 9%，非常接近我们观察到的 8.95% 的加速。</li>
+<h3 id="effectiveness-summary">Effectiveness Summary</h3>
+<p>In most cases, COZ identified around 20 lines of interest, with as
+many as 50 for larger programs (Mem- cached and x264). COZ identified
+optimization opportunities in all of the PARSEC benchmarks, but some
+required more invasive changes that are out of scope for this paper.
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/b2de75fd51419add7018a677acc21e78.png" alt="b2de75fd51419add7018a677acc21e78"></p>
+<h3 id="accuracy">Accuracy</h3>
+<ul>
+<li>为了优化 ferret，我们将索引阶段的线程数从 16 个增加到 22 个，这将第
+320 行的吞吐量提高了 27%。 COZ 预测这一改进将导致程序加速
+21.4%，这与我们观察到的 21.2% 几乎相同。</li>
+<li>对于dedup，COZ 识别了遍历哈希桶链表的 while 循环的顶部。
+通过替换退化哈希函数，我们将每个哈希桶中的平均元素数量从 76.7 个减少到
+2.09 个。 此更改将迭代次数从 77.7 次减少到 3.09
+次（考虑到循环的最终行程）。 这一减少相当于 COZ 线加速了 96%。
+对于这次加速，COZ 预测性能提升为 9%，非常接近我们观察到的 8.95%
+的加速。</li>
 </ul>
-<h3 id="Efficiency"><a href="#Efficiency" class="headerlink" title="Efficiency"></a>Efficiency</h3><p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/7eb9496c751a289797b09bc05984b12a.png" alt="7eb9496c751a289797b09bc05984b12a"></p>
-<p>减少开销。<br>大多数程序都有足够长的运行时间（平均：103 秒）来分摊处理调试信息的成本，但在启动时处理特别大的可执行文件可能会很昂贵（例如 x264 和 vips）。 可以修改 COZ 以延迟收集和处理调试信息，以减少启动开销。 采样开销主要来自于在线程创建和退出时使用 perf event API 启动和停止采样。 可以通过全局采样而不是按线程采样来摊销此成本，这需要大多数计算机上的 root 权限。 如果 perf 事件 API 支持对进程中的所有线程进行采样，则可以消除此开销。 延迟开销是 COZ 总开销的最大组成部分，可以通过允许程序在每次实验之间正常执行一段时间来减少。 增加实验之间的时间将显着减少开销，但需要更长的分析运行才能收集可用的配置文件。<br>效率总结。<br>COZ 的分析开销平均为 17.6%（最小值：0.1%，最大值：65%）。 对于除三个基准之外的所有基准，其开销均低于 30%。 鉴于广泛使用的 gprof 分析器可能会产生更高的开销（例如，雪貂为 6 倍，而 COZ 为 6%），这些结果证实 COZ 在实践中具有足够低的开销。</p>
-<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><p>因果分析识别并量化优化机会，而过去大多数分析器的工作都集中在以较低的开销收集详细的（尽管不一定是可操作的）信息。</p>
-<h3 id="通用分析器"><a href="#通用分析器" class="headerlink" title="通用分析器"></a>通用分析器</h3><p>通用分析器通常使用仪器、采样或两者来实现。 基于抽样（包括因果分析）的系统可以任意减少探测效应，尽管抽样必须是无偏的[35]。<br>UNIX prof 工具和 oprofile 都专门使用采样 [29, 42]。 Oprofile 可以使用各种硬件性能计数器进行采样，这些计数器可用于识别缓存恶意代码、预测不佳的分支和其他硬件瓶颈。 Gprof 结合了仪器和采样来测量执行时间 [17]。 Gprof 生成一个调用图配置文件，它对按调用者隔离的函数的调用进行计数。 乔，莫斯利，等人通过交错检测和未检测执行来减少 Gprof 调用图分析的开销 [9]。 路径分析器添加了更多详细信息，计算通过过程或跨过程的每个路径的执行情况 [2, 6]。</p>
-<h3 id="并行分析器"><a href="#并行分析器" class="headerlink" title="并行分析器"></a>并行分析器</h3><p>过去有关并行分析的工作主要集中在识别关键路径或瓶颈上，尽管优化关键路径或消除瓶颈可能不会显着提高程序性能。<br>关键路径分析。 IPS 使用消息传递程序的跟踪来识别关键路径，并报告每个过程对关键路径贡献的时间量 [34]。 IPS-2 通过对共享内存并行性的有限支持扩展了这种方法 [33, 44]。 其他关键路径分析器依赖具有first-class线程和同步的语言来识别关键路径 [21,37,40]。 识别关键路径可以帮助开发人员找到优化会产生一定影响的代码，但这些方法不会向开发人员提供有关在关键路径更改之前可能获得多少性能增益的任何信息。 Hollingsworth 和 Miller 引入了两个新指标来估算优化潜力：松弛，在关键路径发生变化之前可以改进多少过程； 逻辑归零，即完全删除程序时关键路径长度的减少[22]。 这些指标类似于因果分析器测量的优化潜力，但只能使用完整的程序活动图来计算。 收集程序活动图的成本很高，并且可能会引入显著的探测效应。</p>
-<h3 id="瓶颈识别。"><a href="#瓶颈识别。" class="headerlink" title="瓶颈识别。"></a>瓶颈识别。</h3><p>有几种方法使用硬件性能计数器来识别硬件级性能瓶颈[8,12,32]。 基于二进制检测的技术可以识别缓存和堆性能问题、争用锁和其他程序热点[5,31,36]。 ParaShares 和 Harmony 识别在很少或没有并行性的时期运行的基本块 [25, 26]。 这些工具识别的代码是并行化或经典串行优化的良好候选者。 Bottlenecks 是一种配置文件分析工具，它使用启发式方法通过调用树配置文件 [3] 来识别瓶颈。 给定不同执行的调用树配置文件，瓶颈可以查明哪些过程导致性能差异。 FreeLunch 分析器和 Visual Studio 的争用分析器可识别导致大量线程阻塞时间的锁 [11, 16]。 BIS 使用类似的技术来识别非对称多处理器上高度竞争的关键部分，并自动将性能关键代码迁移到更快的内核 [24]。 瓶图以视觉格式呈现线程执行时间和并行性，突出显示程序瓶颈[13]。 与因果分析不同，这些工具无法预测消除瓶颈对性能的影响。 所有这些系统只能识别显式线程通信引起的瓶颈，而因果分析可以测量任何来源的并行性能问题，包括缓存一致性协议、调度依赖性和 I/O。</p>
-<h3 id="分析并行化和可扩展性。"><a href="#分析并行化和可扩展性。" class="headerlink" title="分析并行化和可扩展性。"></a>分析并行化和可扩展性。</h3><p>已经开发了几个系统来测量串行程序中潜在的并行性[15,43,45]。 与因果分析一样，这些系统可以识别可以从开发人员时间中受益的代码。 与因果分析不同，这些工具的目的不是诊断已经并行化的代码中的性能问题。<br>Kulkarni、Pai 和 Schuff 提出了可用并行性和可扩展性的一般指标[28]。 Cilkview 可扩展性分析器使用 Cilk 约束并行性的性能模型来估计添加额外硬件线程的性能影响 [20]。 因果分析可以检测由于当前硬件平台上的扩展不良而导致的性能问题。</p>
-<h3 id="时间归因分析器。"><a href="#时间归因分析器。" class="headerlink" title="时间归因分析器。"></a>时间归因分析器。</h3><p>时间归因分析器根据其他线程正在执行的操作将“责任”分配给并发执行的代码。 Quartz 引入了“正常处理器时间”的概念，这会给在大部分其他线程被阻塞时运行的代码分配很高的成本[4]。 CPPROFJ 通过方面[19]将此方法扩展到 Java 程序。 CPPROFJ 对时间使用更精细的类别：正在运行、阻塞较高优先级线程、等待监视器以及阻塞其他事件。 Tallent 和 Mellor-Crummey 进一步扩展了这种方法来支持 Cilk 程序，并添加了管理并行性所花费的时间类别 [41]。 WAIT 工具添加了细粒度的分类来识别大规模生产 Java 系统中的瓶颈 [1]。 与因果分析不同，这些分析器只能捕获直接影响其调度程序状态的线程之间的干扰。</p>
-<h3 id="性能指导和实验"><a href="#性能指导和实验" class="headerlink" title="性能指导和实验"></a>性能指导和实验</h3><p>一些系统已经利用延迟来提取有关程序执行时间的信息。 </p>
-<ol>
-<li>米特科维奇等人使用延迟来验证单线程 Java 程序上分析器的输出 [35]。 </li>
-<li>斯内利克，Ja ́Ja ́ 等人使用延迟来分析并行程序[38]。 这种方法测量组合减速的影响，这需要针对指数数量的配置中的每一个完整执行程序。 主动依赖发现（ADD）向分布式系统引入性能扰动并测量其对响应时间的影响[7]。 ADD需要系统组件的完整枚举，并且需要开发人员手动插入性能扰动。 </li>
-<li>古纳维，阿格拉瓦尔等人使用延迟来识别 EMC Centera 存储系统中事件之间的因果关系，以分析 Centera 的协议和策略 [18]。 </li>
-<li>Song 和 Lu 使用机器学习来识别源代码中的性能反模式 [39]。 </li>
-</ol>
+<h3 id="efficiency">Efficiency</h3>
+<figure>
+<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/7eb9496c751a289797b09bc05984b12a.png" alt="7eb9496c751a289797b09bc05984b12a">
+<figcaption aria-hidden="true">7eb9496c751a289797b09bc05984b12a</figcaption>
+</figure>
+<p>减少开销。 大多数程序都有足够长的运行时间（平均：103
+秒）来分摊处理调试信息的成本，但在启动时处理特别大的可执行文件可能会很昂贵（例如
+x264 和 vips）。 可以修改 COZ 以延迟收集和处理调试信息，以减少启动开销。
+采样开销主要来自于在线程创建和退出时使用 perf event API 启动和停止采样。
+可以通过全局采样而不是按线程采样来摊销此成本，这需要大多数计算机上的
+root 权限。 如果 perf 事件 API
+支持对进程中的所有线程进行采样，则可以消除此开销。 延迟开销是 COZ
+总开销的最大组成部分，可以通过允许程序在每次实验之间正常执行一段时间来减少。
+增加实验之间的时间将显着减少开销，但需要更长的分析运行才能收集可用的配置文件。
+效率总结。 COZ 的分析开销平均为 17.6%（最小值：0.1%，最大值：65%）。
+对于除三个基准之外的所有基准，其开销均低于 30%。 鉴于广泛使用的 gprof
+分析器可能会产生更高的开销（例如，雪貂为 6 倍，而 COZ 为
+6%），这些结果证实 COZ 在实践中具有足够低的开销。</p>
+<h2 id="related-work">Related Work</h2>
+<p>因果分析识别并量化优化机会，而过去大多数分析器的工作都集中在以较低的开销收集详细的（尽管不一定是可操作的）信息。
+### 通用分析器 通用分析器通常使用仪器、采样或两者来实现。
+基于抽样（包括因果分析）的系统可以任意减少探测效应，尽管抽样必须是无偏的[35]。
+UNIX prof 工具和 oprofile 都专门使用采样 [29, 42]。 Oprofile
+可以使用各种硬件性能计数器进行采样，这些计数器可用于识别缓存恶意代码、预测不佳的分支和其他硬件瓶颈。
+Gprof 结合了仪器和采样来测量执行时间 [17]。 Gprof
+生成一个调用图配置文件，它对按调用者隔离的函数的调用进行计数。
+乔，莫斯利，等人通过交错检测和未检测执行来减少 Gprof 调用图分析的开销
+[9]。
+路径分析器添加了更多详细信息，计算通过过程或跨过程的每个路径的执行情况
+[2, 6]。</p>
+<h3 id="并行分析器">并行分析器</h3>
+<p>过去有关并行分析的工作主要集中在识别关键路径或瓶颈上，尽管优化关键路径或消除瓶颈可能不会显着提高程序性能。
+关键路径分析。 IPS
+使用消息传递程序的跟踪来识别关键路径，并报告每个过程对关键路径贡献的时间量
+[34]。 IPS-2 通过对共享内存并行性的有限支持扩展了这种方法 [33, 44]。
+其他关键路径分析器依赖具有first-class线程和同步的语言来识别关键路径
+[21,37,40]。
+识别关键路径可以帮助开发人员找到优化会产生一定影响的代码，但这些方法不会向开发人员提供有关在关键路径更改之前可能获得多少性能增益的任何信息。
+Hollingsworth 和 Miller
+引入了两个新指标来估算优化潜力：松弛，在关键路径发生变化之前可以改进多少过程；
+逻辑归零，即完全删除程序时关键路径长度的减少[22]。
+这些指标类似于因果分析器测量的优化潜力，但只能使用完整的程序活动图来计算。
+收集程序活动图的成本很高，并且可能会引入显著的探测效应。</p>
+<h3 id="瓶颈识别">瓶颈识别。</h3>
+<p>有几种方法使用硬件性能计数器来识别硬件级性能瓶颈[8,12,32]。
+基于二进制检测的技术可以识别缓存和堆性能问题、争用锁和其他程序热点[5,31,36]。
+ParaShares 和 Harmony 识别在很少或没有并行性的时期运行的基本块 [25,
+26]。 这些工具识别的代码是并行化或经典串行优化的良好候选者。 Bottlenecks
+是一种配置文件分析工具，它使用启发式方法通过调用树配置文件 [3]
+来识别瓶颈。
+给定不同执行的调用树配置文件，瓶颈可以查明哪些过程导致性能差异。
+FreeLunch 分析器和 Visual Studio
+的争用分析器可识别导致大量线程阻塞时间的锁 [11, 16]。 BIS
+使用类似的技术来识别非对称多处理器上高度竞争的关键部分，并自动将性能关键代码迁移到更快的内核
+[24]。 瓶图以视觉格式呈现线程执行时间和并行性，突出显示程序瓶颈[13]。
+与因果分析不同，这些工具无法预测消除瓶颈对性能的影响。
+所有这些系统只能识别显式线程通信引起的瓶颈，而因果分析可以测量任何来源的并行性能问题，包括缓存一致性协议、调度依赖性和
+I/O。 ### 分析并行化和可扩展性。
+已经开发了几个系统来测量串行程序中潜在的并行性[15,43,45]。
+与因果分析一样，这些系统可以识别可以从开发人员时间中受益的代码。
+与因果分析不同，这些工具的目的不是诊断已经并行化的代码中的性能问题。
+Kulkarni、Pai 和 Schuff 提出了可用并行性和可扩展性的一般指标[28]。
+Cilkview 可扩展性分析器使用 Cilk
+约束并行性的性能模型来估计添加额外硬件线程的性能影响 [20]。
+因果分析可以检测由于当前硬件平台上的扩展不良而导致的性能问题。</p>
+<h3 id="时间归因分析器">时间归因分析器。</h3>
+<p>时间归因分析器根据其他线程正在执行的操作将“责任”分配给并发执行的代码。
+Quartz
+引入了“正常处理器时间”的概念，这会给在大部分其他线程被阻塞时运行的代码分配很高的成本[4]。
+CPPROFJ 通过方面[19]将此方法扩展到 Java 程序。 CPPROFJ
+对时间使用更精细的类别：正在运行、阻塞较高优先级线程、等待监视器以及阻塞其他事件。
+Tallent 和 Mellor-Crummey 进一步扩展了这种方法来支持 Cilk
+程序，并添加了管理并行性所花费的时间类别 [41]。 WAIT
+工具添加了细粒度的分类来识别大规模生产 Java 系统中的瓶颈 [1]。
+与因果分析不同，这些分析器只能捕获直接影响其调度程序状态的线程之间的干扰。</p>
+<h3 id="性能指导和实验">性能指导和实验</h3>
+<p>一些系统已经利用延迟来提取有关程序执行时间的信息。 1.
+米特科维奇等人使用延迟来验证单线程 Java 程序上分析器的输出 [35]。 1.
+斯内利克，Ja ́Ja ́ 等人使用延迟来分析并行程序[38]。
+这种方法测量组合减速的影响，这需要针对指数数量的配置中的每一个完整执行程序。
+主动依赖发现（ADD）向分布式系统引入性能扰动并测量其对响应时间的影响[7]。
+ADD需要系统组件的完整枚举，并且需要开发人员手动插入性能扰动。 1.
+古纳维，阿格拉瓦尔等人使用延迟来识别 EMC Centera
+存储系统中事件之间的因果关系，以分析 Centera 的协议和策略 [18]。 1. Song
+和 Lu 使用机器学习来识别源代码中的性能反模式 [39]。</p>
 <p>与因果分析不同，这些方法不能预测潜在优化的效果。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>分析器是程序员工具箱中用于识别性能调整机会的主要工具。 以前的分析器仅观察实际执行并将代码与执行时间或性能计数器关联起来。 该信息的用途可能有限，因为所花费的时间不一定对应于程序员应该将优化工作的重点放在哪里。 过去的分析器还仅限于报告端到端执行时间，这对于服务器和交互式应用程序来说并不重要，因为它们感兴趣的关键指标是吞吐量和延迟。 因果分析是一种基于实验的新方法，可在假设的优化及其效果之间建立因果关系。 通过虚拟地加速代码行，因果分析可以识别并量化任何程度的优化对任何代码行的吞吐量或延迟的影响。 我们的原型因果分析器 COZ 在指导优化工作方面高效、准确且有效。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/09/18/linux-kernel/">linux_kernel</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-09-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/kernel/">kernel</a></span><div class="content"><h2 id="9-内核同步介绍"><a href="#9-内核同步介绍" class="headerlink" title="9 内核同步介绍"></a>9 内核同步介绍</h2><h3 id="临界区和同步"><a href="#临界区和同步" class="headerlink" title="临界区和同步"></a>临界区和同步</h3><p>临界区：访问和共享数据的代码段。<br>同步：避免并发和防止竞争条件称为同步（synchronization）。</p>
-<h3 id="为什么需要保护？为什么需要有临界区？"><a href="#为什么需要保护？为什么需要有临界区？" class="headerlink" title="为什么需要保护？为什么需要有临界区？"></a>为什么需要保护？为什么需要有临界区？</h3><p>银行系统</p>
-<h3 id="怎么保护？"><a href="#怎么保护？" class="headerlink" title="怎么保护？"></a>怎么保护？</h3><p>处理器提供原子指令，先读后写。<br>对于不那么固定长度的临界区，采用锁机制。<br>    各种锁机制的主要区别在于锁被占用是的处理行为：<br>        忙等待<br>        睡眠直到锁可用</p>
-<h3 id="造成并发的原因"><a href="#造成并发的原因" class="headerlink" title="造成并发的原因"></a>造成并发的原因</h3><p>中断<br>软中断和tasklet<br>内核抢占<br>睡眠及用户空间的同步<br>对称多处理机</p>
-<p>加锁不难，难的是发现潜在并发可能性，有意识地放置并发。<br>中断安全代码（interrupt-safe）<br>SMP安全代码（SMP-safe）<br>抢占安全代码（preempt-safe）</p>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>死锁类型：<br>    自死锁：获取自己已经持有的锁<br>    ABBA死锁：每个线程持有其他线程需要的锁。<br>如何避免？<br>    按顺序加锁<br>    放置发生饥饿<br>    不要重复请求同一个锁<br>    设计力求简单：越复杂越有可能死锁</p>
-<h3 id="锁争用和扩展性"><a href="#锁争用和扩展性" class="headerlink" title="锁争用和扩展性"></a>锁争用和扩展性</h3><p>锁的高度争用会造成系统的瓶颈，严重降低系统性能。<br>细粒度加锁可以避免不必要的竞争，但是过细的粒度会加大系统开销，造成浪费。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/08/25/books/">books</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-08-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/book/">book</a></span><div class="content"><h2 id="2023-Q1"><a href="#2023-Q1" class="headerlink" title="2023.Q1"></a>2023.Q1</h2><p>万火归一<br>无穷大简史<br>半导体简史<br>文化失忆</p>
-<h2 id="2023-Q2"><a href="#2023-Q2" class="headerlink" title="2023.Q2"></a>2023.Q2</h2><p>费曼物理学讲义<br>从一到无穷大<br>旧制度与大革命<br>芯片战争<br>神曲<br>编译器设计</p>
-<h2 id="2023-Q3"><a href="#2023-Q3" class="headerlink" title="2023.Q3"></a>2023.Q3</h2><p>裸眼观星：零障碍天文观测指南<br>失控<br>量子物理史话<br>癌症真相<br>集异璧之大成<br>大问题<br>古今数学思想<br>改变心理学的40项研究<br>人生的智慧：叔本华影响世界的哲学箴言<br>所罗门王的指环:科普、自然<br>万物简史</p>
-<h2 id="TO-read-list"><a href="#TO-read-list" class="headerlink" title="TO read list"></a>TO read list</h2><h3 id="自然、生物"><a href="#自然、生物" class="headerlink" title="自然、生物"></a>自然、生物</h3><p><a target="_blank" rel="noopener" href="https://m.douban.com/subject_collection/EC445KZ2Q">https://m.douban.com/subject_collection/EC445KZ2Q</a><br>中国鸟类野外手册<br>DK博物百科</p>
-<h3 id="科普"><a href="#科普" class="headerlink" title="科普"></a>科普</h3><p>宇宙的琴弦：弦理论<br>哥白尼革命</p>
-<h3 id="心理学"><a href="#心理学" class="headerlink" title="心理学"></a>心理学</h3><p>对伪心理学说不</p>
-<h3 id="社会"><a href="#社会" class="headerlink" title="社会"></a>社会</h3><p>用后即弃的人</p>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><p>虚构的以色列地</p>
-<h3 id="小说"><a href="#小说" class="headerlink" title="小说"></a>小说</h3><p>老舍经典全集 <a target="_blank" rel="noopener" href="https://item.jd.com/13102958.html">https://item.jd.com/13102958.html</a></p>
-<h3 id="科技"><a href="#科技" class="headerlink" title="科技"></a>科技</h3><p>现代CPU性能分析与优化<br>CPU设计实战<br>高性能计算系列丛书·CUDA并行程序设计<br>昇腾AI处理器架构与编程<br>KVM实战：原理、进阶与性能调优</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/08/25/network/">benchmark for network</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-08-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/qperf/">qperf</a></span><div class="content"><h2 id="qperf"><a href="#qperf" class="headerlink" title="qperf"></a>qperf</h2><figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># more qperf.sh</span></span><br><span class="line">echo <span class="string">"qperf test"</span></span><br><span class="line"><span class="attribute">server</span>=192.168.3.4</span><br><span class="line"><span class="attribute">ts</span>=$(date <span class="string">'+%Y%m%d%H%M%S'</span>)</span><br><span class="line"><span class="attribute">log</span>=amd-7w83-nps1-qperf-bandwidth-latency-bycore-$ts.csv</span><br><span class="line"></span><br><span class="line">echo <span class="string">""</span> &gt; <span class="variable">$log</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> {0<span class="built_in">..</span>127<span class="built_in">..</span>1}</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  #qperf bw</span><br><span class="line">  <span class="attribute">result</span>=`qperf --cpu_affinity <span class="variable">$c</span> <span class="variable">$server</span> tcp_bw  | tail -n 1`</span><br><span class="line">  <span class="attribute">bw</span>=`echo <span class="variable">$result</span> | awk <span class="string">'{print $3}'</span>`</span><br><span class="line"></span><br><span class="line">  #qperf latency</span><br><span class="line">  <span class="attribute">result</span>=`qperf --cpu_affinity <span class="variable">$c</span> <span class="variable">$server</span> tcp_lat  | tail -n 1`</span><br><span class="line">  <span class="attribute">lat</span>=`echo <span class="variable">$result</span> | awk <span class="string">'{print $3}'</span>`</span><br><span class="line"></span><br><span class="line">  echo <span class="variable">$c</span>,<span class="variable">$bw</span>,<span class="string">"GB/s"</span>,<span class="variable">$lat</span>,<span class="string">"us"</span> &gt;&gt; <span class="variable">$log</span></span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>qperf —cpu_affinity 100 192.168.3.4 tcp_lat<br>tcp_lat:<br>    latency  =  10.5 us</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/21/perf/">perf</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/perf/">perf</a></span><div class="content"><h2 id="perf"><a href="#perf" class="headerlink" title="perf"></a>perf</h2><h3 id="基础介绍"><a href="#基础介绍" class="headerlink" title="基础介绍"></a>基础介绍</h3><p>perf的基础介绍可以参考：<br><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/perf.1.html">http://man7.org/linux/man-pages/man1/perf.1.html</a><br><a target="_blank" rel="noopener" href="http://wiki.csie.ncku.edu.tw/embedded/perf-tutorial#perf-top">http://wiki.csie.ncku.edu.tw/embedded/perf-tutorial#perf-top</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangskd/article/details/37902159">https://blog.csdn.net/zhangskd/article/details/37902159</a></p>
-<h2 id="perf-top：宏观了解程序行为及热点函数"><a href="#perf-top：宏观了解程序行为及热点函数" class="headerlink" title="perf top：宏观了解程序行为及热点函数"></a>perf top：宏观了解程序行为及热点函数</h2><p>-p：指定进程号，常用<br>perf top -p 12345<br>输出如下：第一列为函数耗时占比。第二列第三列显示的是函数<br> <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174110.png" alt="20230621174110"><br>按a可以看汇编热点：<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/f118de541dc59778ea65e4277426797f.png" alt="f118de541dc59778ea65e4277426797f"></p>
-<h2 id="perf-record：记录程序行为以便分析"><a href="#perf-record：记录程序行为以便分析" class="headerlink" title="perf record：记录程序行为以便分析"></a>perf record：记录程序行为以便分析</h2><p>-g：用来记录函数调用栈，是火焰图的基础<br>-F 指定采样频率为 99Hz(每秒99次)<br>— sleep ：用来控制采样记录的时长，一般60s;注意有空格</p>
-<p>命令：perf record -g -p 12345 — sleep 60<br>输出：当前目录下的perf.data<br>处理该perf.data变为可读有两种办法(推荐第一种）：</p>
-<ol>
-<li>perf script -i perf.data &gt; output.file</li>
-<li>perf report -i perf.data </li>
-</ol>
-<h3 id="火焰图"><a href="#火焰图" class="headerlink" title="火焰图"></a>火焰图</h3><p>火焰图可以看到函数调用栈和热点函数（当热点函数连续的持续调用时间长，分散的是不太好从火焰图中直接观察到的）</p>
-<h4 id="下载链接"><a href="#下载链接" class="headerlink" title="下载链接"></a>下载链接</h4><p><a target="_blank" rel="noopener" href="https://github.com/brendangregg/FlameGraph">https://github.com/brendangregg/FlameGraph</a><br>里面有处理脚本，无需安装</p>
-<h4 id="生成火焰图"><a href="#生成火焰图" class="headerlink" title="生成火焰图"></a>生成火焰图</h4><p>在获得了上述perf统计的数据后，生成火焰图的命令如下：<br>cat output.file | ../FlameGraph-master/stackcollapse-perf.pl | ../FlameGraph-master/flamegraph.pl &gt; flame.svg<br>想要只观察指定函数的火焰图可以：<br>cat output.file | ../FlameGraph-master/stackcollapse-perf.pl | grep functionA | ../FlameGraph-master/flamegraph.pl &gt; functionA.svg<br>展示如下：<br> <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174147.png" alt="20230621174147"></p>
-<h4 id="分散热点分析"><a href="#分散热点分析" class="headerlink" title="分散热点分析"></a>分散热点分析</h4><p>上面提到对于分散的函数热点，火焰图不太好直接观测，可以采用下面的方法：</p>
-<ol>
-<li>获取折叠的数据（格式如下）：cat output.file | ../FlameGraph-master/stackcollapse-perf.pl &gt; perf.data.folded<br><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174205.png" alt="20230621174205"></li>
-<li>提取要观测的函数例如FetchFromSpans: grep FetchFromSpans perf.data.folded | awk -F ‘ ‘ ‘{sum+=$NF} END {print “Sum = “, sum}’</li>
-<li>想要知道上述函数的比例需要计算所有函数的样本点：cat perf.data.folded | awk -F ‘ ‘ ‘{sum+=$NF} END {print “Sum = “, sum}’</li>
-</ol>
-<h2 id="perf-sched"><a href="#perf-sched" class="headerlink" title="perf sched"></a>perf sched</h2><h3 id="timeline"><a href="#timeline" class="headerlink" title="timeline"></a>timeline</h3><h4 id="根据传参，对pid进行采集"><a href="#根据传参，对pid进行采集" class="headerlink" title="根据传参，对pid进行采集"></a>根据传参，对pid进行采集</h4><p>perf sched record -a -g -p $pid -o perf.data — sleep 5</p>
-<h4 id="对数据做格式化处理，输出时间片信息"><a href="#对数据做格式化处理，输出时间片信息" class="headerlink" title="对数据做格式化处理，输出时间片信息"></a>对数据做格式化处理，输出时间片信息</h4><p>perf sched timehist -f -i perf.data &gt; timehist.txt</p>
-<h4 id="对输出信息进行格式化处理，生成timehist-csv"><a href="#对输出信息进行格式化处理，生成timehist-csv" class="headerlink" title="对输出信息进行格式化处理，生成timehist.csv"></a>对输出信息进行格式化处理，生成timehist.csv</h4><p>cat timehist.txt |sed 1,3d | awk ‘{print $1,$3,$4,$5,$6,$7}’|sed “s/[/ /g”|sed “s/]/ /g”|sed “s/\// /g”|awk ‘{if(NF==7) {print $1,$2,”null”,$3,$4,$5,$6,$7} else {print $0}}’ &gt; timehist.csv</p>
+<h2 id="结论">结论</h2>
+<p>分析器是程序员工具箱中用于识别性能调整机会的主要工具。
+以前的分析器仅观察实际执行并将代码与执行时间或性能计数器关联起来。
+该信息的用途可能有限，因为所花费的时间不一定对应于程序员应该将优化工作的重点放在哪里。
+过去的分析器还仅限于报告端到端执行时间，这对于服务器和交互式应用程序来说并不重要，因为它们感兴趣的关键指标是吞吐量和延迟。
+因果分析是一种基于实验的新方法，可在假设的优化及其效果之间建立因果关系。
+通过虚拟地加速代码行，因果分析可以识别并量化任何程度的优化对任何代码行的吞吐量或延迟的影响。
+我们的原型因果分析器 COZ 在指导优化工作方面高效、准确且有效。</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/09/18/linux-kernel/">linux_kernel</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-09-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/kernel/">kernel</a></span><div class="content"><h2 id="内核同步介绍">9 内核同步介绍</h2>
+<h3 id="临界区和同步">临界区和同步</h3>
+<p>临界区：访问和共享数据的代码段。
+同步：避免并发和防止竞争条件称为同步（synchronization）。 ###
+为什么需要保护？为什么需要有临界区？ 银行系统</p>
+<h3 id="怎么保护">怎么保护？</h3>
+<p>处理器提供原子指令，先读后写。
+对于不那么固定长度的临界区，采用锁机制。
+各种锁机制的主要区别在于锁被占用是的处理行为： 忙等待 睡眠直到锁可用</p>
+<h3 id="造成并发的原因">造成并发的原因</h3>
+<p>中断 软中断和tasklet 内核抢占 睡眠及用户空间的同步 对称多处理机</p>
+<p>加锁不难，难的是发现潜在并发可能性，有意识地放置并发。
+中断安全代码（interrupt-safe） SMP安全代码（SMP-safe）
+抢占安全代码（preempt-safe）</p>
+<h3 id="死锁">死锁</h3>
+<p>死锁类型： 自死锁：获取自己已经持有的锁
+ABBA死锁：每个线程持有其他线程需要的锁。 如何避免？ 按顺序加锁
+放置发生饥饿 不要重复请求同一个锁 设计力求简单：越复杂越有可能死锁</p>
+<h3 id="锁争用和扩展性">锁争用和扩展性</h3>
+<p>锁的高度争用会造成系统的瓶颈，严重降低系统性能。
+细粒度加锁可以避免不必要的竞争，但是过细的粒度会加大系统开销，造成浪费。</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/08/25/books/">books</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-08-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/book/">book</a></span><div class="content"><h2 id="积灰中">积灰中</h2>
+<h2 id="科学">科学</h2>
+<ul>
+<li>无穷大简史</li>
+<li>从一到无穷大</li>
+<li>古今数学思想</li>
+<li>费曼物理学讲义</li>
+<li>量子物理史话</li>
+<li>裸眼观星：零障碍天文观测指南</li>
+<li>所罗门王的指环:科普、自然</li>
+<li>万物简史</li>
+<li>哥白尼革命</li>
+</ul>
+<h2 id="技术">技术</h2>
+<ul>
+<li>半导体简史</li>
+<li>芯片战争</li>
+<li>失控</li>
+<li>编译器设计</li>
+<li>现代CPU性能分析与优化</li>
+<li>CPU设计实战</li>
+<li>高性能计算系列丛书·CUDA并行程序设计</li>
+<li>昇腾AI处理器架构与编程</li>
+<li>KVM实战：原理、进阶与性能调优</li>
+<li>AI加速器架构设计与实现</li>
+<li>ChatGPT原理与实战：大型语言模型的算法、技术和私有化</li>
+<li>深度学习</li>
+<li>深入Linux内核架构</li>
+<li>深入理解Linux内核</li>
+<li>深度探索Linux系统虚拟化</li>
+<li>Linux内核设计与实现</li>
+<li>程序员的自我修养</li>
+<li>性能之巅</li>
+<li>BPF之巅</li>
+<li>kubernetes权威指南</li>
+<li>Linux/UNIX系统编程手册</li>
+</ul>
+<h2 id="文学">文学</h2>
+<ul>
+<li>万火归一</li>
+<li>神曲</li>
+<li>老舍经典全集</li>
+</ul>
+<h2 id="社会科学与历史">社会科学与历史</h2>
+<ul>
+<li>文化失忆</li>
+<li>旧制度与大革命</li>
+<li>用后即弃的人</li>
+<li>虚构的以色列地</li>
+<li>改变心理学的40项研究</li>
+<li>人类简史</li>
+<li></li>
+</ul>
+<h2 id="哲学">哲学</h2>
+<ul>
+<li>大问题</li>
+<li>人生的智慧：叔本华影响世界的哲学箴言</li>
+<li>哥德尔、艾舍尔、巴赫：集异璧之大成</li>
+</ul>
+<h2 id="医学">医学</h2>
+<ul>
+<li>癌症真相</li>
+</ul>
+<h2 id="自然">自然</h2>
+<ul>
+<li>DK博物百科</li>
+</ul>
+<h2 id="to-read-list">TO read list</h2>
+<h3 id="自然生物">自然、生物</h3>
+<p>https://m.douban.com/subject_collection/EC445KZ2Q
+中国鸟类野外手册</p>
+<h3 id="科普">科普</h3>
+<p>宇宙的琴弦：弦理论</p>
+<h3 id="心理学">心理学</h3>
+<p>对伪心理学说不(无货)</p>
+<h3 id="社会">社会</h3>
+<h3 id="历史">历史</h3>
+<h3 id="小说">小说</h3>
+<h3 id="科技">科技</h3>
+<ul>
+<li>计算机程序的构造和解释 (ToSee)</li>
+<li>深入理解计算机系统 (ToSee)</li>
+<li>Python机器学习 (ToSee)</li>
+<li>计算机网络：自顶向下方法 (ToSee)</li>
+<li>算法导论 (ToSee)</li>
+<li>人工智能：一种现代的方法 (ToSee)</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/08/25/network/">benchmark for network</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-08-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/qperf/">qperf</a></span><div class="content"><h2 id="qperf">qperf</h2>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># more qperf.sh</span></span><br><span class="line">echo <span class="string">"qperf test"</span></span><br><span class="line"><span class="attribute">server</span>=192.168.3.4</span><br><span class="line"><span class="attribute">ts</span>=$(date <span class="string">'+%Y%m%d%H%M%S'</span>)</span><br><span class="line"><span class="attribute">log</span>=amd-7w83-nps1-qperf-bandwidth-latency-bycore-$ts.csv</span><br><span class="line"></span><br><span class="line">echo <span class="string">""</span> &gt; <span class="variable">$log</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> c <span class="keyword">in</span> {0<span class="built_in">..</span>127<span class="built_in">..</span>1}</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  #qperf bw</span><br><span class="line">  <span class="attribute">result</span>=`qperf --cpu_affinity <span class="variable">$c</span> <span class="variable">$server</span> tcp_bw  | tail -n 1`</span><br><span class="line">  <span class="attribute">bw</span>=`echo <span class="variable">$result</span> | awk <span class="string">'{print $3}'</span>`</span><br><span class="line"></span><br><span class="line">  #qperf latency</span><br><span class="line">  <span class="attribute">result</span>=`qperf --cpu_affinity <span class="variable">$c</span> <span class="variable">$server</span> tcp_lat  | tail -n 1`</span><br><span class="line">  <span class="attribute">lat</span>=`echo <span class="variable">$result</span> | awk <span class="string">'{print $3}'</span>`</span><br><span class="line"></span><br><span class="line">  echo <span class="variable">$c</span>,<span class="variable">$bw</span>,<span class="string">"GB/s"</span>,<span class="variable">$lat</span>,<span class="string">"us"</span> &gt;&gt; <span class="variable">$log</span></span><br><span class="line"></span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>qperf --cpu_affinity 100 192.168.3.4 tcp_lat tcp_lat: latency = 10.5
+us</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/21/perf/">perf</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/perf/">perf</a></span><div class="content"><h2 id="perf">perf</h2>
+<h3 id="基础介绍">基础介绍</h3>
+<p>perf的基础介绍可以参考：
+http://man7.org/linux/man-pages/man1/perf.1.html
+http://wiki.csie.ncku.edu.tw/embedded/perf-tutorial#perf-top
+https://blog.csdn.net/zhangskd/article/details/37902159</p>
+<h2 id="perf-top宏观了解程序行为及热点函数">perf
+top：宏观了解程序行为及热点函数</h2>
+<p>-p：指定进程号，常用 perf top -p 12345
+输出如下：第一列为函数耗时占比。第二列第三列显示的是函数 <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174110.png" alt="20230621174110"> 按a可以看汇编热点： <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/f118de541dc59778ea65e4277426797f.png" alt="f118de541dc59778ea65e4277426797f"></p>
+<h2 id="perf-record记录程序行为以便分析">perf
+record：记录程序行为以便分析</h2>
+<p>-g：用来记录函数调用栈，是火焰图的基础 -F 指定采样频率为
+99Hz(每秒99次) -- sleep ：用来控制采样记录的时长，一般60s;注意有空格</p>
+<p>命令：perf record -g -p 12345 -- sleep 60 输出：当前目录下的perf.data
+处理该perf.data变为可读有两种办法(推荐第一种）： 1. perf script -i
+perf.data &gt; output.file 2. perf report -i perf.data</p>
+<h3 id="火焰图">火焰图</h3>
+<p>火焰图可以看到函数调用栈和热点函数（当热点函数连续的持续调用时间长，分散的是不太好从火焰图中直接观察到的）
+#### 下载链接 https://github.com/brendangregg/FlameGraph
+里面有处理脚本，无需安装 #### 生成火焰图
+在获得了上述perf统计的数据后，生成火焰图的命令如下： cat output.file |
+../FlameGraph-master/stackcollapse-perf.pl |
+../FlameGraph-master/flamegraph.pl &gt; flame.svg
+想要只观察指定函数的火焰图可以： cat output.file |
+../FlameGraph-master/stackcollapse-perf.pl | grep functionA |
+../FlameGraph-master/flamegraph.pl &gt; functionA.svg 展示如下： <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174147.png" alt="20230621174147"></p>
+<h4 id="分散热点分析">分散热点分析</h4>
+<p>上面提到对于分散的函数热点，火焰图不太好直接观测，可以采用下面的方法：
+1. 获取折叠的数据（格式如下）：cat output.file |
+../FlameGraph-master/stackcollapse-perf.pl &gt; perf.data.folded <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230621174205.png" alt="20230621174205"> 1. 提取要观测的函数例如FetchFromSpans: grep
+FetchFromSpans perf.data.folded | awk -F ' ' '{sum+=<span class="math inline">\(NF} END {print "Sum = ", sum}'
+2.  想要知道上述函数的比例需要计算所有函数的样本点：cat perf.data.folded
+| awk -F ' ' '{sum+=\)</span>NF} END {print "Sum = ",
+sum}'</p>
+<h2 id="perf-sched">perf sched</h2>
+<h3 id="timeline">timeline</h3>
+<h4 id="根据传参对pid进行采集">根据传参，对pid进行采集</h4>
+<p>perf sched record -a -g -p $pid -o perf.data -- sleep 5 ####
+对数据做格式化处理，输出时间片信息 perf sched timehist -f -i perf.data
+&gt; timehist.txt #### 对输出信息进行格式化处理，生成timehist.csv cat
+timehist.txt |sed 1,3d | awk '{print $1,$3,$4,$5,$6,$7}'|sed "s/[/
+/g"|sed "s/]/ /g"|sed "s/// /g"|awk '{if(NF==7) {print
+$1,$2,"null",$3,$4,$5,$6,$7} else {print $0}}' &gt; timehist.csv</p>
 <figure class="highlight haskell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]# perf sched record -<span class="type">F</span> <span class="number">99</span> -a -g -p <span class="number">83998</span> -o perf.<span class="class"><span class="keyword">data</span> <span class="comment">-- sleep 20</span></span></span><br><span class="line"><span class="type">Warning</span>:</span><br><span class="line"><span class="type">PID</span>/<span class="type">TID</span> switch overriding <span class="type">SYSTEM</span></span><br><span class="line">[ perf record: <span class="type">Woken</span> up <span class="number">107</span> times to write <span class="class"><span class="keyword">data</span> ]</span></span><br><span class="line">[ perf record: <span class="type">Captured</span> and wrote <span class="number">251.718</span> <span class="type">MB</span> perf.<span class="class"><span class="keyword">data</span> (1576867 <span class="title">samples</span>) ]</span></span><br><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]# ls</span><br><span class="line"><span class="title">err</span>.log  perf.<span class="class"><span class="keyword">data</span>  r000ps  r001ue  r002hs  r003macc  r004macc  r005mc  r006tr  r007hpc  r008io  r009mc  r010hs</span></span><br><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]# perf sched timehist -f -i perf.<span class="class"><span class="keyword">data</span> &gt; timehist.txt</span></span><br><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]# vi timehist.txt</span><br><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]#  cat timehist.txt | grep -vE ':|lost' | sed <span class="number">1</span>,3d | head</span><br><span class="line"> <span class="number">6037529.749004</span> [<span class="number">0044</span>]  feedroiuserq[<span class="number">84007</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.749021</span> [<span class="number">0045</span>]  feedroiuserq[<span class="number">84005</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.749971</span> [<span class="number">0051</span>]  feedroiuserq[<span class="number">91170</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.750255</span> [<span class="number">0044</span>]  feedroiuserq[<span class="number">84007</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">1.250</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.750277</span> [<span class="number">0045</span>]  feedroiuserq[<span class="number">84005</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">1.256</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.750796</span> [<span class="number">0043</span>]  feedroiuserq[<span class="number">91178</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- schedule_hrtimeout_range_clock &lt;- ep_poll &lt;- sys_epoll_wait &lt;- do_syscall_64</span><br><span class="line"> <span class="number">6037529.750976</span> [<span class="number">0052</span>]  feedroiuserq[<span class="number">91174</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- schedule_hrtimeout_range_clock &lt;- ep_poll &lt;- sys_epoll_wait &lt;- do_syscall_64</span><br><span class="line"> <span class="number">6037529.751031</span> [<span class="number">0048</span>]  feedroiuserq[<span class="number">91176</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line"> <span class="number">6037529.751043</span> [<span class="number">0043</span>]  feedroiuserq[<span class="number">91178</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.247</span>    __sched_text_start &lt;- __sched_text_start &lt;- schedule_hrtimeout_range_clock &lt;- ep_poll &lt;- sys_epoll_wait &lt;- do_syscall_64</span><br><span class="line"> <span class="number">6037529.751111</span> [<span class="number">0047</span>]  feedroiuserq[<span class="number">91177</span>/<span class="number">83998</span>]           <span class="number">0.000</span>      <span class="number">0.000</span>      <span class="number">0.000</span>    __sched_text_start &lt;- __sched_text_start &lt;- futex_wait_queue_me &lt;- futex_wait &lt;- do_futex &lt;- sys_futex</span><br><span class="line">[root@bjdd-acg-tge39-77f89.bjdd.baidu.com feedroiuserq]# cat timehist.txt | grep -vE ':|lost' | sed <span class="number">1</span>,3d | awk '{print $<span class="number">1</span>,$<span class="number">3</span>,$<span class="number">4</span>,$<span class="number">5</span>,$<span class="number">6</span>,$<span class="number">7</span>}' | head |sed <span class="string">"s/\[/ /g"</span> |sed <span class="string">"s/\]/ /g"</span> |sed <span class="string">"s/\// /g"</span>|awk '{<span class="keyword">if</span>(<span class="type">NF</span>==<span class="number">7</span>) {print $<span class="number">1</span>,$<span class="number">2</span>,$<span class="number">3</span>,$<span class="number">3</span>,$<span class="number">4</span>,$<span class="number">5</span>,$<span class="number">6</span>,$<span class="number">7</span>} <span class="keyword">else</span> {print $<span class="number">0</span>}}' |sed <span class="string">"s/[ ][ ]*/,/g"</span></span><br><span class="line"><span class="number">6037529.749004</span>,feedroiuserq,<span class="number">84007</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.749021</span>,feedroiuserq,<span class="number">84005</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.749971</span>,feedroiuserq,<span class="number">91170</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.750255</span>,feedroiuserq,<span class="number">84007</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">1.250</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.750277</span>,feedroiuserq,<span class="number">84005</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">1.256</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.750796</span>,feedroiuserq,<span class="number">91178</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.750976</span>,feedroiuserq,<span class="number">91174</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.751031</span>,feedroiuserq,<span class="number">91176</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.751043</span>,feedroiuserq,<span class="number">91178</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.247</span>,__sched_text_start</span><br><span class="line"><span class="number">6037529.751111</span>,feedroiuserq,<span class="number">91177</span>,<span class="number">83998</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,<span class="number">0.000</span>,__sched_text_start</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="perf-sched-latency"><a href="#perf-sched-latency" class="headerlink" title="perf sched latency"></a>perf sched latency</h3><figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@bjdd-acg-tge39-<span class="number">77</span>f89.bjdd.baidu.com lyj]<span class="comment"># perf sched latency -s runtime</span></span><br><span class="line"></span><br><span class="line"> -----------------------------------------------------------------------------------------------------------------</span><br><span class="line">  Task                  |   Runtime <span class="keyword">ms</span>  <span class="title">| Switches</span> | Average delay <span class="keyword">ms</span> <span class="title">| Maximum</span> delay <span class="keyword">ms</span> <span class="title">| Maximum</span> delay at       |</span><br><span class="line"> -----------------------------------------------------------------------------------------------------------------</span><br><span class="line">  cc1:(<span class="number">201</span>)             |   <span class="number">6777.688</span> <span class="keyword">ms</span> <span class="title">|      294</span> | avg:    <span class="number">0.004</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.023</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766938.333270</span> s</span><br><span class="line">  machine_load_co:(<span class="number">4</span>)   |    <span class="number">901.555</span> <span class="keyword">ms</span> <span class="title">|       26</span> | avg:    <span class="number">0.002</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.007</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766932.445528</span> s</span><br><span class="line">  ld:(<span class="number">89</span>)               |    <span class="number">873.351</span> <span class="keyword">ms</span> <span class="title">|      112</span> | avg:    <span class="number">0.013</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">1.133</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766934.072955</span> s</span><br><span class="line">  configure:(<span class="number">483</span>)       |    <span class="number">754.665</span> <span class="keyword">ms</span> <span class="title">|     2210</span> | avg:    <span class="number">0.007</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.691</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766932.195960</span> s</span><br><span class="line">  halolet:(<span class="number">75</span>)          |    <span class="number">745.764</span> <span class="keyword">ms</span> <span class="title">|    10530</span> | avg:    <span class="number">0.001</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">2.572</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766934.423655</span> s</span><br></pre></td></tr></tbody></table></figure>
-<p>Task：这一列显示了任务或进程的名称或标识符。<br>Runtime ms：此列表示任务的运行时间，以毫秒为单位。它显示了任务在调度期间的实际运行时间。<br>Switches：此列表示任务的上下文切换次数。上下文切换是指从一个正在执行的任务切换到另一个任务的过程。<br>Average delay ms：这一列显示了任务的平均调度延迟，以毫秒为单位。它表示任务在等待调度时的平均延迟时间。<br>Maximum delay ms：此列显示了任务的最大调度延迟，以毫秒为单位。它表示任务在等待调度时的最长延迟时间。<br>Maximum delay at：这一列显示了任务出现最大调度延迟的时间戳，通常以秒为单位。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/16/todo/">todo</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-16</time><div class="content"><h2 id="roofline"><a href="#roofline" class="headerlink" title="roofline"></a>roofline</h2><p><a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf">https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf</a></p>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p><a target="_blank" rel="noopener" href="https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722804086315874">https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722804086315874</a><br><a target="_blank" rel="noopener" href="https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722807500479332">https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722807500479332</a></p>
-<h2 id="vtune分析"><a href="#vtune分析" class="headerlink" title="vtune分析"></a>vtune分析</h2><p><a target="_blank" rel="noopener" href="https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2023-0/cpu-metrics-reference.html#FP-ARITHMETIC-MEMORY-READ-INSTRUCTIONS-RATIO">https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2023-0/cpu-metrics-reference.html#FP-ARITHMETIC-MEMORY-READ-INSTRUCTIONS-RATIO</a></p>
-<h2 id="ACPI"><a href="#ACPI" class="headerlink" title="ACPI"></a>ACPI</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lvzh/p/16203890.html">https://www.cnblogs.com/lvzh/p/16203890.html</a></p>
-<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.<span class="keyword">com</span>.baidu.<span class="keyword">com</span> ~]# <span class="keyword">ls</span> /usr/lib64/pkgconfig/</span><br><span class="line">com_err.<span class="keyword">pc</span>   json.<span class="keyword">pc</span>         krb5-gssapi.<span class="keyword">pc</span>  libpcre16.<span class="keyword">pc</span>   libpcreposix.<span class="keyword">pc</span>  libsystemd-daemon.<span class="keyword">pc</span>   libsystemd.<span class="keyword">pc</span>       mit-krb5.<span class="keyword">pc</span>   uuid.<span class="keyword">pc</span></span><br><span class="line">fontutil.<span class="keyword">pc</span>  kadm-client.<span class="keyword">pc</span>  krb5.<span class="keyword">pc</span>         libpcre32.<span class="keyword">pc</span>   libselinux.<span class="keyword">pc</span>    libsystemd-id128.<span class="keyword">pc</span>    libudev.<span class="keyword">pc</span>          openssl.<span class="keyword">pc</span>    yaml-<span class="number">0.1</span>.<span class="keyword">pc</span></span><br><span class="line">gssrpc.<span class="keyword">pc</span>    kadm-server.<span class="keyword">pc</span>  libcrypto.<span class="keyword">pc</span>    libpcrecpp.<span class="keyword">pc</span>  libsepol.<span class="keyword">pc</span>      libsystemd-journal.<span class="keyword">pc</span>  libverto.<span class="keyword">pc</span>         ossp-uuid.<span class="keyword">pc</span>  zlib.<span class="keyword">pc</span></span><br><span class="line">json-<span class="keyword">c</span>.<span class="keyword">pc</span>    kdb.<span class="keyword">pc</span>          libkmod.<span class="keyword">pc</span>      libpcre.<span class="keyword">pc</span>     libssl.<span class="keyword">pc</span>        libsystemd-login.<span class="keyword">pc</span>    mit-krb5-gssapi.<span class="keyword">pc</span>  systemd.<span class="keyword">pc</span></span><br><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.<span class="keyword">com</span>.baidu.<span class="keyword">com</span> ~]# pkg-config --<span class="built_in">exists</span> libssl &amp;&amp; <span class="keyword">echo</span> Found || <span class="keyword">echo</span> Not found</span><br><span class="line">Found</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.com.baidu.com ~]<span class="comment"># ls /usr/lib64/*.so |head</span></span><br><span class="line"><span class="regexp">/usr/</span>lib64/ld-<span class="number">2.17</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libanl-<span class="number">2.17</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libanl.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libasm-<span class="number">0.170</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libbfd-<span class="number">2.27</span>-<span class="number">27</span>.base.el7.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libBrokenLocale-<span class="number">2.17</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libBrokenLocale.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libc-<span class="number">2.17</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libcidn-<span class="number">2.17</span>.so</span><br><span class="line"><span class="regexp">/usr/</span>lib64/libcidn.so</span><br><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.com.baidu.com ~]<span class="comment"># ldconfig -p | grep libkmod</span></span><br><span class="line">    libkmod.so.<span class="number">2</span> (libc6,x86-<span class="number">64</span>) =&gt; <span class="regexp">/lib64/</span>libkmod.so.<span class="number">2</span></span><br><span class="line">    libkmod.so (libc6,x86-<span class="number">64</span>) =&gt; <span class="regexp">/lib64/</span>libkmod.so</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="simpoint"><a href="#simpoint" class="headerlink" title="simpoint"></a>simpoint</h2><p><a target="_blank" rel="noopener" href="https://cseweb.ucsd.edu/~calder/simpoint/">https://cseweb.ucsd.edu/~calder/simpoint/</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/anfang654321/article/details/128225885">https://blog.csdn.net/anfang654321/article/details/128225885</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/380561873">https://zhuanlan.zhihu.com/p/380561873</a></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/stream/">stream</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/stream/">stream</a></span><div class="content"><p><a target="_blank" rel="noopener" href="https://www.cs.virginia.edu/stream/FTP/Code/stream.c">https://www.cs.virginia.edu/stream/FTP/Code/stream.c</a><br><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/388380">https://bbs.huaweicloud.com/blogs/388380</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/407489860">https://zhuanlan.zhihu.com/p/407489860</a></p>
-<h2 id="服务器资源监控工具——Stream"><a href="#服务器资源监控工具——Stream" class="headerlink" title="服务器资源监控工具——Stream"></a>服务器资源监控工具——Stream</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>  <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230607145033.png" alt="20230607145033"></p>
-<h3 id="编译安装——Stream"><a href="#编译安装——Stream" class="headerlink" title="编译安装——Stream"></a>编译安装——Stream</h3><h4 id="源码编译安装"><a href="#源码编译安装" class="headerlink" title="源码编译安装"></a>源码编译安装</h4><p>​ 下载源码：<br></p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c</span><br></pre></td></tr></tbody></table></figure><br>​ 解压编译：<br><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=2000000 -DNTIMES=10 stream.c -o stream</span><br></pre></td></tr></tbody></table></figure><br>​ 参数说明：<br><figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-O3：</span><br><span class="line">    指定最高编译优化级别，即3</span><br><span class="line"></span><br><span class="line">-fopenmp：</span><br><span class="line">    启用OpenMP，适应多处理器环境，更能得到内存带宽实际最大值。开启后，程序默认运行线程为CPU线程数</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DSTREAM_ARRAY_SIZE</span>=2000000：</span><br><span class="line">    指定测试数组a[]、b[]、c[]的大小（Array size）。若stream.c为5.10版本，参数名变为-DSTREAM_ARRAY_SIZE，默认值10000000）。</span><br><span class="line">    注意：必须设置测试数组大小远大于CPU 最高级缓存（一般为L3 Cache）的大小，否则就是测试CPU缓存的吞吐性能，而非内存吞吐性能。</span><br><span class="line">    推荐计算公式：{最高级缓存X MB}×1024×1024×4.1×CPU路数/8，结果取整数</span><br><span class="line">    解释：由于stream.c源码推荐设置至少4倍最高级缓存，且STREAM_ARRAY_SIZE的数据为double类型=8 Byte。所以公式为：最高级缓存(单位：Byte)×4.1倍×CPU路数/8</span><br><span class="line">    例如：测试机器是双路CPU，最高级缓存32MB，则计算值为32×1024×1024×4.1×2/8≈34393292</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DNTIMES</span>=10：</span><br><span class="line">    执行的次数，并从这些结果中选最优值。</span><br><span class="line"></span><br><span class="line">stream.c：</span><br><span class="line">    待编译的源码文件</span><br><span class="line"></span><br><span class="line">stream：</span><br><span class="line">    输出的可执行文件名</span><br><span class="line"></span><br><span class="line">其他参数：</span><br><span class="line"><span class="attribute">-mtune</span>=native <span class="attribute">-march</span>=native：</span><br><span class="line">    针对CPU指令的优化，此处由于编译机即运行机器。故采用native的优化方法。更多编译器对CPU的优化参考</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-mcmodel</span>=medium：</span><br><span class="line">    当单个Memory Array Size 大于2GB时需要设置此参数</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-DOFFSET</span>=4096：</span><br><span class="line">    数组的偏移，一般可以不定义</span><br></pre></td></tr></tbody></table></figure><p></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/SPEC%20CPU2017/">SPEC CPU2017</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/SPECCPU2017/">SPECCPU2017</a></span><div class="content"><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19773867/answer/2857416414">https://www.zhihu.com/question/19773867/answer/2857416414</a></p>
-<p><a target="_blank" rel="noopener" href="https://tosiron.com/papers/2018/SPEC2017_ISPASS18.pdf">https://tosiron.com/papers/2018/SPEC2017_ISPASS18.pdf</a></p>
-</div><hr></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2023 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<h3 id="perf-sched-latency">perf sched latency</h3>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@bjdd-acg-tge39-<span class="number">77</span>f89.bjdd.baidu.com lyj]<span class="comment"># perf sched latency -s runtime</span></span><br><span class="line"></span><br><span class="line"> -----------------------------------------------------------------------------------------------------------------</span><br><span class="line">  Task                  |   Runtime <span class="keyword">ms</span>  <span class="title">| Switches</span> | Average delay <span class="keyword">ms</span> <span class="title">| Maximum</span> delay <span class="keyword">ms</span> <span class="title">| Maximum</span> delay at       |</span><br><span class="line"> -----------------------------------------------------------------------------------------------------------------</span><br><span class="line">  cc1:(<span class="number">201</span>)             |   <span class="number">6777.688</span> <span class="keyword">ms</span> <span class="title">|      294</span> | avg:    <span class="number">0.004</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.023</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766938.333270</span> s</span><br><span class="line">  machine_load_co:(<span class="number">4</span>)   |    <span class="number">901.555</span> <span class="keyword">ms</span> <span class="title">|       26</span> | avg:    <span class="number">0.002</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.007</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766932.445528</span> s</span><br><span class="line">  ld:(<span class="number">89</span>)               |    <span class="number">873.351</span> <span class="keyword">ms</span> <span class="title">|      112</span> | avg:    <span class="number">0.013</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">1.133</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766934.072955</span> s</span><br><span class="line">  configure:(<span class="number">483</span>)       |    <span class="number">754.665</span> <span class="keyword">ms</span> <span class="title">|     2210</span> | avg:    <span class="number">0.007</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">0.691</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766932.195960</span> s</span><br><span class="line">  halolet:(<span class="number">75</span>)          |    <span class="number">745.764</span> <span class="keyword">ms</span> <span class="title">|    10530</span> | avg:    <span class="number">0.001</span> <span class="keyword">ms</span> <span class="title">| max</span>:    <span class="number">2.572</span> <span class="keyword">ms</span> <span class="title">| max</span> at: <span class="number">10766934.423655</span> s</span><br></pre></td></tr></tbody></table></figure>
+<p>Task：这一列显示了任务或进程的名称或标识符。 Runtime
+ms：此列表示任务的运行时间，以毫秒为单位。它显示了任务在调度期间的实际运行时间。
+Switches：此列表示任务的上下文切换次数。上下文切换是指从一个正在执行的任务切换到另一个任务的过程。
+Average delay
+ms：这一列显示了任务的平均调度延迟，以毫秒为单位。它表示任务在等待调度时的平均延迟时间。
+Maximum delay
+ms：此列显示了任务的最大调度延迟，以毫秒为单位。它表示任务在等待调度时的最长延迟时间。
+Maximum delay
+at：这一列显示了任务出现最大调度延迟的时间戳，通常以秒为单位。</p>
+</div><hr></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2024 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
