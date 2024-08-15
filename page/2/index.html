@@ -10,758 +10,120 @@
   hexoVersion: '6.3.0'
 } </script><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">19</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">6</span></a></div></div></div><nav id="nav" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="site-info"><div id="site-title">Looking For Socrates</div><div id="site-sub-title">The unexamined life is not worth living.</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/16/todo/">todo</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-16</time><div class="content"><h2 id="roofline">roofline</h2>
-<p>https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf</p>
-<h2 id="编译">编译</h2>
-<p>https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722804086315874
-https://openanolis.cn/sig/ARM_ARCH_SIG/doc/738722807500479332</p>
-<h2 id="vtune分析">vtune分析</h2>
-<p>https://www.intel.com/content/www/us/en/docs/vtune-profiler/user-guide/2023-0/cpu-metrics-reference.html#FP-ARITHMETIC-MEMORY-READ-INSTRUCTIONS-RATIO</p>
-<h2 id="acpi">ACPI</h2>
-<p>https://www.cnblogs.com/lvzh/p/16203890.html</p>
-<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.<span class="keyword">com</span>.baidu.<span class="keyword">com</span> ~]# <span class="keyword">ls</span> /usr/lib64/pkgconfig/</span><br><span class="line">com_err.<span class="keyword">pc</span>   json.<span class="keyword">pc</span>         krb5-gssapi.<span class="keyword">pc</span>  libpcre16.<span class="keyword">pc</span>   libpcreposix.<span class="keyword">pc</span>  libsystemd-daemon.<span class="keyword">pc</span>   libsystemd.<span class="keyword">pc</span>       mit-krb5.<span class="keyword">pc</span>   uuid.<span class="keyword">pc</span></span><br><span class="line">fontutil.<span class="keyword">pc</span>  kadm-client.<span class="keyword">pc</span>  krb5.<span class="keyword">pc</span>         libpcre32.<span class="keyword">pc</span>   libselinux.<span class="keyword">pc</span>    libsystemd-id128.<span class="keyword">pc</span>    libudev.<span class="keyword">pc</span>          openssl.<span class="keyword">pc</span>    yaml-<span class="number">0.1</span>.<span class="keyword">pc</span></span><br><span class="line">gssrpc.<span class="keyword">pc</span>    kadm-server.<span class="keyword">pc</span>  libcrypto.<span class="keyword">pc</span>    libpcrecpp.<span class="keyword">pc</span>  libsepol.<span class="keyword">pc</span>      libsystemd-journal.<span class="keyword">pc</span>  libverto.<span class="keyword">pc</span>         ossp-uuid.<span class="keyword">pc</span>  zlib.<span class="keyword">pc</span></span><br><span class="line">json-<span class="keyword">c</span>.<span class="keyword">pc</span>    kdb.<span class="keyword">pc</span>          libkmod.<span class="keyword">pc</span>      libpcre.<span class="keyword">pc</span>     libssl.<span class="keyword">pc</span>        libsystemd-login.<span class="keyword">pc</span>    mit-krb5-gssapi.<span class="keyword">pc</span>  systemd.<span class="keyword">pc</span></span><br><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.<span class="keyword">com</span>.baidu.<span class="keyword">com</span> ~]# pkg-config --<span class="built_in">exists</span> libssl &amp;&amp; <span class="keyword">echo</span> Found || <span class="keyword">echo</span> Not found</span><br><span class="line">Found</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.com.baidu.com ~]<span class="comment"># ls /usr/lib64/*.so |head</span></span><br><span class="line">/usr/lib64/ld-2.17.so</span><br><span class="line">/usr/lib64/libanl-2.17.so</span><br><span class="line">/usr/lib64/libanl.so</span><br><span class="line">/usr/lib64/libasm-0.170.so</span><br><span class="line">/usr/lib64/libbfd-2.27-27.base.el7.so</span><br><span class="line">/usr/lib64/libBrokenLocale-2.17.so</span><br><span class="line">/usr/lib64/libBrokenLocale.so</span><br><span class="line">/usr/lib64/libc-2.17.so</span><br><span class="line">/usr/lib64/libcidn-2.17.so</span><br><span class="line">/usr/lib64/libcidn.so</span><br><span class="line">[root@lxsyslab-zte-R2008F-lxsyslab.baidu.com.baidu.com ~]<span class="comment"># ldconfig -p | grep libkmod</span></span><br><span class="line">    libkmod.so.2 (libc6,x86-64) =&gt; /lib64/libkmod.so.2</span><br><span class="line">    libkmod.so (libc6,x86-64) =&gt; /lib64/libkmod.so</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="simpoint">simpoint</h2>
-<p>https://cseweb.ucsd.edu/~calder/simpoint/
-https://blog.csdn.net/anfang654321/article/details/128225885
-https://zhuanlan.zhihu.com/p/380561873</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/stream/">stream</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/stream/">stream</a></span><div class="content"><p>https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+</head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150845.png"></div><div class="author-info__name text-center">Looking4Socrates</div><div class="author-info__description text-center">The only true wisdom is in knowing you know nothing.</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">21</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">1</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">9</span></a></div></div></div><nav id="nav" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Looking For Socrates</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search"></i><span> 搜索</span></a></span></div><div id="site-info"><div id="site-title">Looking For Socrates</div><div id="site-sub-title">The unexamined life is not worth living.</div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/21/perf/">perf</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/profiling/">profiling</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">perf
+基础介绍
+perf的基础介绍可以参考：
+http://man7.org/linux/man-pages/man1/perf.1.html
+http://wiki.csie.ncku.edu.tw/embedded/perf-tutorial#perf-top
+https://blog.cs ...</div><a class="more" href="/2023/06/21/perf/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/16/todo/">todo</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-16</time><div class="content">roofline
+https://people.eecs.berkeley.edu/~kubitron/cs252/handouts/papers/RooflineVyNoYellow.pdf
+编译
+https://openanolis.cn/sig/ARM_ARCH_SIG/doc/7387228 ...</div><a class="more" href="/2023/06/16/todo/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/stream/">stream</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">https://www.cs.virginia.edu/stream/FTP/Code/stream.c
 https://bbs.huaweicloud.com/blogs/388380
-https://zhuanlan.zhihu.com/p/407489860</p>
-<h2 id="服务器资源监控工具stream">服务器资源监控工具——Stream</h2>
-<h3 id="原理">原理</h3>
-<figure>
-<img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230607145033.png" alt="20230607145033">
-<figcaption aria-hidden="true">20230607145033</figcaption>
-</figure>
-<h3 id="编译安装stream">编译安装——Stream</h3>
-<h4 id="源码编译安装">源码编译安装</h4>
-<p>​ 下载源码： </p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c</span><br></pre></td></tr></tbody></table></figure> ​ 解压编译： <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=2000000 -DNTIMES=10 stream.c -o stream</span><br></pre></td></tr></tbody></table></figure> ​ 参数说明：
-<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-O3：</span><br><span class="line">    指定最高编译优化级别，即3</span><br><span class="line"></span><br><span class="line">-fopenmp：</span><br><span class="line">    启用OpenMP，适应多处理器环境，更能得到内存带宽实际最大值。开启后，程序默认运行线程为CPU线程数</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DSTREAM_ARRAY_SIZE</span>=2000000：</span><br><span class="line">    指定测试数组a[]、b[]、c[]的大小（Array size）。若stream.c为5.10版本，参数名变为-DSTREAM_ARRAY_SIZE，默认值10000000）。</span><br><span class="line">    注意：必须设置测试数组大小远大于CPU 最高级缓存（一般为L3 Cache）的大小，否则就是测试CPU缓存的吞吐性能，而非内存吞吐性能。</span><br><span class="line">    推荐计算公式：{最高级缓存X MB}×1024×1024×4.1×CPU路数/8，结果取整数</span><br><span class="line">    解释：由于stream.c源码推荐设置至少4倍最高级缓存，且STREAM_ARRAY_SIZE的数据为double类型=8 Byte。所以公式为：最高级缓存(单位：Byte)×4.1倍×CPU路数/8</span><br><span class="line">    例如：测试机器是双路CPU，最高级缓存32MB，则计算值为32×1024×1024×4.1×2/8≈34393292</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DNTIMES</span>=10：</span><br><span class="line">    执行的次数，并从这些结果中选最优值。</span><br><span class="line"></span><br><span class="line">stream.c：</span><br><span class="line">    待编译的源码文件</span><br><span class="line"></span><br><span class="line">stream：</span><br><span class="line">    输出的可执行文件名</span><br><span class="line"></span><br><span class="line">其他参数：</span><br><span class="line"><span class="attribute">-mtune</span>=native <span class="attribute">-march</span>=native：</span><br><span class="line">    针对CPU指令的优化，此处由于编译机即运行机器。故采用native的优化方法。更多编译器对CPU的优化参考</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-mcmodel</span>=medium：</span><br><span class="line">    当单个Memory Array Size 大于2GB时需要设置此参数</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-DOFFSET</span>=4096：</span><br><span class="line">    数组的偏移，一般可以不定义</span><br></pre></td></tr></tbody></table></figure><p></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/SPEC%20CPU2017/">SPEC CPU2017</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/SPECCPU2017/">SPECCPU2017</a></span><div class="content"><p>https://www.zhihu.com/question/19773867/answer/2857416414</p>
-<p>https://tosiron.com/papers/2018/SPEC2017_ISPASS18.pdf</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/benchmark/">benchmark</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/benchmark/">benchmark</a></span><div class="content"><table>
-<colgroup>
-<col style="width: 21%">
-<col style="width: 52%">
-<col style="width: 26%">
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;"></th>
-<th style="text-align: left;">测试内容</th>
-<th style="text-align: left;">benchmark</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">CPU性能</td>
-<td style="text-align: left;">整型</td>
-<td style="text-align: left;">SPECint</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">浮点</td>
-<td style="text-align: left;">SPECfp</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">综合</td>
-<td style="text-align: left;">unixbench</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Cinebench</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">stress-ng</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">cpu core</td>
-<td style="text-align: left;">coremark</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">SIMD</td>
-<td style="text-align: left;">Linpack</td>
-</tr>
-<tr>
-<td style="text-align: left;">CPU频率</td>
-<td style="text-align: left;">CPU空载频率</td>
-<td style="text-align: left;">frequency_monitoring</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">CPU
-SPECInt频率（跑SPECint时的平均频率）</td>
-<td style="text-align: left;">SPECInt2017+</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">frequency_monitoring</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">CPU
-SPECfp频率（跑SPECfp时的平均频率）</td>
-<td style="text-align: left;">SPECfp2017+</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">frequency_monitoring</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">CPU SIMD频率</td>
-<td style="text-align: left;">Linpack+</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">（跑avx/avx2/avx3/TMUL时的频率）</td>
-<td style="text-align: left;">frequency_monitoring、cpupower</td>
-</tr>
-<tr>
-<td style="text-align: left;">内存</td>
-<td style="text-align: left;">带宽(lolcal/remote)</td>
-<td style="text-align: left;">stream</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">MLC</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">ramspeed</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">延时</td>
-<td style="text-align: left;">MLC</td>
-</tr>
-<tr>
-<td style="text-align: left;">cache</td>
-<td style="text-align: left;">L1/L2/L3延时</td>
-<td style="text-align: left;">lmbench</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">L3带宽</td>
-<td style="text-align: left;">MLC</td>
-</tr>
-<tr>
-<td style="text-align: left;">磁盘</td>
-<td style="text-align: left;">带宽/IOPS</td>
-<td style="text-align: left;">FIO</td>
-</tr>
-<tr>
-<td style="text-align: left;">网络</td>
-<td style="text-align: left;">带宽/IOPS</td>
-<td style="text-align: left;">iperf</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">netperf</td>
-</tr>
-<tr>
-<td style="text-align: left;">虚拟化</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">SPECvirt Datacenter</td>
-</tr>
-<tr>
-<td style="text-align: left;">Java</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">SPECjbb</td>
-</tr>
-<tr>
-<td style="text-align: left;">功耗</td>
-<td style="text-align: left;">整机功耗</td>
-<td style="text-align: left;">SPECPOWER</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">Sert</td>
-</tr>
-<tr>
-<td style="text-align: left;">监控</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">PTU</td>
-</tr>
-<tr>
-<td style="text-align: left;">压力</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">PTU</td>
-</tr>
-<tr>
-<td style="text-align: left;">总线（PCIE/UPI）</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">intel工具</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>memory带宽和延迟的曲线关系
-<ul>
-<li>done：https://nga.178.com/read.php?tid=21282980&amp;rand=601</li>
-</ul></li>
-</ul>
-<h2 id="lmbench">lmbench</h2>
-<p>lmbench是一个用来测量Linux/Unix系统性能的工具套件，其名字来源于"LM",
-即 Larry McVoy 和 “benchmark”的组合，Larry
-McVoy是lmbench的主要开发者。</p>
-<p>lmbench工具套件包含多个基准测试工具，每个工具都是用来测量特定系统或硬件性能的，包括CPU（如L1、L2缓存、内存等）、系统调用、管道、进程创建、网络性能（TCP、UDP等）、文件系统等多个方面。该工具套件使用C语言编写，采用微基准测试（micro-benchmark）的方式，即通过大量反复执行简单且对性能影响明显的操作（如读写操作、系统调用）来测量性能。</p>
-<p>具体运行时，你可以通过指定参数来选择你想要测试的设备或功能，lmbench将执行相应的操作进行测试，然后统计和分析这些操作的执行时间或者速度，据此来评估系统性能。</p>
-<p>其原理主要基于计算机科学中的基准测试原理，即通过一组预定义的操作来客观地评估硬件或软件的性能，并通过这些结果来进行系统优化或者进行设备之间的比较。</p>
-<p>https://blog.csdn.net/qq_36393978/article/details/125989992</p>
-<h2 id="mlc">mlc</h2>
-<p>https://www.intel.cn/content/www/cn/zh/developer/articles/tool/intelr-memory-latency-checker.html</p>
-<p>https://zhuanlan.zhihu.com/p/447936509</p>
-<p>Intel开发的Memory Latency
-Checker（MLC）是一种工具，用于在Intel处理器上测量内存子系统的延迟和带宽。它主要通过两种方法进行测试：</p>
-<p>内存延迟测试：MLC使用Load-Use或者Pointer
-Chasing的方法来测算内存访问的延迟时间。“Load-Use”是将一条指令的输出作为后续指令的输入，通过这种依赖关系测量从内存加载数据到CPU寄存器的时间。“Pointer
-Chasing”则是创建一个指针数组，然后使CPU沿着这些指针"追踪"数据，这种方法能够有效的测量处理器对内存的访问延迟。</p>
-<p>内存带宽测试：MLE通过特定的内存访问模式如顺序访问或随机访问，以及固定数量的并行访问线程，来测量处理器能够达到的最大内存带宽。这个测试能够反映出内存子系统的负载情况，以及多核心间的内存带宽共享情况。</p>
-<p>通过这两种方法，MLE可以全面地测量和理解处理器的内存性能，从而帮助系统优化专家针对性的进行硬件调整和软件优化，以充分挖掘和利用计算机系统的定向性能。</p>
-<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">Intel(R) Memory Latency Checker - v3.<span class="number">10</span></span><br><span class="line">Measuring idle latencies for sequential access (in ns)...</span><br><span class="line">        Numa node</span><br><span class="line">Numa node         <span class="number">0</span>	     <span class="number">1</span></span><br><span class="line">       <span class="number">0</span>      <span class="number">83</span>.<span class="number">4</span>	 <span class="number">132</span>.<span class="number">9</span></span><br><span class="line">       <span class="number">1</span>     <span class="number">136</span>.<span class="number">5</span>	  <span class="number">79</span>.<span class="number">7</span></span><br><span class="line"></span><br><span class="line">Measuring Peak Injection Memory Bandwidths for the system</span><br><span class="line">Bandwidths are in MB/sec (<span class="number">1</span> MB/sec = <span class="number">1</span>,<span class="number">000,000</span> Bytes/sec)</span><br><span class="line">Using all the threads from each core if Hyper-threading is enabled</span><br><span class="line">Using traffic with the following read-write ratios</span><br><span class="line">ALL Reads        :    <span class="number">107686.1</span></span><br><span class="line"><span class="number">3</span>:<span class="number">1</span> Reads-Writes :    <span class="number">90658.9</span></span><br><span class="line"><span class="number">2</span>:<span class="number">1</span> Reads-Writes :    <span class="number">86887.9</span></span><br><span class="line"><span class="number">1</span>:<span class="number">1</span> Reads-Writes :    <span class="number">68752.4</span></span><br><span class="line">Stream-triad like:    <span class="number">74245.6</span></span><br><span class="line"></span><br><span class="line">Measuring Memory Bandwidths between nodes within system</span><br><span class="line">Bandwidths are in MB/sec (<span class="number">1</span> MB/sec = <span class="number">1</span>,<span class="number">000,000</span> Bytes/sec)</span><br><span class="line">Using all the threads from each core if Hyper-threading is enabled</span><br><span class="line">Using Read-only traffic type</span><br><span class="line">        Numa node</span><br><span class="line">Numa node         <span class="number">0</span>	     <span class="number">1</span></span><br><span class="line">       <span class="number">0    111204.7</span>	<span class="number">34309.2</span></span><br><span class="line">       <span class="number">1    34283.0</span>	<span class="number">110464.5</span></span><br><span class="line"></span><br><span class="line">Measuring Loaded Latencies for the system</span><br><span class="line">Using all the threads from each core if Hyper-threading is enabled</span><br><span class="line">Using Read-only traffic type</span><br><span class="line">Inject    Latency	Bandwidth</span><br><span class="line">Delay    (ns)	MB/sec</span><br><span class="line">==========================</span><br><span class="line"> <span class="number">00000    257</span>.<span class="number">07</span>	 <span class="number">219957.7</span></span><br><span class="line"> <span class="number">00002    257</span>.<span class="number">55</span>	 <span class="number">220385.6</span></span><br><span class="line"> <span class="number">00008    260</span>.<span class="number">01</span>	 <span class="number">219768.3</span></span><br><span class="line"> <span class="number">00015    256</span>.<span class="number">79</span>	 <span class="number">220255.4</span></span><br><span class="line"> <span class="number">00050    253.01</span>	 <span class="number">221044.1</span></span><br><span class="line"> <span class="number">00100    255.28</span>	 <span class="number">220292.6</span></span><br><span class="line"> <span class="number">00200    128.30</span>	 <span class="number">173953.4</span></span><br><span class="line"> <span class="number">00300    111.38</span>	 <span class="number">118262.0</span></span><br><span class="line"> <span class="number">00400    108.22</span>	  <span class="number">89920.4</span></span><br><span class="line"> <span class="number">00500    116.18</span>	  <span class="number">71995.6</span></span><br><span class="line"> <span class="number">00700    105.37</span>	  <span class="number">52788.4</span></span><br><span class="line"> <span class="number">01000</span>     <span class="number">97</span>.<span class="number">67</span>	  <span class="number">37175.9</span></span><br><span class="line"> <span class="number">01300</span>     <span class="number">95</span>.<span class="number">87</span>	  <span class="number">28641.6</span></span><br><span class="line"> <span class="number">01700</span>     <span class="number">94</span>.<span class="number">88</span>	  <span class="number">22091.6</span></span><br><span class="line"> <span class="number">02500</span>     <span class="number">93</span>.<span class="number">82</span>	  <span class="number">15327.3</span></span><br><span class="line"> <span class="number">03500</span>     <span class="number">92</span>.<span class="number">26</span>	  <span class="number">11095.0</span></span><br><span class="line"> <span class="number">05000</span>     <span class="number">92</span>.<span class="number">03</span>	   <span class="number">7988</span>.<span class="number">1</span></span><br><span class="line"> <span class="number">09000</span>     <span class="number">91</span>.<span class="number">29</span>	   <span class="number">4704</span>.<span class="number">6</span></span><br><span class="line"> <span class="number">20000</span>     <span class="number">91</span>.<span class="number">24</span>	   <span class="number">2537</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">Measuring cache-to-cache transfer latency (in ns)...</span><br><span class="line">Local Socket L2-&gt;L2 HIT  latency    <span class="number">51</span>.<span class="number">4</span></span><br><span class="line">Local Socket L2-&gt;L2 HITM latency    <span class="number">51</span>.<span class="number">5</span></span><br><span class="line">Remote Socket L2-&gt;L2 HITM latency (data address homed in writer socket)</span><br><span class="line">            Reader Numa Node</span><br><span class="line">Writer Numa Node     <span class="number">0</span>         <span class="number">1</span></span><br><span class="line">            <span class="number">0</span>         -	 <span class="number">113</span>.<span class="number">5</span></span><br><span class="line">            <span class="number">1</span>     <span class="number">113</span>.<span class="number">5</span>	     -</span><br><span class="line">Remote Socket L2-&gt;L2 HITM latency (data address homed in reader socket)</span><br><span class="line">            Reader Numa Node</span><br><span class="line">Writer Numa Node     <span class="number">0</span>         <span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
-<p>./mlc --loaded_latency -d0 -b${buffer} -${OPERATION} -t${DRATION} -T
--k${cores}</p>
-<p>在CORES的CPU上配置buffer大小的内存对象，执行OPERATION操作DURATION秒。</p>
-<p>mlc --c2c_latency -w${dest} -c${SRC} </p><figure class="highlight llvm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="title">@bddwd-sys-xaware08.bddwd.baidu.com</span> Linux]# numactl -N <span class="number">1</span> ./mlc --<span class="keyword">c</span><span class="number">2</span>c_latency -w<span class="number">0</span> -<span class="keyword">c</span><span class="number">24</span></span><br><span class="line">Intel(R) Memory Latency Checker - v<span class="number">3.10</span></span><br><span class="line">Command line parameters: --<span class="keyword">c</span><span class="number">2</span>c_latency -w<span class="number">0</span> -<span class="keyword">c</span><span class="number">24</span></span><br><span class="line"></span><br><span class="line">Measuring cache-<span class="keyword">to</span>-cache transfer latency (in ns)...</span><br><span class="line"></span><br><span class="line">Latency <span class="operator">=</span> <span class="number">294.8</span> base frequency clocks (<span class="number">113.7</span> ns)</span><br><span class="line">[root<span class="title">@bddwd-sys-xaware08.bddwd.baidu.com</span> Linux]# numactl -N <span class="number">1</span> ./mlc --<span class="keyword">c</span><span class="number">2</span>c_latency -w<span class="number">24</span> -<span class="keyword">c</span><span class="number">0</span></span><br><span class="line">Intel(R) Memory Latency Checker - v<span class="number">3.10</span></span><br><span class="line">Command line parameters: --<span class="keyword">c</span><span class="number">2</span>c_latency -w<span class="number">24</span> -<span class="keyword">c</span><span class="number">0</span></span><br><span class="line"></span><br><span class="line">Measuring cache-<span class="keyword">to</span>-cache transfer latency (in ns)...</span><br><span class="line"></span><br><span class="line">Latency <span class="operator">=</span> <span class="number">459.1</span> base frequency clocks (<span class="number">177.0</span> ns)</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure> ## stream ### 原理
-原理:copy+scale+add+triad <img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230607145033.png" alt="20230607145033"><p></p>
-<h3 id="编译安装stream">编译安装——Stream</h3>
-<h4 id="源码编译安装">源码编译安装</h4>
-<p>​ 下载源码： </p><figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://www.cs.virginia.edu/stream/FTP/Code/stream.c</span><br></pre></td></tr></tbody></table></figure> ​ 解压编译： <figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -O3 -fopenmp -DSTREAM_ARRAY_SIZE=2000000 -DNTIMES=10 stream.c -o stream</span><br></pre></td></tr></tbody></table></figure> ​ 参数说明：
-<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">-O3：</span><br><span class="line">    指定最高编译优化级别，即3</span><br><span class="line"></span><br><span class="line">-fopenmp：</span><br><span class="line">    启用OpenMP，适应多处理器环境，更能得到内存带宽实际最大值。开启后，程序默认运行线程为CPU线程数</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DSTREAM_ARRAY_SIZE</span>=2000000：</span><br><span class="line">    指定测试数组a[]、b[]、c[]的大小（Array size）。若stream.c为5.10版本，参数名变为-DSTREAM_ARRAY_SIZE，默认值10000000）。</span><br><span class="line">    注意：必须设置测试数组大小远大于CPU 最高级缓存（一般为L3 Cache）的大小，否则就是测试CPU缓存的吞吐性能，而非内存吞吐性能。</span><br><span class="line">    推荐计算公式：{最高级缓存X MB}×1024×1024×4.1×CPU路数/8，结果取整数</span><br><span class="line">    解释：由于stream.c源码推荐设置至少4倍最高级缓存，且STREAM_ARRAY_SIZE的数据为double类型=8 Byte。所以公式为：最高级缓存(单位：Byte)×4.1倍×CPU路数/8</span><br><span class="line">    例如：测试机器是双路CPU，最高级缓存32MB，则计算值为32×1024×1024×4.1×2/8≈34393292</span><br><span class="line"></span><br><span class="line"><span class="attribute">-DNTIMES</span>=10：</span><br><span class="line">    执行的次数，并从这些结果中选最优值。</span><br><span class="line"></span><br><span class="line">stream.c：</span><br><span class="line">    待编译的源码文件</span><br><span class="line"></span><br><span class="line">stream：</span><br><span class="line">    输出的可执行文件名</span><br><span class="line"></span><br><span class="line">其他参数：</span><br><span class="line"><span class="attribute">-mtune</span>=native <span class="attribute">-march</span>=native：</span><br><span class="line">    针对CPU指令的优化，此处由于编译机即运行机器。故采用native的优化方法。更多编译器对CPU的优化参考</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-mcmodel</span>=medium：</span><br><span class="line">    当单个Memory Array Size 大于2GB时需要设置此参数</span><br><span class="line">    </span><br><span class="line"><span class="attribute">-DOFFSET</span>=4096：</span><br><span class="line">    数组的偏移，一般可以不定义</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>https://zhuanlan.zhihu.com/p/407489860
-https://www.cnblogs.com/iouwenbo/p/14377478.html</p>
-<h2 id="multichase">multichase</h2>
-<p>https://github.com/google/multichase</p>
-<h2 id="fio">fio</h2>
-<p>fio
-是一个灵活的I/O性能测试工具，它可以生成和测量各种类型的I/O负载。它被广泛用于性能分析和基准测试。fio
-可以模拟多种I/O工作负载，包括顺序读写、随机读写、混合工作负载等。 ‎</p>
-<h3 id="命令解析">命令解析</h3>
-<p>‎ 一个基本的 fio 命令可能看起来像这样： ‎ </p><figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fio <span class="attribute">--name</span>=test <span class="attribute">--ioengine</span>=libaio <span class="attribute">--iodepth</span>=4 <span class="attribute">--rw</span>=read <span class="attribute">--bs</span>=4k <span class="attribute">--direct</span>=1 <span class="attribute">--size</span>=1G <span class="attribute">--numjobs</span>=1 <span class="attribute">--runtime</span>=60</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>下面是一些常用的 fio 参数： ‎</p>
-<ul>
-<li>--name: 测试的名称。</li>
-<li>--ioengine: I/O引擎类型（如 sync, libaio, posixaio, mmap 等）。</li>
-<li>--iodepth: 对于异步I/O引擎，这指定了队列深度。</li>
-<li>--rw: I/O模式（如 read, write, randread, randwrite, randrw
-等）。</li>
-<li>--bs: 块大小，即每次I/O操作的数据量。</li>
-<li>--direct: 是否绕过缓存。1 表示绕过操作系统的缓存。</li>
-<li>--size: 测试文件的大小。</li>
-<li>--numjobs: 同时运行的作业数。</li>
-<li>--runtime: 测试运行的时间。 ‎</li>
-</ul>
-<h3 id="结果解读">结果解读</h3>
-<p>‎ fio 输出的结果包含了多个部分，主要包括： ‎</p>
-<ul>
-<li>IOPS: 每秒输入/输出操作数。这是衡量存储性能的关键指标之一。</li>
-<li>BW: 带宽，通常以MB/s（兆字节每秒）表示，显示了数据传输的速度。</li>
-<li>clat (Completion latency):
-完成延迟，即从I/O请求发出到完成所需的时间。</li>
-<li>slat (Submission latency):
-提交延迟，即从I/O请求生成到提交给I/O引擎所需的时间。</li>
-<li>lat (Latency): 总延迟，包括提交延迟和完成延迟。 ‎ 一个典型的 fio
-输出可能包含以下内容：</li>
-</ul>
-<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">test</span>: (groupid=<span class="number">0</span>, jobs=<span class="number">1</span>): err= <span class="number">0</span>: pid=<span class="number">1234</span></span><br><span class="line">  <span class="attribute">read</span>: IOPS=<span class="number">25</span>.<span class="number">0</span>k, BW=<span class="number">98</span>.<span class="number">0</span>MiB/s (<span class="number">102</span>MB/s)(<span class="number">5</span>.<span class="number">74</span>GiB/<span class="number">60001</span>msec)</span><br><span class="line">    <span class="attribute">slat</span> (usec): min=<span class="number">2</span>, max=<span class="number">12</span>, avg= <span class="number">4</span>.<span class="number">00</span>, stdev= <span class="number">1</span>.<span class="number">20</span></span><br><span class="line">    <span class="attribute">clat</span> (usec): min=<span class="number">20</span>, max=<span class="number">3400</span>, avg=<span class="number">40</span>.<span class="number">00</span>, stdev= <span class="number">7</span>.<span class="number">50</span></span><br><span class="line">     <span class="attribute">lat</span> (usec): min=<span class="number">22</span>, max=<span class="number">3412</span>, avg=<span class="number">44</span>.<span class="number">00</span>, stdev= <span class="number">7</span>.<span class="number">70</span></span><br></pre></td></tr></tbody></table></figure>
-<p>‎ 这表示： ‎</p>
-<ul>
-<li>测试名称为 test，作业数为1。</li>
-<li>没有错误发生。</li>
-<li>读取操作的IOPS为25,000，带宽为98.0MiB/s。</li>
-<li>提交延迟的最小值为2微秒，最大值为12微秒，平均值为4微秒，标准差为1.2微秒。</li>
-<li>完成延迟的最小值为20微秒，最大值为3400微秒，平均值为40微秒，标准差为7.5微秒。</li>
-<li>总延迟的最小值为22微秒，最大值为3412微秒，平均值为44微秒，标准差为7.7微秒。
-‎</li>
-</ul>
-<p>fio
-的输出非常详细，可以提供关于存储性能的深入见解。解读这些结果时，重要的是要关注与你的特定测试目标最相关的指标。例如，如果你关心随机读写性能，那么随机读写的IOPS和延迟将是你最关注的指标。如果你在测试顺序读写性能，那么带宽可能是更重要的指标。</p>
-<h2 id="netperf">netperf</h2>
-<p>netperf
-是一个网络性能测试工具，它可以测试网络连接的各种方面，包括吞吐量、延迟和包传输速率。netperf
-主要由两个组件组成：一个服务器端 (netserver) 和一个客户端
-(netperf)。服务器端在待测试的网络节点上运行，而客户端从另一端连接到服务器端以进行测试。
-‎</p>
-<h3 id="使用-netperf">使用 netperf</h3>
-<p>‎ 在开始测试之前，你需要在两台机器上安装
-netperf。一台机器将作为服务器运行 netserver，另一台机器将作为客户端运行
-netperf。 ‎</p>
-<ol type="1">
-<li>启动服务器端： 在服务器机器上，运行以下命令来启动 netserver：
-netserver ‎</li>
-<li>运行客户端测试： 在客户端机器上，使用 netperf
-命令来执行测试。例如，要测试TCP连接的吞吐量，可以运行：</li>
-</ol>
-<p>netperf -H <server_ip_address> 其中 <server_ip_address>
-是服务器端的IP地址。 ‎</server_ip_address></server_ip_address></p>
-<h3 id="命令解析-1">命令解析</h3>
-<p>‎ netperf 提供了多种选项来定制测试。以下是一些常用的选项： ‎</p>
-<ul>
-<li><p>-H 或 --host：指定服务器端的主机名或IP地址。</p></li>
-<li><p>-p 或 --port：指定服务器端的端口号（默认是12865）。</p></li>
-<li><p>-t 或 --test：指定要运行的测试类型，如
-TCP_STREAM（TCP吞吐量测试）或 UDP_STREAM（UDP吞吐量测试）。</p></li>
-<li><p>-l 或 --time：指定测试持续的时间（秒）。</p></li>
-<li><p>-i 或 --interval：指定显示中间结果的时间间隔（秒）。</p></li>
-<li><p>-- -m：指定发送缓冲区的大小（字节）。</p></li>
-<li><p>-- -M：指定接收缓冲区的大小（字节）。 ‎ ### 结果解读 ‎ netperf
-输出的结果会根据所选的测试类型而有所不同。对于一个基本的TCP吞吐量测试，输出可能包含以下内容：
-‎</p><figure class="highlight livecodeserver"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MIGRATED TCP STREAM TEST <span class="built_in">from</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span> (<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>) port <span class="number">0</span> AF_INET <span class="built_in">to</span> &lt;server_ip_address&gt; (x.x.x.x) port <span class="number">0</span> AF_INET</span><br><span class="line">Recv   Send    Send</span><br><span class="line">Socket Socket  Message  Elapsed</span><br><span class="line">Size   Size    Size     Time     Throughput</span><br><span class="line"><span class="keyword">bytes</span>  <span class="keyword">bytes</span>   <span class="keyword">bytes</span>    <span class="built_in">secs</span>.    <span class="number">10</span>^<span class="number">6</span>bits/<span class="built_in">sec</span></span><br><span class="line">‎</span><br><span class="line"> <span class="number">87380</span>  <span class="number">16384</span>  <span class="number">16384</span>    <span class="number">10.00</span>    <span class="number">939.64</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure> ‎ 这表示： ‎<p></p></li>
-<li><p>测试类型是TCP流（吞吐量）测试。</p></li>
-<li><p>发送和接收缓冲区的大小分别是16384字节。</p></li>
-<li><p>测试持续了10秒。</p></li>
-<li><p>吞吐量是939.64 Mbps（百万比特每秒）。 ‎</p></li>
-</ul>
-<p>在解读结果时，重要的是要关注与你的测试目标最相关的指标。对于吞吐量测试，你会关注
-Throughput
-字段，它表示在测试期间网络连接的平均数据传输速率。对于延迟测试，你会关注往返时间（RTT）或事务延迟。
-‎netperf
-是一个强大的工具，可以提供关于网络性能的详细信息。正确地解读这些结果可以帮助你识别网络瓶颈、评估网络设备性能或验证服务质量（QoS）。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/interview/">question</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><div class="content"><h2 id="过往重点工作">过往重点工作</h2>
-<h3 id="hxt">HXT：</h3>
-<ul>
-<li>QSBv3.1.ppt</li>
-</ul>
-<h3 id="ict">ICT</h3>
-<p>处理器核设计 处理器多核互联设计，互联总线用的什么？</p>
-<h2 id="todo">TODO:</h2>
-<ul>
-<li>PMU事件多核采集的时候：core之间如何同步，保证采集同时段。
-<ul>
-<li>uarch monitor没有单独采集每个core的？</li>
-<li>整机：每个core的事件的差值计算后，多个core求和，每个core的采集过程并没有同步。</li>
-<li>容器：</li>
-</ul></li>
-</ul>
-<figure class="highlight arduino"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">perf_event_open</span><span class="params">(<span class="keyword">struct</span> perf_event_attr *attr,</span></span></span><br><span class="line"><span class="params"><span class="function">                           <span class="type">pid_t</span> pid, <span class="type">int</span> cpu, <span class="type">int</span> group_fd,</span></span></span><br><span class="line"><span class="params"><span class="function">                           <span class="type">unsigned</span> <span class="type">long</span> flags)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//pid和cpu组合可以实现不同的监控对象</span></span><br><span class="line">The pid <span class="keyword">and</span> cpu arguments allow specifying which process <span class="keyword">and</span> CPU</span><br><span class="line">       to monitor:</span><br><span class="line"> </span><br><span class="line">       pid == <span class="number">0</span> <span class="keyword">and</span> cpu == <span class="number">-1</span> <span class="comment">// 监控当前线程，无论运行在哪个CPU上</span></span><br><span class="line">              This measures the calling process/thread on any CPU.</span><br><span class="line"> </span><br><span class="line">       pid == <span class="number">0</span> <span class="keyword">and</span> cpu &gt;= <span class="number">0</span> <span class="comment">// 监控当前线程，只有运行在指定cpu上才监控</span></span><br><span class="line">              This measures the calling process/thread only when running</span><br><span class="line">              on the specified CPU.</span><br><span class="line"> </span><br><span class="line">       pid &gt; <span class="number">0</span> <span class="keyword">and</span> cpu == <span class="number">-1</span> <span class="comment">// 监控指定的pid线程，无论运行在哪个CPU上</span></span><br><span class="line">              This measures the specified process/thread on any CPU.</span><br><span class="line"> </span><br><span class="line">       pid &gt; <span class="number">0</span> <span class="keyword">and</span> cpu &gt;= <span class="number">0</span> <span class="comment">// 监控指定cpu上的指定的pid线程（容器的监控使用该配置，传入的pid是该容器的fd）</span></span><br><span class="line">              This measures the specified process/thread only when</span><br><span class="line">              running on the specified CPU.</span><br><span class="line"> </span><br><span class="line">       pid == <span class="number">-1</span> <span class="keyword">and</span> cpu &gt;= <span class="number">0</span> <span class="comment">// 监控指定cpu上的所有线程（当前machine监控使用该配置）</span></span><br><span class="line">              This measures all processes/threads on the specified CPU.</span><br><span class="line">              This <span class="keyword">requires</span> <span class="built_in">CAP_PERFMON</span> (since Linux <span class="number">5.8</span>) <span class="keyword">or</span></span><br><span class="line">              CAP_SYS_ADMIN capability <span class="keyword">or</span> a</span><br><span class="line">              /proc/sys/kernel/perf_event_paranoid value of less than <span class="number">1.</span></span><br><span class="line"> </span><br><span class="line">       pid == <span class="number">-1</span> <span class="keyword">and</span> cpu == <span class="number">-1</span></span><br><span class="line">              This setting is invalid <span class="keyword">and</span> will <span class="keyword">return</span> an error.</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="为什么要自己写个pmu-monitor不用perf">为什么要自己写个PMU
-monitor，不用perf？</h3>
-<ul>
-<li><p>支持优先级采集，一键采集所有的。</p></li>
-<li><p>perf版本没有打平，不同机器上不一样</p></li>
-<li><p>perf不支持容器，uarch monitor如何支持容器的？</p></li>
-<li><p>perf不支持所有事件，例如TMA</p>
-<ul>
-<li>google有个perf patch可以采集TMA L1 bound。但L1不够</li>
-</ul></li>
-</ul>
-<h2 id="经验">经验</h2>
-<ul>
-<li>优先讲熟悉的项目</li>
-<li>直接回答问题，不要先讲其他的</li>
-<li>编译：精度选项可以优化；自己写的汇编没有编译器好。</li>
-<li>如何讲好项目
-<ul>
-<li>做项目的前期环境</li>
-<li>项目目标</li>
-<li>如何做的，要思路清晰</li>
-<li>达成效果</li>
-</ul></li>
-</ul>
-<p>网卡 大包小包 打散 第三方库共享 内存问题</p>
-<p>1.会更多地关注你的项目:技术、角色、表达能力等 2.技术广度
-3.技术之外的软技能 沟通能力，跨部门合作之类 负责NUMA
-V3方案的设计、开发和上线，组织并实现了6个团队(hac、matrix、paas，运维、idw、noah）的协同工作，
-协同了20+业务方进行NUMA落地并解决落地问题。 对业务的理解和思考
-全栈的软硬结合的性能分析和优化 理解业务逻辑
-强化多层次联动的性能分析:业务、内核、编译、微架构
-从优化手段出发，融会贯通。 难点： 全栈的联合分析
-调优落地实践的标准化流程</p>
-<p>软硬结合领域，目前CPU领域的调优在学术界已经很成熟，不过落地还有不少工作。
-还有个方向就是CPU和GPU联合调优分析。</p>
-<p>责任心 4.职业规划相关 职业经历 跳槽的原因：所在项目迟迟无法商业化
-5.开放性问题 6.你的问题 在招的岗位规划 团队的规模、人员情况
-了解部门和团队的业务</p>
-<p>这个是技术终面一般会问到的点需要准备个问题（职业生涯中觉得最成功/最有成就感的事情是什么）</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/p-state/">CPU频率调节器（Governor）和P-state、C-state</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/cpu/">cpu</a></span><div class="content"><h2 id="cpu频率调节器governor">CPU频率调节器（Governor）</h2>
-<h3 id="performance模式">1.performance模式</h3>
-<ul>
-<li>描述:performance模式将CPU频率固定在最高可用频率。这意味着无论系统负载如何，CPU都会一直运行在其最大频率以提供最佳性能。</li>
-<li>工作原理: 在这种模式下，CPU不进行频率调整，直接运行在最高频率。</li>
-<li>适用场景:
-<ul>
-<li>高性能计算任务</li>
-<li>游戏服务器</li>
-<li>需要最低延迟和最高吞吐量的应用程序</li>
-</ul></li>
-<li>优点:
-<ul>
-<li>最大化性能</li>
-<li>最低延迟</li>
-</ul></li>
-<li>缺点:
-<ul>
-<li>高功耗</li>
-<li>高温度</li>
-<li>可能会缩短硬件寿命</li>
-</ul></li>
-</ul>
-<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 performance 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g performance</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="powersave模式">2.powersave模式</h3>
-<ul>
-<li>描述:powersave模式将CPU频率固定在最低可用频率。这意味着无论系统负载如何，CPU都会一直运行在最低频率以最大限度地节省能量。</li>
-<li>工作原理: 在这种模式下，CPU不进行频率调整，直接运行在最低频率。</li>
-<li>适用场景:
-<ul>
-<li>电池供电的设备（如笔记本电脑）</li>
-<li>服务器待机模式</li>
-<li>对性能要求不高但对能效要求高的场景</li>
-</ul></li>
-<li>优点:
-<ul>
-<li>最低功耗</li>
-<li>降低发热量</li>
-<li>延长电池寿命</li>
-</ul></li>
-<li>缺点:
-<ul>
-<li>性能较低</li>
-<li>可能导致高负载任务运行缓慢 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 powersave 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g powersave</span><br></pre></td></tr></tbody></table></figure></li>
-</ul></li>
-</ul>
-<h3 id="conservative模式">3.conservative模式</h3>
-<ul>
-<li>描述:conservative模式根据系统负载逐步调整CPU频率。当负载增加时，频率逐步提升；当负载减少时，频率逐步降低。相比ondemand模式，conservative模式的频率调整更加缓和。</li>
-<li>工作原理:conservative模式会监控CPU负载，当负载超过某个阈值时，逐步提升频率；当负载低于某个阈值时，逐步降低频率。</li>
-<li>适用场景:
-<ul>
-<li>需要平衡性能和能效的任务</li>
-<li>希望避免频繁的频率波动</li>
-</ul></li>
-<li>优点:
-<ul>
-<li>平衡性能和能效</li>
-<li>频率调整较为平缓，减少频率变化带来的开销</li>
-</ul></li>
-<li>缺点:
-<ul>
-<li>响应速度较慢，可能导致短暂的高负载任务性能不佳 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 conservative 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g conservative</span><br></pre></td></tr></tbody></table></figure></li>
-</ul></li>
-</ul>
-<h3 id="ondemand模式">4.ondemand模式</h3>
-<ul>
-<li>描述:ondemand模式根据系统负载快速调整CPU频率。当负载增加时，立即将频率提升到最高；当负载减少时，立即将频率降低到最低。</li>
-<li>工作原理:ondemand模式会监控CPU负载，当负载超过某个阈值时，立即将频率提升到最高；当负载低于某个阈值时，立即将频率降低到最低。</li>
-<li>适用场景:
-<ul>
-<li>动态负载环境，例如桌面系统、普通服务器</li>
-<li>需要快速响应负载变化的场景</li>
-</ul></li>
-<li>优点:
-<ul>
-<li>能快速响应负载变化</li>
-<li>性能与能效平衡较好</li>
-</ul></li>
-<li>缺点:
-<ul>
-<li>频繁的频率切换可能导致系统不稳定</li>
-<li>频率切换带来的开销 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 ondemand 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g ondemand</span><br></pre></td></tr></tbody></table></figure></li>
-</ul></li>
-</ul>
-<h3 id="schedutil模式">5.schedutil模式</h3>
-<ul>
-<li>描述:schedutil模式基于Linux内核调度器的负载跟踪机制来调整CPU频率。这个调节器利用调度器的负载信息，通常能提供较好的性能和能效平衡。</li>
-<li>工作原理:schedutil模式直接从调度器获取负载信息，并根据这个信息来调整CPU频率。频率调整更加智能和动态。</li>
-<li>适用场景:
-<ul>
-<li>现代Linux系统</li>
-<li>需要智能频率调整的场景</li>
-</ul></li>
-<li>优点:
-<ul>
-<li>调整频率更智能</li>
-<li>性能和能效平衡较好</li>
-<li>频率调整更加平滑</li>
-</ul></li>
-<li>缺点:
-<ul>
-<li>需要较新的内核版本支持</li>
-<li>可能在某些特定场景下不如专门的调节器高效 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将所有CPU的调节器设置为 schedutil 模式</span></span><br><span class="line">sudo cpufreq-<span class="built_in">set</span> -r -g schedutil</span><br></pre></td></tr></tbody></table></figure></li>
-</ul></li>
-</ul>
-<h3 id="选择合适的调节器模式">选择合适的调节器模式</h3>
-<p>选择合适的调节器模式需要根据具体的使用场景和需求来决定： *
-高性能需求: * 选择performance模式 *
-适用于需要最高性能的场景，如高性能计算、游戏服务器等。 * 节能需求: *
-选择powersave模式 *
-适用于对能效要求高的场景，如电池供电设备、待机模式等。 * 平衡性能和能效:
-* 选择conservative、ondemand或schedutil模式 *
-适用于需要动态调整频率以平衡性能和能效的场景，如桌面系统、普通服务器等。</p>
-<h2 id="p-state-performance-state">P-state (Performance State)</h2>
-<h3 id="概述">概述</h3>
-<p>P-state代表CPU的不同性能状态，每个P-state定义了一个特定的电压和频率组合。更高的P-state（如P0）通常意味着更高的频率和电压，从而提供更高的性能和更高的功耗。更低的P-state（如P1,
-P2等）则意味着较低的频率和电压，从而降低性能和功耗。 ### 工作原理
-在操作系统或固件的控制下，P-state可以动态调整，以适应当前的工作负载。当系统负载较高时，CPU会使用较高的P-state以获得更高的性能。当系统负载较低时，CPU会使用较低的P-state以节省能量。
-### 具体实现 * Intel P-state 驱动：Linux内核中有一个专用的Intel
-P-state驱动程序，它可以直接与Intel处理器硬件交互，以更高效地管理P-state。
-* AMD P-state
-驱动：类似地，AMD处理器也有专用的P-state驱动程序，能够更精细地控制P-state。
-### P-state 的调节器（Governor） * performance: 固定选择最高的P-state。
-* powersave: 固定选择最低的P-state。 * conservative:
-根据系统负载逐步调整P-state。 * ondemand: 根据系统负载快速调整P-state。
-* schedutil: 基于调度器的负载跟踪机制来调整P-state。</p>
-<h3 id="查看p-state信息">查看P-state信息</h3>
-<ol type="1">
-<li>cpupower 工具 cpupower
-是一个命令行工具，可以用来查看和管理CPU的P-state。 安装 cpupower： sudo
-apt-get install linux-tools-common linux-tools-$(uname -r)
-查看P-state信息： sudo cpupower frequency-info
-该命令将显示当前CPU频率、可用频率范围、当前调速器（governor）等信息。</li>
-<li>/sys 文件系统 Linux内核通过 /sys
-文件系统暴露了许多与CPU相关的信息，包括P-state。
-查看当前调速器（governor）： cat
-/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 查看当前CPU频率：
-cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
-查看可用频率范围： cat
-/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
-查看可用的调速器（governor）： cat
-/sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors ###
-设置P-state</li>
-<li>使用 cpupower 工具 你可以使用 cpupower
-工具来设置P-state，例如设置调速器（governor）和频率范围。
-设置调速器（governor）： sudo cpupower frequency-set -g performance
-将调速器设置为 performance 模式。这意味着CPU将尽可能运行在最高频率。
-设置最小和最大频率： sudo cpupower frequency-set -d 1.2GHz -u 2.8GHz
-将CPU频率限制在1.2GHz到2.8GHz之间。</li>
-<li>修改 /sys 文件系统 你也可以直接修改 /sys
-文件系统中的配置文件来设置P-state。 设置调速器（governor）： echo
-"performance" | sudo tee
-/sys/devices/system/cpu/cpu<em>/cpufreq/scaling_governor 将调速器设置为
-performance 模式。 设置最小和最大频率： echo 1200000 | sudo tee
-/sys/devices/system/cpu/cpu</em>/cpufreq/scaling_min_freq echo 2800000 |
-sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
-将CPU频率限制在1.2GHz到2.8GHz之间。注意，频率值以千赫兹（kHz）为单位。
-### 高级配置</li>
-<li>BIOS/UEFI 设置
-有些系统允许在BIOS或UEFI设置中配置P-state。你可以在启动计算机时进入BIOS/UEFI设置界面，通常通过按下特定的键（如F2,
-Del,
-Esc等）。在电源管理或高级设置菜单中，你可能会找到P-state相关的设置。</li>
-<li>内核参数 你可以通过内核参数来配置P-state。例如，Intel处理器可以使用
-intel_pstate 驱动，并通过内核参数进行配置。 编辑GRUB配置文件
-/etc/default/grub： sudo nano /etc/default/grub 在
-GRUB_CMDLINE_LINUX_DEFAULT 行中添加：
-GRUB_CMDLINE_LINUX_DEFAULT="intel_pstate=enable"
-更新GRUB配置并重启系统： sudo update-grub sudo reboot</li>
-<li>使用 turbostat 工具 turbostat
-是另一个强大的工具，可以提供详细的CPU状态信息，包括P-state。 安装
-turbostat： sudo apt-get install linux-tools-common linux-tools-$(uname
--r) 运行 turbostat： sudo turbostat ### 总结
-通过上述方法，你可以在Linux系统中查看和设置P-state。了解和调整P-state可以帮助优化系统的功耗和性能，特别是在不同的应用场景中。通过合理的配置，可以在性能和能效之间找到最佳平衡点。
-## C-state (CPU Idle State) ### 概述
-C-state代表CPU的空闲状态，用于减少CPU在空闲时的功耗。C-state的等级越高，CPU的功耗越低，但从这种状态恢复到工作状态所需的时间也越长。
-### 工作原理
-当CPU没有工作负载时，它可以进入不同的C-state以节省能量。C-state从C0（完全活跃）到更高的C-state（如C1,
-C2,
-C3等），每个状态减少更多的功耗，但也增加了从该状态恢复到C0的延迟。</li>
-</ol>
-<ul>
-<li>C0: 活跃状态，CPU正在执行指令。</li>
-<li>C1: 轻度空闲状态，CPU停止执行指令，但可以迅速恢复到C0。</li>
-<li>C2: 中度空闲状态，进一步减少功耗，但恢复时间较长。</li>
-<li>C3: 深度空闲状态，CPU缓存被刷新，功耗进一步降低，恢复时间更长。</li>
-<li>Cn: 更高级的空闲状态，可能进一步降低功耗，但恢复时间也更长。 C-state
-的管理</li>
-<li>操作系统控制：操作系统可以通过ACPI（Advanced Configuration and Power
-Interface）管理C-state。操作系统通过查询硬件和固件，决定进入哪个C-state。</li>
-<li>硬件控制：一些C-state（如C1E）由硬件自动管理，而不需要操作系统干预。</li>
-</ul>
-<h3 id="查看c-state信息">查看C-state信息</h3>
-<ol type="1">
-<li>cpupower 工具 cpupower
-是一个命令行工具，用于管理和查看CPU的电源管理设置。你可以使用它来查看C-state信息。
-安装 cpupower： sudo apt-get install linux-tools-common
-linux-tools-$(uname -r) 查看C-state信息： sudo cpupower idle-info</li>
-<li>/sys 文件系统 Linux内核通过 /sys
-文件系统暴露了许多与CPU相关的信息，包括C-state。 查看C-state统计信息：
-cat /sys/devices/system/cpu/cpu0/cpuidle/state<em>/name cat
-/sys/devices/system/cpu/cpu0/cpuidle/state</em>/usage
-这将显示每个C-state的名称和使用次数。</li>
-<li>turbostat 工具 turbostat
-是另一个强大的工具，可以提供详细的CPU状态信息，包括C-state。 安装
-turbostat： sudo apt-get install linux-tools-common linux-tools-$(uname
--r) 运行 turbostat： sudo turbostat ### 修改C-state设置</li>
-<li>禁用特定的C-state
-可以通过内核参数在启动时禁用特定的C-state。例如，要禁用C6状态，可以在引导加载器（如GRUB）的配置文件中添加以下参数：
-编辑GRUB配置文件 /etc/default/grub： sudo nano /etc/default/grub 在
-GRUB_CMDLINE_LINUX_DEFAULT 行中添加：
-GRUB_CMDLINE_LINUX_DEFAULT="intel_idle.max_cstate=5"
-这将最大C-state限制为C5，从而禁用C6。 更新GRUB配置： sudo update-grub
-重启系统： sudo reboot</li>
-<li>使用 cpupower 工具 cpupower 工具也可以用于设置C-state。
-限制最大C-state： sudo cpupower idle-set -d 3 这将禁用C-state
-3及其以上的状态。 启用所有C-state： sudo cpupower idle-set -e all ###
-高级配置</li>
-<li>BIOS/UEFI 设置
-很多系统允许在BIOS或UEFI固件中配置C-state。你可以在启动计算机时进入BIOS/UEFI设置界面，通常通过按下特定的键（如F2,
-Del,
-Esc等）。在电源管理或高级设置菜单中，你可能会找到C-state相关的设置，可以启用或禁用特定的C-state。</li>
-<li>内核配置 在编译自定义内核时，可以通过配置选项来控制C-state。
-编辑内核配置： make menuconfig 导航到 Processor type and features -&gt;
-CPU idle PM support，然后根据需要启用或禁用特定的C-state支持。 ##
-P-state 和 C-state 的区别</li>
-</ol>
-<ul>
-<li>P-state:
-主要用于动态调整CPU的频率和电压，以平衡性能和能效。在运行负载时使用。</li>
-<li>C-state:
-主要用于减少CPU在空闲状态下的功耗。不同的C-state代表不同的空闲深度和恢复时间。
-### 交互与优化
-P-state和C-state经常一起工作，以优化系统的整体性能和能效。</li>
-<li>高负载场景：在高负载情况下，CPU通常在较高的P-state（如P0）运行，以提供最高性能。此时，CPU可能很少进入高等级的C-state。</li>
-<li>低负载或空闲场景：在低负载或空闲情况下，CPU可能会使用较低的P-state，并进入较高等级的C-state，以最大限度地节省能量。</li>
-</ul>
-<h2 id="cpu频率调节器governor与p-state的关系">CPU频率调节器（Governor）与P-state的关系</h2>
-<p>在现代CPU中，特别是Intel和AMD的处理器中，P-state（Performance
-State）和频率调节器（governor）是密切相关的概念，但它们工作在不同的层面上。
-CPU频率调节器（governor）在操作系统层面工作，它们决定了在给定的负载条件下选择哪一个P-state。可以认为，governor是操作系统用于管理和选择P-state的策略。
-### 工作原理 1. Governor（操作系统层面）监控系统负载。 2.
-根据系统负载，Governor决定需要哪种性能状态。 3.
-Governor选择相应的P-state。 4. CPU根据选择的P-state调整其频率和电压。
-### 各种Governor与P-state的关系 performance 模式 * 描述:
-固定选择最高的P-state（如P0）。 * P-state选择:
-始终选择最高性能的P-state。 * 适用场景: 高性能计算任务、游戏服务器等。
-powersave 模式 * 描述: 固定选择最低的P-state。 * P-state选择:
-始终选择最低性能的P-state。 * 适用场景: 电池供电设备、服务器待机模式等。
-conservative 模式 * 描述: 根据系统负载逐步调整P-state。 * P-state选择:
-根据负载情况在不同的P-state之间逐步切换。 * 适用场景:
-平衡性能和能效的任务。 ondemand 模式 * 描述:
-根据系统负载快速调整P-state。 * P-state选择:
-负载高时立即选择最高的P-state，负载低时立即选择最低的P-state。 *
-适用场景: 动态负载环境，例如桌面系统、普通服务器。 schedutil 模式 *
-描述: 基于Linux内核调度器的负载跟踪机制来调整P-state。 * P-state选择:
-根据调度器的负载信息动态调整P-state。 * 适用场景:
-现代Linux系统，适用于各种任务。 ### Intel P-state 驱动
-对于Intel处理器，Linux内核提供了一个专用的Intel
-P-state驱动程序，它直接与CPU硬件交互来控制P-state。这种驱动程序可以更高效地管理P-state，因为它可以更精细地调整频率和电压。
-Intel P-state 驱动的Governor * powersave: 在Intel
-P-state驱动中，powersave governor并不像传统的powersave
-governor那样固定在最低频率。相反，它会动态调整频率，但倾向于更低的频率，以节省能量。
-* performance: 在Intel P-state驱动中，performance
-governor将频率尽可能地保持在最高。 ### AMD P-state 驱动
-类似地，AMD处理器也有专用的P-state驱动程序，能够更精细地控制P-state。不同的调节器模式在AMD处理器上也会有相似的效果。
-### 总结 * P-state: 由硬件和固件管理，定义不同的频率和电压组合。 *
-Governor: 由操作系统管理，决定选择哪个P-state以平衡性能和能效。 *
-Governor与P-state的关系:
-Governor通过监控系统负载来选择合适的P-state，从而动态调整CPU频率和电压。
-了解P-state与Governor的关系有助于更好地优化系统性能和能效，通过选择合适的Governor，可以在不同的使用场景中实现最佳的性能和能效平衡。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/05/29/Memory-Consistency-Models-X86-VS-ARM/">Memory Consistency Models (X86 VS ARM)</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-05-29</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/uarch/">uarch</a></span><div class="content"><p><link rel="stylesheet" type="text/css" href="auto-number-title.css"></p>
-<h1 id="memory-consistency-models介绍">Memory Consistency
-Models介绍</h1>
-<p>https://www.cs.utexas.edu/~bornholt/post/memory-models.html</p>
-<table>
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Memory Consistency Models</th>
-<th style="text-align: left;">特点</th>
-<th style="text-align: left;"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/memoryConsistency1.png"></th>
-<th style="text-align: left;"><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/memoryConsistency2.png"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">不同地址一个序</td>
-<td style="text-align: left;">不允许出现00</td>
-<td style="text-align: left;">程序如直观顺序，正确执行</td>
-</tr>
-<tr>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">不同地址写保序，读不保序</td>
-<td style="text-align: left;">允许出现00（不太好理解的顺序）</td>
-<td style="text-align: left;">程序如直观顺序，正确执行</td>
-</tr>
-<tr>
-<td style="text-align: left;">Relaxed memory models</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">允许出现00</td>
-<td style="text-align: left;">会出现R2看到 W2，但是 R1没看到 W1</td>
-</tr>
-</tbody>
-</table>
-<h1 id="memory-order-差异">memory order 差异</h1>
-<h2 id="x86">X86</h2>
-<p>x86处理器的内存顺序涉及到内存访问的原子性、顺序性和可见性等方面。下面是x86的内存顺序解析：
-1.
-原子性：x86处理器提供了多种原子操作，如xadd、xchg、cmpxchg等。这些操作能够保证内存访问的原子性，即它们能够在不被其他操作打断的情况下执行。
-2.
-顺序性：x86处理器的内存顺序遵循一个基本原则：相邻的内存操作之间必须保持顺序一致。也就是说，如果一个内存操作之后还有其他内存操作，那么这些操作必须按照规定的顺序执行。为了确保内存顺序的正确性，x86处理器提供了多种机制，如内存屏障、总线锁定、缓存锁定等。
-3.
-可见性：x86处理器使用缓存一致性协议来保证不同处理器的缓存中的数据一致。当一个处理器修改了一个共享变量的值时，它必须通知其他处理器，使得其他处理器缓存中的数据无效，从而保证数据的可见性。
-总的来说，x86的内存顺序非常复杂，包含了多种机制和协议，以保证内存访问的原子性、顺序性和可见性。这些机制和协议是为了确保多线程程序的正确性和性能。在编写和优化多线程程序时，必须仔细考虑x86的内存顺序，以避免潜在的问题。</p>
-<h2 id="arm">ARM</h2>
-<p>ARM架构的内存模型与x86架构略有不同。在ARM架构中，对于多线程程序中的内存访问顺序，需要使用内存顺序（Memory
-Order）来指定访问顺序。 ARM架构中定义了三种内存顺序： 1.
-内存顺序未指定（Unspecified memory
-order）未指定内存顺序意味着对于特定的内存访问，没有指定任何顺序关系。这意味着编译器和处理器可以按照任意顺序执行或重排内存访问操作。
-2. 顺序一致内存顺序（Sequentially consistent memory
-order）顺序一致内存顺序保证所有线程看到的内存访问顺序都是相同的，即所有内存访问按照程序中的顺序执行，不会发生任何重排或乱序操作。这是最保守的内存顺序，也是最容易理解和使用的内存顺序。
-3. 发布-订阅内存顺序（Release-acquire memory
-order）发布-订阅内存顺序提供了一种更灵活的内存顺序，允许程序员指定一些内存访问之间的顺序关系。在发布-订阅内存顺序中，一个写入操作可以被视为“发布”操作，而一个读取操作可以被视为“订阅”操作。发布-订阅内存顺序保证所有“发布”操作都要先于所有后续的“订阅”操作执行，但不保证所有内存操作按照程序中的顺序执行。
-在ARM架构中，我们可以使用C++11中的std::memory_order枚举类型来指定内存顺序。常用的内存顺序有：
-* std::memory_order_relaxed：未指定内存顺序，允许任意顺序执行内存操作。
-* std::memory_order_seq_cst：顺序一致内存顺序。 *
-std::memory_order_release：发布-订阅内存顺序中的“发布”操作。 *
-std::memory_order_acquire：发布-订阅内存顺序中的“订阅”操作。
-在ARM架构上编写多线程程序时，需要特别注意内存顺序的使用。错误的内存顺序可能会导致程序出现数据竞争、死锁、数据不一致等问题。</p>
-<h2 id="微架构实现">微架构实现</h2>
-<h3 id="问题既然x86和-arm-的架构在-memory-order上不一样那微架构的实现也不一样了x86不能做乱序那不是很影响性能了">问题：既然x86和
-arm 的架构在 memory
-order上不一样，那微架构的实现也不一样了？x86不能做乱序？那不是很影响性能了？</h3>
-<p>答案：其实
-x86微架构内部还是乱序执行的，只不过通过顺序提交、乱序读取的检查机制、发现错误后的回滚策略保证其
-memory order。</p>
-<h3 id="问题具体怎么实现乱序读取的检查发现错误后的回滚呢">问题：具体怎么实现乱序读取的检查、发现错误后的回滚呢？</h3>
-<p>答案：例子: Thread1先进行write address1再执行 write address2；thread2
-先进行read address2 在进行read address1。</p>
-<p><img src="https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/memoryConsistency3.png"></p>
-<p>错误情况如何检测呢？ 处理器会 在 STB（store buffer）记录未提交的
-write（即 store），STB 记录了w1先于 w2的顺序： 1.
-先执行W2：W2先到HCA2（home coherence agent），获得独占权限（老数据写入
-core1的cache）。 + 就算是先发送 W1 再发送
-W2，但是地址不同，W2可能先到其HCA，所以没必要按序发送，只要记录顺序就行。
-2. 执行 R2，必然 miss，thread1的 core1有独占数据。 +
-发送请求到HCA2去snoop thread1的 core1
-去读取数据，core1的W2未提交，thread1的 core1
-失去独占权限，R2获得W2之前的数据。 + R2不完成，if
-条件不成立，R1也没办法执行 3. 执行W1：W1到 HCA进行写操作，W1提交 4. 提交
-W2：发现被 probe 过，重新查 cache，发现不是 E 状态，再去
-HCA获取E权限，然后提交。</p>
-<p>注意：第三种正确情况不会发生。</p>
-<h3 id="问题io-的-order-是怎么样的">问题：IO 的 order 是怎么样的？</h3>
-<p>答案：IO 的 order 是 PCIE
-要求的，不能乱序。但是在微架构实现的时候仍然可以选择乱序执行，通过机制保证顺序即可。
-# 示例
-假设我们有两个线程A和B，它们共享一个变量x和一个标志变量flag，代码如下所示：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Shared variables</span></span><br><span class="line">volatileint x = <span class="number">0</span>;</span><br><span class="line">volatilebool flag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Thread A</span></span><br><span class="line">x = <span class="number">1</span>;</span><br><span class="line">flag = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Thread B</span></span><br><span class="line"><span class="keyword">if</span> (flag) {</span><br><span class="line">    <span class="type">int</span> y = x + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// do something with y</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>在这个例子中，线程A会将x设置为1，然后将flag设置为true。线程B会检查flag的值，如果为true，则将x的值加1，并进行一些操作。
-在x86处理器上，这个程序的行为是可以被正确保证的，因为x86处理器的内存顺序比较严格，会保证写入操作的顺序与代码中的顺序一致。但是，在ARM处理器上，这个程序可能会出现问题。
-具体来说，如果线程B中的读取操作先于flag的写入操作执行，那么线程B将无法正确地检测到flag的值。此时，线程B将不会执行x的加法操作，导致程序出现错误。
-为了避免这种情况，我们需要在线程A中插入一个屏障来保证写入操作的顺序，如下所示：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Thread A</span></span><br><span class="line">x = <span class="number">1</span>;</span><br><span class="line">std::<span class="built_in">atomic_thread_fence</span>(std::memory_order_release); <span class="comment">// 写入屏障</span></span><br><span class="line">flag = <span class="literal">true</span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>在这个例子中，我们在写入操作之后插入了一个写入屏障，以确保写入操作先于标志变量的写入操作执行。这样，即使线程B中的读取操作在写入操作之前执行，也可以正确地检测到flag的值，从而避免程序出现错误。</p>
-<h2 id="例子">例子：</h2>
-<p>hipoas core 问题处理</p>
-</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2024 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+https://zhuanlan.zhihu.com/p/407489860
+服务器资源监控工具——Stream ...</div><a class="more" href="/2023/06/07/stream/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/SPEC%20CPU2017/">SPEC CPU2017</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">https://www.zhihu.com/question/19773867/answer/2857416414
+https://tosiron.com/papers/2018/SPEC2017_ISPASS18.pdf
+</div><a class="more" href="/2023/06/07/SPEC%20CPU2017/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/benchmark/">benchmark</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/benchmark/">benchmark</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">
+
+
+
+
+
+
+
+
+测试内容
+benchmark
+
+
+
+
+CPU性能
+整型
+SPECint
+
+
+
+浮点
+SPECfp
+
+
+
+综合
+unixbench
+
+
+
+
+Cinebench
+
+
+
+
+stress-ng
+
+
+
+cpu core
+coremark
+
+
+
+SIMD
+Linpack
+
+
+CPU频率
+CPU ...</div><a class="more" href="/2023/06/07/benchmark/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/interview/">question</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><div class="content">过往重点工作
+HXT：
+
+QSBv3.1.ppt
+
+ICT
+处理器核设计 处理器多核互联设计，互联总线用的什么？
+TODO:
+
+PMU事件多核采集的时候：core之间如何同步，保证采集同时段。
+
+uarch monitor没有单独采集每个core的？
+整机：每个core的事件的差值计算后，多个cor ...</div><a class="more" href="/2023/06/07/interview/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/06/07/p-state/">CPU频率调节器（Governor）和P-state、C-state</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/cpu/">cpu</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">CPU频率调节器（Governor）
+1.performance模式
+
+描述:performance模式将CPU频率固定在最高可用频率。这意味着无论系统负载如何，CPU都会一直运行在其最大频率以提供最佳性能。
+工作原理: 在这种模式下，CPU不进行频率调整，直接运行在最高频率。
+适用场景:
+
+高性能 ...</div><a class="more" href="/2023/06/07/p-state/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/05/30/ARM-Ampere-Altra/">ARM-Ampere-Altra</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-05-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/ARM/">ARM</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">整体
+Amper在core，CPU，双路互联3个层面跟Intel和AMD均有差异，需要分析差异并给出对应优化
+Core解析
+https://en.wikichip.org/wiki/arm_holdings/microarchitectures/neoverse_n1
+
+
+2023053023004 ...</div><a class="more" href="/2023/05/30/ARM-Ampere-Altra/#more" style="margin-top: 14px">阅读更多</a><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2023/05/29/Memory-Consistency-Models-X86-VS-ARM/">Memory Consistency Models (X86 VS ARM)</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2023-05-29</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/uarch/">uarch</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/deploy/">deploy</a></span><div class="content">
+Memory Consistency
+Models介绍
+https://www.cs.utexas.edu/~bornholt/post/memory-models.html
+
+
+
+
+
+
+
+
+
+Memory Consistency Models
+特点
+
+
+
+
+
+
+
+不同地址一个序
+不允许出现00
+ ...</div><a class="more" href="/2023/05/29/Memory-Consistency-Models-X86-VS-ARM/#more" style="margin-top: 14px">阅读更多</a><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div></div><footer class="footer-bg" style="background-image: url(https://raw.githubusercontent.com/Looking4Socrates/pic/main/work/20230531150257.png)"><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2024 By Looking4Socrates</div><div class="framework-info"><span>驱动 - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script src="/js/search/local-search.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
