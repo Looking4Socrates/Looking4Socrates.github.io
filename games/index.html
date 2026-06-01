@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>末日之战 - 水滴</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: #000;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+}
+canvas { display: block; }
+#ui-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+#ui-overlay > div {
+    background: rgba(0,0,0,0.6);
+    padding: 8px 16px;
+    border: 1px solid rgba(100,180,255,0.3);
+    border-radius: 4px;
+}
+#start-screen, #end-screen, #leaderboard-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.92);
+    z-index: 100;
+}
+#start-screen h1 {
+    font-size: 48px;
+    color: #4af;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(68,170,255,0.5);
+}
+#start-screen .subtitle {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 40px;
+}
+.level-select {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+}
+.level-btn {
+    padding: 12px 20px;
+    background: rgba(68,170,255,0.1);
+    border: 1px solid #4af;
+    color: #4af;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+    pointer-events: all;
+}
+.level-btn:hover:not(.locked) {
+    background: rgba(68,170,255,0.3);
+    box-shadow: 0 0 15px rgba(68,170,255,0.3);
+}
+.level-btn.locked {
+    border-color: #333;
+    color: #444;
+    cursor: not-allowed;
+    background: rgba(0,0,0,0.3);
+}
+.level-btn.completed {
+    border-color: #4a4;
+    color: #4a4;
+}
+.level-btn.current {
+    border-color: #ff0;
+    color: #ff0;
+    box-shadow: 0 0 10px rgba(255,255,0,0.2);
+}
+.controls-info {
+    color: #666;
+    font-size: 13px;
+    margin-top: 20px;
+    text-align: center;
+    line-height: 1.8;
+}
+.menu-btns {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+.menu-btn {
+    padding: 10px 24px;
+    background: rgba(68,170,255,0.1);
+    border: 1px solid #4af;
+    color: #4af;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    pointer-events: all;
+}
+.menu-btn:hover {
+    background: rgba(68,170,255,0.3);
+}
+#end-screen h2 {
+    font-size: 36px;
+    color: #4af;
+    margin-bottom: 20px;
+}
+#end-screen .stats {
+    font-size: 18px;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+#end-screen .rating {
+    font-size: 24px;
+    margin: 20px 0;
+}
+#end-screen .unlock-msg {
+    font-size: 14px;
+    color: #4a4;
+    margin-bottom: 10px;
+}
+.end-btns {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+.end-btn {
+    padding: 12px 28px;
+    background: rgba(68,170,255,0.1);
+    border: 1px solid #4af;
+    color: #4af;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.end-btn:hover {
+    background: rgba(68,170,255,0.3);
+}
+.end-btn.next-btn {
+    border-color: #4a4;
+    color: #4a4;
+}
+.end-btn.next-btn:hover {
+    background: rgba(68,170,68,0.2);
+}
+#leaderboard-screen h2 {
+    font-size: 32px;
+    color: #4af;
+    margin-bottom: 25px;
+}
+.leaderboard-table {
+    width: 400px;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+.leaderboard-table th {
+    color: #888;
+    padding: 8px 16px;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+.leaderboard-table td {
+    padding: 10px 16px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a2a;
+    font-size: 14px;
+}
+.leaderboard-table tr.highlight td {
+    color: #4af;
+    font-weight: bold;
+}
+.leaderboard-table .rank-1 { color: #ffd700; }
+.leaderboard-table .rank-2 { color: #c0c0c0; }
+.leaderboard-table .rank-3 { color: #cd7f32; }
+</style>
+</head>
+<body>
+
+<div id="ui-overlay">
+    <div id="hud-left">关卡: <span id="hud-level">1</span>/8 | 战舰: <span id="hud-ships">0/0</span></div>
+    <div id="hud-center">时间: <span id="hud-time">0.00</span>s</div>
+    <div id="hud-right">速度: <span id="hud-speed">0</span> km/s</div>
+</div>
+
+<div id="start-screen">
+    <h1>末 日 之 战</h1>
+    <div class="subtitle">"水滴"强互作用力探测器 — 歼灭地球舰队</div>
+    <div class="level-select" id="level-select"></div>
+    <div class="controls-info">
+        操控：鼠标移动 / 触屏滑动 控制水滴方向<br>
+        水滴以恒定高速飞行，撞击即摧毁战舰<br>
+        目标：以最短时间逐关歼灭全部战舰（需达C级以上解锁下一关）
+    </div>
+    <div class="menu-btns">
+        <button class="menu-btn" id="leaderboard-btn">排行榜</button>
+    </div>
+</div>
+
+<div id="end-screen" style="display:none">
+    <h2 id="end-title">舰队歼灭</h2>
+    <div class="stats" id="end-stats"></div>
+    <div class="stats" id="end-destroyed"></div>
+    <div class="rating" id="end-rating"></div>
+    <div class="unlock-msg" id="unlock-msg" style="display:none"></div>
+    <div class="end-btns">
+        <button class="end-btn" id="restart-btn">重新挑战</button>
+        <button class="end-btn next-btn" id="next-btn" style="display:none">下一关</button>
+    </div>
+    <button class="end-btn" id="back-btn" style="margin-top:10px;font-size:13px;padding:8px 20px;border-color:#555;color:#888">返回主页</button>
+</div>
+
+<div id="leaderboard-screen" style="display:none">
+    <h2>全关通关排行榜</h2>
+    <table class="leaderboard-table" id="leaderboard-table">
+        <thead><tr><th>排名</th><th>玩家</th><th>总时间</th><th>日期</th></tr></thead>
+        <tbody id="leaderboard-body"></tbody>
+    </table>
+    <button class="end-btn" id="lb-back-btn">返回</button>
+</div>
+
+<canvas id="game-canvas"></canvas>
+
+<script>
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+
+let W, H;
+function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// --- Audio (Web Audio API synthesized sounds) ---
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playExplosionSound() {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const noise = audioCtx.createBufferSource();
+    const noiseBuffer = audioCtx.createBuffer(1, audioCtx.sampleRate * 0.3, audioCtx.sampleRate);
+    const data = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.5;
+    noise.buffer = noiseBuffer;
+
+    const noiseGain = audioCtx.createGain();
+    noise.connect(noiseGain);
+    noiseGain.connect(audioCtx.destination);
+    noiseGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 0.2);
+    gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + 0.25);
+    noise.start(audioCtx.currentTime);
+    noise.stop(audioCtx.currentTime + 0.3);
+}
+
+function playVictorySound() {
+    const notes = [523, 659, 784, 1047];
+    notes.forEach((freq, i) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + i * 0.15);
+        gain.gain.setValueAtTime(0, audioCtx.currentTime + i * 0.15);
+        gain.gain.linearRampToValueAtTime(0.2, audioCtx.currentTime + i * 0.15 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + i * 0.15 + 0.4);
+        osc.start(audioCtx.currentTime + i * 0.15);
+        osc.stop(audioCtx.currentTime + i * 0.15 + 0.4);
+    });
+}
+
+// --- Levels ---
+const LEVELS = [
+    { name: '侦察编队', ships: 8, formation: 'line', maxSpeed: 0.8, accel: 0.003, shipSize: 80 },
+    { name: '前卫舰群', ships: 12, formation: 'wedge', maxSpeed: 1.0, accel: 0.004, shipSize: 75 },
+    { name: '主力方阵', ships: 20, formation: 'grid', maxSpeed: 1.2, accel: 0.005, shipSize: 70 },
+    { name: '混合编队', ships: 30, formation: 'mixed', maxSpeed: 1.4, accel: 0.005, shipSize: 65 },
+    { name: '纵深防御', ships: 40, formation: 'wedge', maxSpeed: 1.6, accel: 0.006, shipSize: 62 },
+    { name: '末日舰队', ships: 55, formation: 'dense', maxSpeed: 1.8, accel: 0.007, shipSize: 60 },
+    { name: '绝望之阵', ships: 75, formation: 'scatter', maxSpeed: 2.0, accel: 0.008, shipSize: 58 },
+    { name: '最终决战', ships: 100, formation: 'dense', maxSpeed: 2.2, accel: 0.009, shipSize: 55 },
+];
+
+// --- Game State ---
+let gameState = 'menu';
+let currentLevel = 0;
+let gameTime = 0;
+let destroyedCount = 0;
+let totalShips = 0;
+let unlockedLevel = 0;
+let levelTimes = [];
+
+let waterdrop = { x: 0, y: 0, vx: 0, vy: 0, speed: 6, trail: [] };
+let ships = [];
+let explosions = [];
+let debris = [];
+let stars = [];
+let targetX = 0, targetY = 0;
+
+// Load progress
+function loadProgress() {
+    try {
+        const saved = localStorage.getItem('waterdrop_progress');
+        if (saved) {
+            const data = JSON.parse(saved);
+            unlockedLevel = data.unlockedLevel || 0;
+        }
+    } catch(e) {}
+}
+function saveProgress() {
+    try {
+        localStorage.setItem('waterdrop_progress', JSON.stringify({ unlockedLevel }));
+    } catch(e) {}
+}
+function loadLeaderboard() {
+    try {
+        const saved = localStorage.getItem('waterdrop_leaderboard');
+        return saved ? JSON.parse(saved) : [];
+    } catch(e) { return []; }
+}
+function saveLeaderboard(board) {
+    try {
+        localStorage.setItem('waterdrop_leaderboard', JSON.stringify(board));
+    } catch(e) {}
+}
+
+loadProgress();
+
+for (let i = 0; i < 200; i++) {
+    stars.push({
+        x: Math.random() * 2000,
+        y: Math.random() * 2000,
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.5 + 0.3
+    });
+}
+
+// --- Level Select UI ---
+function initLevelSelect() {
+    const container = document.getElementById('level-select');
+    container.innerHTML = '';
+    LEVELS.forEach((level, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'level-btn';
+        if (i > unlockedLevel) {
+            btn.classList.add('locked');
+            btn.textContent = `第${i+1}关: ???`;
+        } else if (i < unlockedLevel) {
+            btn.classList.add('completed');
+            btn.textContent = `第${i+1}关: ${level.name} [已通关]`;
+        } else {
+            btn.classList.add('current');
+            btn.textContent = `第${i+1}关: ${level.name} (${level.ships}舰)`;
+        }
+        if (i <= unlockedLevel) {
+            btn.addEventListener('click', () => startLevel(i));
+        }
+        container.appendChild(btn);
+    });
+}
+
+// --- Ship Creation with safe margins ---
+function createShips(levelConfig) {
+    ships = [];
+    const { ships: count, formation, maxSpeed, accel, shipSize } = levelConfig;
+    const edgeMargin = 150;
+    const areaTop = edgeMargin;
+    const areaBottom = H - edgeMargin;
+    const areaLeft = W * 0.25;
+    const areaRight = W - edgeMargin;
+
+    for (let i = 0; i < count; i++) {
+        let x, y;
+        const shipMaxSpeed = maxSpeed * (0.7 + Math.random() * 0.6);
+        const shipAccel = accel * (0.8 + Math.random() * 0.4);
+        const angle = (Math.random() - 0.5) * 0.4;
+
+        switch(formation) {
+            case 'line':
+                x = areaLeft + (areaRight - areaLeft) * (i / count);
+                y = H * 0.5 + (Math.random() - 0.5) * (areaBottom - areaTop) * 0.4;
+                break;
+            case 'wedge':
+                const row = Math.floor(i / 5);
+                const col = i % 5;
+                x = areaLeft + row * 80 + Math.random() * 20;
+                y = H * 0.5 + (col - 2) * 55 * (1 + row * 0.3) + Math.random() * 20;
+                break;
+            case 'grid':
+                const cols = Math.ceil(Math.sqrt(count));
+                const gx = i % cols;
+                const gy = Math.floor(i / cols);
+                x = areaLeft + gx * ((areaRight - areaLeft) / cols) + Math.random() * 20;
+                y = areaTop + gy * ((areaBottom - areaTop) / Math.ceil(count/cols)) + Math.random() * 20;
+                break;
+            case 'mixed':
+                if (i < count * 0.3) {
+                    x = areaLeft + Math.random() * (areaRight - areaLeft) * 0.4;
+                    y = areaTop + Math.random() * (areaBottom - areaTop);
+                } else {
+                    x = areaLeft + (areaRight - areaLeft) * 0.4 + Math.random() * (areaRight - areaLeft) * 0.6;
+                    y = areaTop + Math.random() * (areaBottom - areaTop);
+                }
+                break;
+            case 'dense':
+                const cx = W * 0.55, cy = H * 0.5;
+                const maxR = Math.min(areaRight - areaLeft, areaBottom - areaTop) * 0.4;
+                const r = Math.random() * maxR;
+                const a = Math.random() * Math.PI * 2;
+                x = cx + Math.cos(a) * r;
+                y = cy + Math.sin(a) * r;
+                break;
+            case 'scatter':
+                x = areaLeft + Math.random() * (areaRight - areaLeft);
+                y = areaTop + Math.random() * (areaBottom - areaTop);
+                break;
+        }
+
+        y = Math.max(areaTop, Math.min(areaBottom, y));
+        x = Math.max(areaLeft * 0.5, Math.min(W - 50, x));
+
+        ships.push({
+            x, y,
+            vx: 0,
+            vy: 0,
+            dirX: Math.cos(angle),
+            dirY: Math.sin(angle),
+            maxSpeed: shipMaxSpeed,
+            accel: shipAccel,
+            size: shipSize,
+            alive: true,
+            engineFlicker: Math.random() * Math.PI * 2,
+            type: Math.floor(Math.random() * 3)
+        });
+    }
+}
+
+function startLevel(level) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    currentLevel = level;
+    const config = LEVELS[level];
+    totalShips = config.ships;
+    destroyedCount = 0;
+    gameTime = 0;
+    explosions = [];
+    debris = [];
+
+    waterdrop.x = 80;
+    waterdrop.y = H / 2;
+    waterdrop.vx = waterdrop.speed;
+    waterdrop.vy = 0;
+    waterdrop.trail = [];
+    targetX = W / 2;
+    targetY = H / 2;
+
+    createShips(config);
+
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('leaderboard-screen').style.display = 'none';
+    document.getElementById('hud-level').textContent = `${level + 1}`;
+
+    gameState = 'playing';
+}
+
+function getRating(timePerShip) {
+    if (timePerShip < 0.5) return { text: 'S+ 级 — 完美歼灭', code: 'S+', pass: true };
+    if (timePerShip < 0.8) return { text: 'S 级 — 势如破竹', code: 'S', pass: true };
+    if (timePerShip < 1.2) return { text: 'A 级 — 高效打击', code: 'A', pass: true };
+    if (timePerShip < 2.0) return { text: 'B 级 — 任务完成', code: 'B', pass: true };
+    if (timePerShip < 3.0) return { text: 'C 级 — 勉强达标', code: 'C', pass: true };
+    return { text: 'D 级 — 未达标，请重试', code: 'D', pass: false };
+}
+
+function endLevel() {
+    gameState = 'ended';
+    playVictorySound();
+
+    const timeStr = gameTime.toFixed(2);
+    const timePerShip = gameTime / totalShips;
+    const rating = getRating(timePerShip);
+
+    document.getElementById('end-title').textContent = '舰队歼灭';
+    document.getElementById('end-stats').textContent = `用时: ${timeStr} 秒`;
+    document.getElementById('end-destroyed').textContent = `摧毁: ${destroyedCount}/${totalShips} 艘战舰`;
+    document.getElementById('end-rating').textContent = rating.text;
+
+    const unlockMsg = document.getElementById('unlock-msg');
+    const nextBtn = document.getElementById('next-btn');
+
+    if (rating.pass && currentLevel === unlockedLevel && currentLevel < LEVELS.length - 1) {
+        unlockedLevel = currentLevel + 1;
+        saveProgress();
+        unlockMsg.textContent = `已解锁第${unlockedLevel + 1}关: ${LEVELS[unlockedLevel].name}`;
+        unlockMsg.style.display = 'block';
+        nextBtn.style.display = 'inline-block';
+    } else if (rating.pass && currentLevel < LEVELS.length - 1 && currentLevel < unlockedLevel) {
+        unlockMsg.style.display = 'none';
+        nextBtn.style.display = 'inline-block';
+    } else if (rating.pass && currentLevel === LEVELS.length - 1) {
+        unlockMsg.style.display = 'none';
+        nextBtn.style.display = 'none';
+        levelTimes[currentLevel] = gameTime;
+        showAllClearLeaderboard();
+        return;
+    } else {
+        unlockMsg.textContent = '未达标！需达C级以上才能解锁下一关';
+        unlockMsg.style.display = 'block';
+        unlockMsg.style.color = '#a44';
+        nextBtn.style.display = 'none';
+    }
+
+    levelTimes[currentLevel] = gameTime;
+    document.getElementById('end-screen').style.display = 'flex';
+}
+
+function showAllClearLeaderboard() {
+    const totalTime = levelTimes.reduce((a, b) => a + (b || 0), 0);
+    const playerName = prompt(`全部通关！总用时: ${totalTime.toFixed(2)}秒\n请输入你的名字：`, '无名舰长') || '无名舰长';
+
+    const board = loadLeaderboard();
+    const entry = {
+        name: playerName,
+        time: parseFloat(totalTime.toFixed(2)),
+        date: new Date().toLocaleDateString('zh-CN')
+    };
+    board.push(entry);
+    board.sort((a, b) => a.time - b.time);
+    if (board.length > 20) board.length = 20;
+    saveLeaderboard(board);
+
+    showLeaderboard(entry);
+}
+
+function showLeaderboard(highlightEntry) {
+    const board = loadLeaderboard();
+    const tbody = document.getElementById('leaderboard-body');
+    tbody.innerHTML = '';
+
+    if (board.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="color:#555">暂无记录，完成全部8关后上榜</td></tr>';
+    } else {
+        board.forEach((entry, i) => {
+            const tr = document.createElement('tr');
+            const isHighlight = highlightEntry && entry.name === highlightEntry.name && entry.time === highlightEntry.time;
+            if (isHighlight) tr.classList.add('highlight');
+
+            const rankClass = i < 3 ? `rank-${i+1}` : '';
+            tr.innerHTML = `
+                <td class="${rankClass}">${i + 1}</td>
+                <td>${entry.name}</td>
+                <td>${entry.time.toFixed(2)}s</td>
+                <td style="color:#666;font-size:12px">${entry.date}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('leaderboard-screen').style.display = 'flex';
+}
+
+// --- Game Update ---
+function updateWaterdrop(dt) {
+    const dx = targetX - waterdrop.x;
+    const dy = targetY - waterdrop.y;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+
+    if (dist > 5) {
+        const targetVx = (dx / dist) * waterdrop.speed;
+        const targetVy = (dy / dist) * waterdrop.speed;
+        const turnRate = 0.08;
+        waterdrop.vx += (targetVx - waterdrop.vx) * turnRate;
+        waterdrop.vy += (targetVy - waterdrop.vy) * turnRate;
+    }
+
+    const currentSpeed = Math.sqrt(waterdrop.vx*waterdrop.vx + waterdrop.vy*waterdrop.vy);
+    if (currentSpeed > 0) {
+        waterdrop.vx = (waterdrop.vx / currentSpeed) * waterdrop.speed;
+        waterdrop.vy = (waterdrop.vy / currentSpeed) * waterdrop.speed;
+    }
+
+    waterdrop.x += waterdrop.vx;
+    waterdrop.y += waterdrop.vy;
+
+    if (waterdrop.x < 0) waterdrop.x = 0;
+    if (waterdrop.x > W) waterdrop.x = W;
+    if (waterdrop.y < 0) waterdrop.y = 0;
+    if (waterdrop.y > H) waterdrop.y = H;
+
+    waterdrop.trail.push({ x: waterdrop.x, y: waterdrop.y, alpha: 1.0 });
+    if (waterdrop.trail.length > 40) waterdrop.trail.shift();
+}
+
+function updateShips(dt) {
+    const safeTop = 120;
+    const safeBottom = H - 120;
+    ships.forEach(ship => {
+        if (!ship.alive) return;
+
+        const currentSpeed = Math.sqrt(ship.vx*ship.vx + ship.vy*ship.vy);
+        if (currentSpeed < ship.maxSpeed) {
+            ship.vx += ship.dirX * ship.accel;
+            ship.vy += ship.dirY * ship.accel;
+        }
+
+        ship.x += ship.vx;
+        ship.y += ship.vy;
+        ship.engineFlicker += 0.1;
+
+        if (ship.y < safeTop) {
+            ship.y = safeTop;
+            ship.vy = Math.abs(ship.vy) * 0.5;
+            ship.dirY = Math.abs(ship.dirY);
+        }
+        if (ship.y > safeBottom) {
+            ship.y = safeBottom;
+            ship.vy = -Math.abs(ship.vy) * 0.5;
+            ship.dirY = -Math.abs(ship.dirY);
+        }
+
+        if (ship.x < -100) ship.x = W + 100;
+        if (ship.x > W + 100) ship.x = -100;
+    });
+}
+
+function checkCollisions() {
+    ships.forEach(ship => {
+        if (!ship.alive) return;
+        const dx = waterdrop.x - ship.x;
+        const dy = waterdrop.y - ship.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < ship.size * 0.7) {
+            ship.alive = false;
+            destroyedCount++;
+            createExplosion(ship.x, ship.y, ship.size);
+            playExplosionSound();
+            if (destroyedCount >= totalShips) {
+                setTimeout(endLevel, 500);
+            }
+        }
+    });
+}
+
+function createExplosion(x, y, size) {
+    explosions.push({
+        x, y, radius: size * 0.5, maxRadius: size * 4,
+        alpha: 1.0, time: 0
+    });
+    for (let i = 0; i < 15; i++) {
+        const angle = (Math.PI * 2 / 15) * i + Math.random() * 0.3;
+        const speed = 2 + Math.random() * 4;
+        debris.push({
+            x, y,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            alpha: 1.0,
+            size: 2 + Math.random() * 4
+        });
+    }
+}
+
+function updateExplosions(dt) {
+    explosions.forEach(exp => {
+        exp.time += dt;
+        exp.radius += (exp.maxRadius - exp.radius) * 0.1;
+        exp.alpha -= dt * 1.5;
+    });
+    explosions = explosions.filter(e => e.alpha > 0);
+
+    debris.forEach(d => {
+        d.x += d.vx;
+        d.y += d.vy;
+        d.vx *= 0.97;
+        d.vy *= 0.97;
+        d.alpha -= dt * 1.0;
+    });
+    debris = debris.filter(d => d.alpha > 0);
+}
+
+// --- Drawing ---
+function drawStars() {
+    stars.forEach(star => {
+        ctx.fillStyle = `rgba(200,220,255,${star.alpha})`;
+        ctx.fillRect(star.x % W, star.y % H, star.size, star.size);
+    });
+}
+
+function drawWaterdrop() {
+    for (let i = 0; i < waterdrop.trail.length; i++) {
+        const t = waterdrop.trail[i];
+        const progress = i / waterdrop.trail.length;
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, 2 * progress, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(150,200,255,${progress * 0.4})`;
+        ctx.fill();
+    }
+
+    const angle = Math.atan2(waterdrop.vy, waterdrop.vx);
+    ctx.save();
+    ctx.translate(waterdrop.x, waterdrop.y);
+    ctx.rotate(angle);
+
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, 12);
+    gradient.addColorStop(0, 'rgba(220,240,255,1)');
+    gradient.addColorStop(0.5, 'rgba(100,180,255,0.8)');
+    gradient.addColorStop(1, 'rgba(50,100,200,0)');
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 14, 8, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(10, 0);
+    ctx.lineTo(-6, -5);
+    ctx.lineTo(-4, 0);
+    ctx.lineTo(-6, 5);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(200,230,255,0.9)';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(3, 0, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawShip(ship) {
+    if (!ship.alive) return;
+    const speed = Math.sqrt(ship.vx*ship.vx + ship.vy*ship.vy);
+    const angle = speed > 0.01 ? Math.atan2(ship.vy, ship.vx) : Math.atan2(ship.dirY, ship.dirX);
+    ctx.save();
+    ctx.translate(ship.x, ship.y);
+    ctx.rotate(angle);
+
+    const s = ship.size;
+
+    ctx.beginPath();
+    ctx.moveTo(s * 0.6, 0);
+    ctx.lineTo(-s * 0.4, -s * 0.3);
+    ctx.lineTo(-s * 0.6, -s * 0.25);
+    ctx.lineTo(-s * 0.5, 0);
+    ctx.lineTo(-s * 0.6, s * 0.25);
+    ctx.lineTo(-s * 0.4, s * 0.3);
+    ctx.closePath();
+
+    const shipGrad = ctx.createLinearGradient(-s*0.5, 0, s*0.5, 0);
+    shipGrad.addColorStop(0, '#334');
+    shipGrad.addColorStop(0.5, '#667');
+    shipGrad.addColorStop(1, '#99a');
+    ctx.fillStyle = shipGrad;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(150,180,200,0.5)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+
+    const flicker = 0.5 + Math.sin(ship.engineFlicker) * 0.3;
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.5, -s * 0.1);
+    ctx.lineTo(-s * 0.8 - Math.random() * 5, 0);
+    ctx.lineTo(-s * 0.5, s * 0.1);
+    ctx.fillStyle = `rgba(100,150,255,${flicker})`;
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawExplosions() {
+    explosions.forEach(exp => {
+        const gradient = ctx.createRadialGradient(exp.x, exp.y, 0, exp.x, exp.y, exp.radius);
+        gradient.addColorStop(0, `rgba(255,200,50,${exp.alpha})`);
+        gradient.addColorStop(0.3, `rgba(255,100,20,${exp.alpha * 0.8})`);
+        gradient.addColorStop(0.7, `rgba(200,50,0,${exp.alpha * 0.4})`);
+        gradient.addColorStop(1, `rgba(100,20,0,0)`);
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(exp.x, exp.y, exp.radius, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    debris.forEach(d => {
+        ctx.fillStyle = `rgba(255,${150 + Math.random()*100},50,${d.alpha})`;
+        ctx.fillRect(d.x, d.y, d.size, d.size);
+    });
+}
+
+function drawSafeZoneHint() {
+    ctx.fillStyle = 'rgba(255,50,50,0.03)';
+    ctx.fillRect(0, 0, W, 120);
+    ctx.fillRect(0, H - 120, W, 120);
+}
+
+function drawHUD() {
+    document.getElementById('hud-ships').textContent = `${destroyedCount}/${totalShips}`;
+    document.getElementById('hud-time').textContent = gameTime.toFixed(2);
+    const speed = Math.sqrt(waterdrop.vx*waterdrop.vx + waterdrop.vy*waterdrop.vy);
+    document.getElementById('hud-speed').textContent = Math.round(speed * 50);
+}
+
+// --- Game Loop ---
+let lastTime = 0;
+function gameLoop(timestamp) {
+    const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+    lastTime = timestamp;
+
+    ctx.fillStyle = '#000810';
+    ctx.fillRect(0, 0, W, H);
+
+    drawStars();
+
+    if (gameState === 'playing') {
+        gameTime += dt;
+        updateWaterdrop(dt);
+        updateShips(dt);
+        checkCollisions();
+        updateExplosions(dt);
+
+        drawSafeZoneHint();
+        ships.forEach(drawShip);
+        drawExplosions();
+        drawWaterdrop();
+        drawHUD();
+    }
+
+    requestAnimationFrame(gameLoop);
+}
+
+// --- Events ---
+canvas.addEventListener('mousemove', (e) => {
+    if (gameState === 'playing') {
+        targetX = e.clientX;
+        targetY = e.clientY;
+    }
+});
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (gameState === 'playing' && e.touches.length > 0) {
+        targetX = e.touches[0].clientX;
+        targetY = e.touches[0].clientY;
+    }
+}, { passive: false });
+
+document.getElementById('restart-btn').addEventListener('click', () => {
+    startLevel(currentLevel);
+});
+
+document.getElementById('next-btn').addEventListener('click', () => {
+    if (currentLevel < LEVELS.length - 1) {
+        startLevel(currentLevel + 1);
+    }
+});
+
+document.getElementById('back-btn').addEventListener('click', () => {
+    gameState = 'menu';
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'flex';
+    initLevelSelect();
+});
+
+document.getElementById('leaderboard-btn').addEventListener('click', () => {
+    showLeaderboard(null);
+});
+
+document.getElementById('lb-back-btn').addEventListener('click', () => {
+    document.getElementById('leaderboard-screen').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'flex';
+});
+
+initLevelSelect();
+requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>
