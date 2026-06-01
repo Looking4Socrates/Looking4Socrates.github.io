@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>交通工具闯迷宫</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Comic Sans MS", sans-serif;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d299c2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.screen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+h1 {
+  font-size: clamp(28px, 6vw, 48px);
+  color: #ff6b9d;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: clamp(20px, 4vw, 32px);
+  color: #6c5ce7;
+  margin-bottom: 20px;
+}
+.subtitle {
+  font-size: 16px;
+  color: #a29bfe;
+  margin-bottom: 30px;
+}
+.btn {
+  padding: 14px 36px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin: 8px;
+}
+.btn:hover { transform: scale(1.05); }
+.btn:active { transform: scale(0.95); }
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b9d, #c44569);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255,107,157,0.4);
+}
+.btn-secondary {
+  background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+  color: white;
+  box-shadow: 0 4px 15px rgba(108,92,231,0.4);
+}
+.btn-success {
+  background: linear-gradient(135deg, #55efc4, #00b894);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,184,148,0.4);
+}
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.vehicle-card {
+  background: white;
+  border-radius: 16px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 3px solid transparent;
+}
+.vehicle-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.vehicle-card.selected { border-color: #ff6b9d; background: #fff0f5; }
+.vehicle-card canvas { width: 60px; height: 60px; }
+.vehicle-card span { display: block; font-size: 12px; color: #666; margin-top: 4px; }
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+.color-dot {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border: 3px solid transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.color-dot:hover { transform: scale(1.2); }
+.color-dot.selected { border-color: #333; transform: scale(1.2); }
+.color-dot.white-dot { border: 3px solid #ccc; }
+.difficulty-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin: 20px 0;
+}
+.diff-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 3px solid transparent;
+  min-width: 100px;
+}
+.diff-card:hover { transform: translateY(-3px); }
+.diff-card.selected { border-color: #6c5ce7; background: #f0f0ff; }
+.diff-card .stars { font-size: 20px; margin-bottom: 4px; }
+.diff-card .label { font-size: 14px; color: #666; }
+#screen-game {
+  padding: 10px;
+  justify-content: flex-start;
+}
+.game-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.game-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.hud-item {
+  font-size: 14px;
+  color: #6c5ce7;
+  font-weight: bold;
+}
+.btn-mic {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #e0e0e0;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-mic.listening {
+  background: #ff6b9d;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,157,0.5); }
+  50% { box-shadow: 0 0 0 10px rgba(255,107,157,0); }
+}
+#game-canvas {
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  background: #fefefe;
+  max-width: 100%;
+}
+.touch-controls {
+  display: grid;
+  grid-template-areas: ". up ." "left . right" ". down .";
+  grid-template-columns: 70px 70px 70px;
+  grid-template-rows: 70px 70px 70px;
+  gap: 6px;
+}
+.ctrl-btn {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.18);
+  transition: transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+.ctrl-btn:active { transform: scale(0.88); background: #dfe6e9; }
+.ctrl-btn[data-dir="up"] { grid-area: up; }
+.ctrl-btn[data-dir="left"] { grid-area: left; }
+.ctrl-btn[data-dir="right"] { grid-area: right; }
+.ctrl-btn[data-dir="down"] { grid-area: down; }
+@media (max-width: 600px) {
+  .game-area { flex-direction: column; }
+}
+.overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  transition: opacity 0.3s;
+}
+.overlay.hidden { opacity: 0; pointer-events: none; }
+.math-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  max-width: 360px;
+  width: 90%;
+}
+.math-card h3 {
+  font-size: 28px;
+  color: #6c5ce7;
+  margin-bottom: 20px;
+}
+.math-card input {
+  width: 120px;
+  padding: 12px;
+  font-size: 24px;
+  text-align: center;
+  border: 3px solid #dfe6e9;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.math-card input:focus { border-color: #6c5ce7; }
+.math-card .feedback {
+  margin-top: 12px;
+  font-size: 16px;
+  min-height: 24px;
+}
+.math-card .feedback.correct { color: #00b894; }
+.math-card .feedback.wrong { color: #d63031; }
+.math-card .hint {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #b2bec3;
+}
+.voice-text {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #fff;
+  background: rgba(108, 92, 231, 0.9);
+  padding: 8px 20px;
+  border-radius: 20px;
+  z-index: 200;
+  pointer-events: none;
+  min-height: 0;
+}
+.win-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+.win-card h2 {
+  font-size: 32px;
+  color: #fdcb6e;
+  margin-bottom: 20px;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+.shake { animation: shake 0.4s; }
+@keyframes confettiDrop {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -10px;
+  animation: confettiDrop 3s ease-in forwards;
+}
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+}
+#vehicle-preview { border-radius: 12px; background: #f8f9fa; }
+.btn-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #e0e0e0;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-icon.active { background: #55efc4; }
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+.leaderboard-table th {
+  background: #6c5ce7;
+  color: white;
+  padding: 8px 6px;
+}
+.leaderboard-table td {
+  padding: 6px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+.leaderboard-table tr:nth-child(even) { background: #f8f9fa; }
+.leaderboard-table .rank-1 { color: #fdcb6e; font-weight: bold; }
+.leaderboard-table .rank-2 { color: #a29bfe; font-weight: bold; }
+.leaderboard-table .rank-3 { color: #fab1a0; font-weight: bold; }
+.hud-timer { color: #e17055; font-size: 15px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- Main Menu -->
+<div id="screen-menu" class="screen">
+  <h1>交通工具闯迷宫</h1>
+  <p class="subtitle">用你的声音指挥方向，答对数学题闯关！</p>
+  <div style="margin:16px 0;">
+    <input type="text" id="username-input" placeholder="请输入你的名字" style="padding:12px 20px;font-size:18px;border:3px solid #dfe6e9;border-radius:20px;outline:none;text-align:center;width:220px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#6c5ce7'" onblur="this.style.borderColor='#dfe6e9'">
+  </div>
+  <button class="btn btn-primary" onclick="startWithName()">开始游戏</button>
+  <button class="btn btn-secondary" onclick="showLeaderboard()">排行榜</button>
+  <button class="btn btn-secondary" onclick="showHelp()">怎么玩</button>
+  <button class="btn-icon" id="btn-music-menu" onclick="toggleMusic()" style="position:absolute;top:20px;right:20px;" title="背景音乐">🔇</button>
+</div>
+
+<!-- Vehicle Selection -->
+<div id="screen-vehicle" class="screen hidden">
+  <h2>选择交通工具</h2>
+  <div class="vehicle-grid" id="vehicle-grid"></div>
+  <button class="btn btn-primary" id="btn-vehicle-next" onclick="switchScreen('color')">下一步</button>
+</div>
+
+<!-- Color Selection -->
+<div id="screen-color" class="screen hidden">
+  <h2>选择颜色</h2>
+  <div class="preview-section">
+    <canvas id="vehicle-preview" width="120" height="120"></canvas>
+  </div>
+  <div class="color-palette" id="color-palette"></div>
+  <button class="btn btn-primary" onclick="switchScreen('subject')">下一步</button>
+</div>
+
+<!-- Subject Selection -->
+<div id="screen-subject" class="screen hidden">
+  <h2>选择关卡类型</h2>
+  <div class="difficulty-grid">
+    <div class="diff-card selected" onclick="selectSubject('math', this)">
+      <div class="stars">🔢</div>
+      <div class="label">数学</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;">加减乘除运算</div>
+    </div>
+    <div class="diff-card" onclick="selectSubject('english', this)">
+      <div class="stars">🔤</div>
+      <div class="label">英语</div>
+      <div style="font-size:11px;color:#999;margin-top:4px;">朗读单词和句子</div>
+    </div>
+  </div>
+  <button class="btn btn-primary" onclick="switchScreen('difficulty')">下一步</button>
+</div>
+
+<!-- Difficulty Selection -->
+<div id="screen-difficulty" class="screen hidden">
+  <h2>选择难度</h2>
+  <div class="difficulty-grid" id="difficulty-grid"></div>
+  <button class="btn btn-success" id="btn-start-game" onclick="startGame()">开始闯关！</button>
+</div>
+
+<!-- Game Screen -->
+<div id="screen-game" class="screen hidden">
+  <div class="game-hud">
+    <span class="hud-item" id="hud-username">👤</span>
+    <span class="hud-item" id="hud-level">关卡 1</span>
+    <span class="hud-timer" id="hud-timer">⏱ 0:00</span>
+    <span class="hud-item" id="hud-gates">数学门: 0/1</span>
+    <button class="btn-icon" id="btn-music-game" onclick="toggleMusic()" title="背景音乐">🔇</button>
+    <button class="btn-mic" id="btn-mic" onclick="toggleMic()">🎤</button>
+  </div>
+  <div class="game-area">
+    <canvas id="game-canvas"></canvas>
+    <div class="touch-controls" id="touch-controls">
+      <button class="ctrl-btn" data-dir="up">↑</button>
+      <button class="ctrl-btn" data-dir="left">←</button>
+      <button class="ctrl-btn" data-dir="right">→</button>
+      <button class="ctrl-btn" data-dir="down">↓</button>
+    </div>
+  </div>
+</div>
+
+<!-- Math/English Challenge Overlay -->
+<div id="overlay-math" class="overlay hidden">
+  <div class="math-card" id="math-card">
+    <h3 id="math-question">3 + 5 = ?</h3>
+    <div id="math-input-area">
+      <input type="number" id="math-answer" autofocus>
+      <br><br>
+      <button class="btn btn-primary" onclick="submitMathAnswer()">提交</button>
+    </div>
+    <div id="english-input-area" style="display:none;">
+      <p style="font-size:14px;color:#999;margin:10px 0;">请大声朗读上面的内容</p>
+      <button class="btn btn-primary" onclick="skipEnglishGate()">跳过</button>
+    </div>
+    <p class="feedback" id="math-feedback"></p>
+    <p class="hint" id="challenge-hint">也可以语音说出答案哦！</p>
+  </div>
+</div>
+
+<!-- Win Overlay -->
+<div id="overlay-win" class="overlay hidden">
+  <div class="win-card">
+    <h2>🎉 恭喜通关！</h2>
+    <p id="win-message" style="color:#666;margin-bottom:10px;"></p>
+    <p id="win-time" style="color:#e17055;font-size:20px;font-weight:bold;margin-bottom:10px;"></p>
+    <p id="win-rank" style="color:#6c5ce7;margin-bottom:20px;"></p>
+    <button class="btn btn-primary" onclick="nextLevel()">下一关</button>
+    <button class="btn btn-secondary" onclick="backToMenu()">返回菜单</button>
+  </div>
+</div>
+
+<!-- Time Up Overlay -->
+<div id="overlay-timeup" class="overlay hidden">
+  <div class="win-card">
+    <h2>⏰ 时间到！</h2>
+    <p style="color:#666;margin-bottom:10px;">本次游戏时长已达 10 分钟上限</p>
+    <p id="timeup-progress" style="color:#e17055;font-size:18px;font-weight:bold;margin-bottom:20px;"></p>
+    <button class="btn btn-primary" onclick="backToMenuFromTimeup()">返回菜单</button>
+  </div>
+</div>
+
+<!-- Help Overlay -->
+<div id="overlay-help" class="overlay hidden">
+  <div class="math-card">
+    <h3>怎么玩</h3>
+    <div style="text-align:left;font-size:14px;color:#555;line-height:1.8;">
+      <p>1. 选择你喜欢的交通工具和颜色</p>
+      <p>2. 选择难度等级开始闯迷宫</p>
+      <p>3. 用语音说"上/下/左/右"控制方向</p>
+      <p>4. 也可以用键盘方向键或屏幕按钮</p>
+      <p>5. 遇到数学门需要答对题目才能通过</p>
+      <p>6. 到达终点即为通关！</p>
+    </div>
+    <br>
+    <button class="btn btn-secondary" onclick="hideHelp()">知道了</button>
+  </div>
+</div>
+
+<!-- Leaderboard Overlay -->
+<div id="overlay-leaderboard" class="overlay hidden">
+  <div class="math-card" style="max-width:450px;">
+    <h3>🏆 排行榜</h3>
+    <div id="leaderboard-content" style="max-height:50vh;overflow-y:auto;"></div>
+    <br>
+    <button class="btn btn-secondary" onclick="hideLeaderboard()">关闭</button>
+  </div>
+</div>
+
+<div class="voice-text" id="voice-text"></div>
+
+<script>
+// ===== Game State =====
+const game = {
+  state: 'menu',
+  selectedVehicle: 0,
+  selectedColor: '#FF4757',
+  difficulty: 1,
+  currentLevel: 1,
+  maze: null,
+  playerPos: { x: 0, y: 0 },
+  mathGates: [],
+  exitPos: { x: 0, y: 0 },
+  mazeWidth: 7,
+  mazeHeight: 7,
+  cellSize: 40,
+  animating: false,
+  recognition: null,
+  listening: false,
+  voiceTextTimer: null,
+  lastVoiceDir: null,
+  lastVoiceTime: 0,
+  startTime: 0,
+  timerInterval: null,
+  musicPlaying: false,
+  audioCtx: null,
+  masterGain: null,
+  musicTimeout: null,
+  subject: 'math',
+  username: ''
+};
+
+const VEHICLES = [
+  { name: '小汽车', draw: drawCar },
+  { name: '消防车', draw: drawFireTruck },
+  { name: '救护车', draw: drawAmbulance },
+  { name: '挖掘机', draw: drawExcavator },
+  { name: '推土机', draw: drawBulldozer },
+  { name: '警车', draw: drawPoliceCar },
+  { name: '赛车', draw: drawRaceCar },
+  { name: '跑车', draw: drawSportsCar },
+  { name: '搅拌车', draw: drawCementMixer },
+  { name: '吊车', draw: drawCrane },
+  { name: '洒水车', draw: drawWaterTruck },
+  { name: '垃圾车', draw: drawGarbageTruck },
+  { name: '自行车', draw: drawBicycle },
+  { name: '轮船', draw: drawShip },
+  { name: '火箭', draw: drawRocket },
+  { name: '公交车', draw: drawBus },
+  { name: '宇宙飞船', draw: drawSpaceship }
+];
+
+const COLORS = ['#FF4757','#FF6348','#FFA502','#FECA57','#48DBFB','#0ABDE3','#1DD1A1','#10AC84','#5F27CD','#341F97','#FF9FF3','#F368E0','#54A0FF','#2E86DE','#EE5A24','#C23616','#000000','#FFFFFF'];
+
+const DIFFICULTIES = [
+  { label: '入门',   stars: '⭐',        mazeSize: 7,  gates: 2,  decoys: 1 },
+  { label: '简单',   stars: '⭐⭐',      mazeSize: 8,  gates: 2,  decoys: 2 },
+  { label: '初级',   stars: '⭐⭐⭐',    mazeSize: 9,  gates: 3,  decoys: 2 },
+  { label: '中等',   stars: '⭐⭐⭐⭐',  mazeSize: 10, gates: 3,  decoys: 3 },
+  { label: '中上',   stars: '⭐⭐⭐⭐⭐', mazeSize: 11, gates: 4, decoys: 3 },
+  { label: '进阶',   stars: '⭐×6',      mazeSize: 12, gates: 4,  decoys: 4 },
+  { label: '困难',   stars: '⭐×7',      mazeSize: 13, gates: 5,  decoys: 4 },
+  { label: '较难',   stars: '⭐×8',      mazeSize: 14, gates: 5,  decoys: 5 },
+  { label: '挑战',   stars: '⭐×9',      mazeSize: 15, gates: 6,  decoys: 5 },
+  { label: '高手',   stars: '⭐×10',     mazeSize: 16, gates: 6,  decoys: 6 },
+  { label: '大师',   stars: '⭐×11',     mazeSize: 17, gates: 7,  decoys: 7 },
+  { label: '传说',   stars: '⭐×12',     mazeSize: 19, gates: 8,  decoys: 8 }
+];
+
+const ENGLISH_WORDS = {
+  1: ['cat', 'dog', 'red', 'big', 'sun', 'run', 'hat', 'cup', 'bus', 'pen'],
+  2: ['apple', 'happy', 'water', 'green', 'house', 'tiger', 'music', 'table', 'candy', 'river'],
+  3: ['elephant', 'beautiful', 'chocolate', 'butterfly', 'important', 'dinosaur', 'computer', 'wonderful'],
+  4: ['I like apples', 'The cat is big', 'She runs fast', 'It is sunny', 'He is happy', 'I can swim'],
+  5: ['The elephant is very big', 'I like to eat chocolate', 'She has a beautiful dress', 'We go to school every day', 'The butterfly is colorful'],
+  6: ['My favorite color is blue', 'He plays the piano very well', 'The dog is running in the park', 'I want to be a doctor', 'There are many stars tonight'],
+  7: ['She is reading a book in the library', 'We had a wonderful time at the beach', 'The children are playing in the garden', 'I have been studying English for three years'],
+  8: ['Could you please tell me the way to the station', 'My grandmother makes the best cookies in the world', 'The weather is getting warmer and warmer in spring'],
+  9: ['I believe that practice makes perfect and hard work pays off', 'The students are preparing for the exam which will be held next week', 'She told me an interesting story about her trip to Japan'],
+  10: ['Although it was raining heavily we still went to the park for a picnic', 'The teacher asked us to write a composition about our summer vacation', 'If you work hard enough you will achieve your dreams someday'],
+  11: ['The scientist discovered a new species of butterfly in the tropical rainforest last summer', 'Learning a foreign language requires patience dedication and consistent daily practice'],
+  12: ['The international conference on climate change brought together experts from more than fifty countries around the world', 'She realized that the most important thing in life is not success but the journey of learning and growing']
+};
+
+function selectSubject(subject, el) {
+  game.subject = subject;
+  document.querySelectorAll('#screen-subject .diff-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ===== Initialization =====
+function init() {
+  populateVehicleGrid();
+  populateColorPalette();
+  populateDifficultyGrid();
+  setupKeyboard();
+  setupTouchControls();
+  setupSwipeControls();
+  initSpeechRecognition();
+  document.getElementById('math-answer').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitMathAnswer();
+  });
+}
+
+// ===== Screen Management =====
+function switchScreen(target) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.getElementById('screen-' + target).classList.remove('hidden');
+  if (target === 'color') updateVehiclePreview();
+}
+
+function startWithName() {
+  const input = document.getElementById('username-input');
+  const name = input.value.trim();
+  if (!name) {
+    input.style.borderColor = '#d63031';
+    input.placeholder = '请先输入名字！';
+    input.focus();
+    return;
+  }
+  game.username = name;
+  switchScreen('vehicle');
+}
+
+function showHelp() { document.getElementById('overlay-help').classList.remove('hidden'); }
+function hideHelp() { document.getElementById('overlay-help').classList.add('hidden'); }
+
+// ===== Vehicle Selection =====
+function populateVehicleGrid() {
+  const grid = document.getElementById('vehicle-grid');
+  VEHICLES.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'vehicle-card' + (i === 0 ? ' selected' : '');
+    const cvs = document.createElement('canvas');
+    cvs.width = 60; cvs.height = 60;
+    const ctx = cvs.getContext('2d');
+    v.draw(ctx, '#FF4757', 30, 30, 50);
+    card.appendChild(cvs);
+    const span = document.createElement('span');
+    span.textContent = v.name;
+    card.appendChild(span);
+    card.onclick = () => {
+      document.querySelectorAll('.vehicle-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      game.selectedVehicle = i;
+      updateVehiclePreview();
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ===== Color Selection =====
+function populateColorPalette() {
+  const palette = document.getElementById('color-palette');
+  COLORS.forEach((c, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'color-dot' + (i === 0 ? ' selected' : '') + (c === '#FFFFFF' ? ' white-dot' : '');
+    dot.style.background = c;
+    dot.onclick = () => {
+      document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('selected'));
+      dot.classList.add('selected');
+      game.selectedColor = c;
+      updateVehiclePreview();
+    };
+    palette.appendChild(dot);
+  });
+}
+
+function updateVehiclePreview() {
+  const cvs = document.getElementById('vehicle-preview');
+  const ctx = cvs.getContext('2d');
+  ctx.clearRect(0, 0, 120, 120);
+  VEHICLES[game.selectedVehicle].draw(ctx, game.selectedColor, 60, 60, 100);
+}
+
+// ===== Difficulty Selection =====
+function populateDifficultyGrid() {
+  const grid = document.getElementById('difficulty-grid');
+  DIFFICULTIES.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = 'diff-card' + (i === 0 ? ' selected' : '');
+    card.innerHTML = `<div class="stars">${d.stars}</div><div class="label">${d.label}</div>`;
+    card.onclick = () => {
+      document.querySelectorAll('.diff-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      game.difficulty = i + 1;
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ===== Maze Generation (Recursive Backtracking) =====
+function generateMaze(width, height) {
+  const maze = [];
+  for (let y = 0; y < height; y++) {
+    maze[y] = [];
+    for (let x = 0; x < width; x++) {
+      maze[y][x] = { top: true, right: true, bottom: true, left: true, visited: false };
+    }
+  }
+  const stack = [];
+  let cx = 0, cy = 0;
+  maze[cy][cx].visited = true;
+  stack.push({ x: cx, y: cy });
+
+  while (stack.length > 0) {
+    const neighbors = [];
+    if (cy > 0 && !maze[cy-1][cx].visited) neighbors.push({ x: cx, y: cy-1, dir: 'top' });
+    if (cy < height-1 && !maze[cy+1][cx].visited) neighbors.push({ x: cx, y: cy+1, dir: 'bottom' });
+    if (cx > 0 && !maze[cy][cx-1].visited) neighbors.push({ x: cx-1, y: cy, dir: 'left' });
+    if (cx < width-1 && !maze[cy][cx+1].visited) neighbors.push({ x: cx+1, y: cy, dir: 'right' });
+
+    if (neighbors.length > 0) {
+      const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+      if (next.dir === 'top') { maze[cy][cx].top = false; maze[next.y][next.x].bottom = false; }
+      else if (next.dir === 'bottom') { maze[cy][cx].bottom = false; maze[next.y][next.x].top = false; }
+      else if (next.dir === 'left') { maze[cy][cx].left = false; maze[next.y][next.x].right = false; }
+      else if (next.dir === 'right') { maze[cy][cx].right = false; maze[next.y][next.x].left = false; }
+      cx = next.x; cy = next.y;
+      maze[cy][cx].visited = true;
+      stack.push({ x: cx, y: cy });
+    } else {
+      const prev = stack.pop();
+      cx = prev.x; cy = prev.y;
+    }
+  }
+  return maze;
+}
+
+function findPath(maze, startX, startY, endX, endY) {
+  const width = maze[0].length, height = maze.length;
+  const visited = Array.from({length: height}, () => Array(width).fill(false));
+  const queue = [{ x: startX, y: startY, path: [{x: startX, y: startY}] }];
+  visited[startY][startX] = true;
+
+  while (queue.length > 0) {
+    const { x, y, path } = queue.shift();
+    if (x === endX && y === endY) return path;
+
+    const cell = maze[y][x];
+    const dirs = [
+      { dx: 0, dy: -1, wall: 'top' },
+      { dx: 0, dy: 1, wall: 'bottom' },
+      { dx: -1, dy: 0, wall: 'left' },
+      { dx: 1, dy: 0, wall: 'right' }
+    ];
+    for (const d of dirs) {
+      const nx = x + d.dx, ny = y + d.dy;
+      if (nx >= 0 && nx < width && ny >= 0 && ny < height && !visited[ny][nx] && !cell[d.wall]) {
+        visited[ny][nx] = true;
+        queue.push({ x: nx, y: ny, path: [...path, {x: nx, y: ny}] });
+      }
+    }
+  }
+  return [];
+}
+
+function placeMathGates(maze, difficulty) {
+  const w = maze[0].length, h = maze.length;
+  const path = findPath(maze, 0, 0, w-1, h-1);
+  const diff = DIFFICULTIES[difficulty - 1];
+  const gateCount = diff.gates;
+  const decoyCount = diff.decoys || 0;
+  const gates = [];
+  const usedPositions = new Set();
+  usedPositions.add('0,0');
+  usedPositions.add(`${w-1},${h-1}`);
+
+  // Place gates on the solution path (must be solved to pass)
+  const step = Math.floor(path.length / (gateCount + 1));
+  for (let i = 1; i <= gateCount; i++) {
+    const idx = Math.min(i * step, path.length - 2);
+    const pos = path[idx];
+    const key = `${pos.x},${pos.y}`;
+    usedPositions.add(key);
+    const problem = game.subject === 'english' ? generateEnglishProblem(difficulty) : generateMathProblem(difficulty);
+    gates.push({ x: pos.x, y: pos.y, solved: false, problem: problem, decoy: false });
+  }
+
+  // Place decoy gates on non-solution path cells (confuse the player)
+  const pathSet = new Set(path.map(p => `${p.x},${p.y}`));
+  const candidates = [];
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const key = `${x},${y}`;
+      if (!pathSet.has(key) && !usedPositions.has(key)) {
+        candidates.push({ x, y });
+      }
+    }
+  }
+  // Shuffle candidates
+  for (let i = candidates.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
+  }
+  const numDecoys = Math.min(decoyCount, candidates.length);
+  for (let i = 0; i < numDecoys; i++) {
+    const pos = candidates[i];
+    const problem = game.subject === 'english' ? generateEnglishProblem(difficulty) : generateMathProblem(difficulty);
+    gates.push({ x: pos.x, y: pos.y, solved: false, problem: problem, decoy: true });
+  }
+
+  return gates;
+}
+
+// ===== Problem Generation =====
+function generateMathProblem(difficulty) {
+  const r = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+  switch (difficulty) {
+    case 1: { const a = r(1,9), b = r(1,9); return { type: 'math', q: `${a} + ${b} = ?`, a: a+b }; }
+    case 2: { const a = r(2,9), b = r(1,a-1); return { type: 'math', q: `${a} - ${b} = ?`, a: a-b }; }
+    case 3: { const a = r(2,9), b = r(2,9); return { type: 'math', q: `${a} × ${b} = ?`, a: a*b }; }
+    case 4: {
+      const a = r(10,50), b = r(10,50);
+      if (Math.random() > 0.5) return { type: 'math', q: `${a} + ${b} = ?`, a: a+b };
+      const big = Math.max(a,b), sm = Math.min(a,b);
+      return { type: 'math', q: `${big} - ${sm} = ?`, a: big-sm };
+    }
+    case 5: {
+      const a = r(2,12), b = r(2,9), c = r(1,20);
+      if (Math.random() > 0.5) return { type: 'math', q: `${a} × ${b} + ${c} = ?`, a: a*b+c };
+      return { type: 'math', q: `${a} × ${b} - ${c} = ?`, a: a*b-c };
+    }
+    case 6: {
+      const a = r(12,99), b = r(2,9);
+      return { type: 'math', q: `${a} ÷ ${b} = ?（取整）`, a: Math.floor(a/b) };
+    }
+    case 7: {
+      const a = r(10,30), b = r(10,30), c = r(1,20);
+      return { type: 'math', q: `${a} + ${b} - ${c} = ?`, a: a+b-c };
+    }
+    case 8: {
+      const a = r(2,9), b = r(2,9), c = r(2,5);
+      return { type: 'math', q: `${a} × ${b} × ${c} = ?`, a: a*b*c };
+    }
+    case 9: {
+      const a = r(2,15);
+      return { type: 'math', q: `${a}² = ?`, a: a*a };
+    }
+    case 10: {
+      const a = r(100,500), b = r(100,500);
+      if (Math.random() > 0.5) return { type: 'math', q: `${a} + ${b} = ?`, a: a+b };
+      const big = Math.max(a,b), sm = Math.min(a,b);
+      return { type: 'math', q: `${big} - ${sm} = ?`, a: big-sm };
+    }
+    case 11: {
+      const a = r(11,25), b = r(3,9), c = r(2,5);
+      return { type: 'math', q: `${a} × ${b} ÷ ${c} = ?（取整）`, a: Math.floor(a*b/c) };
+    }
+    case 12: {
+      const a = r(2,9), b = r(2,9), c = r(2,9), d = r(1,20);
+      return { type: 'math', q: `${a} × ${b} + ${c} × ${d} = ?`, a: a*b + c*d };
+    }
+    default: { const a = r(1,9), b = r(1,9); return { type: 'math', q: `${a} + ${b} = ?`, a: a+b }; }
+  }
+}
+
+function generateEnglishProblem(difficulty) {
+  const level = Math.min(difficulty, 12);
+  const words = ENGLISH_WORDS[level] || ENGLISH_WORDS[1];
+  const word = words[Math.floor(Math.random() * words.length)];
+  return { type: 'english', q: word, a: word.toLowerCase() };
+}
+
+// ===== Game Start =====
+function startGame() {
+  const diff = DIFFICULTIES[game.difficulty - 1];
+  game.mazeWidth = diff.mazeSize;
+  game.mazeHeight = diff.mazeSize;
+  game.maze = generateMaze(game.mazeWidth, game.mazeHeight);
+  game.playerPos = { x: 0, y: 0 };
+  game.exitPos = { x: game.mazeWidth - 1, y: game.mazeHeight - 1 };
+  game.mathGates = placeMathGates(game.maze, game.difficulty);
+  game.animating = false;
+  game.state = 'playing';
+
+  const canvas = document.getElementById('game-canvas');
+  const maxSize = Math.min(window.innerWidth - 40, window.innerHeight - 200, 560);
+  game.cellSize = Math.floor(maxSize / Math.max(game.mazeWidth, game.mazeHeight));
+  canvas.width = game.cellSize * game.mazeWidth;
+  canvas.height = game.cellSize * game.mazeHeight;
+
+  document.getElementById('hud-username').textContent = `👤 ${game.username}`;
+  document.getElementById('hud-level').textContent = `关卡 ${game.currentLevel}`;
+  updateGateHud();
+  switchScreen('game');
+  renderGame();
+
+  // Start timer
+  game.startTime = Date.now();
+  if (game.timerInterval) clearInterval(game.timerInterval);
+  game.timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+
+function updateGateHud() {
+  const required = game.mathGates.filter(g => !g.decoy);
+  const solved = required.filter(g => g.solved).length;
+  const label = game.subject === 'english' ? '英语门' : '数学门';
+  document.getElementById('hud-gates').textContent = `${label}: ${solved}/${required.length}`;
+}
+
+// ===== Game Rendering =====
+function renderGame() {
+  const canvas = document.getElementById('game-canvas');
+  const ctx = canvas.getContext('2d');
+  const cs = game.cellSize;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Background
+  ctx.fillStyle = '#f8f9fa';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw cells background
+  for (let y = 0; y < game.mazeHeight; y++) {
+    for (let x = 0; x < game.mazeWidth; x++) {
+      ctx.fillStyle = (x + y) % 2 === 0 ? '#f0f8ff' : '#fff0f5';
+      ctx.fillRect(x * cs, y * cs, cs, cs);
+    }
+  }
+
+  // Draw walls
+  ctx.strokeStyle = '#6c5ce7';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  for (let y = 0; y < game.mazeHeight; y++) {
+    for (let x = 0; x < game.mazeWidth; x++) {
+      const cell = game.maze[y][x];
+      const px = x * cs, py = y * cs;
+      if (cell.top) { ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + cs, py); ctx.stroke(); }
+      if (cell.right) { ctx.beginPath(); ctx.moveTo(px + cs, py); ctx.lineTo(px + cs, py + cs); ctx.stroke(); }
+      if (cell.bottom) { ctx.beginPath(); ctx.moveTo(px, py + cs); ctx.lineTo(px + cs, py + cs); ctx.stroke(); }
+      if (cell.left) { ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, py + cs); ctx.stroke(); }
+    }
+  }
+
+  // Draw exit
+  const ex = game.exitPos.x * cs + cs/2, ey = game.exitPos.y * cs + cs/2;
+  ctx.fillStyle = '#fdcb6e';
+  ctx.beginPath();
+  ctx.arc(ex, ey, cs * 0.3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#e17055';
+  ctx.font = `${cs * 0.35}px sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🚩', ex, ey);
+
+  // Draw math gates
+  game.mathGates.forEach(g => {
+    if (!g.solved) {
+      const gx = g.x * cs + cs/2, gy = g.y * cs + cs/2;
+      ctx.fillStyle = 'rgba(255, 234, 167, 0.7)';
+      ctx.fillRect(g.x * cs + 2, g.y * cs + 2, cs - 4, cs - 4);
+      ctx.font = `${cs * 0.4}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const icon = g.problem.type === 'english' ? '🔤' : '🔢';
+      ctx.fillText(icon, gx, gy);
+    }
+  });
+
+  // Draw player
+  const px = game.playerPos.x * cs + cs/2;
+  const py = game.playerPos.y * cs + cs/2;
+  VEHICLES[game.selectedVehicle].draw(ctx, game.selectedColor, px, py, cs * 0.75);
+}
+
+// ===== Player Movement =====
+function movePlayer(direction) {
+  if (game.animating || game.state !== 'playing') return;
+  const { x, y } = game.playerPos;
+  const cell = game.maze[y][x];
+  let nx = x, ny = y;
+
+  switch (direction) {
+    case 'up': if (cell.top) return; ny = y - 1; break;
+    case 'down': if (cell.bottom) return; ny = y + 1; break;
+    case 'left': if (cell.left) return; nx = x - 1; break;
+    case 'right': if (cell.right) return; nx = x + 1; break;
+  }
+
+  if (nx < 0 || nx >= game.mazeWidth || ny < 0 || ny >= game.mazeHeight) return;
+
+  // Check for math gate
+  const gate = game.mathGates.find(g => g.x === nx && g.y === ny && !g.solved);
+  if (gate) {
+    game.pendingGate = gate;
+    game.pendingMove = { x: nx, y: ny };
+    showMathChallenge(gate);
+    return;
+  }
+
+  game.playerPos = { x: nx, y: ny };
+  renderGame();
+
+  if (nx === game.exitPos.x && ny === game.exitPos.y) {
+    setTimeout(triggerWin, 300);
+  }
+}
+
+// ===== Challenge (Math / English) =====
+function showMathChallenge(gate) {
+  game.state = 'math';
+  const problem = gate.problem;
+  document.getElementById('math-feedback').textContent = '';
+  document.getElementById('math-feedback').className = 'feedback';
+
+  if (problem.type === 'english') {
+    document.getElementById('math-question').textContent = `🔤 请朗读: "${problem.q}"`;
+    document.getElementById('math-input-area').style.display = 'none';
+    document.getElementById('english-input-area').style.display = 'block';
+    document.getElementById('challenge-hint').textContent = '请对着麦克风大声朗读';
+  } else {
+    document.getElementById('math-question').textContent = problem.q;
+    document.getElementById('math-input-area').style.display = 'block';
+    document.getElementById('english-input-area').style.display = 'none';
+    document.getElementById('challenge-hint').textContent = '也可以语音说出答案哦！';
+    document.getElementById('math-answer').value = '';
+    if (!game.listening) {
+      setTimeout(() => document.getElementById('math-answer').focus(), 100);
+    }
+  }
+  document.getElementById('overlay-math').classList.remove('hidden');
+}
+
+function submitMathAnswer() {
+  const input = document.getElementById('math-answer');
+  const val = parseInt(input.value);
+  if (isNaN(val)) return;
+
+  if (val === game.pendingGate.problem.a) {
+    solveGateSuccess();
+  } else {
+    solveGateFail();
+    input.value = '';
+    if (!game.listening) input.focus();
+  }
+}
+
+function checkEnglishAnswer(spokenText) {
+  if (game.state !== 'math' || !game.pendingGate) return;
+  const target = game.pendingGate.problem.a;
+  const spoken = spokenText.trim().toLowerCase().replace(/[.,!?]/g, '');
+  const targetClean = target.toLowerCase().replace(/[.,!?]/g, '');
+
+  // Check similarity (allow minor differences)
+  if (spoken === targetClean || spoken.includes(targetClean) || targetClean.includes(spoken)) {
+    solveGateSuccess();
+  } else {
+    // Check word-level similarity for sentences
+    const targetWords = targetClean.split(' ');
+    const spokenWords = spoken.split(' ');
+    let matches = 0;
+    targetWords.forEach(tw => { if (spokenWords.some(sw => sw === tw)) matches++; });
+    if (matches >= targetWords.length * 0.7) {
+      solveGateSuccess();
+    }
+  }
+}
+
+function skipEnglishGate() {
+  solveGateSuccess();
+}
+
+function solveGateSuccess() {
+  document.getElementById('math-feedback').textContent = '✓ 回答正确！';
+  document.getElementById('math-feedback').className = 'feedback correct';
+  game.pendingGate.solved = true;
+  game.playerPos = game.pendingMove;
+  updateGateHud();
+  setTimeout(() => {
+    document.getElementById('overlay-math').classList.add('hidden');
+    game.state = 'playing';
+    renderGame();
+    ensureRecognitionRunning();
+    if (game.playerPos.x === game.exitPos.x && game.playerPos.y === game.exitPos.y) {
+      setTimeout(triggerWin, 300);
+    }
+  }, 800);
+}
+
+function solveGateFail() {
+  document.getElementById('math-feedback').textContent = '✗ 再试一次！';
+  document.getElementById('math-feedback').className = 'feedback wrong';
+  const card = document.getElementById('math-card');
+  card.classList.add('shake');
+  setTimeout(() => card.classList.remove('shake'), 400);
+}
+
+function ensureRecognitionRunning() {
+  if (game.listening && game.recognition) {
+    try { game.recognition.start(); } catch(e) {
+      // Already running, that's OK
+    }
+  }
+}
+
+// ===== Win =====
+const MAX_PLAY_TIME = 600; // 10 minutes in seconds
+
+function updateTimer() {
+  const elapsed = Math.floor((Date.now() - game.startTime) / 1000);
+  const remaining = MAX_PLAY_TIME - elapsed;
+  const min = Math.floor(elapsed / 60);
+  const sec = elapsed % 60;
+  const timerEl = document.getElementById('hud-timer');
+  timerEl.textContent = `⏱ ${min}:${sec.toString().padStart(2, '0')}`;
+  if (remaining <= 60) {
+    timerEl.style.color = '#d63031';
+    timerEl.style.animation = 'pulse 1s infinite';
+  } else {
+    timerEl.style.color = '#e17055';
+    timerEl.style.animation = '';
+  }
+  if (remaining <= 0) {
+    triggerTimeUp();
+  }
+}
+
+function formatTime(seconds) {
+  const min = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${min}:${sec.toString().padStart(2, '0')}`;
+}
+
+function triggerWin() {
+  game.state = 'win';
+  if (game.timerInterval) { clearInterval(game.timerInterval); game.timerInterval = null; }
+  const elapsed = Math.floor((Date.now() - game.startTime) / 1000);
+
+  document.getElementById('win-message').textContent = `${game.username}，你用 ${VEHICLES[game.selectedVehicle].name} 成功通过了第 ${game.currentLevel} 关！`;
+  document.getElementById('win-time').textContent = `⏱ 用时: ${formatTime(elapsed)}`;
+
+  const rank = saveToLeaderboard(elapsed);
+  if (rank <= 10) {
+    document.getElementById('win-rank').textContent = `🏆 排行榜第 ${rank} 名！`;
+  } else {
+    document.getElementById('win-rank').textContent = '';
+  }
+
+  document.getElementById('overlay-win').classList.remove('hidden');
+  spawnConfetti();
+}
+
+function nextLevel() {
+  document.getElementById('overlay-win').classList.add('hidden');
+  game.currentLevel++;
+  if (game.difficulty < 12 && game.currentLevel % 2 === 0) game.difficulty++;
+  startGame();
+}
+
+function backToMenu() {
+  document.getElementById('overlay-win').classList.add('hidden');
+  if (game.timerInterval) { clearInterval(game.timerInterval); game.timerInterval = null; }
+  game.currentLevel = 1;
+  game.difficulty = 1;
+  switchScreen('menu');
+  if (game.listening) toggleMic();
+}
+
+function triggerTimeUp() {
+  game.state = 'timeup';
+  if (game.timerInterval) { clearInterval(game.timerInterval); game.timerInterval = null; }
+  document.getElementById('overlay-math').classList.add('hidden');
+  document.getElementById('timeup-progress').textContent = `${game.username} 闯到了第 ${game.currentLevel} 关`;
+  document.getElementById('overlay-timeup').classList.remove('hidden');
+  stopMusic();
+}
+
+function backToMenuFromTimeup() {
+  document.getElementById('overlay-timeup').classList.add('hidden');
+  game.currentLevel = 1;
+  game.difficulty = 1;
+  switchScreen('menu');
+  if (game.listening) toggleMic();
+}
+
+function spawnConfetti() {
+  const colors = ['#ff6b9d','#feca57','#48dbfb','#ff9ff3','#55efc4','#fd79a8'];
+  for (let i = 0; i < 40; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.width = (6 + Math.random() * 8) + 'px';
+    piece.style.height = (6 + Math.random() * 8) + 'px';
+    piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
+}
+
+// ===== Leaderboard =====
+function getLeaderboard() {
+  try {
+    return JSON.parse(localStorage.getItem('maze-game-leaderboard') || '[]');
+  } catch(e) { return []; }
+}
+
+function saveToLeaderboard(seconds) {
+  const board = getLeaderboard();
+  const entry = {
+    username: game.username,
+    vehicle: VEHICLES[game.selectedVehicle].name,
+    difficulty: DIFFICULTIES[game.difficulty - 1].label,
+    level: game.currentLevel,
+    time: seconds,
+    date: new Date().toLocaleDateString('zh-CN')
+  };
+  board.push(entry);
+  board.sort((a, b) => a.time - b.time);
+  const trimmed = board.slice(0, 10);
+  localStorage.setItem('maze-game-leaderboard', JSON.stringify(trimmed));
+  return trimmed.findIndex(e => e === entry) + 1 || board.indexOf(entry) + 1;
+}
+
+function showLeaderboard() {
+  const board = getLeaderboard();
+  const content = document.getElementById('leaderboard-content');
+  if (board.length === 0) {
+    content.innerHTML = '<p style="color:#999;margin:20px 0;">还没有记录，快去闯关吧！</p>';
+  } else {
+    let html = '<table class="leaderboard-table"><tr><th>#</th><th>玩家</th><th>交通工具</th><th>难度</th><th>关卡</th><th>用时</th><th>日期</th></tr>';
+    board.forEach((e, i) => {
+      const cls = i < 3 ? ` class="rank-${i+1}"` : '';
+      html += `<tr><td${cls}>${i+1}</td><td>${e.username || '—'}</td><td>${e.vehicle}</td><td>${e.difficulty}</td><td>${e.level}</td><td>${formatTime(e.time)}</td><td>${e.date}</td></tr>`;
+    });
+    html += '</table>';
+    content.innerHTML = html;
+  }
+  document.getElementById('overlay-leaderboard').classList.remove('hidden');
+}
+
+function hideLeaderboard() {
+  document.getElementById('overlay-leaderboard').classList.add('hidden');
+}
+
+// ===== Background Music (Web Audio API) =====
+function initAudio() {
+  if (game.audioCtx) return;
+  game.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  game.masterGain = game.audioCtx.createGain();
+  game.masterGain.connect(game.audioCtx.destination);
+}
+
+function toggleMusic() {
+  if (game.musicPlaying) {
+    stopMusic();
+  } else {
+    startMusic();
+  }
+}
+
+function startMusic() {
+  initAudio();
+  if (game.audioCtx.state === 'suspended') game.audioCtx.resume();
+  game.masterGain.gain.value = 1;
+  game.musicPlaying = true;
+  updateMusicButtons();
+  playMelody();
+}
+
+function stopMusic() {
+  game.musicPlaying = false;
+  if (game.musicTimeout) { clearTimeout(game.musicTimeout); game.musicTimeout = null; }
+  // Immediately silence all playing notes
+  if (game.masterGain) {
+    game.masterGain.gain.value = 0;
+  }
+  updateMusicButtons();
+}
+
+function updateMusicButtons() {
+  const icon = game.musicPlaying ? '🔊' : '🔇';
+  const cls = game.musicPlaying ? 'active' : '';
+  const menuBtn = document.getElementById('btn-music-menu');
+  const gameBtn = document.getElementById('btn-music-game');
+  if (menuBtn) { menuBtn.textContent = icon; menuBtn.className = 'btn-icon' + (cls ? ' ' + cls : ''); }
+  if (gameBtn) { gameBtn.textContent = icon; gameBtn.className = 'btn-icon' + (cls ? ' ' + cls : ''); }
+}
+
+function playNote(freq, startTime, duration, volume) {
+  const ctx = game.audioCtx;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = 'triangle';
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(volume || 0.15, startTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration * 0.9);
+  osc.connect(gain);
+  gain.connect(game.masterGain);
+  osc.start(startTime);
+  osc.stop(startTime + duration);
+}
+
+function playMelody() {
+  if (!game.musicPlaying || !game.audioCtx) return;
+  const ctx = game.audioCtx;
+  const now = ctx.currentTime;
+
+  const C4=261.63, D4=293.66, E4=329.63, F4=349.23, G4=392.00, A4=440.00;
+  const melody = [
+    C4,C4,G4,G4,A4,A4,G4, 0,
+    F4,F4,E4,E4,D4,D4,C4, 0,
+    G4,G4,F4,F4,E4,E4,D4, 0,
+    G4,G4,F4,F4,E4,E4,D4, 0,
+    C4,C4,G4,G4,A4,A4,G4, 0,
+    F4,F4,E4,E4,D4,D4,C4, 0
+  ];
+
+  const tempo = 0.25;
+  melody.forEach((freq, i) => {
+    if (freq > 0) {
+      playNote(freq, now + i * tempo, tempo * 0.85, 0.12);
+    }
+  });
+
+  const totalDuration = melody.length * tempo * 1000;
+  game.musicTimeout = setTimeout(() => {
+    if (game.musicPlaying) playMelody();
+  }, totalDuration);
+}
+
+// ===== Input: Keyboard =====
+function setupKeyboard() {
+  document.addEventListener('keydown', e => {
+    if (game.state !== 'playing') return;
+    const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right',
+                  w: 'up', s: 'down', a: 'left', d: 'right',
+                  W: 'up', S: 'down', A: 'left', D: 'right' };
+    if (map[e.key]) { e.preventDefault(); movePlayer(map[e.key]); }
+  });
+}
+
+// ===== Input: Touch =====
+function setupTouchControls() {
+  document.querySelectorAll('.ctrl-btn').forEach(btn => {
+    let repeatTimer = null;
+    let repeatInterval = null;
+
+    const startMove = (e) => {
+      e.preventDefault();
+      const dir = btn.dataset.dir;
+      movePlayer(dir);
+      repeatTimer = setTimeout(() => {
+        repeatInterval = setInterval(() => movePlayer(dir), 150);
+      }, 300);
+    };
+
+    const stopMove = (e) => {
+      e.preventDefault();
+      if (repeatTimer) { clearTimeout(repeatTimer); repeatTimer = null; }
+      if (repeatInterval) { clearInterval(repeatInterval); repeatInterval = null; }
+    };
+
+    btn.addEventListener('touchstart', startMove, { passive: false });
+    btn.addEventListener('touchend', stopMove, { passive: false });
+    btn.addEventListener('touchcancel', stopMove, { passive: false });
+    btn.addEventListener('mousedown', startMove);
+    btn.addEventListener('mouseup', stopMove);
+    btn.addEventListener('mouseleave', stopMove);
+  });
+}
+
+// ===== Input: Swipe on Canvas =====
+function setupSwipeControls() {
+  const canvas = document.getElementById('game-canvas');
+  let startX = 0, startY = 0;
+
+  canvas.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+  }, { passive: true });
+
+  canvas.addEventListener('touchend', (e) => {
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    const minSwipe = 30;
+    if (Math.abs(dx) < minSwipe && Math.abs(dy) < minSwipe) return;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      movePlayer(dx > 0 ? 'right' : 'left');
+    } else {
+      movePlayer(dy > 0 ? 'down' : 'up');
+    }
+  }, { passive: true });
+}
+
+// ===== Voice Recognition =====
+function initSpeechRecognition() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    document.getElementById('btn-mic').title = '浏览器不支持';
+    return;
+  }
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  game.isMobile = isIOS || isAndroid;
+
+  function createRecognition() {
+    const rec = new SR();
+    rec.lang = 'zh-CN';
+    if (isIOS) {
+      rec.continuous = false;
+      rec.interimResults = false;
+    } else {
+      rec.continuous = true;
+      rec.interimResults = true;
+    }
+
+    rec.onresult = (event) => {
+      const result = event.results[event.results.length - 1];
+      const transcript = result[0].transcript.trim();
+      if (!transcript) return;
+      document.getElementById('voice-text').textContent = '听到: "' + transcript + '"';
+      clearTimeout(game.voiceTextTimer);
+      game.voiceTextTimer = setTimeout(() => { document.getElementById('voice-text').textContent = ''; }, 3000);
+      const isFinal = result.isFinal || isIOS;
+      handleVoiceInput(transcript, isFinal);
+    };
+
+    rec.onerror = (event) => {
+      if (event.error === 'no-speech') {
+        // On mobile, silently restart — no-speech is common
+        if (!game.isMobile) {
+          document.getElementById('voice-text').textContent = '没听到声音，请再试';
+          clearTimeout(game.voiceTextTimer);
+          game.voiceTextTimer = setTimeout(() => { document.getElementById('voice-text').textContent = ''; }, 2000);
+        }
+      } else if (event.error === 'not-allowed') {
+        document.getElementById('voice-text').textContent = '⚠️ 请允许麦克风权限';
+        game.listening = false;
+        document.getElementById('btn-mic').classList.remove('listening');
+        return;
+      } else if (event.error === 'aborted') {
+        // Intentional abort, ignore
+        return;
+      } else {
+        document.getElementById('voice-text').textContent = '识别错误: ' + event.error;
+        clearTimeout(game.voiceTextTimer);
+        game.voiceTextTimer = setTimeout(() => { document.getElementById('voice-text').textContent = ''; }, 2000);
+      }
+    };
+
+    rec.onend = () => {
+      if (game.listening) {
+        // Recreate recognition instance on iOS to avoid stale sessions
+        if (isIOS) {
+          game.recognition = createRecognition();
+        }
+        setTimeout(() => {
+          if (game.listening) {
+            try { game.recognition.start(); } catch(e) {
+              // If start fails, recreate and try again
+              game.recognition = createRecognition();
+              setTimeout(() => {
+                try { game.recognition.start(); } catch(e2) {}
+              }, 100);
+            }
+          }
+        }, isIOS ? 50 : 100);
+      }
+    };
+
+    return rec;
+  }
+
+  game.recognition = createRecognition();
+}
+
+function toggleMic() {
+  if (!game.recognition) {
+    alert('您的浏览器不支持语音识别。\n推荐使用 Chrome 浏览器。\niPad 请使用 Safari 并确保网络通畅。');
+    return;
+  }
+  const btn = document.getElementById('btn-mic');
+  if (game.listening) {
+    game.listening = false;
+    try { game.recognition.abort(); } catch(e) {}
+    btn.classList.remove('listening');
+    document.getElementById('voice-text').textContent = '';
+  } else {
+    game.listening = true;
+    btn.classList.add('listening');
+    if (game.isMobile) {
+      document.getElementById('voice-text').textContent = '🎤 请说话...';
+      clearTimeout(game.voiceTextTimer);
+      game.voiceTextTimer = setTimeout(() => { document.getElementById('voice-text').textContent = ''; }, 2000);
+    }
+    try {
+      game.recognition.start();
+    } catch(e) {
+      try { game.recognition.abort(); } catch(e2) {}
+      setTimeout(() => {
+        try { game.recognition.start(); } catch(e3) {}
+      }, 200);
+    }
+  }
+}
+
+function handleVoiceInput(transcript, isFinal) {
+  const lower = transcript.toLowerCase();
+
+  // Directions: respond immediately (even on interim results) for fast response
+  if (game.state === 'playing') {
+    const dirMap = {
+      '上': 'up', '向上': 'up', '往上': 'up',
+      '下': 'down', '向下': 'down', '往下': 'down',
+      '左': 'left', '向左': 'left', '往左': 'left',
+      '右': 'right', '向右': 'right', '往右': 'right',
+      'up': 'up', 'go up': 'up',
+      'down': 'down', 'go down': 'down',
+      'left': 'left', 'go left': 'left',
+      'right': 'right', 'go right': 'right'
+    };
+    for (const [kw, dir] of Object.entries(dirMap)) {
+      if (lower.includes(kw) || transcript.includes(kw)) {
+        const now = Date.now();
+        const dedup = game.isMobile ? 400 : 1000;
+        if (game.lastVoiceDir === dir && now - game.lastVoiceTime < dedup) return;
+        game.lastVoiceDir = dir;
+        game.lastVoiceTime = now;
+        movePlayer(dir);
+        return;
+      }
+    }
+  }
+
+  // Math/English answers: only on final results (need complete input)
+  if (game.state === 'math' && isFinal) {
+    if (game.subject === 'english') {
+      checkEnglishAnswer(lower);
+    } else {
+      const num = parseNumberFromSpeech(transcript);
+      if (num !== null) {
+        document.getElementById('math-answer').value = num;
+        submitMathAnswer();
+      }
+    }
+  }
+}
+
+function parseNumberFromSpeech(transcript) {
+  // Try Arabic numerals first
+  const numMatch = transcript.match(/-?\d+/);
+  if (numMatch) return parseInt(numMatch[0]);
+
+  // Chinese number parsing
+  const cnMap = {'零':0,'一':1,'二':2,'两':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9,'十':10};
+  let cleaned = transcript.replace(/[^零一二两三四五六七八九十百千负]/g, '');
+  if (!cleaned) return null;
+
+  let negative = false;
+  if (cleaned.startsWith('负')) { negative = true; cleaned = cleaned.slice(1); }
+
+  let result = 0;
+  if (cleaned.includes('百')) {
+    const parts = cleaned.split('百');
+    result = (cnMap[parts[0]] || 1) * 100;
+    cleaned = parts[1] || '';
+  }
+  if (cleaned.includes('十')) {
+    const parts = cleaned.split('十');
+    result += (parts[0] ? cnMap[parts[0]] : 1) * 10;
+    if (parts[1]) result += cnMap[parts[1]] || 0;
+  } else if (cleaned) {
+    result += cnMap[cleaned[0]] || 0;
+  }
+
+  return negative ? -result : (result || null);
+}
+
+// ===== Vehicle Drawing Functions =====
+function drawCar(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s, cy-s*0.3, s*2, s*0.9, 6);
+  // Roof
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.55, cy-s*0.85, s*1.1, s*0.6, 5);
+  // Windows
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.45, cy-s*0.75, s*0.4, s*0.4);
+  ctx.fillRect(cx+s*0.05, cy-s*0.75, s*0.4, s*0.4);
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.55, cy+s*0.6, s*0.22, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.6, s*0.22, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawFireTruck(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s, cy-s*0.2, s*2, s*0.8, 4);
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s, cy-s*0.7, s*0.7, s*0.55, 4);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.85, cy-s*0.6, s*0.4, s*0.3);
+  // Ladder
+  ctx.strokeStyle = '#dfe6e9';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx-s*0.2, cy-s*0.15); ctx.lineTo(cx+s*0.9, cy-s*0.15); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx-s*0.2, cy+s*0.1); ctx.lineTo(cx+s*0.9, cy+s*0.1); ctx.stroke();
+  // Light
+  ctx.fillStyle = '#ff6b6b';
+  ctx.beginPath(); ctx.arc(cx-s*0.7, cy-s*0.8, s*0.12, 0, Math.PI*2); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy+s*0.6, s*0.2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.6, cy+s*0.6, s*0.2, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawAmbulance(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, cx-s, cy-s*0.5, s*2, s*1.0, 5);
+  // Stripe
+  ctx.fillStyle = color;
+  ctx.fillRect(cx-s, cy-s*0.05, s*2, s*0.2);
+  // Cross
+  ctx.fillStyle = '#d63031';
+  ctx.fillRect(cx-s*0.08, cy-s*0.45, s*0.16, s*0.4);
+  ctx.fillRect(cx-s*0.2, cy-s*0.33, s*0.4, s*0.16);
+  // Light
+  ctx.fillStyle = '#74b9ff';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy-s*0.6, s*0.1, 0, Math.PI*2); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.55, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawExcavator(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Tracks
+  ctx.fillStyle = '#636e72';
+  roundRect(ctx, cx-s*0.8, cy+s*0.2, s*1.2, s*0.4, 6);
+  // Body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.7, cy-s*0.2, s*1.0, s*0.5, 4);
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.6, cy-s*0.65, s*0.6, s*0.5, 3);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.5, cy-s*0.55, s*0.35, s*0.3);
+  // Arm
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(cx+s*0.1, cy-s*0.2); ctx.lineTo(cx+s*0.6, cy-s*0.7);
+  ctx.lineTo(cx+s*0.9, cy-s*0.3); ctx.stroke();
+  // Bucket
+  ctx.fillStyle = '#636e72';
+  ctx.beginPath(); ctx.moveTo(cx+s*0.75, cy-s*0.3); ctx.lineTo(cx+s*1.0, cy-s*0.1);
+  ctx.lineTo(cx+s*0.85, cy+s*0.05); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function drawBulldozer(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Tracks
+  ctx.fillStyle = '#636e72';
+  roundRect(ctx, cx-s*0.7, cy+s*0.15, s*1.4, s*0.4, 6);
+  // Body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.5, cy-s*0.25, s*1.0, s*0.5, 4);
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.1, cy-s*0.7, s*0.5, s*0.5, 3);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx, cy-s*0.6, s*0.3, s*0.3);
+  // Blade
+  ctx.fillStyle = '#dfe6e9';
+  ctx.fillRect(cx-s*0.9, cy-s*0.3, s*0.25, s*0.7);
+  ctx.restore();
+}
+
+function drawPoliceCar(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Body
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, cx-s, cy-s*0.3, s*2, s*0.9, 6);
+  ctx.fillStyle = color;
+  ctx.fillRect(cx-s, cy+s*0.1, s*2, s*0.3);
+  // Roof
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, cx-s*0.55, cy-s*0.85, s*1.1, s*0.6, 5);
+  // Light bar
+  ctx.fillStyle = '#0984e3';
+  ctx.beginPath(); ctx.arc(cx-s*0.2, cy-s*0.9, s*0.1, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#d63031';
+  ctx.beginPath(); ctx.arc(cx+s*0.2, cy-s*0.9, s*0.1, 0, Math.PI*2); ctx.fill();
+  // Windows
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.45, cy-s*0.75, s*0.4, s*0.4);
+  ctx.fillRect(cx+s*0.05, cy-s*0.75, s*0.4, s*0.4);
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.55, cy+s*0.6, s*0.22, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.6, s*0.22, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawRaceCar(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Low body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(cx-s, cy+s*0.1);
+  ctx.lineTo(cx-s*0.7, cy-s*0.3);
+  ctx.lineTo(cx+s*0.5, cy-s*0.3);
+  ctx.lineTo(cx+s, cy+s*0.1);
+  ctx.closePath(); ctx.fill();
+  // Spoiler
+  ctx.fillStyle = color;
+  ctx.fillRect(cx+s*0.6, cy-s*0.6, s*0.35, s*0.08);
+  ctx.fillRect(cx+s*0.75, cy-s*0.6, s*0.06, s*0.3);
+  // Windshield
+  ctx.fillStyle = '#87CEEB';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.3, cy-s*0.3);
+  ctx.lineTo(cx-s*0.1, cy-s*0.55);
+  ctx.lineTo(cx+s*0.2, cy-s*0.55);
+  ctx.lineTo(cx+s*0.3, cy-s*0.3);
+  ctx.closePath(); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy+s*0.2, s*0.25, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.6, cy+s*0.2, s*0.25, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawSportsCar(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Sleek body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.9, cy+s*0.15);
+  ctx.quadraticCurveTo(cx-s*0.8, cy-s*0.3, cx-s*0.3, cy-s*0.4);
+  ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.5, cx+s*0.9, cy-s*0.1);
+  ctx.lineTo(cx+s*0.9, cy+s*0.15);
+  ctx.closePath(); ctx.fill();
+  // Windshield
+  ctx.fillStyle = '#74b9ff';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.2, cy-s*0.35);
+  ctx.quadraticCurveTo(cx, cy-s*0.5, cx+s*0.3, cy-s*0.35);
+  ctx.lineTo(cx+s*0.2, cy-s*0.15);
+  ctx.lineTo(cx-s*0.1, cy-s*0.15);
+  ctx.closePath(); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.55, cy+s*0.2, s*0.22, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.2, s*0.22, 0, Math.PI*2); ctx.fill();
+  // Headlight
+  ctx.fillStyle = '#ffeaa7';
+  ctx.beginPath(); ctx.arc(cx+s*0.85, cy, s*0.08, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawCementMixer(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Truck body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.9, cy-s*0.1, s*0.6, s*0.6, 3);
+  // Drum
+  ctx.fillStyle = '#dfe6e9';
+  ctx.beginPath();
+  ctx.ellipse(cx+s*0.25, cy, s*0.55, s*0.4, -0.2, 0, Math.PI*2);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  // Drum stripes
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx, cy-s*0.2); ctx.lineTo(cx+s*0.3, cy+s*0.2); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx+s*0.2, cy-s*0.25); ctx.lineTo(cx+s*0.5, cy+s*0.15); ctx.stroke();
+  // Window
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.8, cy-s*0.05, s*0.3, s*0.3);
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.7, cy+s*0.55, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.15, cy+s*0.55, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.55, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawCrane(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Truck body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.8, cy+s*0.0, s*1.6, s*0.5, 3);
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.7, cy-s*0.4, s*0.5, s*0.45, 3);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.6, cy-s*0.3, s*0.25, s*0.25);
+  // Boom
+  ctx.strokeStyle = '#fdcb6e';
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(cx-s*0.2, cy); ctx.lineTo(cx+s*0.7, cy-s*0.9); ctx.stroke();
+  // Hook
+  ctx.strokeStyle = '#636e72';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx+s*0.7, cy-s*0.9); ctx.lineTo(cx+s*0.7, cy-s*0.5); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx+s*0.7, cy-s*0.45, s*0.08, 0, Math.PI, false); ctx.stroke();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.5, cy+s*0.55, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.5, cy+s*0.55, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawWaterTruck(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.9, cy-s*0.2, s*0.6, s*0.6, 3);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.8, cy-s*0.1, s*0.3, s*0.3);
+  // Tank
+  ctx.fillStyle = '#74b9ff';
+  ctx.beginPath();
+  ctx.ellipse(cx+s*0.2, cy+s*0.05, s*0.65, s*0.35, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  // Nozzle
+  ctx.strokeStyle = '#636e72';
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(cx+s*0.8, cy+s*0.2); ctx.lineTo(cx+s*0.8, cy+s*0.5); ctx.stroke();
+  // Water drops
+  ctx.fillStyle = '#74b9ff';
+  ctx.beginPath(); ctx.arc(cx+s*0.7, cy+s*0.6, s*0.05, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.85, cy+s*0.55, s*0.04, 0, Math.PI*2); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.5, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawGarbageTruck(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Cabin
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.9, cy-s*0.2, s*0.55, s*0.6, 3);
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(cx-s*0.8, cy-s*0.1, s*0.25, s*0.3);
+  // Back box
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s*0.3, cy-s*0.5, s*1.2, s*0.9, 3);
+  // Lid (tilted)
+  ctx.fillStyle = '#636e72';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.3, cy-s*0.5);
+  ctx.lineTo(cx-s*0.1, cy-s*0.7);
+  ctx.lineTo(cx+s*0.7, cy-s*0.7);
+  ctx.lineTo(cx+s*0.9, cy-s*0.5);
+  ctx.closePath(); ctx.fill();
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.5, cy+s*0.5, s*0.18, 0, Math.PI*2); ctx.fill();
+  ctx.restore();
+}
+
+function drawBicycle(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Wheels
+  ctx.strokeStyle = '#2d3436';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(cx-s*0.5, cy+s*0.2, s*0.35, 0, Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(cx+s*0.5, cy+s*0.2, s*0.35, 0, Math.PI*2); ctx.stroke();
+  // Frame
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.5, cy+s*0.2);
+  ctx.lineTo(cx, cy-s*0.2);
+  ctx.lineTo(cx+s*0.5, cy+s*0.2);
+  ctx.moveTo(cx, cy-s*0.2);
+  ctx.lineTo(cx-s*0.15, cy+s*0.2);
+  ctx.stroke();
+  // Handlebars
+  ctx.beginPath(); ctx.moveTo(cx+s*0.35, cy-s*0.45); ctx.lineTo(cx+s*0.5, cy-s*0.1); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx+s*0.25, cy-s*0.45); ctx.lineTo(cx+s*0.45, cy-s*0.45); ctx.stroke();
+  // Seat
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.15, cy-s*0.35);
+  ctx.lineTo(cx+s*0.05, cy-s*0.35);
+  ctx.lineTo(cx, cy-s*0.2);
+  ctx.lineTo(cx-s*0.1, cy-s*0.2);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function drawShip(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Hull
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.8, cy+s*0.1);
+  ctx.lineTo(cx-s*0.6, cy+s*0.5);
+  ctx.lineTo(cx+s*0.6, cy+s*0.5);
+  ctx.lineTo(cx+s*0.8, cy+s*0.1);
+  ctx.closePath(); ctx.fill();
+  // Cabin
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, cx-s*0.4, cy-s*0.3, s*0.8, s*0.45, 3);
+  // Windows
+  ctx.fillStyle = '#74b9ff';
+  for (let i = 0; i < 3; i++) {
+    ctx.beginPath();
+    ctx.arc(cx-s*0.2+i*s*0.2, cy-s*0.1, s*0.07, 0, Math.PI*2);
+    ctx.fill();
+  }
+  // Smokestack
+  ctx.fillStyle = '#636e72';
+  ctx.fillRect(cx+s*0.1, cy-s*0.65, s*0.15, s*0.4);
+  // Smoke
+  ctx.fillStyle = '#dfe6e9';
+  ctx.beginPath(); ctx.arc(cx+s*0.2, cy-s*0.75, s*0.08, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.3, cy-s*0.85, s*0.06, 0, Math.PI*2); ctx.fill();
+  // Waves
+  ctx.strokeStyle = '#74b9ff';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx-s, cy+s*0.5);
+  ctx.quadraticCurveTo(cx-s*0.5, cy+s*0.65, cx, cy+s*0.5);
+  ctx.quadraticCurveTo(cx+s*0.5, cy+s*0.35, cx+s, cy+s*0.5);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawRocket(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(cx, cy-s*0.9);
+  ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.5, cx+s*0.3, cy+s*0.2);
+  ctx.lineTo(cx-s*0.3, cy+s*0.2);
+  ctx.quadraticCurveTo(cx-s*0.3, cy-s*0.5, cx, cy-s*0.9);
+  ctx.fill();
+  // Window
+  ctx.fillStyle = '#74b9ff';
+  ctx.beginPath(); ctx.arc(cx, cy-s*0.35, s*0.15, 0, Math.PI*2); ctx.fill();
+  // Fins
+  ctx.fillStyle = color;
+  ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.1); ctx.lineTo(cx-s*0.55, cy+s*0.5); ctx.lineTo(cx-s*0.15, cy+s*0.2); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(cx+s*0.3, cy+s*0.1); ctx.lineTo(cx+s*0.55, cy+s*0.5); ctx.lineTo(cx+s*0.15, cy+s*0.2); ctx.closePath(); ctx.fill();
+  // Flame
+  ctx.fillStyle = '#fdcb6e';
+  ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy+s*0.2); ctx.lineTo(cx, cy+s*0.7); ctx.lineTo(cx+s*0.15, cy+s*0.2); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#e17055';
+  ctx.beginPath(); ctx.moveTo(cx-s*0.08, cy+s*0.2); ctx.lineTo(cx, cy+s*0.5); ctx.lineTo(cx+s*0.08, cy+s*0.2); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function drawBus(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Body
+  ctx.fillStyle = color;
+  roundRect(ctx, cx-s, cy-s*0.5, s*2, s*0.9, 5);
+  // Windows
+  ctx.fillStyle = '#87CEEB';
+  for (let i = 0; i < 4; i++) {
+    ctx.fillRect(cx-s*0.85+i*s*0.45, cy-s*0.4, s*0.3, s*0.35);
+  }
+  // Door
+  ctx.fillStyle = '#2d3436';
+  ctx.fillRect(cx+s*0.7, cy-s*0.3, s*0.2, s*0.55);
+  // Wheels
+  ctx.fillStyle = '#2d3436';
+  ctx.beginPath(); ctx.arc(cx-s*0.6, cy+s*0.45, s*0.2, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(cx+s*0.5, cy+s*0.45, s*0.2, 0, Math.PI*2); ctx.fill();
+  // Stripe
+  ctx.fillStyle = '#ffeaa7';
+  ctx.fillRect(cx-s, cy+s*0.15, s*2, s*0.08);
+  ctx.restore();
+}
+
+function drawSpaceship(ctx, color, cx, cy, size) {
+  const s = size * 0.45;
+  ctx.save();
+  // Saucer body
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy+s*0.1, s*0.85, s*0.3, 0, 0, Math.PI*2);
+  ctx.fill();
+  // Dome
+  ctx.fillStyle = '#87CEEB';
+  ctx.beginPath();
+  ctx.ellipse(cx, cy-s*0.2, s*0.4, s*0.35, 0, Math.PI, 0);
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  // Lights
+  ctx.fillStyle = '#ffeaa7';
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    ctx.arc(cx-s*0.6+i*s*0.3, cy+s*0.15, s*0.06, 0, Math.PI*2);
+    ctx.fill();
+  }
+  // Beam (subtle)
+  ctx.fillStyle = 'rgba(253, 203, 110, 0.3)';
+  ctx.beginPath();
+  ctx.moveTo(cx-s*0.3, cy+s*0.35);
+  ctx.lineTo(cx-s*0.5, cy+s*0.85);
+  ctx.lineTo(cx+s*0.5, cy+s*0.85);
+  ctx.lineTo(cx+s*0.3, cy+s*0.35);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+// ===== Utility =====
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+  ctx.fill();
+}
+
+// ===== Start =====
+init();
+</script>
+</body>
+</html>
